@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>IconFont</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="iconfont.css">
+</head>
+<body>
+    <div class="main markdown">
+        <h1>IconFont 图标</h1>
+        <ul class="icon_lists clear">
+            
+                <li>
+                <i class="icon iconfont icon-heart"></i>
+                    <div class="name">heart</div>
+                    <div class="fontclass">.icon-heart</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-location"></i>
+                    <div class="name">location</div>
+                    <div class="fontclass">.icon-location</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-arrow-right-copy-copy-copy"></i>
+                    <div class="name">箭头</div>
+                    <div class="fontclass">.icon-arrow-right-copy-copy-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-searchamagnifyingglass"></i>
+                    <div class="name">Search a magnifying glass</div>
+                    <div class="fontclass">.icon-searchamagnifyingglass</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-555"></i>
+                    <div class="name">google+</div>
+                    <div class="fontclass">.icon-555</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-pinterest"></i>
+                    <div class="name">pinterest</div>
+                    <div class="fontclass">.icon-pinterest</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-twitter"></i>
+                    <div class="name">twitter</div>
+                    <div class="fontclass">.icon-twitter</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantou-copy-copy"></i>
+                    <div class="name">箭头</div>
+                    <div class="fontclass">.icon-jiantou-copy-copy</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-tag"></i>
+                    <div class="name">tag</div>
+                    <div class="fontclass">.icon-tag</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-facebookf"></i>
+                    <div class="name">facebook-f</div>
+                    <div class="fontclass">.icon-facebookf</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-star3"></i>
+                    <div class="name">star3</div>
+                    <div class="fontclass">.icon-star3</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-star2"></i>
+                    <div class="name">star2</div>
+                    <div class="fontclass">.icon-star2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-jiantou2"></i>
+                    <div class="name">箭头 左 小</div>
+                    <div class="fontclass">.icon-jiantou2</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-youjian"></i>
+                    <div class="name">邮件</div>
+                    <div class="fontclass">.icon-youjian</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-iconkey"></i>
+                    <div class="name">icon_key</div>
+                    <div class="fontclass">.icon-iconkey</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-google_plus"></i>
+                    <div class="name">google_plus</div>
+                    <div class="fontclass">.icon-google_plus</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-twitter1"></i>
+                    <div class="name">twitter</div>
+                    <div class="fontclass">.icon-twitter1</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-facebook"></i>
+                    <div class="name">facebook</div>
+                    <div class="fontclass">.icon-facebook</div>
+                </li>
+            
+                <li>
+                <i class="icon iconfont icon-star-o"></i>
+                    <div class="name">star-o</div>
+                    <div class="fontclass">.icon-star-o</div>
+                </li>
+            
+        </ul>
+
+        <h2 id="font-class-">font-class引用</h2>
+        <hr>
+
+        <p>font-class是unicode使用方式的一种变种，主要是解决unicode书写不直观，语意不明确的问题。</p>
+        <p>与unicode使用方式相比，具有如下特点：</p>
+        <ul>
+        <li>兼容性良好，支持ie8+，及所有现代浏览器。</li>
+        <li>相比于unicode语意明确，书写更直观。可以很容易分辨这个icon是什么。</li>
+        <li>因为使用class来定义图标，所以当要替换图标时，只需要修改class里面的unicode引用。</li>
+        <li>不过因为本质上还是使用的字体，所以多色图标还是不支持的。</li>
+        </ul>
+        <p>使用步骤如下：</p>
+        <h3 id="-fontclass-">第一步：引入项目下面生成的fontclass代码：</h3>
+
+
+        <pre><code class="lang-js hljs javascript"><span class="hljs-comment">&lt;link rel="stylesheet" type="text/css" href="./iconfont.css"&gt;</span></code></pre>
+        <h3 id="-">第二步：挑选相应图标并获取类名，应用于页面：</h3>
+        <pre><code class="lang-css hljs">&lt;<span class="hljs-selector-tag">i</span> <span class="hljs-selector-tag">class</span>="<span class="hljs-selector-tag">iconfont</span> <span class="hljs-selector-tag">icon-xxx</span>"&gt;&lt;/<span class="hljs-selector-tag">i</span>&gt;</code></pre>
+        <blockquote>
+        <p>"iconfont"是你项目下的font-family。可以通过编辑项目查看，默认是"iconfont"。</p>
+        </blockquote>
+    </div>
+</body>
+</html>

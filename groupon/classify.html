@@ -92,7 +92,7 @@
 				var ratingsList= Array.from($('.refinement-ratings-list').find('label'))
 				ratingsList.forEach(function(v,k){
 					v.onclick = function(){
-						$(this).prev().attr("checked")
+						$(this).prev().attr("checked","checked")
 						$('.refinement-ratings-clear').find("input").removeAttr("checked")
 					}
 				})
@@ -110,6 +110,12 @@
 				$('.refinement-badges-clear')[0].onclick = function(){
 					$('.refinement-badges-list').find("input").removeAttr("checked")
 				}
+				var refinement = Array.from($('.refinement').find('label'))
+				refinement.forEach(function(v,k){
+					v.onclick = function(){
+						$(this).
+					}
+				})
 			})
 		</script>
 	</head>
@@ -1576,7 +1582,8 @@
 													<h4>Discount Types</h4>
 
 													<ul class="refinement-list">
-														<li class="refinement reset" data-bhc="discount:all" data-bhc-path="LeftHandBar|RefinementUI|discountsRefinement|discount:all"><input type="checkbox" checked="" id="ref-ui-checkbox-reset-discount">
+														<li class="refinement reset" data-bhc="discount:all" data-bhc-path="LeftHandBar|RefinementUI|discountsRefinement|discount:all">
+															<input type="radio" checked="" id="ref-ui-checkbox-reset-discount" name="refinement">
 															<label for="ref-ui-checkbox-reset-discount">
   <a href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1584,7 +1591,7 @@
 
 														<li class="refinement" data-bhc="discount:gg-clearance" data-bhc-path="LeftHandBar|RefinementUI|discountsRefinement|discount:gg-clearance">
 															<span data-id="gg-clearance"><span class="refinement-name dynamic">
-    <input type="checkbox" id="ref-ui-checkbox-gg-clearance">
+    <input type="radio" id="ref-ui-checkbox-gg-clearance" name="refinement">
   <label class="name truncated" for="ref-ui-checkbox-gg-clearance">
     <a href="https://www.groupon.com/goods?discount=gg-clearance" rel="nofollow">Clearance</a>
     
@@ -1630,7 +1637,7 @@
 												<h4>Customer Ratings</h4>
 												<div class="refinement-ratings">
 													<div data-bhc="rating:all" class="refinement-ratings-clear" data-bhc-path="LeftHandBar|RefinementUI|ratingRefinement|rating:all">
-														<div><input type="radio" checked="" id="ref-ui-radio-rating" name="customer">
+														<div><input type="radio" checked="" id="ref-ui-radio-rating">
 															<label for="ref-ui-radio-rating">
   <a class="c-txt-black ch-txt-ntc" href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1705,7 +1712,7 @@
 												<h4>Explore Deals</h4>
 												<div class="refinement-badges">
 													<div data-bhc="badge:all" class="refinement-badges-clear" data-bhc-path="LeftHandBar|RefinementUI|badgeRefinement|badge:all">
-														<div><input type="radio" checked="" id="ref-ui-radio-badge" name="deals">
+														<div><input type="radio" checked="" id="ref-ui-radio-badge">
 															<label for="ref-ui-radio-badge">
   <a class="c-txt-black ch-txt-ntc" href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1765,7 +1772,8 @@
 													<h4>Shipping &amp; Pickup</h4>
 
 													<ul class="refinement-list">
-														<li class="refinement reset" data-bhc="shipping-and-pickup:all" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:all"><input type="checkbox" checked="" id="ref-ui-checkbox-reset-shipping-and-pickup">
+														<li class="refinement reset" data-bhc="shipping-and-pickup:all" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:all">
+															<input type="radio" checked="" id="ref-ui-checkbox-reset-shipping-and-pickup" name="refinement">
 															<label for="ref-ui-checkbox-reset-shipping-and-pickup">
   <a href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1773,7 +1781,7 @@
 
 														<li class="refinement" data-bhc="shipping-and-pickup:ff758e7a-a54b-41fe-bf7f-4dd19a08f52c" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:ff758e7a-a54b-41fe-bf7f-4dd19a08f52c">
 															<span data-id="ff758e7a-a54b-41fe-bf7f-4dd19a08f52c"><span class="refinement-name dynamic">
-    <input type="checkbox" id="ref-ui-checkbox-ff758e7a-a54b-41fe-bf7f-4dd19a08f52c">
+    <input type="radio" id="ref-ui-checkbox-ff758e7a-a54b-41fe-bf7f-4dd19a08f52c" name="refinement">
   <label class="name truncated" for="ref-ui-checkbox-ff758e7a-a54b-41fe-bf7f-4dd19a08f52c">
     <a href="https://www.groupon.com/goods?shipping-and-pickup=ff758e7a-a54b-41fe-bf7f-4dd19a08f52c" rel="nofollow">In-Store Pickup</a>
     
@@ -1787,7 +1795,7 @@
 
 														<li class="refinement" data-bhc="shipping-and-pickup:0a36ada2-05fa-458b-b31e-6a3c2910ac89" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:0a36ada2-05fa-458b-b31e-6a3c2910ac89">
 															<span data-id="0a36ada2-05fa-458b-b31e-6a3c2910ac89"><span class="refinement-name dynamic">
-    <input type="checkbox" id="ref-ui-checkbox-0a36ada2-05fa-458b-b31e-6a3c2910ac89">
+    <input type="radio" id="ref-ui-checkbox-0a36ada2-05fa-458b-b31e-6a3c2910ac89" name="refinement">
   <label class="name truncated" for="ref-ui-checkbox-0a36ada2-05fa-458b-b31e-6a3c2910ac89">
     <a href="https://www.groupon.com/goods?shipping-and-pickup=0a36ada2-05fa-458b-b31e-6a3c2910ac89" rel="nofollow">1-Day Shipping</a>
     
@@ -1801,7 +1809,7 @@
 
 														<li class="refinement" data-bhc="shipping-and-pickup:0e4264ea-5299-4858-801d-12208dff4abc" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:0e4264ea-5299-4858-801d-12208dff4abc">
 															<span data-id="0e4264ea-5299-4858-801d-12208dff4abc"><span class="refinement-name dynamic">
-    <input type="checkbox" id="ref-ui-checkbox-0e4264ea-5299-4858-801d-12208dff4abc">
+    <input type="radio" id="ref-ui-checkbox-0e4264ea-5299-4858-801d-12208dff4abc" name="refinement">
   <label class="name truncated" for="ref-ui-checkbox-0e4264ea-5299-4858-801d-12208dff4abc">
     <a href="https://www.groupon.com/goods?shipping-and-pickup=0e4264ea-5299-4858-801d-12208dff4abc" rel="nofollow">2-Day Shipping</a>
     
@@ -1815,7 +1823,7 @@
 
 														<li class="refinement" data-bhc="shipping-and-pickup:74a32a24-d7f6-4e6f-86b4-954fb87a9da4" data-bhc-path="LeftHandBar|RefinementUI|categoryFilter_shipping-and-pickup_refinement|shipping-and-pickup:74a32a24-d7f6-4e6f-86b4-954fb87a9da4">
 															<span data-id="74a32a24-d7f6-4e6f-86b4-954fb87a9da4"><span class="refinement-name dynamic">
-    <input type="checkbox" id="ref-ui-checkbox-74a32a24-d7f6-4e6f-86b4-954fb87a9da4">
+    <input type="radio" id="ref-ui-checkbox-74a32a24-d7f6-4e6f-86b4-954fb87a9da4" name="refinement">
   <label class="name truncated" for="ref-ui-checkbox-74a32a24-d7f6-4e6f-86b4-954fb87a9da4">
     <a href="https://www.groupon.com/goods?shipping-and-pickup=74a32a24-d7f6-4e6f-86b4-954fb87a9da4" rel="nofollow">3-Day Shipping</a>
     

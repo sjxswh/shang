@@ -80,7 +80,7 @@
 	   	
 	   	this.$ajax({
 		  method: "get",
-		  url:"http://localhost:5000/timezones",
+		  url:"https://panel.newbidder.com/timezones",
 		}).then(function (data) {
 		    that.timezones = data.data.data.timezones
 		});

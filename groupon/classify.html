@@ -110,12 +110,39 @@
 				$('.refinement-badges-clear')[0].onclick = function(){
 					$('.refinement-badges-list').find("input").removeAttr("checked")
 				}
-				var refinement = Array.from($('.refinement').find('label'))
-				refinement.forEach(function(v,k){
-					v.onclick = function(){
-						$(this).
-					}
-				})
+				/*var slider = Array.from($('.ui-slider-handle'))
+				var isDown = false
+				slider.forEach(function(v,k){
+			      if(document.attachEvent) {//ie的事件监听，拖拽div时禁止选中内容，firefox与chrome已在css中设置过-moz-user-select: none; -webkit-user-select: none;
+			        $(this)[0].attachEvent('onselectstart', function() {
+			          return false;
+			        });
+			      }
+			      $(this).mousedown(function(event) {
+			        var event = event || window.event;
+			        mX = event.clientX;
+			        mY = event.clientY;
+			        console.log( mY)
+			        dX = $('.ui-slider-range').offset().left;
+			        dY = $('.ui-slider-range').offset().top;
+			        console.log(mX)
+			        isDown = true;//鼠标拖拽启动
+			      });
+			      $(document).mousemove(function(event) {
+			        var event = event || window.event;
+			        var x = event.clientX;//鼠标滑动时的X轴
+			        var y = event.clientY;//鼠标滑动时的Y轴
+			        console.log(x)
+			        if(isDown) {
+			          $('.ui-slider-range').css({"left": x - mX + dX, "top": y - mY + dY});//div动态位置赋值
+			        }
+			      });
+			      document.mouseup(function() {
+			      	document.onmousedown = false;
+			        document.onmousemove = false;//鼠标拖拽结束
+			      });
+				})*/
+				
 			})
 		</script>
 	</head>
@@ -128,8 +155,9 @@
              big-searchbar" id="ls-header" data-bhw-path="Header">
 					<div class="ls-header-top">
 						<div class="row ls-header-top-row ls-header-with-signin-flyout" id="ls-header-top-row">
-							<a href="https://www.groupon.com/" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo">
-								<img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">
+							<a href="https://www.groupon.com/" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo" style="font-weight: bolder;font-size: 24px;font-family: sans-serif;color: #ffffff;text-align: left;">
+								Newbidder
+								<!--<img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">-->
 							</a>
 							<div id="ls-header-main" class="ls-clearfix alternative-search">
 								<div id="ls-search-bar-wrapper" class="columns search-bar-wrapper">
@@ -1583,7 +1611,7 @@
 
 													<ul class="refinement-list">
 														<li class="refinement reset" data-bhc="discount:all" data-bhc-path="LeftHandBar|RefinementUI|discountsRefinement|discount:all">
-															<input type="radio" checked="" id="ref-ui-checkbox-reset-discount" name="refinement">
+															<input type="radio" checked="" id="ref-ui-checkbox-reset-discount" name="reset">
 															<label for="ref-ui-checkbox-reset-discount">
   <a href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1591,7 +1619,7 @@
 
 														<li class="refinement" data-bhc="discount:gg-clearance" data-bhc-path="LeftHandBar|RefinementUI|discountsRefinement|discount:gg-clearance">
 															<span data-id="gg-clearance"><span class="refinement-name dynamic">
-    <input type="radio" id="ref-ui-checkbox-gg-clearance" name="refinement">
+    <input type="radio" id="ref-ui-checkbox-gg-clearance" name="reset">
   <label class="name truncated" for="ref-ui-checkbox-gg-clearance">
     <a href="https://www.groupon.com/goods?discount=gg-clearance" rel="nofollow">Clearance</a>
     
@@ -1611,10 +1639,13 @@
 													<h4 data-bhc="rangeFilters:price_title" data-bhc-path="LeftHandBar|RefinementUI|rangeRefinement|rangeFilters:price_title">Price Range</h4>
 
 													<div class="refinement-range">
-														<div data-bhc="rangeFilters:price_slider" class="refinement-range-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-bhc-path="LeftHandBar|RefinementUI|rangeRefinement|rangeFilters:price_slider">
-															<div class="ui-slider-range ui-widget-header ui-corner-all c-bg-prim" style="left: 0%; width: 100%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all-handle" tabindex="0" style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all-handle" tabindex="0" style="left: 100%;"></span></div>
+														<!--<div data-bhc="rangeFilters:price_slider" class="refinement-range-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-bhc-path="LeftHandBar|RefinementUI|rangeRefinement|rangeFilters:price_slider">
+															<div class="ui-slider-range ui-widget-header ui-corner-all c-bg-prim" style="left: 0%; width: 100%;"></div>
+															<span class="ui-slider-handle ui-state-default ui-corner-all-handle" tabindex="0" style="left: 0%;"></span>
+															<span class="ui-slider-handle ui-state-default ui-corner-all-handle" tabindex="0" style="left: 100%;"></span>
+														</div>-->
 
-														<div class="refinement-range-input-container">
+														<div class="refinement-range-input-container" style="margin-top: 10px;">
 															<span class="refinement-range-input-unit">$</span>
 															<div class="refinement-range-input refinement-range-minInput">
 																<input title="Price Range min" data-bhc="rangeFilters:price_minInput" type="text" value="0" aria-label="Price Range Min Input" data-bhc-path="LeftHandBar|RefinementUI|rangeRefinement|rangeFilters:price_minInput">

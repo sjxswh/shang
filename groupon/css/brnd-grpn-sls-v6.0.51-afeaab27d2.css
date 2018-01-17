@@ -138,9 +138,7 @@
 	content: "\E02B"
 }
 
-.icon-loading:before {
-	content: "\E02C"
-}
+
 
 .icon-list:before {
 	content: "\E02D"
@@ -489,6 +487,22 @@
 
 body {
 	background: #fff
+}
+.page-loading .icon-loading{
+	animation: myfirst 3s infinite;
+-moz-animation: myfirst 3s infinite;	
+-webkit-animation: myfirst 3s infinite;
+transform-origin: center;
+text-align: center;
+line-height: 50px;
+}
+@-moz-keyframes myfirst{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
+@-webkit-keyframes myfirst{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
 }
 .radio{
 	background-color: #53a318;
@@ -3162,7 +3176,7 @@ span.r-rec {
 
 .flyContainer {
 	color: #75787b;
-	min-height: 528px;
+	min-height: 240px;
 	position: relative;
 	width: 100%
 }
@@ -3261,9 +3275,7 @@ span.r-rec {
 	padding: 0 18px 0 0
 }
 
-.flyContent .ls-flex-wrap>.flyCol50:nth-child(2) {
-	padding: 0 0 0 18px
-}
+
 
 .flyCol50>a {
 	display: block;
@@ -3280,12 +3292,8 @@ span.r-rec {
 	display: block
 }
 
-.flyCol50>a :nth-child(2) {
-	font-size: 12px;
-	display: block
-}
 
-.flyCol50>a :nth-child(3) {
+.flyCol50>a :nth-child(2) {
 	position: absolute;
 	top: 8px;
 	right: 0

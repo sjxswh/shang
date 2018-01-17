@@ -6,6 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Newbidder: Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more.</title>
 		<link type="text/css" rel="stylesheet" href="iconfont/iconfont.css" />
+		<link type="text/css" rel="stylesheet" href="iconfont/iconfont1.css" />
 		<link href="css/brnd-grpn-gig-v7.7.2-fe6d1b17b5.css" rel="stylesheet" type="text/css" id="gig-css">
 		<link href="css/brnd-grpn-sls-v6.0.51-afeaab27d2.css" rel="stylesheet" type="text/css">
 		<link href="css/home-3d082fcacf.css" rel="stylesheet" type="text/css">
@@ -41,113 +42,253 @@
 		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 		<script>
 			$(function(){
-				var primary = Array.from($('.primary-nav-tab'))
-				console.log(primary)
-				primary.forEach(function(v,k){
-					v.onmouseenter = function(){
-						$('#ls-rail-slide').css({left:v.offsetLeft-15})
-						$('#ls-rail-slide').css({display:"block"}).siblings().css({display:"none"})
-						$('#ls-rail-slide').css({width:v.offsetWidth+30})
-					  $('.subnav-flyout').eq(k).css({display:"block"}).siblings().css({display:"none"})
-					}
-					$('.primary-nav')[0].onmouseleave = function(){
-						$('#ls-rail-slide').css({display:"none"})
-						$('.subnav-flyout').css({display:"none"})
-					}
-				})
-				var subnav = Array.from($('.subnav-flyout'))
-				subnav.forEach(function(v,k){
-					v.onmouseenter = function(){
-					  v.style.display = "block"
-					}
-					v.onmouseleave = function(){
-					  v.style.display = "none"
-					}
-				})
-				var flyMenu = Array.from($('.flyMenu').children())
-				flyMenu.forEach(function(v,k){
-					v.onmouseenter = function(){
-						$(this).addClass("flyActive").siblings().removeClass("flyActive")
-					}
-				})
-				var x= 0.6
-				var arr = [3.7,4.2,4,5,2.7]
-				var ss =[]
-				for(var j = 0;j < arr.length;j++){
-					var html = `<figure class="card-ui cui-c-udc c-bdr-gray-clr">
-									<a href="https://www.groupon.com/deals/strikeforce-fitness">
+				
+				$.ajax({
+					type:"get",
+					url:"http://offerwall.newbidder.com",
+					dataType:"json",
+					success:function(data){
+						console.log(data.goods_score_list)
+						$('.page-loading').hide()
+						var index = -1
+						for(var i in data.categories_dict){
+							++index
+							var ss = `<li>
+											<a class="flyMenulink" href="https://www.groupon.com/goods/auto-and-home-improvement" data-bhc="flyout-label:auto-and-home-improvement" tabindex="-1" role="menuitem">
+												<n>${ i }</n>
+												<c>${ data.categories_dict[i][0] }</c>
+											</a>
+											<div data-bhc="flyout-content:auto-and-home-improvement" class="flyContent">
+												<h4><a href="https://www.groupon.com/goods/auto-and-home-improvement" tabindex="-1" role="menuitem">Shop All ${ i }</a></h4>
+												<div class="ls-flex-wrap">
+													<div class="flyCol50">
+														
+													</div>
+												</div>
+												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-auto-and-home-improvement-50ba035e1f.jpg" alt="Auto &amp; Home Improvement">
+											</div>
+										</li>`
+										$('.flyMenu').append(ss)
+										for(let j = 1;j < data.categories_dict[i].length;j++){
+											var sss = `<a href="https://www.groupon.com/goods/auto-parts-and-accessories" tabindex="-1" role="menuitem">
+															<n>${ data.categories_dict[i][j][0] }</n>
+															<c>${ data.categories_dict[i][j][1] }</c>
+														</a>`
+											$('.flyCol50').eq(index).append(sss)	
+										}
+						}
+						for(var n = 0;n < 2;n++){
+							var aa = `<figure class="card-ui cui-c-udc c-bdr-gray-clr cui-is-embedded-card" >
+
+														<a href="https://www.groupon.com/deals/gg-insulating-sofa-style-fiber-filled-pillow-pet-bed-for-dogs">
+															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md has-scroll-listener">
+
+																<div class="cui-udc-image-container">
+																	<div class="cui-udc-image-overlay"></div>
+																	<div class="cui-image-lazy-container cui-image-hover-zoom">
+																		<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="192" width="192" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;192&#39; width=&#39;192&#39;%2F%3E" alt="image placeholder">
+
+																		<img class="cui-image progressive-load lazy-loaded" src="${ data.goods_discount_list[n]["imageUrl"] }" data-original="//img.grouponcdn.com/deal/31JUfE1D4Y5H4bmQKVbDhiUsZ6qf/31-1500x900/v1/c96x96q5.jpg" data-high-quality="//img.grouponcdn.com/deal/31JUfE1D4Y5H4bmQKVbDhiUsZ6qf/31-1500x900/v1/c192x192q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/31JUfE1D4Y5H4bmQKVbDhiUsZ6qf/31-1500x900/v1/c192x192q85.jpg" alt="image for Sofa-Style Fiber-Filled Pillow Pet Bed for Dogs" style="filter: blur(0px);">
+																	</div>
+
+																</div>
+																<div class="cui-udc-details c-txt-gray-dk">
+																	<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
+																		${ data.goods_discount_list[n]["productTitle"] }
+																	</div>
+
+																	<div class="cui-udc-super-row">
+																		<div class="cui-udc-left-zero">
+																		</div>
+																		<div class="cui-udc-right-zero">
+																		</div>
+																	</div>
+																	<div class="cui-udc-top-row">
+																		<div class="cui-udc-left-one">
+
+																			<div class="cui-quantity-bought c-txt-gray-dk">
+																				10,000+ bought
+																			</div>
+
+																		</div>
+																		<div class="cui-udc-right-one">
+
+																			<s class="cui-price-original-same-size c-txt-gray-dk
+ ">${ data.goods_discount_list[n]["originalPrice"] }</s>
+
+																		</div>
+																	</div>
+																	<div class="cui-udc-bottom-row">
+																		<div class="cui-udc-left-two">
+
+																			<div class="cui-review-rating ">
+
+																				<ul class="rating">
+																					
+																				</ul>
+
+																				<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:122" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:6fc5c886-a9fc-11e7-8405-00259060b5da|deal-rating-count:122">
+																					(122)
+																				</div>
+
+																			</div>
+
+																		</div>
+																		<div class="cui-udc-right-two">
+
+																			<span class="cui-price-discount-same-size c-txt-price
+">${ data.goods_discount_list[n]["salePrice"] }</span>
+
+																		</div>
+																	</div>
+
+																</div>
+
+															</div>
+														</a>
+														</figure>`
+														$('.cui-udc-list-view').append(aa)
+									for(let i = 0;i < Math.floor(data.goods_discount_list[n]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star2"><span class="full-star"></span></li>`
+										$('.cui-udc-list-view .rating').eq(n).append(oLi)
+									}
+									if(data.goods_discount_list[n]["evaluateScore"]- Math.floor(data.goods_discount_list[n]["evaluateScore"])> 0.5){
+										let oLis = `<li class="iconfont icon-star3"><span class="full-star"></span></li>`
+										$('.cui-udc-list-view .rating').eq(n).append(oLis)
+									}
+									else if(data.goods_discount_list[n]["evaluateScore"]- Math.floor(data.goods_discount_list[n]["evaluateScore"]) < 0.5 && data.goods_discount_list[n]["evaluateScore"]- Math.floor(data.goods_discount_list[n]["evaluateScore"]) >0){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.cui-udc-list-view .rating').eq(n).append(oLi)
+									}
+									for(let i = 0;i < 4 - Math.floor(data.goods_discount_list[n]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.cui-udc-list-view .rating').eq(n).append(oLi)
+									}
+						}
+						for(let q = 0;q < 36;q++){
+											var html = `<figure class="card-ui cui-c-udc c-bdr-gray-clr c-bdr-gray-clrss" data-pingdom-info="purchasable-deal" data-bhc="deal:abfc461b-1d71-4692-bece-89652818b615" data-bhd="{&quot;cardUUID&quot;:&quot;abfc461b-1d71-4692-bece-89652818b615&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Loose Genuine Gemstones (25, 50, or 100 CTW)&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:300},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;10&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$143 $14.99&quot;}}" data-bh-viewport="respect" data-bhc-path="HomeCards|deal:abfc461b-1d71-4692-bece-89652818b615">
+						
+									<a href="detail.html?productId=${ data.goods_score_list[q]["productId"] }">
 										<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
+						
 											<div class="cui-udc-image-container">
 												<div class="cui-udc-image-overlay"></div>
 												<div class="cui-image-lazy-container cui-image-hover-zoom">
 													<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="211" width="349" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;211&#39; width=&#39;349&#39;%2F%3E" alt="image placeholder">
-													<img class="cui-image  lazy-wl    progressive-load  " src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;211&#39; width=&#39;349&#39;%2F%3E" alt="image for 76% Off Kickboxing Classes at StrikeForce Fitness">
+						
+													<img class="cui-image progressive-load lazy-loaded" src="${ data.goods_score_list[q]["imageUrl"] }" data-original="//img.grouponcdn.com/deal/9h7L1T54RtGgbrSZ9hkKW6v3G5M/9h-1000x600/v1/c125x75q5.jpg" data-high-quality="//img.grouponcdn.com/deal/9h7L1T54RtGgbrSZ9hkKW6v3G5M/9h-1000x600/v1/c349x211q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/9h7L1T54RtGgbrSZ9hkKW6v3G5M/9h-1000x600/v1/c349x211q85.jpg" alt="image for Loose Genuine Gemstones (25, 50, or 100 CTW)" style="filter: blur(0px);">
 												</div>
-												<div class="cui-badge " style="color:rgba(255,255,255,1.000);background-color:rgba(117,120,123,0.902)">
-													<span class="cui-badge-label">RECENTLY VIEWED</span>
-												</div>
+						
 											</div>
 											<div class="cui-udc-details c-txt-gray-dk">
-												<div class="cui-udc-title-with-subtitle c-txt-black one-line-truncate">
-													Up to 76% off Kickboxing Classes
-												</div>
-												<div class="cui-udc-subtitle c-txt-gray-dk one-line-truncate ">
-													StrikeForce Fitness
+												<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
+													${ data.goods_score_list[q]["productTitle"] }
 												</div>
 												<div class="cui-udc-top-row">
-													<div class="cui-udc-left-one">
-														<div class="cui-location cui-truncate c-txt-gray-dk cui-has-distance">
-															<span class="cui-location-name">Chicago</span>
-															<span class="cui-location-separator"> • </span>
-															<span class="cui-location-distance">1.5 mi</span>
-														</div>
-													</div>
-													<div class="cui-udc-right-one">
-													</div>
+													dfd
 												</div>
 												<div class="cui-udc-bottom-row">
 													<div class="cui-udc-left-two">
+						
 														<div class="cui-review-rating ">
-															<ul class="rating" data-bhc="deal-review-rating:4.8">
+						
+															<ul class="rating" data-bhc="deal-review-rating:2.5" data-bh-viewport="respect" data-bhc-path="HomeCards|deal:abfc461b-1d71-4692-bece-89652818b615|deal-review-rating:2.5">
 																
 															</ul>
-															<div class="rating-count c-txt-gray-dk">(54)</div>
+						
+															<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:10" data-bh-viewport="respect" data-bhc-path="HomeCards|deal:abfc461b-1d71-4692-bece-89652818b615|deal-rating-count:10">
+																${data.goods_score_list[q]["evaluateScore"]}
+															</div>
+						
 														</div>
+						
 													</div>
 													<div class="cui-udc-right-two">
-														<div class="cui-price">
-															<s class="cui-price-original-same-size c-txt-gray-dk">$250</s>
-																<span class="cui-price-discount-same-size c-txt-price">$59</span>
+						
+														<div class="cui-price" data-pingdom-id="deal-price">
+															<s class="cui-price-original-same-size c-txt-gray-dk
+						 ">${ data.goods_score_list[q]["originalPrice"] }</s>
+																<span class="cui-price-discount-same-size c-txt-price
+						">${ data.goods_score_list[q]["salePrice"] }</span>
 														</div>
+						
 													</div>
 												</div>
+						
 											</div>
+						
 										</div>
 									</a>
 									</figure>`
 									$('#pull-cards').append(html)
-					for(var i = 0;i < Math.floor(arr[j]);i++){
-						var oLi = `<li class="iconfont icon-star2"><span class="full-star"></span></li>`
-						$('.rating').eq(j+4).append(oLi)
-					}
-					if(arr[j]- Math.floor(arr[j])> 0.5){
-						var oLis = `<li class="iconfont icon-star3"><span class="full-star"></span></li>`
-						$('.rating').eq(j+4).append(oLis)
-					}else{
-						var oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
-						$('.rating').eq(j+4).append(oLi)
-					}
-					for(var i = 0;i < 4 - Math.floor(arr[j]);i++){
-						var oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
-						$('.rating').eq(j+4).append(oLi)
-					}
+									for(let i = 0;i < Math.floor(data.goods_score_list[q]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star2"><span class="full-star"></span></li>`
+										$('.c-bdr-gray-clrss .rating').eq(q).append(oLi)
+									}
+									if(data.goods_score_list[q]["evaluateScore"]- Math.floor(data.goods_score_list[q]["evaluateScore"])> 0.5){
+										let oLis = `<li class="iconfont icon-star3"><span class="full-star"></span></li>`
+										$('.c-bdr-gray-clrss .rating').eq(q).append(oLis)
+									}
+									else if(data.goods_score_list[q]["evaluateScore"]- Math.floor(data.goods_score_list[q]["evaluateScore"]) < 0.5 && data.goods_score_list[q]["evaluateScore"]- Math.floor(data.goods_score_list[q]["evaluateScore"]) >0){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.c-bdr-gray-clrss .rating').eq(q).append(oLi)
+									}
+									for(let i = 0;i < 4 - Math.floor(data.goods_score_list[q]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.c-bdr-gray-clrss .rating').eq(q).append(oLi)
+									}
+					
 				}
+						$('.flyMenu li:nth-child(1)').addClass("flyActive")
+						var primary = Array.from($('.primary-nav-tab'))
+							primary.forEach(function(v,k){
+								v.onmouseenter = function(){
+									$('#ls-rail-slide').css({left:v.offsetLeft-15})
+									$('#ls-rail-slide').css({display:"block"}).siblings().css({display:"none"})
+									$('#ls-rail-slide').css({width:v.offsetWidth+30})
+								  $('.subnav-flyout').eq(k).css({display:"block"}).siblings().css({display:"none"})
+								}
+								$('.primary-nav')[0].onmouseleave = function(){
+									$('#ls-rail-slide').css({display:"none"})
+									$('.subnav-flyout').css({display:"none"})
+								}
+							})
+							var subnav = Array.from($('.subnav-flyout'))
+							subnav.forEach(function(v,k){
+								v.onmouseenter = function(){
+								  v.style.display = "block"
+								}
+								v.onmouseleave = function(){
+								  v.style.display = "none"
+								}
+							})
+						var flyMenu = Array.from($('.flyMenu').children())
+						flyMenu.forEach(function(v,k){
+							v.onmouseenter = function(){
+								$(this).addClass("flyActive").siblings().removeClass("flyActive")
+							}
+						})
+					},
+				  error: function(xhr, ajaxOptions, thrownError) {
+            console.info("error.");
+            if (xhr.status == 200) {
+                console.log(ajaxOptions);
+            }
+            else {
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+          }
+				});
+				
 			})
 		</script>
 	</head>
 
 	<body dir="ltr" id="ls-body" class="brand-groupon      pull-home               is-web ltr          en_US en_XX pull-app-is-ready pull-app-is-loaded">
-
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 999;background: black;opacity: .5;">
+			<span class="iconfont icon-loading" style="display: block;color: white;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div id="global-container">
 
 			<div class="header-v2">
@@ -155,8 +296,9 @@
              big-searchbar" id="ls-header" data-bhw-path="Header">
 					<div class="ls-header-top">
 						<div class="row ls-header-top-row ls-header-with-signin-flyout" id="ls-header-top-row">
-							<a href="https://www.groupon.com/" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo">
-								<img src="./Groupon_ Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more._files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">
+							<a href="https://www.groupon.com/" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo" style="font-weight: bolder;font-size: 24px;font-family: sans-serif;color: #ffffff;text-align: left;">
+								Newbidder
+								<!--<img src="./Groupon_ Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more._files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">-->
 							</a>
 							<div id="ls-header-main" class="ls-clearfix alternative-search">
 								<div id="ls-search-bar-wrapper" class="columns search-bar-wrapper">
@@ -310,7 +452,7 @@
 						<div id="ls-primary-nav-row" class="row">
 							<ul class="primary-nav" role="menubar">
 								<li id="home-tab" class="primary-nav-tab" data-bhw="NavHome" data-bhw-path="Header|NavHome">
-									<a href="https://www.groupon.com/" id="sls-aria-0" role="menuitem" tabindex="0">
+									<a href="index.html" id="sls-aria-0" role="menuitem" tabindex="0">
 										Home
 									</a>
 								</li>
@@ -320,7 +462,7 @@
 									</a>
 								</li>
 								<li id="goods-tab" class="primary-nav-tab" data-bhw="NavGoods" data-bhw-path="Header|NavGoods">
-									<a href="https://www.groupon.com/goods" id="sls-aria-2" role="menuitem" aria-haspopup="true" aria-owns="subnav-goods-tab" tabindex="0">
+									<a href="classify.html" id="sls-aria-2" role="menuitem" aria-haspopup="true" aria-owns="subnav-goods-tab" tabindex="0">
 										Goods
 									</a>
 								</li>
@@ -330,7 +472,7 @@
 									</a>
 								</li>
 								<li id="coupons-tab" class="primary-nav-tab" data-bhw="NavCoupons" data-bhw-path="Header|NavCoupons">
-									<a href="https://www.groupon.com/coupons" id="sls-aria-5" role="menuitem" aria-haspopup="true" aria-owns="subnav-coupons-tab" tabindex="0">
+									<a href="coupons.html" id="sls-aria-5" role="menuitem" aria-haspopup="true" aria-owns="subnav-coupons-tab" tabindex="0">
 										Coupons
 									</a>
 								</li>
@@ -425,7 +567,7 @@
 							<nav class="subnav-flyout goods-tab-flyout row hide" id="subnav-goods-tab" data-bhw="SubNav-goods-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-2">
 								<div data-bhw="goods-flyout" class="flyContainer">
 									<ul class="flyMenu">
-										<li class="flyActive">
+										<!--<li class="flyActive">
 											<a class="flyMenulink" href="https://www.groupon.com/goods/auto-and-home-improvement" data-bhc="flyout-label:auto-and-home-improvement" tabindex="-1" role="menuitem">
 												<n>Auto &amp; Home Improvement</n>
 												<c>22064</c>
@@ -1205,7 +1347,7 @@
 												<n>Shop All Categories</n>
 												<c>25251</c>
 											</a>
-										</li>
+										</li>-->
 									</ul>
 									<div class="flyTeaserMsg">
 										<span>FREE Shipping</span> with $34.99 Purchase |
@@ -1577,16 +1719,7 @@
 										<div class="cui-content-holder">
 											<div class="cui-cards-wrapper  carousel">
 												<div class="cui-content  cui-one-up cui-udc-list-view  has-scroll-listener">
-													<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  
-   cui-is-embedded-card 
-  
-  
-  
-  
-  
-  
-  " data-pingdom-info="purchasable-deal" data-bhc="deal:6fc5c886-a9fc-11e7-8405-00259060b5da" data-bhd="{&quot;cardUUID&quot;:&quot;6fc5c886-a9fc-11e7-8405-00259060b5da&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Sofa-Style Fiber-Filled Pillow Pet Bed for Dogs&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:10000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;122&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$69.99 $16.99&quot;}}" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:6fc5c886-a9fc-11e7-8405-00259060b5da">
+													<!--<figure class="card-ui cui-c-udc c-bdr-gray-clr cui-is-embedded-card">
 
 														<a href="https://www.groupon.com/deals/gg-insulating-sofa-style-fiber-filled-pillow-pet-bed-for-dogs">
 															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md has-scroll-listener">
@@ -1659,100 +1792,91 @@
 
 															</div>
 														</a>
-														</figure>
-														<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  
-   cui-is-embedded-card 
-  
-  
-  
-  
-  
-  
-  " data-pingdom-info="purchasable-deal" data-bhc="deal:16aa2267-7259-93de-9ed5-a9dca27f4361" data-bhd="{&quot;cardUUID&quot;:&quot;16aa2267-7259-93de-9ed5-a9dca27f4361&quot;,&quot;cardSubtype&quot;:&quot;LOCAL&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Up to 62% off Reflexology&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;location-and-distance&quot;,&quot;content&quot;:&quot;North Side, Chicago(4.6 mi)&quot;},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;3,621&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$68 $26&quot;}}" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:16aa2267-7259-93de-9ed5-a9dca27f4361">
+														</figure>-->
+													<!--<figure class="card-ui cui-c-udc c-bdr-gray-clr cui-is-embedded-card">
 
-															<a href="https://www.groupon.com/deals/vip-feet-feel-spa-1">
-																<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md has-scroll-listener">
+														<a href="https://www.groupon.com/deals/vip-feet-feel-spa-1">
+															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md has-scroll-listener">
 
-																	<div class="cui-udc-image-container">
-																		<div class="cui-udc-image-overlay"></div>
-																		<div class="cui-image-lazy-container cui-image-hover-zoom">
-																			<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="192" width="192" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;192&#39; width=&#39;192&#39;%2F%3E" alt="image placeholder">
+																<div class="cui-udc-image-container">
+																	<div class="cui-udc-image-overlay"></div>
+																	<div class="cui-image-lazy-container cui-image-hover-zoom">
+																		<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="192" width="192" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;192&#39; width=&#39;192&#39;%2F%3E" alt="image placeholder">
 
-																			<img class="cui-image progressive-load lazy-loaded" src="./Groupon_ Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more._files/c192x192q85(1).jpg" data-original="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c96x96q5.jpg" data-high-quality="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c192x192q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c192x192q85.jpg" alt="image for Up to 62% Off Reflexology" style="filter: blur(0px);">
-																		</div>
-
-																	</div>
-																	<div class="cui-udc-details c-txt-gray-dk">
-
-																		<div class="cui-udc-title-with-subtitle c-txt-black one-line-truncate">
-																			Up to 62% off Reflexology
-																		</div>
-
-																		<div class="cui-udc-subtitle c-txt-gray-dk one-line-truncate ">
-																			VIP Feet Feel Spa
-																		</div>
-
-																		<div class="cui-udc-super-row">
-																			<div class="cui-udc-left-zero">
-																			</div>
-																			<div class="cui-udc-right-zero">
-																			</div>
-																		</div>
-																		<div class="cui-udc-top-row">
-																			<div class="cui-udc-left-one">
-																				<div class="cui-location cui-truncate c-txt-gray-dk cui-has-distance">
-																					<span class="cui-location-name">
-         North Side, Chicago
-       </span>
-																					<span class="cui-location-separator"> • </span>
-																					<span class="cui-location-distance">
-         4.6 mi
-       </span>
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-one">
-
-																				<s class="cui-price-original-same-size c-txt-gray-dk
- ">$68</s>
-
-																			</div>
-																		</div>
-																		<div class="cui-udc-bottom-row">
-																			<div class="cui-udc-left-two">
-
-																				<div class="cui-review-rating ">
-
-																					<ul class="rating" data-bhc="deal-review-rating:4.6" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:16aa2267-7259-93de-9ed5-a9dca27f4361|deal-review-rating:4.6">
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="half-star "></span></li>
-																					</ul>
-
-																					<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:3621" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:16aa2267-7259-93de-9ed5-a9dca27f4361|deal-rating-count:3621">
-																						(3,621)
-																					</div>
-
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-two">
-
-																				<span class="cui-price-discount-same-size c-txt-price
-">$26</span>
-
-																			</div>
-																		</div>
-
+																		<img class="cui-image progressive-load lazy-loaded" src="./Groupon_ Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more._files/c192x192q85(1).jpg" data-original="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c96x96q5.jpg" data-high-quality="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c192x192q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/UzyzqtnUkPcmstJzvGG/5Q-2048x1229/v1/c192x192q85.jpg" alt="image for Up to 62% Off Reflexology" style="filter: blur(0px);">
 																	</div>
 
 																</div>
-															</a>
-															</figure>
+																<div class="cui-udc-details c-txt-gray-dk">
 
+																	<div class="cui-udc-title-with-subtitle c-txt-black one-line-truncate">
+																		Up to 62% off Reflexology
+																	</div>
+
+																	<div class="cui-udc-subtitle c-txt-gray-dk one-line-truncate ">
+																		VIP Feet Feel Spa
+																	</div>
+
+																	<div class="cui-udc-super-row">
+																		<div class="cui-udc-left-zero">
+																		</div>
+																		<div class="cui-udc-right-zero">
+																		</div>
+																	</div>
+																	<div class="cui-udc-top-row">
+																		<div class="cui-udc-left-one">
+																			<div class="cui-location cui-truncate c-txt-gray-dk cui-has-distance">
+																				<span class="cui-location-name">
+       North Side, Chicago
+     </span>
+																				<span class="cui-location-separator"> • </span>
+																				<span class="cui-location-distance">
+       4.6 mi
+     </span>
+																			</div>
+
+																		</div>
+																		<div class="cui-udc-right-one">
+
+																			<s class="cui-price-original-same-size c-txt-gray-dk
+ ">$68</s>
+
+																		</div>
+																	</div>
+																	<div class="cui-udc-bottom-row">
+																		<div class="cui-udc-left-two">
+
+																			<div class="cui-review-rating ">
+
+																				<ul class="rating" data-bhc="deal-review-rating:4.6" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:16aa2267-7259-93de-9ed5-a9dca27f4361|deal-review-rating:4.6">
+																					<li><span class="full-star "></span></li>
+																					<li><span class="full-star "></span></li>
+																					<li><span class="full-star "></span></li>
+																					<li><span class="full-star "></span></li>
+																					<li><span class="half-star "></span></li>
+																				</ul>
+
+																				<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:3621" data-bh-viewport="respect" data-bhc-path="HomeCards|CompoundCollection|compound:8bcbf672-a14f-4190-b561-3602c380bb7b|deal:16aa2267-7259-93de-9ed5-a9dca27f4361|deal-rating-count:3621">
+																					(3,621)
+																				</div>
+
+																			</div>
+
+																		</div>
+																		<div class="cui-udc-right-two">
+
+																			<span class="cui-price-discount-same-size c-txt-price
+">$26</span>
+
+																		</div>
+																	</div>
+
+																</div>
+
+															</div>
+														</a>
+														</figure>
+-->
 												</div>
 											</div>
 										</div>
@@ -2145,7 +2269,7 @@
 
 <div id="pull-oops-error"></div>
 
-<div id="pull-widget" data-bhw="BottomWidget" class="cui-four-up" data-bhw-path="BottomWidget">
+<!--<div id="pull-widget" data-bhw="BottomWidget" class="cui-four-up" data-bhw-path="BottomWidget">
 <figure class="card-ui cui-c-compound cui-four-up
 
 
@@ -2162,16 +2286,7 @@ Trending Deals
 <div class="cui-content-holder">
 <div class="cui-cards-wrapper  carousel">
 <div class="cui-content  has-scroll-listener">
-<figure class="card-ui cui-c-udc c-bdr-gray-clr
-
- cui-is-embedded-card 
-
-
-
- cui-udc-display-stacked-row
-
-
-" data-pingdom-info="purchasable-deal" data-bhc="deal:a5ea2e65-17d5-4d02-a345-40493001b811" data-bhd="{&quot;cardUUID&quot;:&quot;a5ea2e65-17d5-4d02-a345-40493001b811&quot;,&quot;cardSubtype&quot;:&quot;LOCAL&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Up to 44% off Two Movie Tickets&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;location-and-distance&quot;,&quot;content&quot;:&quot;Pine Ridge, Woodridge(22.1 mi)&quot;},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;3,225&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$16 $9&quot;}}" data-bh-viewport="respect">
+<figure class="card-ui cui-c-udc c-bdr-gray-clr cui-is-embedded-card cui-udc-display-stacked-row" >
 
 <a href="https://www.groupon.com/deals/hollywood-blvd-cinema-6">
 <div class="cui-content c-bdr-gray-clr ch-bdr-gray-md has-scroll-listener">
@@ -3005,7 +3120,7 @@ Trending Deals
 				<a class="cui-arrow-previous c-bg-white ch-bg-gray-bg c-txt-price ch-txt-price" data-bhc="carousel:previous" alt="Previous" style="display:none;"> </a>
 				</div>
 				</figure>
-				</div>
+				</div>-->
 				
 				<div id="browse-by-location" data-bhw="StaticWidget" data-bhc="staticWidgetType:SeoBrowseByLocation" data-bh-viewport="respect">
 				<h3>

@@ -8,6 +8,18 @@
 			<option>Lander</option>
 			<option>Traffic Source</option>
 			<option>Affiliate Network</option>
+			<option>WebSite ID</option>
+			<option>Brands</option>
+			<option>Brower versions</option>
+			<option>Browers</option>
+			<option>City</option>
+			<option>Connection Type</option>
+			<option>County</option>
+			<option>Day</option>
+			<option>Hour</option>
+			<option>HourOfDay</option>
+			<option>Device Type</option>
+			<option>IP</option>
 		</select>
 	</div>
 </template>

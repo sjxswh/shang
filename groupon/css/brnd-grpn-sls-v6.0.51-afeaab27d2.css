@@ -504,6 +504,9 @@ line-height: 50px;
 	from{transform: rotate(0deg);}
 	to{transform: rotate(360deg);}
 }
+.buy-button-wrapper{
+	border-top: 1px solid #d5d8db;
+}
 .radio{
 	background-color: #53a318;
 	border-color: #53a318;
@@ -521,21 +524,14 @@ line-height: 50px;
 	position: static !important;
 }
 .swiper-pagination-bullet{
-	width: 100px !important;
+	width: 60px !important;
 	height: 60px !important;
 	border: 1px solid #CCCCCC;
 	border-radius: 0 !important;
 	margin: 0 10px;
+	background-size: 100% 100%  !important;
 }
-.swiper-pagination-bullet:nth-child(1){
-	background: url(../img/t100x1002.jpg);
-}
-.swiper-pagination-bullet:nth-child(2){
-	background: url(../img/t100x1003.jpg);
-}
-.swiper-pagination-bullet:nth-child(3){
-	background: url(../img/t100x1001.jpg);
-}
+
 .ls-hide-absolute {
 	visibility: hidden;
 	position: absolute
@@ -1829,6 +1825,7 @@ line-height: 50px;
 	width: 35px;
 	min-width: 35px;
 	text-align: center;
+	line-height: 35px;
 	padding: 0;
 	font-size: 16px;
 	vertical-align: middle;

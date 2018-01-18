@@ -31,10 +31,10 @@
 		  		var that = this
 				this.$ajax({
 				  method: "post",
-				  url:"https://panel.newbidder.com/auth/login",
+				  url:"http://beta.newbidder.com/auth/login",
 	  			  data:{
 	  				 email: that.emailValue,
-					 password:that.pwdValue
+					 		password:that.pwdValue
 	  			  },
 				}).then(function (data) {
 					console.log(data)

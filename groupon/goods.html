@@ -111,38 +111,131 @@
 				$('.refinement-badges-clear')[0].onclick = function(){
 					$('.refinement-badges-list').find("input").removeAttr("checked")
 				}
-				/*var slider = Array.from($('.ui-slider-handle'))
-				var isDown = false
-				slider.forEach(function(v,k){
-			      if(document.attachEvent) {//ie的事件监听，拖拽div时禁止选中内容，firefox与chrome已在css中设置过-moz-user-select: none; -webkit-user-select: none;
-			        $(this)[0].attachEvent('onselectstart', function() {
-			          return false;
-			        });
-			      }
-			      $(this).mousedown(function(event) {
-			        var event = event || window.event;
-			        mX = event.clientX;
-			        mY = event.clientY;
-			        console.log( mY)
-			        dX = $('.ui-slider-range').offset().left;
-			        dY = $('.ui-slider-range').offset().top;
-			        console.log(mX)
-			        isDown = true;//鼠标拖拽启动
-			      });
-			      $(document).mousemove(function(event) {
-			        var event = event || window.event;
-			        var x = event.clientX;//鼠标滑动时的X轴
-			        var y = event.clientY;//鼠标滑动时的Y轴
-			        console.log(x)
-			        if(isDown) {
-			          $('.ui-slider-range').css({"left": x - mX + dX, "top": y - mY + dY});//div动态位置赋值
-			        }
-			      });
-			      document.mouseup(function() {
-			      	document.onmousedown = false;
-			        document.onmousemove = false;//鼠标拖拽结束
-			      });
-				})*/
+				var LocationH = window.location.href.split("?")[1].split("=")[1]
+				console.log(LocationH)
+				$.ajax({
+					type:"post",
+					url:"http://offerwall.newbidder.com/search/",
+					data:{
+						"goodname":LocationH,
+						"categoryid":LocationH
+					},
+					success:function(data){
+						console.log(data)
+						for(var j in data.categories){
+							console.log(j)
+							var bb = `<li data-id="auto-and-home-improvement" class="sub-category-links child-refinement" data-bhc="category2:auto-and-home-improvement" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:auto-and-home-improvement">
+																<a href="https://www.groupon.com/goods/auto-and-home-improvement">
+																	${ j }
+																	<span class="deal-counts">(${ data.categories[j][0] })</span>
+
+																</a>
+															</li>`
+										$('#all-list').append(bb)
+						}
+						for(var n = 0;n < data.goods.length;n++){
+							var aa = `<figure class="card-ui cui-c-udc c-bdr-gray-clr has-additional-value-message " data-pingdom-info="purchasable-deal" data-bhc="deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f" data-bhd="{&quot;cardUUID&quot;:&quot;6cab281e-2e1e-4adc-a7e6-d400a54efa3f&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Nina or Shore Embossed Quilt Set (2- or 3-Piece)&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:10000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;3,369&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$159.99 $24.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f">
+															<a href="detail.html?productId=${ data.goods[n]["productId"] }">
+																<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
+
+																	<div class="cui-udc-image-container">
+																		<div class="cui-udc-image-overlay"></div>
+																		<div class="cui-image-lazy-container cui-image-hover-zoom">
+																			<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
+
+																			<img class="cui-image lazy-loaded" src="${data.goods[n]["imageUrl"]}" data-original="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" alt="image for Nina or Shore Embossed Quilt Set (2- or 3-Piece)" style="width:100%;height:100%;">
+																		</div>
+
+																		<div class="cui-badge c-bg-accent c-txt-white">
+																			<span class="cui-badge-label">TOP SELLER</span>
+																		</div>
+																	</div>
+																	<div class="cui-udc-details c-txt-gray-dk">
+																		<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
+																			${data.goods[n]["productTitle"]}
+																		</div>
+
+																		<div class="cui-udc-top-row">
+																			<div class="cui-udc-left-one">
+
+																				<div class="cui-quantity-bought c-txt-gray-dk">
+																					10,000+ bought
+																				</div>
+
+																			</div>
+																			<div class="cui-udc-right-one">
+
+																				<div class="cui-price" data-pingdom-id="deal-price">
+																					<s class="cui-price-original c-txt-gray-dk
+ ">${data.goods[n]["originalPrice"]}</s>
+																						<span class="cui-price-discount cui-urgent c-txt-err
+
+
+">${data.goods[n]["salePrice"]}</span>
+																				</div>
+
+																			</div>
+																		</div>
+																		<div class="cui-udc-bottom-row">
+																			<div class="cui-udc-left-two">
+
+																				<div class="cui-review-rating ">
+
+																					<ul class="rating ratings" data-bhc="deal-review-rating:4.3" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-review-rating:4.3">
+																						
+																					</ul>
+
+																					<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:3369" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-rating-count:3369">
+																						${data.goods[n]["evaluateScore"]}
+																					</div>
+
+																				</div>
+
+																			</div>
+																			<div class="cui-udc-right-two">
+
+																				<div class="cui-promotions">
+																					<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
+																				</div>
+
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</a>
+															</figure>`
+															$('#browse-deals').append(aa)
+									for(let i = 0;i < Math.floor(data.goods[n]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star2"><span class="full-star"></span></li>`
+										$('.ratings').eq(n).append(oLi)
+									}
+									if(data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"])> 0.5){
+										let oLis = `<li class="iconfont icon-star3"><span class="full-star"></span></li>`
+										$('.ratings').eq(n).append(oLis)
+									}
+									else if(data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"]) < 0.5 && data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"]) >0){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.ratings').eq(n).append(oLi)
+									}
+									for(let i = 0;i < 5 - Math.floor(data.goods[n]["evaluateScore"]);i++){
+										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
+										$('.ratings').eq(n).append(oLi)
+									}
+						}
+					},
+					error: function(xhr, ajaxOptions, thrownError) {
+            console.info("error.");
+            if (xhr.status == 200) {
+                console.log(ajaxOptions);
+            }
+            else {
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+          }
+				});
 				
 			})
 		</script>
@@ -1503,14 +1596,7 @@
 													<div class="refinement-box">
 														<h4>Categories</h4>
 														<ul id="all-list" class="refinement-list">
-															<li data-id="auto-and-home-improvement" class="sub-category-links child-refinement" data-bhc="category2:auto-and-home-improvement" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:auto-and-home-improvement">
-																<a href="https://www.groupon.com/goods/auto-and-home-improvement">
-																	Auto &amp; Home Improvement
-																	<span class="deal-counts">(22240)</span>
-
-																</a>
-															</li>
-															<li data-id="baby-kids-and-toys" class="sub-category-links child-refinement" data-bhc="category2:baby-kids-and-toys" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:baby-kids-and-toys">
+															<!--<li data-id="baby-kids-and-toys" class="sub-category-links child-refinement" data-bhc="category2:baby-kids-and-toys" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:baby-kids-and-toys">
 																<a href="https://www.groupon.com/goods/baby-kids-and-toys">
 																	Baby, Kids &amp; Toys
 																	<span class="deal-counts">(18657)</span>
@@ -1600,7 +1686,7 @@
 																	<span class="deal-counts">(35328)</span>
 
 																</a>
-															</li>
+															</li>-->
 														</ul>
 													</div>
 												</div>
@@ -2036,447 +2122,9 @@
 															</div>
 														</a>
 														</figure>
-														<figure class="card-ui cui-c-udc c-bdr-gray-clr
-    has-additional-value-message
-  
-  
-  
-  
-  
-  
-  " data-pingdom-info="purchasable-deal" data-bhc="deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f" data-bhd="{&quot;cardUUID&quot;:&quot;6cab281e-2e1e-4adc-a7e6-d400a54efa3f&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Nina or Shore Embossed Quilt Set (2- or 3-Piece)&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:10000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;3,369&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$159.99 $24.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f">
-
-															<a href="https://www.groupon.com/deals/gg-cm-embossed-quilt-set-nina-or-shore-3-piece">
-																<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																	<div class="cui-udc-image-container">
-																		<div class="cui-udc-image-overlay"></div>
-																		<div class="cui-image-lazy-container cui-image-hover-zoom">
-																			<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																			<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50.jpg" data-original="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" alt="image for Nina or Shore Embossed Quilt Set (2- or 3-Piece)">
-																		</div>
-
-																		<div class="cui-badge c-bg-accent c-txt-white">
-																			<span class="cui-badge-label">TOP SELLER</span>
-																		</div>
-																	</div>
-																	<div class="cui-udc-details c-txt-gray-dk">
-																		<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
-
-																			Nina or Shore Embossed Quilt Set (2- or 3-Piece)
-																		</div>
-
-																		<div class="cui-udc-top-row">
-																			<div class="cui-udc-left-one">
-
-																				<div class="cui-quantity-bought c-txt-gray-dk">
-																					10,000+ bought
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-one">
-
-																				<div class="cui-price" data-pingdom-id="deal-price">
-																					<s class="cui-price-original c-txt-gray-dk
- ">$159.99</s>
-																						<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$24.99</span>
-																				</div>
-
-																			</div>
-																		</div>
-																		<div class="cui-udc-bottom-row">
-																			<div class="cui-udc-left-two">
-
-																				<div class="cui-review-rating ">
-
-																					<ul class="rating" data-bhc="deal-review-rating:4.3" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-review-rating:4.3">
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="half-star "></span></li>
-																					</ul>
-
-																					<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:3369" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-rating-count:3369">
-																						(3,369)
-																					</div>
-
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-two">
-
-																				<div class="cui-promotions">
-																					<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																				</div>
-
-																			</div>
-																		</div>
-
-																	</div>
-
-																</div>
-															</a>
-															</figure>
-															<figure class="card-ui cui-c-udc c-bdr-gray-clr
-    has-additional-value-message
-  
-  
-  
-  
-  
-  
-  " data-pingdom-info="purchasable-deal" data-bhc="deal:11748709-bb88-4b70-a499-3edf7929063d" data-bhd="{&quot;cardUUID&quot;:&quot;11748709-bb88-4b70-a499-3edf7929063d&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;C.C. Women&#39;s Knit Beanie Hat&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:25000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;741&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$39.99 $8.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:11748709-bb88-4b70-a499-3edf7929063d">
-
-																<a href="https://www.groupon.com/deals/gg-cm-popular-c-c-knit-beanie-hat">
-																	<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																		<div class="cui-udc-image-container">
-																			<div class="cui-udc-image-overlay"></div>
-																			<div class="cui-image-lazy-container cui-image-hover-zoom">
-																				<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																				<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(1).jpg" data-original="//img.grouponcdn.com/stores/3ggpfNW3fuFBzsn2vHzmMyub63DZ/storespi2340361-1000x600/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/stores/3ggpfNW3fuFBzsn2vHzmMyub63DZ/storespi2340361-1000x600/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/stores/3ggpfNW3fuFBzsn2vHzmMyub63DZ/storespi2340361-1000x600/v1/c414x250q85.jpg" alt="image for C.C. Women&#39;s Knit Beanie Hat">
-																			</div>
-
-																			<div class="cui-badge c-bg-accent c-txt-white">
-																				<span class="cui-badge-label">TOP SELLER</span>
-																			</div>
-																		</div>
-																		<div class="cui-udc-details c-txt-gray-dk">
-																			<div class="cui-udc-title c-txt-black ">
-
-																				C.C. Women's Knit Beanie Hat
-																			</div>
-
-																			<div class="cui-udc-top-row">
-																				<div class="cui-udc-left-one">
-
-																					<div class="cui-quantity-bought c-txt-gray-dk">
-																						25,000+ bought
-																					</div>
-
-																				</div>
-																				<div class="cui-udc-right-one">
-
-																					<div class="cui-price" data-pingdom-id="deal-price">
-																						<s class="cui-price-original c-txt-gray-dk
- ">$39.99</s>
-																							<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$8.99</span>
-																					</div>
-
-																				</div>
-																			</div>
-																			<div class="cui-udc-bottom-row">
-																				<div class="cui-udc-left-two">
-
-																					<div class="cui-review-rating ">
-
-																						<ul class="rating" data-bhc="deal-review-rating:4.1" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:11748709-bb88-4b70-a499-3edf7929063d|deal-review-rating:4.1">
-																							<li><span class="full-star "></span></li>
-																							<li><span class="full-star "></span></li>
-																							<li><span class="full-star "></span></li>
-																							<li><span class="full-star "></span></li>
-																							<li><span class="empty-star c-txt-gray-clr"></span></li>
-																						</ul>
-
-																						<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:741" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:11748709-bb88-4b70-a499-3edf7929063d|deal-rating-count:741">
-																							(741)
-																						</div>
-
-																					</div>
-
-																				</div>
-																				<div class="cui-udc-right-two">
-
-																					<div class="cui-promotions">
-																						<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																					</div>
-
-																				</div>
-																			</div>
-
-																		</div>
-
-																	</div>
-																</a>
-																</figure>
-																<figure class="card-ui cui-c-udc c-bdr-gray-clr
-    has-additional-value-message
-  
-  
-  
-  
-  
-  
-  " data-pingdom-info="purchasable-deal" data-bhc="deal:0ee84d28-ad20-11e7-b0de-00259060b5da" data-bhd="{&quot;cardUUID&quot;:&quot;0ee84d28-ad20-11e7-b0de-00259060b5da&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Diaper Bag Backpack&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:5000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;325&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$64.99 $24.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:0ee84d28-ad20-11e7-b0de-00259060b5da">
-
-																	<a href="https://www.groupon.com/deals/gg-diaper-bag-backpack-changing-pad">
-																		<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																			<div class="cui-udc-image-container">
-																				<div class="cui-udc-image-overlay"></div>
-																				<div class="cui-image-lazy-container cui-image-hover-zoom">
-																					<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																					<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(2).jpg" data-original="//img.grouponcdn.com/deal/3h6NyhNp7daoxfDCVCgqDaXULbZt/3h-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/3h6NyhNp7daoxfDCVCgqDaXULbZt/3h-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/3h6NyhNp7daoxfDCVCgqDaXULbZt/3h-2048x1229/v1/c414x250q85.jpg" alt="image for Diaper Bag Backpack">
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-details c-txt-gray-dk">
-																				<div class="cui-udc-title c-txt-black ">
-
-																					Diaper Bag Backpack
-																				</div>
-
-																				<div class="cui-udc-top-row">
-																					<div class="cui-udc-left-one">
-
-																						<div class="cui-quantity-bought c-txt-gray-dk">
-																							5,000+ bought
-																						</div>
-
-																					</div>
-																					<div class="cui-udc-right-one">
-
-																						<div class="cui-price" data-pingdom-id="deal-price">
-																							<s class="cui-price-original c-txt-gray-dk
- ">$64.99</s>
-																								<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$24.99</span>
-																						</div>
-
-																					</div>
-																				</div>
-																				<div class="cui-udc-bottom-row">
-																					<div class="cui-udc-left-two">
-
-																						<div class="cui-review-rating ">
-
-																							<ul class="rating" data-bhc="deal-review-rating:4.2" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:0ee84d28-ad20-11e7-b0de-00259060b5da|deal-review-rating:4.2">
-																								<li><span class="full-star "></span></li>
-																								<li><span class="full-star "></span></li>
-																								<li><span class="full-star "></span></li>
-																								<li><span class="full-star "></span></li>
-																								<li><span class="empty-star c-txt-gray-clr"></span></li>
-																							</ul>
-
-																							<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:325" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:0ee84d28-ad20-11e7-b0de-00259060b5da|deal-rating-count:325">
-																								(325)
-																							</div>
-
-																						</div>
-
-																					</div>
-																					<div class="cui-udc-right-two">
-
-																						<div class="cui-promotions">
-																							<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																						</div>
-
-																					</div>
-																				</div>
-
-																			</div>
-
-																		</div>
-																	</a>
-																	</figure>
-																	<figure class="card-ui cui-c-collection cui-c-udc
-  
-  
-   " data-bhc="collection:goods-lightning-flash" data-bhd="{&quot;cardName&quot;:&quot;deals-of-the-day&quot;,&quot;cardUUID&quot;:&quot;goods-lightning-flash&quot;,&quot;templateView&quot;:&quot;WebFullBleedCollectionView&quot;}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|collection:goods-lightning-flash">
-																		<a href="https://www.groupon.com/occasion/deals-of-the-day" class="cui-content c-txt-white c-bg-prim cui-image lazy-loaded" data-original="//img.grouponcdn.com/deal/3aZKDvJ1oH5PvHjLFiEY7w5hubbs/cc-1280x1280/v1/c600x600q50.jpg" data-high-quality="//img.grouponcdn.com/deal/3aZKDvJ1oH5PvHjLFiEY7w5hubbs/cc-1280x1280/v1/c600x600q85.jpg" alt="" style="background-image: url(&quot;//img.grouponcdn.com/deal/3aZKDvJ1oH5PvHjLFiEY7w5hubbs/cc-1280x1280/v1/c600x600q50.jpg&quot;);">
-																			<div class="cui-placeholder-container">
-																				<img class="cui-svg-placeholder" type="image/svg+xml" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-																			</div>
-																			<figcaption class="">
-																				<div class="cui-title"></div>
-																				<div class="cui-description"></div>
-																			</figcaption>
-
-																			<div class="cui-cta-container">
-																				<div class="cui-cta c-bdr-white btn-transparent">Shop Now</div>
-																			</div>
-
-																		</a>
-																		</figure>
-											<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  has-additional-value-message
-
-
-
-
-
-
-" data-pingdom-info="purchasable-deal" data-bhc="deal:08b288b8-2b4f-11e7-a979-00259060b5da" data-bhd="{&quot;cardUUID&quot;:&quot;08b288b8-2b4f-11e7-a979-00259060b5da&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Purtech 10ft. Apple-Certified Lightning Cable (1-, 2-, or 3-Pack)&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:100000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;7,279&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$39.99 $7.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:08b288b8-2b4f-11e7-a979-00259060b5da">
-
-												<a href="https://www.groupon.com/deals/gg-apple-certified-lightning-cable-for-iphone">
-													<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-														<div class="cui-udc-image-container">
-															<div class="cui-udc-image-overlay"></div>
-															<div class="cui-image-lazy-container cui-image-hover-zoom">
-																<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(3).jpg" data-original="//img.grouponcdn.com/deal/uuNoJLBDn29BCSVsWN82xrTAthz/uu-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/uuNoJLBDn29BCSVsWN82xrTAthz/uu-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/uuNoJLBDn29BCSVsWN82xrTAthz/uu-2048x1229/v1/c414x250q85.jpg" alt="image for Purtech 10ft. Apple-Certified Lightning Cable (1-, 2-, or 3-Pack)">
-															</div>
-
-														</div>
-														<div class="cui-udc-details c-txt-gray-dk">
-															<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
-
-																Purtech&nbsp;10ft. Apple-Certified Lightning Cable (1-, 2-, or 3-Pack)
-															</div>
-
-															<div class="cui-udc-top-row">
-																<div class="cui-udc-left-one">
-
-																	<div class="cui-quantity-bought c-txt-gray-dk">
-																		100,000+ bought
-																	</div>
-
-																</div>
-																<div class="cui-udc-right-one">
-
-																	<div class="cui-price" data-pingdom-id="deal-price">
-																		<s class="cui-price-original c-txt-gray-dk
- ">$39.99</s>
-																			<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$7.99</span>
-																	</div>
-
-																</div>
-															</div>
-															<div class="cui-udc-bottom-row">
-																<div class="cui-udc-left-two">
-
-																	<div class="cui-review-rating ">
-
-																		<ul class="rating" data-bhc="deal-review-rating:4.3" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:08b288b8-2b4f-11e7-a979-00259060b5da|deal-review-rating:4.3">
-																			<li><span class="full-star "></span></li>
-																			<li><span class="full-star "></span></li>
-																			<li><span class="full-star "></span></li>
-																			<li><span class="full-star "></span></li>
-																			<li><span class="half-star "></span></li>
-																		</ul>
-
-																		<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:7279" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:08b288b8-2b4f-11e7-a979-00259060b5da|deal-rating-count:7279">
-																			(7,279)
-																		</div>
-
-																	</div>
-
-																</div>
-																<div class="cui-udc-right-two">
-
-																	<div class="cui-promotions">
-																		<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																	</div>
-
-																</div>
-															</div>
-
-														</div>
-
-													</div>
-												</a>
-												</figure>
-												<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  has-additional-value-message
-
-
-
-
-
-
-" data-pingdom-info="purchasable-deal" data-bhc="deal:2a6e214b-b7a3-4c72-9922-e52f1d687a2e" data-bhd="{&quot;cardUUID&quot;:&quot;2a6e214b-b7a3-4c72-9922-e52f1d687a2e&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Women&#39;s Floral Flare Pants&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:25000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;1,506&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$34.99 $11.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:2a6e214b-b7a3-4c72-9922-e52f1d687a2e">
-
-													<a href="https://www.groupon.com/deals/gg-cm-floral-pants">
-														<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-															<div class="cui-udc-image-container">
-																<div class="cui-udc-image-overlay"></div>
-																<div class="cui-image-lazy-container cui-image-hover-zoom">
-																	<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																	<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(4).jpg" data-original="//img.grouponcdn.com/deal/3JFjvMqKX69RSQaSqYKM5B3mHWTU/3J-1000x600/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/3JFjvMqKX69RSQaSqYKM5B3mHWTU/3J-1000x600/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/3JFjvMqKX69RSQaSqYKM5B3mHWTU/3J-1000x600/v1/c414x250q85.jpg" alt="image for Women&#39;s Floral Flare Pants">
-																</div>
-
-															</div>
-															<div class="cui-udc-details c-txt-gray-dk">
-																<div class="cui-udc-title c-txt-black ">
-
-																	Women's Floral Flare Pants
-																</div>
-
-																<div class="cui-udc-top-row">
-																	<div class="cui-udc-left-one">
-
-																		<div class="cui-quantity-bought c-txt-gray-dk">
-																			25,000+ bought
-																		</div>
-
-																	</div>
-																	<div class="cui-udc-right-one">
-
-																		<div class="cui-price" data-pingdom-id="deal-price">
-																			<s class="cui-price-original c-txt-gray-dk
- ">$34.99</s>
-																				<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$11.99</span>
-																		</div>
-
-																	</div>
-																</div>
-																<div class="cui-udc-bottom-row">
-																	<div class="cui-udc-left-two">
-
-																		<div class="cui-review-rating ">
-
-																			<ul class="rating" data-bhc="deal-review-rating:4.1" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:2a6e214b-b7a3-4c72-9922-e52f1d687a2e|deal-review-rating:4.1">
-																				<li><span class="full-star "></span></li>
-																				<li><span class="full-star "></span></li>
-																				<li><span class="full-star "></span></li>
-																				<li><span class="full-star "></span></li>
-																				<li><span class="empty-star c-txt-gray-clr"></span></li>
-																			</ul>
-
-																			<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:1506" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:2a6e214b-b7a3-4c72-9922-e52f1d687a2e|deal-rating-count:1506">
-																				(1,506)
-																			</div>
-
-																		</div>
-
-																	</div>
-																	<div class="cui-udc-right-two">
-
-																		<div class="cui-promotions">
-																			<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																		</div>
-
-																	</div>
-																</div>
-
-															</div>
-
-														</div>
-													</a>
-													</figure>
-													<figure class="card-ui cui-c-udc c-bdr-gray-clr
+														
+														
+													<!--<figure class="card-ui cui-c-udc c-bdr-gray-clr
   has-additional-value-message
 
 
@@ -2641,7 +2289,7 @@
 
 																</div>
 															</a>
-															</figure>
+															</figure>-->
 																											
 																																			
 												</div>
@@ -3046,7 +2694,7 @@
 		<script src="js/gig-v7.7.2-c460c629c4.js"></script>
 		<script src="js/locale.js"></script>
 		<script src="js/main-07a0a6eda7.js"></script>
-		<script src="js/demo.js"></script>
+		<script src="js/loading.js"></script>
 		<noscript>
         &lt;a href="http://www.boldchat.com" title="Visitor Monitoring" target="_blank" rel="noopener"&gt;&lt;img alt="Visitor Monitoring" src="https://vms.boldchat.com/aid/888454639756334259/bc.vmi" border="0" width="1" height="1" /&gt;&lt;/a&gt;
         </noscript>

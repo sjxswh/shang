@@ -59,6 +59,7 @@
 
 		<meta name="referrer" type="origin-when-crossorigin"><iframe height="0" width="0" src="./92% Off on Smartwatch With Bluetooth and... _ Groupon Goods_files/activityi.html" style="display: none; visibility: hidden;"></iframe>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.1.2/css/swiper.min.css">
+		<link href="iconfont/iconfont1.css" rel="stylesheet" />
 		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.1.2/js/swiper.min.js"></script>
 		<script type="text/javascript" async="" src="./92% Off on Smartwatch With Bluetooth and... _ Groupon Goods_files/bat.js.下载"></script>
@@ -74,7 +75,6 @@
 		<script>        
 		  $(function(){
 		  	var primary = Array.from($('.primary-nav-tab'))
-				console.log(primary)
 				primary.forEach(function(v,k){
 					v.onmouseenter = function(){
 						$('#ls-rail-slide').css({left:v.offsetLeft-15})
@@ -102,25 +102,93 @@
 						$(this).addClass("flyActive").siblings().removeClass("flyActive")
 					}
 				})
-		  	var mySwiper = new Swiper ('.swiper-container', {
-		    	loop: true,
-					autoplay:3000,
-					pagination: '.swiper-pagination',
-					uniqueNavElements: false,
-					paginationClickable: true,
-					nextButton: '.swiper-button-next',
-					prevButton: '.swiper-button-prev',
-		  	})  
 		  	var LocationH = window.location.href.split("?")[1].split("=")[1]
+		  	csrf = $('input[name="csrfmiddlewaretoken"]').val()
+		  	console.log(LocationH)
+		  	$.ajax({
+		  		type:"post",
+		  		url:"http://offerwall.newbidder.com/detail/",
+		  		dataType:"json",
+		  		data:{
+		  			"productid":LocationH,
+		  		},
+		  		success:function(data){
+		  			$('.page-loading').hide()
+		  			console.log(data.details)
+		  			for(let i = 0;i < data.details.allImageUrls.length;i++){
+		  				let aa = `<div class="swiper-slide">
+					        	<img class="sleepy-load current-media lazy-loaded" src="${ data.details.allImageUrls[i] }" alt="OSP: Smartwatch With Bluetooth and Camera for Samsung iPhone and Android" style="filter: blur(0px); width: 100%;height: 100%;">
+					        </div>`
+					        $('.swiper-wrapper').append(aa)
+		  			}
+		  			var mySwiper = new Swiper ('.swiper-container', {
+					    	loop: true,
+					    	lazyLoading : true,
+								pagination: '.swiper-pagination',
+								uniqueNavElements: false,
+								paginationClickable: true,
+								nextButton: '.swiper-button-next',
+								prevButton: '.swiper-button-prev',
+					  	})
+		  			for(let i = 0;i < data.details.allImageUrls.length;i++){
+					  	var  bullet= Array.from($(".swiper-pagination .swiper-pagination-bullet"))
+					  	setTimeout(()=>{
+					  		$(".swiper-pagination .swiper-pagination-bullet").eq(i)[0].style.background = "url("+ data.details.allImageUrls[i] +")"
+					  	},30)
+					  	
+		  			}
+		  		
+		  				var bb = `	<div class="buy long">
+												<div class="t-pod multi-option-breakout with-traits">
+													<div class="option-details c-txt-gray-dk">
+														<div class="breakout-pricing-messages">
+															<div class="breakout-messages">
+																<div class="discount-message details">Discount ${ data.details.discount }</div>
+																<div class="sold-message details"></div>
+													</div>
+													<div class="breakout-pricing">
+														<div class="pricing-options-wrapper">
+															<div class="value-source-wrapper">
+																<div class="breakout-option-value">${ data.details.originalPrice }</div>
+														</div>
+														<div class="breakout-option-price small-font c-txt-price">${ data.details.salePrice }</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="buy-button-wrapper">
+								<a class="btn-buy-big buy-button has-traits state-buy " id="buy-link" href="${ data.details.promotionUrl }" data-bhw="BuyButton" data-bhd="{&quot;endAt&quot;:&quot;2027-05-23T15:14:39Z&quot;,&quot;category&quot;:{&quot;L2&quot;:&quot;jewelry-and-watches&quot;,&quot;L3&quot;:&quot;watches&quot;,&quot;L4&quot;:&quot;mens-watches&quot;},&quot;traitCount&quot;:1,&quot;traits&quot;:[{&quot;layout&quot;:&quot;DefaultVariation&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;position&quot;:1}]}" rel="nofollow" data-bhw-path="FeaturedDeal|deal:a1e390af-e280-4df2-b751-ad38db05184f|BuyButton">Buy<div class="order-processing-loader">
+										<span class="icon-g-loader"></span>
+										<span class="order-processing-text">Processing... Please wait</span>
+									</div>
+								</a>
+							</div>
+					</div>`
+		  			$('.position-top').after(bb)
+				  },
+		  		error: function(xhr, ajaxOptions, thrownError) {
+            console.info("error.");
+            if (xhr.status == 200) {
+                console.log(ajaxOptions);
+            }
+            else {
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+          }
+		  	});
+		  	
 		  })
   	</script>
 		<script src="./92% Off on Smartwatch With Bluetooth and... _ Groupon Goods_files/saved_resource"></script>
 	</head>
 
-	<body dir="ltr" id="ls-body" class="brand-groupon      deal-page goods deal_buyable                      is-web ltr          en_US en_XX">
-
+	<body dir="ltr" id="ls-body" class="brand-groupon deal-page goods deal_buyable is-web ltr en_US en_XX">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 999;background: white;opacity: .5;">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div id="global-container">
-
 			<div class="header-v2">
 				<header data-bhw="Header" role="banner" class="header
              big-searchbar" id="ls-header" data-bhw-path="Header">
@@ -1483,43 +1551,21 @@
 												<meta itemprop="priceCurrency" content="USD">
 											</div>
 
-											<div class="buy long">
-												<div class="t-pod multi-option-breakout with-traits">
-													<div class="option-details c-txt-gray-dk">
-														<div class="breakout-pricing-messages
-    ">
-															<div class="breakout-messages
-        ">
-
-																<div class="discount-message details">
-																	Discount 92%
-																</div>
-
-																<div class="sold-message details">
-
-																</div>
-
+							<!--<div class="buy long">
+									<div class="t-pod multi-option-breakout with-traits">
+										<div class="option-details c-txt-gray-dk">
+											<div class="breakout-pricing-messages">
+												<div class="breakout-messages">
+													<div class="discount-message details">Discount 92%</div>
+													<div class="sold-message details"></div>
 													</div>
-
-													<div class="breakout-pricing
-      
-      ">
-
+													<div class="breakout-pricing">
 														<div class="pricing-options-wrapper">
 															<div class="value-source-wrapper">
-																<div class="breakout-option-value
-                  ">
-																	$199.99
-															</div>
+																<div class="breakout-option-value">$199.99</div>
 														</div>
-
-														<div class="breakout-option-price small-font
-                 c-txt-price">
-															$15.99
-												</div>
-
+														<div class="breakout-option-price small-font c-txt-price">$15.99</div>
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -1548,24 +1594,13 @@
 									</form>
 								</div>
 							</div>
-
 							<div class="buy-button-wrapper">
-								<a class="btn-buy-big
-              
-               buy-button 
-              
-               has-traits 
-              
-              state-buy " id="buy-link" href="https://www.groupon.com/deals/gs-multifunctional-bluetooth-smart-watch-for-android-and-iphone/confirmation?pledge_id=59859373" data-bhw="BuyButton" data-bhd="{&quot;endAt&quot;:&quot;2027-05-23T15:14:39Z&quot;,&quot;category&quot;:{&quot;L2&quot;:&quot;jewelry-and-watches&quot;,&quot;L3&quot;:&quot;watches&quot;,&quot;L4&quot;:&quot;mens-watches&quot;},&quot;traitCount&quot;:1,&quot;traits&quot;:[{&quot;layout&quot;:&quot;DefaultVariation&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;position&quot;:1}]}" rel="nofollow" data-bhw-path="FeaturedDeal|deal:a1e390af-e280-4df2-b751-ad38db05184f|BuyButton">
-									Buy
-
-									<div class="order-processing-loader">
+								<a class="btn-buy-big buy-button has-traits state-buy " id="buy-link" href="https://www.groupon.com/deals/gs-multifunctional-bluetooth-smart-watch-for-android-and-iphone/confirmation?pledge_id=59859373" data-bhw="BuyButton" data-bhd="{&quot;endAt&quot;:&quot;2027-05-23T15:14:39Z&quot;,&quot;category&quot;:{&quot;L2&quot;:&quot;jewelry-and-watches&quot;,&quot;L3&quot;:&quot;watches&quot;,&quot;L4&quot;:&quot;mens-watches&quot;},&quot;traitCount&quot;:1,&quot;traits&quot;:[{&quot;layout&quot;:&quot;DefaultVariation&quot;,&quot;name&quot;:&quot;Color&quot;,&quot;position&quot;:1}]}" rel="nofollow" data-bhw-path="FeaturedDeal|deal:a1e390af-e280-4df2-b751-ad38db05184f|BuyButton">Buy<div class="order-processing-loader">
 										<span class="icon-g-loader"></span>
 										<span class="order-processing-text">Processing... Please wait</span>
 									</div>
-									</a>
+								</a>
 							</div>
-
 					</div>
 
 					<div id="delivery-estimates" class="close">
@@ -1585,7 +1620,7 @@
 								</form>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					<div id="special-message" class="" data-bhw="SpecialMessageModule" style="display: none;">
 						<div class="special-message"></div>
 					</div>
@@ -1617,21 +1652,14 @@
 		<div id="deal-info" class="eight columns pull-four">
 			<figure id="carousel" data-bhw="DealCarousel" data-bhd="{&quot;orientation&quot;:&quot;horizontal&quot;}" class="with-thumbs" data-bhw-path="FeaturedDeal|deal:a1e390af-e280-4df2-b751-ad38db05184f|DealCarousel">
 				<div class="swiper-container"  id="overflow-container">
-			    <div class="swiper-wrapper" style="width: 687px; height: 412.2px; padding-top: 0px;">
-			        <div class="swiper-slide">
-			        	<img class="sleepy-load current-media lazy-loaded" src="img/c700x420.jpg" alt="OSP: Smartwatch With Bluetooth and Camera for Samsung iPhone and Android" style="filter: blur(0px);">
-			        </div>
-			        <div class="swiper-slide">
-			        	<img class="sleepy-load current-media lazy-loaded" src="img/c700x420(1).jpg" alt="OSP: Smartwatch With Bluetooth and Camera for Samsung iPhone and Android" style="filter: blur(0px);">
-			        </div>
-			        <div class="swiper-slide">
-			        	<img class="sleepy-load current-media lazy-loaded" src="img/c700x420(2).jpg" alt="OSP: Smartwatch With Bluetooth and Camera for Samsung iPhone and Android" style="filter: blur(0px);">
-			        </div>
+			    <div class="swiper-wrapper" style="width: 100%; height: 100%; padding-top: 0px;">
+			        
 			    </div>
 			    <div class="swiper-button-prev"></div>
 			    <div class="swiper-button-next"></div>
+			    <div class="swiper-pagination"></div>
 			</div>
-			 <div class="swiper-pagination"></div>
+			 
 				<!--<div id="overflow-container">
 					<div class="media-container loaded" style="width: 687px; height: 412.2px; padding-top: 0px;">
 						

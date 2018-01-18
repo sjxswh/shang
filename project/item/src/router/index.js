@@ -17,8 +17,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'LoginInfo',
-      component: LoginInfo
+      name: 'LoginIn',
+      component: LoginIn
     },
     {
       path: '/Dashboard',
@@ -57,8 +57,8 @@ export default new Router({
     },
     {
       path: '/Account',
-      name: 'LoginIn',
-      component: LoginIn
+      name: 'LoginInfo',
+      component: LoginInfo
     },
     
   ]

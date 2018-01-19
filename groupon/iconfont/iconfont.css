@@ -19,7 +19,7 @@
 
 .icon-location:before { content: "\e623"; }
 
-.icon-arrow-right-copy-copy-copy:before { content: "\e604"; }
+.icon-arrow-right-copy-copy-copy:after { content: "\e604"; }
 
 .icon-searchamagnifyingglass:before { content: "\e625"; }
 

@@ -88,7 +88,6 @@
 	   	this.pickerVisibles = new Date();
 	   	this.Year = this.pickerVisible.getFullYear()
    		this.Month = this.pickerVisible.getMonth()+1
-<<<<<<< HEAD
    		this.Month = this.Month<10?"0"+this.Month:this.Month
    		this.Dates = this.pickerVisible.getDate()
    		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
@@ -123,7 +122,6 @@
 	   		this.Years = this.pickerVisibles.getFullYear()
 	   		this.Months = this.pickerVisibles.getMonth()+1
 	   		this.Datess = this.pickerVisibles.getDate()+1
-=======
    		this.Dates = this.pickerVisible.getDate()
    		this.Years = this.pickerVisibles.getFullYear()
    		this.Months = this.pickerVisibles.getMonth()+1
@@ -139,7 +137,6 @@
 	   },
 	   updated () {
 	   	
->>>>>>> 706933180f5db0013d073f3e232b2508901e7a97
 	   }
 	}
 </script>

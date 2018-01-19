@@ -62,7 +62,8 @@
 				Years:"",
 				Months:"",
 				Datess:"",
-				timezones:""
+				timezones:"",
+				timeS:""
 			}
 		},
 		methods: {
@@ -77,24 +78,42 @@
 	   	let that = this
 	   	this.pickerVisible = new Date();
 	   	this.pickerVisibles = new Date();
-	   	
-	   	this.$ajax({
-		  method: "get",
-		  url:"https://panel.newbidder.com/timezones",
-		}).then(function (data) {
-		    that.timezones = data.data.data.timezones
-		});
+	   	this.Year = this.pickerVisible.getFullYear()
+   		this.Month = this.pickerVisible.getMonth()+1
+   		this.Month = this.Month<10?"0"+this.Month:this.Month
+   		this.Dates = this.pickerVisible.getDate()
+   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+   		this.Years = this.pickerVisibles.getFullYear()
+   		this.Months = this.pickerVisibles.getMonth()+1
+   		this.Months = this.Months<10?"0"+this.Months:this.Months
+   		this.Datess = this.pickerVisibles.getDate()+1
+   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+   			console.log(this.pickerVisibles)
+		   	this.$ajax({
+			  method: "get",
+			  url:"http://beta.newbidder.com/timezones",
+			}).then(function (data) {
+			    that.timezones = data.data.data.timezones
+			});
 	   },
 	   watch:{
 	   	
 	   },
 	   updated () {
+	   
 	   		this.Year = this.pickerVisible.getFullYear()
 	   		this.Month = this.pickerVisible.getMonth()+1
+	   		/*if(this.Month<10){
+	   			console.log()
+	   			this.Month = "0"+this.Month
+	   		}
+	   		else{
+	   			this.Month = this.Month
+	   		}*/
 	   		this.Dates = this.pickerVisible.getDate()
 	   		this.Years = this.pickerVisibles.getFullYear()
 	   		this.Months = this.pickerVisibles.getMonth()+1
-	   		this.Datess = this.pickerVisibles.getDate()
+	   		this.Datess = this.pickerVisibles.getDate()+1
 	   }
 	}
 </script>

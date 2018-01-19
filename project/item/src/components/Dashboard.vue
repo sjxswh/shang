@@ -50,20 +50,22 @@
 		    return {
 		     id:"container",
 		     option:option,
-		     date:""
+		     date:"",
+		     
 		    }
 		},
 		mounted(){
 			let token=document.cookie.split("=")[1];
 			console.log(token)
 			this.date = new Date() 
+			
 		  this.$ajax({
 			  method: "get",
 			  url:"http://beta.newbidder.com/api/profile?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU",
 			}).then(function (data) {
 			   console.log(data)
 			});	
-			console.log(new Date())
+			
 		   	/*this.$ajax({
 			  method: "get",
 			  changeOrigin:true,

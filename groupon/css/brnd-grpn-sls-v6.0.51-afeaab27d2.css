@@ -297,10 +297,6 @@
 	content: "\E074"
 }
 
-.icon-arrow-right-large:before {
-	content: "\E075"
-}
-
 .icon-arrow-left-large:before {
 	content: "\E076"
 }
@@ -429,10 +425,6 @@
 	content: "\E908"
 }
 
-.icon-heart:before {
-	content: "\E909"
-}
-
 .icon-bell:before {
 	content: "\E90A"
 }
@@ -513,6 +505,15 @@ line-height: 50px;
 	height: 1.4rem;
 	padding: .2rem;
 	width: 1.4rem
+}
+.icon-heart{
+	position: relative;
+	z-index: 99;
+}
+.icon-star{
+	color: #bbb;
+	font-size: 20px;
+	line-height: 16px;
 }
 .icon-star2{
 	color: #ffc120;

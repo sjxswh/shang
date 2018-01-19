@@ -72,29 +72,36 @@
 	       openPickers() {
 	        this.$refs.pickers.open();
 	      },
+	      clickDate(){
+		   		this.Year = this.pickerVisible.getFullYear()
+		   		this.Month = this.pickerVisible.getMonth()+1
+		   		this.Dates = this.pickerVisible.getDate()
+		   		this.Years = this.pickerVisibles.getFullYear()
+		   		this.Months = this.pickerVisibles.getMonth()+1
+		   		this.Datess = this.pickerVisibles.getDate()
+		   	}
 	    },
 	   mounted () {
 	   	let that = this
 	   	this.pickerVisible = new Date();
 	   	this.pickerVisibles = new Date();
-	   	
+	   	this.Year = this.pickerVisible.getFullYear()
+   		this.Month = this.pickerVisible.getMonth()+1
+   		this.Dates = this.pickerVisible.getDate()
+   		this.Years = this.pickerVisibles.getFullYear()
+   		this.Months = this.pickerVisibles.getMonth()+1
+   		this.Datess = this.pickerVisibles.getDate()+1
+	   	var vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
+	   	window.addEventListener("click",this.clickDate)
 	   	this.$ajax({
 		  method: "get",
-		  url:"https://panel.newbidder.com/timezones",
-		}).then(function (data) {
-		    that.timezones = data.data.data.timezones
-		});
-	   },
-	   watch:{
-	   	
+			  url:"https://panel.newbidder.com/timezones",
+			}).then(function (data) {
+			    that.timezones = data.data.data.timezones
+			});
 	   },
 	   updated () {
-	   		this.Year = this.pickerVisible.getFullYear()
-	   		this.Month = this.pickerVisible.getMonth()+1
-	   		this.Dates = this.pickerVisible.getDate()
-	   		this.Years = this.pickerVisibles.getFullYear()
-	   		this.Months = this.pickerVisibles.getMonth()+1
-	   		this.Datess = this.pickerVisibles.getDate()
+	   	
 	   }
 	}
 </script>

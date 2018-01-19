@@ -44,6 +44,7 @@
 		<link rel="alternate" hreflang="es-ES" href="https://www.groupon.es/goods">
 		<link rel="alternate" hreflang="en-ZA" href="https://www.groupon.co.za/goods">
 		<link rel="alternate" hreflang="nl-NL" href="https://www.groupon.nl/goods">
+		<link rel="stylesheet" href="iconfont/iconfont1.css" />
 		<meta name="csrf-token" content="N3oE89nZ-beOobBPlaH_WuaY1ZpRnFZVOJhY">
 
 		<meta name="request-id" content="3ca39c9e-c5af-4694-971e-4d5c02f5cdbe">
@@ -58,229 +59,58 @@
 		<script id="bcvm_script_1516080953205" async="" type="text/javascript" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/bc.pv"></script>
 		<script src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/saved_resource"></script>
 		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-		
+		<script src="js/header.js"></script>
+		<script src="js/goods.js"></script>
 		<script>
-			$(function(){
-				var primary = Array.from($('.primary-nav-tab'))
-				console.log(primary)
-				primary.forEach(function(v,k){
-					v.onmouseenter = function(){
-						$('#ls-rail-slide').css({left:v.offsetLeft-15})
-						$('#ls-rail-slide').css({display:"block"}).siblings().css({display:"none"})
-						$('#ls-rail-slide').css({width:v.offsetWidth+30})
-					  $('.subnav-flyout').eq(k).css({display:"block"}).siblings().css({display:"none"})
-					}
-					$('.primary-nav')[0].onmouseleave = function(){
-						$('#ls-rail-slide').css({display:"none"})
-						$('.subnav-flyout').css({display:"none"})
-					}
-				})
-				var subnav = Array.from($('.subnav-flyout'))
-				subnav.forEach(function(v,k){
-					v.onmouseenter = function(){
-					  v.style.display = "block"
-					}
-					v.onmouseleave = function(){
-					  v.style.display = "none"
-					}
-				})
-				var flyMenu = Array.from($('.flyMenu').children())
-				flyMenu.forEach(function(v,k){
-					v.onmouseenter = function(){
-						$(this).addClass("flyActive").siblings().removeClass("flyActive")
-					}
-				})
-				var ratingsList= Array.from($('.refinement-ratings-list').find('label'))
-				ratingsList.forEach(function(v,k){
-					v.onclick = function(){
-						$(this).prev().attr("checked","checked")
-						$('.refinement-ratings-clear').find("input").removeAttr("checked")
-					}
-				})
-				$('.refinement-ratings-clear')[0].onclick = function(){
-					$('.refinement-ratings-list').find("input").removeAttr("checked")
-				}
-				var badgesList= Array.from($('.refinement-badges-list').find('label'))
-				badgesList.forEach(function(v,k){
-					v.onclick = function(){
-						console.log($(this).prev())
-						$(this).prev().attr("checked")
-						$('.refinement-badges-clear').find("input").removeAttr("checked")
-					}
-				})
-				$('.refinement-badges-clear')[0].onclick = function(){
-					$('.refinement-badges-list').find("input").removeAttr("checked")
-				}
-				var LocationH = window.location.href.split("?")[1].split("=")[1]
-				console.log(LocationH)
-				$.ajax({
-					type:"post",
-					url:"http://offerwall.newbidder.com/search/",
-					data:{
-						"goodname":LocationH,
-						"categoryid":LocationH
-					},
-					success:function(data){
-						console.log(data)
-						for(var j in data.categories){
-							console.log(j)
-							var bb = `<li data-id="auto-and-home-improvement" class="sub-category-links child-refinement" data-bhc="category2:auto-and-home-improvement" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:auto-and-home-improvement">
-																<a href="https://www.groupon.com/goods/auto-and-home-improvement">
-																	${ j }
-																	<span class="deal-counts">(${ data.categories[j][0] })</span>
+			/*$(function(){
+				$("#header-v2").load("header.html #header-v")
+			})*/
 
-																</a>
-															</li>`
-										$('#all-list').append(bb)
-						}
-						for(var n = 0;n < data.goods.length;n++){
-							var aa = `<figure class="card-ui cui-c-udc c-bdr-gray-clr has-additional-value-message " data-pingdom-info="purchasable-deal" data-bhc="deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f" data-bhd="{&quot;cardUUID&quot;:&quot;6cab281e-2e1e-4adc-a7e6-d400a54efa3f&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Nina or Shore Embossed Quilt Set (2- or 3-Piece)&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:10000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;3,369&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$159.99 $24.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f">
-															<a href="detail.html?productId=${ data.goods[n]["productId"] }">
-																<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																	<div class="cui-udc-image-container">
-																		<div class="cui-udc-image-overlay"></div>
-																		<div class="cui-image-lazy-container cui-image-hover-zoom">
-																			<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																			<img class="cui-image lazy-loaded" src="${data.goods[n]["imageUrl"]}" data-original="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/C6cBRh1r5d7Lp6Jwnry8X71hbdy/C6-2048x1229/v1/c414x250q85.jpg" alt="image for Nina or Shore Embossed Quilt Set (2- or 3-Piece)" style="width:100%;height:100%;">
-																		</div>
-
-																		<div class="cui-badge c-bg-accent c-txt-white">
-																			<span class="cui-badge-label">TOP SELLER</span>
-																		</div>
-																	</div>
-																	<div class="cui-udc-details c-txt-gray-dk">
-																		<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
-																			${data.goods[n]["productTitle"]}
-																		</div>
-
-																		<div class="cui-udc-top-row">
-																			<div class="cui-udc-left-one">
-
-																				<div class="cui-quantity-bought c-txt-gray-dk">
-																					10,000+ bought
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-one">
-
-																				<div class="cui-price" data-pingdom-id="deal-price">
-																					<s class="cui-price-original c-txt-gray-dk
- ">${data.goods[n]["originalPrice"]}</s>
-																						<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">${data.goods[n]["salePrice"]}</span>
-																				</div>
-
-																			</div>
-																		</div>
-																		<div class="cui-udc-bottom-row">
-																			<div class="cui-udc-left-two">
-
-																				<div class="cui-review-rating ">
-
-																					<ul class="rating ratings" data-bhc="deal-review-rating:4.3" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-review-rating:4.3">
-																						
-																					</ul>
-
-																					<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:3369" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:6cab281e-2e1e-4adc-a7e6-d400a54efa3f|deal-rating-count:3369">
-																						${data.goods[n]["evaluateScore"]}
-																					</div>
-
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-two">
-
-																				<div class="cui-promotions">
-																					<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																				</div>
-
-																			</div>
-																		</div>
-
-																	</div>
-
-																</div>
-															</a>
-															</figure>`
-															$('#browse-deals').append(aa)
-									for(let i = 0;i < Math.floor(data.goods[n]["evaluateScore"]);i++){
-										let oLi = `<li class="iconfont icon-star2"><span class="full-star"></span></li>`
-										$('.ratings').eq(n).append(oLi)
-									}
-									if(data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"])> 0.5){
-										let oLis = `<li class="iconfont icon-star3"><span class="full-star"></span></li>`
-										$('.ratings').eq(n).append(oLis)
-									}
-									else if(data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"]) < 0.5 && data.goods[n]["evaluateScore"]- Math.floor(data.goods[n]["evaluateScore"]) >0){
-										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
-										$('.ratings').eq(n).append(oLi)
-									}
-									for(let i = 0;i < 5 - Math.floor(data.goods[n]["evaluateScore"]);i++){
-										let oLi = `<li class="iconfont icon-star-o"><span class="full-star"></span></li>`
-										$('.ratings').eq(n).append(oLi)
-									}
-						}
-					},
-					error: function(xhr, ajaxOptions, thrownError) {
-            console.info("error.");
-            if (xhr.status == 200) {
-                console.log(ajaxOptions);
-            }
-            else {
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-          }
-				});
-				
-			})
 		</script>
 	</head>
 
 	<body dir="ltr" id="ls-body" class="brand-groupon      browse               is-web ltr          en_US en_XX">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 999;background: white;opacity: .5;">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div id="global-container">
-
-			<div class="header-v2">
+			<div class="header-v2" id="header-v">
 				<header data-bhw="Header" role="banner" class="header
              big-searchbar" id="ls-header" data-bhw-path="Header">
 					<div class="ls-header-top">
 						<div class="row ls-header-top-row ls-header-with-signin-flyout" id="ls-header-top-row">
-							<a href="https://www.groupon.com/" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo" style="font-weight: bolder;font-size: 24px;font-family: sans-serif;color: #ffffff;text-align: left;">
+							<a href="index.html" id="ls-groupon-logo" class="ls-groupon-logo" data-bhw="Logo" aria-label="Groupon" data-bhw-path="Header|Logo" style="font-weight: bolder;font-size: 24px;font-family: sans-serif;color: #ffffff;text-align: left;">
 								Newbidder
-								<!--<img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">-->
+								<!--<img src="./Groupon_ Deals and Coupons for Restaurants, Fitness, Travel, Shopping, Beauty, and more._files/grpn_logo_white-b8a7246dbd.svg" alt="Groupon">-->
 							</a>
 							<div id="ls-header-main" class="ls-clearfix alternative-search">
 								<div id="ls-search-bar-wrapper" class="columns search-bar-wrapper">
-									<form class="search-bar-v2" id="ls-search-form" data-bhw="SearchBar" role="search" action="https://www.groupon.com/goods" aria-label="What are you looking for?" data-bhw-path="Header|SearchBar">
+									<form class="search-bar-v2" id="ls-search-form" data-bhw="SearchBar" role="search" action="https://www.groupon.com/" aria-label="What are you looking for?" data-bhw-path="Header|SearchBar">
 										<div class="iconfont icon-searchamagnifyingglass search-box deal-search search-bar-icon">
 											<label id="placeholderSearch" class="ls-flex-placeholder" for="ls-search">
-                      Search Groupon
-                </label>
-											<input type="search" name="search" id="ls-search" data-bhw="FreeTextSearchField" maxlength="50" autocomplete="off" spellcheck="false" aria-labelledby="placeholderSearch" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" data-bhw-path="Header|SearchBar|FreeTextSearchField">
+                      
+                			</label>
+											<input type="search" name="search" id="ls-search" class="search-text" data-bhw="FreeTextSearchField" maxlength="50" autocomplete="off" spellcheck="false" placeholder="Search Newbidder" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" data-bhw-path="Header|SearchBar|FreeTextSearchField">
 										</div>
 										<label for="ls-location" class="search-box location-search search-bar-icon iconfont icon-location">
                 <span id="placeholderLocation" class="ls-flex-placeholder isHidden">
                   
                   Zip Code, Neighborhood, City
                 </span>
-                <input type="text" name="location" id="ls-location" data-bhw="LocationBarField" autocomplete="off" spellcheck="false" maxlength="50" aria-labelledby="placeholderLocation" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" placeholder="Chicago" data-bhw-path="Header|SearchBar|LocationBarField">
+                <input type="text" name="location" id="ls-location" class="search-text" data-bhw="LocationBarField" autocomplete="off" spellcheck="false" maxlength="50" placeholder="placeholderLocation" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" placeholder="Chicago" data-bhw-path="Header|SearchBar|LocationBarField">
               </label>
-										<button id="ls-header-search-button" class="ls-header-search-button iconfont icon-searchamagnifyingglass" type="submit" data-bhw="LocationBarFindDeals" data-bhw-path="Header|SearchBar|LocationBarFindDeals">
+										<a href="javascript:;" id="ls-header-search-button" class="ls-header-search-button iconfont icon-searchamagnifyingglass" >
                 <span class="accessibility-hidden">Search</span>
-              </button>
-										<div class="typeahead-response" id="ls-search-results" aria-hidden="true" aria-live="polite" tabindex="-1" style="display: none;">
+              </a>
+										<div class="typeahead-response" id="ls-search-results" aria-hidden="true" aria-live="polite">
 											<ul id="autocomplete-list" role="list" aria-busy="true"></ul>
 										</div>
 									</form>
 
-									<div id="ls-header-lower-signin-container" class="ls-header-lower-signin-container">
+									<!--<div id="ls-header-lower-signin-container" class="ls-header-lower-signin-container">
 
 										<div id="ls-header-signin-flyout-container">
-											<a class="first user-menu-item user-menu-action signin-flyout-menu-item referrer-link" id="ls-user-signin-with-flyout" data-bhw="UserSignIn" href="https://www.groupon.com/login?metric=layout_login&amp;return_to=https%3A%2F%2Fwww.groupon.com%2Fgoods" data-href="https://www.groupon.com/login" data-bhw-path="Header|UserSignIn">
+											<a class="first user-menu-item user-menu-action signin-flyout-menu-item referrer-link" id="ls-user-signin-with-flyout" data-bhw="UserSignIn" href="https://www.groupon.com/login?metric=layout_login&amp;return_to=https%3A%2F%2Fwww.groupon.com%2F" data-href="https://www.groupon.com/login" data-bhw-path="Header|UserSignIn">
 												Sign In | My Stuff
 											</a>
 											<div id="ls-signin-flyout" class="ls-signin-flyout ls-prompt my-stuff signin-flyout">
@@ -315,7 +145,7 @@
 														<div class="ls-signin-error-msg" id="ls-signin-error"></div>
 														<form id="ls-signin-form" class="form-v2-1 ls-signin-form" data-bhw="ls-signin-form" method="post" action="https://www.groupon.com/login?metric=layout_login" novalidate="">
 															<fieldset>
-																<input type="hidden" name="_csrf" value="N3oE89nZ-beOobBPlaH_WuaY1ZpRnFZVOJhY">
+																<input type="hidden" name="_csrf" value="hMkMZNGg-KxH6PupA3JafY6Wn9Z2hyGhvOfQ">
 																<div class="gig-field field-inputs">
 																	<label for="ls-signin-email">Email</label>
 																	<input class="field-input" id="ls-signin-email" type="email" tabindex="0" name="email" autocorrect="off">
@@ -376,9 +206,9 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div>-->
 								</div>
-								<div class="columns user-wrapper">
+								<!--<div class="columns user-wrapper">
 
 									<div id="ls-user-nav">
 										<nav class="user-menu signed-out">
@@ -391,13 +221,13 @@
 											<a id="user-help" class="responsive-hide-500 user-menu-item user-help" href="https://www.groupon.com/customer_support" data-bhw="user-help-link" data-bhw-path="Header|user-help-link">
 												Help
 											</a>
-											<a class="last user-menu-item user-menu-action referrer-link" id="ls-user-signup" data-bhw="UserSignUp" href="https://www.groupon.com/signup?metric=layout_login&amp;return_to=https%3A%2F%2Fwww.groupon.com%2Fgoods" data-href="https://www.groupon.com/signup" data-bhw-path="Header|UserSignUp">
+											<a class="last user-menu-item user-menu-action referrer-link" id="ls-user-signup" data-bhw="UserSignUp" href="https://www.groupon.com/signup?metric=layout_login&amp;return_to=https%3A%2F%2Fwww.groupon.com%2F" data-href="https://www.groupon.com/signup" data-bhw-path="Header|UserSignUp">
 												Sign Up
 											</a>
 											<div id="ls-header-upper-signin-container" class="ls-header-upper-signin-container"></div>
 										</nav>
 									</div>
-								</div>
+								</div>-->
 							</div>
 						</div>
 					</div>
@@ -405,1063 +235,181 @@
 						<div id="ls-primary-nav-row" class="row">
 							<ul class="primary-nav" role="menubar">
 								<li id="home-tab" class="primary-nav-tab" data-bhw="NavHome" data-bhw-path="Header|NavHome">
-									<a href="https://www.groupon.com/" id="sls-aria-0" role="menuitem" tabindex="0">
-										Featured
+									<a href="index.html" id="sls-aria-0" role="menuitem" tabindex="0">
+										Home
 									</a>
 								</li>
-								<li id="local-tab" class="primary-nav-tab" data-bhw="NavLocal" data-bhw-path="Header|NavLocal">
+								<!--<li id="local-tab" class="primary-nav-tab" data-bhw="NavLocal" data-bhw-path="Header|NavLocal">
 									<a href="https://www.groupon.com/browse/chicago?context=local" id="sls-aria-1" role="menuitem" aria-haspopup="true" aria-owns="subnav-local-tab" tabindex="0">
 										Local
 									</a>
-								</li>
+								</li>-->
 								<li id="goods-tab" class="primary-nav-tab" data-bhw="NavGoods" data-bhw-path="Header|NavGoods">
-									<a href="https://www.groupon.com/goods" id="sls-aria-2" role="menuitem" aria-haspopup="true" aria-owns="subnav-goods-tab" tabindex="0">
+									<a href="goods.html?goodname=&categoryid=&type=1" id="sls-aria-2" role="menuitem" aria-haspopup="true" aria-owns="subnav-goods-tab" tabindex="0">
 										Goods
 									</a>
 								</li>
-								<li id="getaways-tab" class="primary-nav-tab" data-bhw="NavGetaways" data-bhw-path="Header|NavGetaways">
+								<!--<li id="getaways-tab" class="primary-nav-tab" data-bhw="NavGetaways" data-bhw-path="Header|NavGetaways">
 									<a href="https://www.groupon.com/getaways" id="sls-aria-3" role="menuitem" aria-haspopup="true" aria-owns="subnav-getaways-tab" tabindex="0">
 										Getaways
 									</a>
-								</li>
+								</li>-->
 								<li id="coupons-tab" class="primary-nav-tab" data-bhw="NavCoupons" data-bhw-path="Header|NavCoupons">
-									<a href="https://www.groupon.com/coupons" id="sls-aria-5" role="menuitem" aria-haspopup="true" aria-owns="subnav-coupons-tab" tabindex="0">
+									<a href="coupons.html" id="sls-aria-5" role="menuitem" aria-haspopup="true" aria-owns="subnav-coupons-tab" tabindex="0">
 										Coupons
 									</a>
 								</li>
-								<li id="goods-deal-of-day-tab" class="primary-nav-tab" data-bhw="NavGoodsLightningFlash" data-bhw-path="Header|NavGoodsLightningFlash">
+								<!--<li id="goods-deal-of-day-tab" class="primary-nav-tab" data-bhw="NavGoodsLightningFlash" data-bhw-path="Header|NavGoodsLightningFlash">
 									<a href="https://www.groupon.com/occasion/deals-of-the-day" id="sls-aria-4" role="menuitem" tabindex="0">
 										Deals of the Day
 									</a>
 								</li>
 								<li id="occasion-tab" class="primary-nav-tab Occasion" data-bhw="NavOccasions" data-bhw-path="Header|NavOccasions">
-									<a class="G_event E-GobalTopNavNH_GrouponOccasion" href="https://www.groupon.com/occasion/tiffany-haddish" data-bhc="NavOccasions:tiffany-haddish" id="sls-aria-6" role="menuitem" tabindex="0" data-bhc-path="Header|NavOccasions|NavOccasions:tiffany-haddish">
-										Tiffany Haddish
+									<a class="G_event E-GobalTopNavNH_GrouponOccasion" href="https://www.groupon.com/occasion/discover-savings" data-bhc="NavOccasions:discover-savings" id="sls-aria-6" role="menuitem" tabindex="0" data-bhc-path="Header|NavOccasions|NavOccasions:discover-savings">
+										Discover Winter Savings
 									</a>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 						<div id="ls-rail" class="ls-rail row"><span id="ls-rail-slide" style="display: none;"></span></div>
 						<nav class="subnav">
-							<nav class="subnav-flyout local-tab-flyout row hide" id="subnav-local-tab" data-bhw="SubNav-local-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-1"></nav>
-							<nav class="subnav-flyout local-tab-flyout row hide" id="subnav-local-tab" data-bhw="SubNav-local-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-1">
-								<div class="ls-flex-wrap">
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?context=local" data-bhc="category:local-tab-all-deals" tabindex="-1" role="menuitem">
-											All Deals
-											<span class="count">9028</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=automotive" data-bhc="category:local-tab-automotive" tabindex="-1" role="menuitem">
-											Automotive
-											<span class="count">176</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=beauty-and-spas" data-bhc="category:local-tab-beauty-and-spas" tabindex="-1" role="menuitem">
-											Beauty &amp; Spas
-											<span class="count">1859</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=food-and-drink" data-bhc="category:local-tab-food-and-drink" tabindex="-1" role="menuitem">
-											Food &amp; Drink
-											<span class="count">1175</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=health-and-fitness" data-bhc="category:local-tab-health-and-fitness" tabindex="-1" role="menuitem">
-											Health &amp; Fitness
-											<span class="count">1068</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=home-improvement" data-bhc="category:local-tab-home-improvement" tabindex="-1" role="menuitem">
-											Home Services
-											<span class="count">162</span>
-
-										</a>
-									</div>
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/occasion/food-and-wine-delivery" data-bhc="category:local-tab-meal-prep" tabindex="-1" role="menuitem">
-											Meal Prep &amp; Wine Delivery
-											<span class="count">139</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/occasion/online-learning" data-bhc="category:local-tab-online-learning" tabindex="-1" role="menuitem">
-											Online Learning
-											<span class="count">86</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=personal-services" data-bhc="category:local-tab-personal-services" tabindex="-1" role="menuitem">
-											Personal Services
-											<span class="count">1416</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/occasion/customizable" data-bhc="category:local-tab-local-customizable" tabindex="-1" role="menuitem">
-											Personalized Items
-											<span class="count">1545</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=retail" data-bhc="category:local-tab-retail" tabindex="-1" role="menuitem">
-											Retail
-											<span class="count">2023</span>
-
-										</a>
-										<a class="subnav-link subnav-link-count" href="https://www.groupon.com/browse/chicago?category=things-to-do" data-bhc="category:local-tab-things-to-do" tabindex="-1" role="menuitem">
-											Things To Do
-											<span class="count">974</span>
-
-										</a>
-									</div>
-									<div class="flyout-column subnav-cards cui-two-up" data-bhc="compound:78614929-89a1-4d60-967a-e05b863d8ffc" data-bhd="{&quot;cardName&quot;:&quot;crossChannel_NavBar_Local_Container&quot;,&quot;cardUUID&quot;:&quot;78614929-89a1-4d60-967a-e05b863d8ffc&quot;,&quot;templateView&quot;:&quot;ContainerCardView&quot;,&quot;templateUUID&quot;:&quot;3b67e451-0727-4f94-9f4f-2e324be4635e&quot;}" data-bhw="CompoundCollection" data-bh-viewport="">
-										<a href="https://www.groupon.com/articles/new-years-resolution-ideas" data-bhc="collection:542fb730-6e7d-4c93-beb8-28bf6d7478bd" data-bhd="{&quot;cardName&quot;:&quot;local_NavBar_GUIDE_New-Years-Resolutions&quot;,&quot;cardUUID&quot;:&quot;542fb730-6e7d-4c93-beb8-28bf6d7478bd&quot;,&quot;templateView&quot;:&quot;CollectionTileView&quot;,&quot;templateUUID&quot;:&quot;ca714021-c80a-49a6-954c-a9fee033fabe&quot;}" data-bh-viewport=""><img class="subnav-card" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/2N-440x420.png" alt="/articles/new-years-resolution-ideas"></a>
-										<a href="https://www.groupon.com/articles/what-is-hot-yoga-like" data-bhc="collection:743bd6bb-38b8-4450-84ad-e98eb907f373" data-bhd="{&quot;cardName&quot;:&quot;local_NavBar_GUIDE_Hot-Yoga&quot;,&quot;cardUUID&quot;:&quot;743bd6bb-38b8-4450-84ad-e98eb907f373&quot;,&quot;templateView&quot;:&quot;CollectionTileView&quot;,&quot;templateUUID&quot;:&quot;ca714021-c80a-49a6-954c-a9fee033fabe&quot;}" data-bh-viewport=""><img class="subnav-card" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/dL-440x420.png" alt="/articles/what-is-hot-yoga-like"></a>
-									</div>
-
-								</div>
+							<nav class="subnav-flyout local-tab-flyout row hide" id="subnav-local-tab" data-bhw="SubNav-local-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-0">
 							</nav>
-							<nav class="subnav-flyout goods-tab-flyout row hide" id="subnav-goods-tab" data-bhw="SubNav-goods-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-2">
-								<div data-bhw="goods-flyout" class="flyContainer">
-									<ul class="flyMenu">
-										<li class="flyActive">
-											<a class="flyMenulink" href="https://www.groupon.com/goods/auto-and-home-improvement" data-bhc="flyout-label:auto-and-home-improvement" tabindex="-1" role="menuitem">
-												<n>Auto &amp; Home Improvement</n>
-												<c>22238</c>
-											</a>
-											<div data-bhc="flyout-content:auto-and-home-improvement" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/auto-and-home-improvement" tabindex="-1" role="menuitem">Shop All Auto &amp; Home Improvement</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/auto-parts-and-accessories" tabindex="-1" role="menuitem">
-															<n>Automotive</n>
-															<l>Car Audio, Car Care, Car Electronics, Ca...</l>
-															<c>4728</c>
-														</a>
-														<a href="https://www.groupon.com/goods/home-appliances" tabindex="-1" role="menuitem">
-															<n>Home Appliances</n>
-															<l>Dishwashers, Freezers, Irons &amp; Garment C...</l>
-															<c>1390</c>
-														</a>
-														<a href="https://www.groupon.com/goods/home-improvement-goods" tabindex="-1" role="menuitem">
-															<n>Home Improvement</n>
-															<l>Bathroom Faucets, Batteries, Electrical...</l>
-															<c>11218</c>
-														</a>
-														<a href="https://www.groupon.com/goods/patio-and-garden-products" tabindex="-1" role="menuitem">
-															<n>Patio &amp; Garden</n>
-															<l>Fire Pits &amp; Outdoor Heaters, Gardening &amp;...</l>
-															<c>4921</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-auto-and-home-improvement-50ba035e1f.jpg" alt="Auto &amp; Home Improvement">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/baby-kids-and-toys" data-bhc="flyout-label:baby-kids-and-toys" tabindex="-1" role="menuitem">
-												<n>Baby, Kids &amp; Toys</n>
-												<c>18660</c>
-											</a>
-											<div data-bhc="flyout-content:baby-kids-and-toys" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/baby-kids-and-toys" tabindex="-1" role="menuitem">Shop All Baby, Kids &amp; Toys</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/baby-care" tabindex="-1" role="menuitem">
-															<n>Baby Care</n>
-															<l>Baby Diapering, Baby Feeding, Baby Gear</l>
-															<c>1608</c>
-														</a>
-														<a href="https://www.groupon.com/goods/bed-and-bath" tabindex="-1" role="menuitem">
-															<n>Bedding &amp; Bath</n>
-															<l>Baby &amp; Kids Bedding, Baby &amp; Kids Blanket...</l>
-															<c>464</c>
-														</a>
-														<a href="https://www.groupon.com/goods/books-music-and-movies" tabindex="-1" role="menuitem">
-															<n>Books, Music &amp; Movies</n>
-															<l>Kid's Music, Kids &amp; Family Movies, Kids...</l>
-															<c>400</c>
-														</a>
-														<a href="https://www.groupon.com/goods/boys-fashion" tabindex="-1" role="menuitem">
-															<n>Boys Fashion</n>
-															<l>Boys' Accessories, Boys' Clothing, Boys'...</l>
-															<c>1833</c>
-														</a>
-														<a href="https://www.groupon.com/goods/baby-furniture" tabindex="-1" role="menuitem">
-															<n>Furniture &amp; Décor</n>
-															<l>Beds &amp; Cribs, Changing Tables, Dressers...</l>
-															<c>728</c>
-														</a>
-														<a href="https://www.groupon.com/goods/girls-fashion" tabindex="-1" role="menuitem">
-															<n>Girls Fashion</n>
-															<l>Girls' Accessories, Girls' Clothing, Gir...</l>
-															<c>3191</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/health-and-safety" tabindex="-1" role="menuitem">
-															<n>Health &amp; Safety</n>
-															<l>Baby Monitors, Safety, Skin &amp; Health Car...</l>
-															<c>403</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-maternity-clothes" tabindex="-1" role="menuitem">
-															<n>Maternity</n>
-															<l>Maternity Bottoms, Maternity Dresses, Ma...</l>
-															<c>338</c>
-														</a>
-														<a href="https://www.groupon.com/goods/toys" tabindex="-1" role="menuitem">
-															<n>Toys</n>
-															<l>Arts &amp; Crafts, Bikes &amp; Ride-ons, Books...</l>
-															<c>11050</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-baby-kids-and-toys-b118e7eb38.jpg" alt="Baby, Kids &amp; Toys">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/collectibles" data-bhc="flyout-label:collectibles" tabindex="-1" role="menuitem">
-												<n>Collectibles</n>
-												<c>1626</c>
-											</a>
-											<div data-bhc="flyout-content:collectibles" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/collectibles" tabindex="-1" role="menuitem">Shop All Collectibles</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/collectible-coins-and-paper-money" tabindex="-1" role="menuitem">
-															<n>Coins &amp; Paper Money</n>
-															<l>Coin Sets, Individual Coins, Paper Curre...</l>
-															<c>348</c>
-														</a>
-														<a href="https://www.groupon.com/goods/collectible-accessories" tabindex="-1" role="menuitem">
-															<n>Collectible Accessories</n>
-															<l>Displays, Storage</l>
-															<c>128</c>
-														</a>
-														<a href="https://www.groupon.com/goods/entertainment-collectibles" tabindex="-1" role="menuitem">
-															<n>Entertainment</n>
-															<l>Musical Instruments &amp; Vinyl, Props</l>
-															<c>132</c>
-														</a>
-														<a href="https://www.groupon.com/goods/historical-and-political-collectibles" tabindex="-1" role="menuitem">
-															<n>Historical &amp; Political</n>
-															<l>Letters &amp; Written Finds</l>
-															<c>27</c>
-														</a>
-														<a href="https://www.groupon.com/goods/sports-collectibles" tabindex="-1" role="menuitem">
-															<n>Sports</n>
-															<l>Baseball, Basketball, Boxing, Football...</l>
-															<c>987</c>
-														</a>
-														<a href="https://www.groupon.com/goods/collectible-stamps" tabindex="-1" role="menuitem">
-															<n>Stamps</n>
-															<l>Individual Stamps, Rare Find, Sheets &amp; B...</l>
-															<c>4</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-collectibles-683bed297c.jpg" alt="Collectibles">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/electronics" data-bhc="flyout-label:electronics" tabindex="-1" role="menuitem">
-												<n>Electronics</n>
-												<c>35161</c>
-											</a>
-											<div data-bhc="flyout-content:electronics" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/electronics" tabindex="-1" role="menuitem">Shop All Electronics</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/camera-video-and-surveillance" tabindex="-1" role="menuitem">
-															<n>Camera, Video &amp; Surveillance</n>
-															<l>Action Cameras &amp; Drones, Camcorders, Das...</l>
-															<c>2621</c>
-														</a>
-														<a href="https://www.groupon.com/goods/car-electronics-and-gps" tabindex="-1" role="menuitem">
-															<n>Car Electronics &amp; GPS</n>
-															<l>Car Audio, Car Mounts &amp; Accessories, Car...</l>
-															<c>1391</c>
-														</a>
-														<a href="https://www.groupon.com/goods/cell-phones-and-accessories" tabindex="-1" role="menuitem">
-															<n>Cell Phones &amp; Accessories</n>
-															<l>Backup Batteries, Bluetooth Devices, Cab...</l>
-															<c>17558</c>
-														</a>
-														<a href="https://www.groupon.com/goods/computers-and-tablets" tabindex="-1" role="menuitem">
-															<n>Computers &amp; Tablets</n>
-															<l>Computer Accessories, Desktops, Monitors...</l>
-															<c>5095</c>
-														</a>
-														<a href="https://www.groupon.com/goods/musical-instruments" tabindex="-1" role="menuitem">
-															<n>Musical Instruments</n>
-															<l>Accessories, Amplifiers &amp; Effects, Brass...</l>
-															<c>783</c>
-														</a>
-														<a href="https://www.groupon.com/goods/office-and-school-supplies" tabindex="-1" role="menuitem">
-															<n>Office Electronics &amp; Supplies</n>
-															<l>Networking, Printers &amp; Scanners, Scanner...</l>
-															<c>1246</c>
-														</a>
-														<a href="https://www.groupon.com/goods/portable-audio" tabindex="-1" role="menuitem">
-															<n>Portable Audio</n>
-															<l>Bluetooth &amp; Wireless Speakers, Docks, Ra...</l>
-															<c>2608</c>
-														</a>
-														<a href="https://www.groupon.com/goods/software" tabindex="-1" role="menuitem">
-															<n>Software</n>
-															<l>Business &amp; Home Office, Children's, Educ...</l>
-															<c>46</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/television-and-home-theater" tabindex="-1" role="menuitem">
-															<n>Television &amp; Home Theater</n>
-															<l>Blu Ray &amp; DVD Players, Home Audio, Home...</l>
-															<c>2614</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v2-gaming" tabindex="-1" role="menuitem">
-															<n>Video Games</n>
-															<l>Game Consoles, Game Gear, Games, Video G...</l>
-															<c>989</c>
-														</a>
-														<a href="https://www.groupon.com/goods/wearable-technology" tabindex="-1" role="menuitem">
-															<n>Wearable Technology</n>
-															<l></l>
-															<c>978</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-electronics-126069b487.jpg" alt="Electronics">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/entertainment-and-media" data-bhc="flyout-label:entertainment-and-media" tabindex="-1" role="menuitem">
-												<n>Entertainment</n>
-												<c>3181</c>
-											</a>
-											<div data-bhc="flyout-content:entertainment-and-media" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/entertainment-and-media" tabindex="-1" role="menuitem">Shop All Entertainment</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/v-books" tabindex="-1" role="menuitem">
-															<n>Books</n>
-															<l>Children &amp; YA Books, Cookbooks, Food &amp; W...</l>
-															<c>551</c>
-														</a>
-														<a href="https://www.groupon.com/goods/magazines" tabindex="-1" role="menuitem">
-															<n>Magazines</n>
-															<l>Business Magazines, Cooking Magazines, H...</l>
-															<c>100</c>
-														</a>
-														<a href="https://www.groupon.com/goods/movies-and-tv" tabindex="-1" role="menuitem">
-															<n>Movies &amp; TV</n>
-															<l>Action TV Shows &amp; Movies, Comedy TV Show...</l>
-															<c>1308</c>
-														</a>
-														<a href="https://www.groupon.com/goods/music" tabindex="-1" role="menuitem">
-															<n>Music</n>
-															<l>Classical Music, Country Music, Kid's Mu...</l>
-															<c>75</c>
-														</a>
-														<a href="https://www.groupon.com/goods/novelty-games-and-gifts" tabindex="-1" role="menuitem">
-															<n>Novelty Games &amp; Gifts</n>
-															<l>Adult Party Games, Gag Gifts</l>
-															<c>155</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-gaming" tabindex="-1" role="menuitem">
-															<n>Video Games</n>
-															<l>Game Consoles, Game Gear &amp; Novelties, Ga...</l>
-															<c>989</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-entertainment-16c86e8454.jpg" alt="Entertainment">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/for-the-home" data-bhc="flyout-label:for-the-home" tabindex="-1" role="menuitem">
-												<n>For the Home</n>
-												<c>126007</c>
-											</a>
-											<div data-bhc="flyout-content:for-the-home" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/for-the-home" tabindex="-1" role="menuitem">Shop All For the Home</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/art" tabindex="-1" role="menuitem">
-															<n>Art</n>
-															<l>Canvas, Framed Art, Mixed Media, Photogr...</l>
-															<c>65853</c>
-														</a>
-														<a href="https://www.groupon.com/goods/bath" tabindex="-1" role="menuitem">
-															<n>Bath</n>
-															<l>Bath Accessories &amp; Sets, Bath Rugs, Bath...</l>
-															<c>2290</c>
-														</a>
-														<a href="https://www.groupon.com/goods/bedding" tabindex="-1" role="menuitem">
-															<n>Bedding</n>
-															<l>Bed Pillows, Bedding Collections &amp; Sets...</l>
-															<c>3439</c>
-														</a>
-														<a href="https://www.groupon.com/goods/floor-care-and-cleaning" tabindex="-1" role="menuitem">
-															<n>Floor Care &amp; Cleaning</n>
-															<l>Brooms, Mops &amp; Dusters, Vacuums</l>
-															<c>894</c>
-														</a>
-														<a href="https://www.groupon.com/goods/furniture" tabindex="-1" role="menuitem">
-															<n>Furniture</n>
-															<l>Accent Furniture, Baby &amp; Kid's Furniture...</l>
-															<c>9492</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v-heating-and-cooling" tabindex="-1" role="menuitem">
-															<n>Heating &amp; Cooling</n>
-															<l>Air Conditioners, Air Purifiers, Dehumid...</l>
-															<c>1187</c>
-														</a>
-														<a href="https://www.groupon.com/goods/appliances-goods" tabindex="-1" role="menuitem">
-															<n>Home Appliances</n>
-															<l>Irons &amp; Garment Care, Sewing Machines, S...</l>
-															<c>3345</c>
-														</a>
-														<a href="https://www.groupon.com/goods/art-and-home-decor" tabindex="-1" role="menuitem">
-															<n>Home Decor</n>
-															<l>Candles &amp; Holders, Home Accents, Lamps &amp;...</l>
-															<c>13498</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/kitchen-and-dining" tabindex="-1" role="menuitem">
-															<n>Kitchen &amp; Dining</n>
-															<l>Bakeware, Coffee, Tea, &amp; Espresso, Cookb...</l>
-															<c>14460</c>
-														</a>
-														<a href="https://www.groupon.com/goods/luggage" tabindex="-1" role="menuitem">
-															<n>Luggage</n>
-															<l>Backpacks, Briefcases &amp; Laptop Bags, Car...</l>
-															<c>2465</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-mattresses" tabindex="-1" role="menuitem">
-															<n>Mattresses &amp; Accessories</n>
-															<l>Innerspring Mattresses, Mattress Toppers...</l>
-															<c>401</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v-office-and-school-supplies" tabindex="-1" role="menuitem">
-															<n>Office &amp; School Supplies</n>
-															<l>Desk Accessories, Home Office Furniture...</l>
-															<c>5551</c>
-														</a>
-														<a href="https://www.groupon.com/goods/patio-and-garden" tabindex="-1" role="menuitem">
-															<n>Patio &amp; Garden</n>
-															<l>Bird Feeders &amp; Food, Fire Pits &amp; Outdoor...</l>
-															<c>8790</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-storage-and-organization" tabindex="-1" role="menuitem">
-															<n>Storage &amp; Organization</n>
-															<l>Bathroom Storage, Closet Storage, Garage...</l>
-															<c>4464</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-for-the-home-31cc33e8b6.jpg" alt="For the Home">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/grocery-and-household" data-bhc="flyout-label:grocery-and-household" tabindex="-1" role="menuitem">
-												<n>Grocery &amp; Household</n>
-												<c>6353</c>
-											</a>
-											<div data-bhc="flyout-content:grocery-and-household" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/grocery-and-household" tabindex="-1" role="menuitem">Shop All Grocery &amp; Household</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/alcohol" tabindex="-1" role="menuitem">
-															<n>Alcohol</n>
-															<l>Beer, Mixers &amp; Ready To Drink, Wine</l>
-															<c>123</c>
-														</a>
-														<a href="https://www.groupon.com/goods/drinks" tabindex="-1" role="menuitem">
-															<n>Beverages</n>
-															<l>Coconut Water, Coffee, Energy Drinks, En...</l>
-															<c>1024</c>
-														</a>
-														<a href="https://www.groupon.com/goods/candy-and-sweets" tabindex="-1" role="menuitem">
-															<n>Candy &amp; Sweets</n>
-															<l>Assortments, Bakery, Caramel &amp; Toffee, C...</l>
-															<c>620</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v-food" tabindex="-1" role="menuitem">
-															<n>Food</n>
-															<l>Baby Foods, Breakfast Foods, Gourmet Gif...</l>
-															<c>1799</c>
-														</a>
-														<a href="https://www.groupon.com/goods/custom-household-essentials" tabindex="-1" role="menuitem">
-															<n>Household Essentials</n>
-															<l>Cleaning Products, Dishwashing, Disposab...</l>
-															<c>1914</c>
-														</a>
-														<a href="https://www.groupon.com/goods/tobacco" tabindex="-1" role="menuitem">
-															<n>Tobacco</n>
-															<l>Cigars, Tobacco Accessories, Vaporizers...</l>
-															<c>1007</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-groceries-household-and-pets-fa122146e0.jpg" alt="Grocery &amp; Household">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/health-and-beauty" data-bhc="flyout-label:health-and-beauty" tabindex="-1" role="menuitem">
-												<n>Health &amp; Beauty</n>
-												<c>66579</c>
-											</a>
-											<div data-bhc="flyout-content:health-and-beauty" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/health-and-beauty" tabindex="-1" role="menuitem">Shop All Health &amp; Beauty</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/massage-and-relaxation" tabindex="-1" role="menuitem">
-															<n>Aromatherapy &amp; Relaxation</n>
-															<l>Acupuncture &amp; Acupressure, Aromatherapy...</l>
-															<c>2496</c>
-														</a>
-														<a href="https://www.groupon.com/goods/bath-and-body" tabindex="-1" role="menuitem">
-															<n>Bath &amp; Body</n>
-															<l>Accessories, Aromatherapy, Bath Soaks &amp;...</l>
-															<c>2888</c>
-														</a>
-														<a href="https://www.groupon.com/goods/cosmetics" tabindex="-1" role="menuitem">
-															<n>Cosmetics</n>
-															<l>Bags &amp; Cases, Brushes &amp; Applicators, Eye...</l>
-															<c>8799</c>
-														</a>
-														<a href="https://www.groupon.com/goods/fragrances" tabindex="-1" role="menuitem">
-															<n>Fragrance</n>
-															<l>Fragrance Gift Sets &amp; Coffrets, Kids Fra...</l>
-															<c>18441</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-hair-care" tabindex="-1" role="menuitem">
-															<n>Hair Care</n>
-															<l>Hair &amp; Scalp Treatment, Hair Accessories...</l>
-															<c>7820</c>
-														</a>
-														<a href="https://www.groupon.com/goods/health-care" tabindex="-1" role="menuitem">
-															<n>Health Care</n>
-															<l>Compression, Daily Living Aids, First Ai...</l>
-															<c>4964</c>
-														</a>
-														<a href="https://www.groupon.com/goods/men" tabindex="-1" role="menuitem">
-															<n>Men's Health &amp; Beauty</n>
-															<l>Men's Bath &amp; Body, Men's Hair Care, Men'...</l>
-															<c>4981</c>
-														</a>
-														<a href="https://www.groupon.com/goods/mobility-and-safety" tabindex="-1" role="menuitem">
-															<n>Mobility &amp; Safety</n>
-															<l>Bathroom Safety, Bedroom Safety, Canes &amp;...</l>
-															<c>510</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/v1-dental-care" tabindex="-1" role="menuitem">
-															<n>Oral Care</n>
-															<l>Denture Care, Floss &amp; Gum Care, Mouthwas...</l>
-															<c>1032</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-personal-care" tabindex="-1" role="menuitem">
-															<n>Personal Care</n>
-															<l>Body Treatments, Deodorants &amp; Antiperspi...</l>
-															<c>3041</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-sexual-health" tabindex="-1" role="menuitem">
-															<n>Sexual Wellness</n>
-															<l>Adult Books, Adult Games, Adult Toys for...</l>
-															<c>4346</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-shaving" tabindex="-1" role="menuitem">
-															<n>Shaving &amp; Grooming</n>
-															<l>Hair Removal, Men's Shave, Shave Accesso...</l>
-															<c>1036</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-skin-care" tabindex="-1" role="menuitem">
-															<n>Skin Care</n>
-															<l>Cellulite &amp; Stretch Marks, Cleanse, Exfo...</l>
-															<c>8277</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v3-vitamins-and-supplements" tabindex="-1" role="menuitem">
-															<n>Vitamins &amp; Supplements</n>
-															<l>Detox &amp; Superfoods, Protein, Sports Nutr...</l>
-															<c>4679</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-health-and-beauty-37a4cff3c6.jpg" alt="Health &amp; Beauty">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/jewelry-and-watches" data-bhc="flyout-label:jewelry-and-watches" tabindex="-1" role="menuitem">
-												<n>Jewelry &amp; Watches</n>
-												<c>53928</c>
-											</a>
-											<div data-bhc="flyout-content:jewelry-and-watches" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/jewelry-and-watches" tabindex="-1" role="menuitem">Shop All Jewelry &amp; Watches</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/childrens-jewelry" tabindex="-1" role="menuitem">
-															<n>Children's Jewelry</n>
-															<l></l>
-															<c>259</c>
-														</a>
-														<a href="https://www.groupon.com/goods/diamond-jewelry" tabindex="-1" role="menuitem">
-															<n>Diamond Jewelry</n>
-															<l>Bracelets, Diamond Accent Jewelry, Diamo...</l>
-															<c>5856</c>
-														</a>
-														<a href="https://www.groupon.com/goods/fashion-jewelry" tabindex="-1" role="menuitem">
-															<n>Fashion Jewelry</n>
-															<l>Bracelets, Fashion Collections &amp; Sets, F...</l>
-															<c>25161</c>
-														</a>
-														<a href="https://www.groupon.com/goods/fine-metal-jewelry" tabindex="-1" role="menuitem">
-															<n>Fine Metal Jewelry</n>
-															<l>Fine Metal Bracelets, Fine Metal Collect...</l>
-															<c>4784</c>
-														</a>
-														<a href="https://www.groupon.com/goods/gemstone-and-pearl-jewelry" tabindex="-1" role="menuitem">
-															<n>Gemstone &amp; Pearl Jewelry</n>
-															<l>Bracelets, Gemstone &amp; Pearl Collections...</l>
-															<c>8012</c>
-														</a>
-														<a href="https://www.groupon.com/goods/jewelry-accessories-and-storage" tabindex="-1" role="menuitem">
-															<n>Jewelry Accessories &amp; Storage</n>
-															<l>Boxes &amp; Holders, Cleaners &amp; Accessories</l>
-															<c>322</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/mens-jewelry" tabindex="-1" role="menuitem">
-															<n>Men's Jewelry</n>
-															<l>Men's Bracelets, Men's Diamond Jewelry...</l>
-															<c>3218</c>
-														</a>
-														<a href="https://www.groupon.com/goods/watches" tabindex="-1" role="menuitem">
-															<n>Watches</n>
-															<l>Men's Watches, Smartwatches, Unisex Watc...</l>
-															<c>6855</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-jewelry-and-watches-412936d823.jpg" alt="Jewelry &amp; Watches">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/mens-clothing-shoes-and-accessories" data-bhc="flyout-label:mens-clothing-shoes-and-accessories" tabindex="-1" role="menuitem">
-												<n>Men's Fashion</n>
-												<c>21555</c>
-											</a>
-											<div data-bhc="flyout-content:mens-clothing-shoes-and-accessories" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/mens-clothing-shoes-and-accessories" tabindex="-1" role="menuitem">Shop All Men's Fashion</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/mens-accessories" tabindex="-1" role="menuitem">
-															<n>Men's Accessories</n>
-															<l>Men's Bags, Men's Belts &amp; Suspenders, Me...</l>
-															<c>5502</c>
-														</a>
-														<a href="https://www.groupon.com/goods/mens-clothing" tabindex="-1" role="menuitem">
-															<n>Men's Clothing</n>
-															<l>Big &amp; Tall, Men's Activewear, Men's Butt...</l>
-															<c>14409</c>
-														</a>
-														<a href="https://www.groupon.com/goods/mens-shoes" tabindex="-1" role="menuitem">
-															<n>Men's Shoes</n>
-															<l>Men's Athletic Shoes, Men's Boat Shoes...</l>
-															<c>1917</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-mens-clothing-shoes-and-accessories-6b9b485165.jpg" alt="Men&#39;s Fashion">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/v1-personalized-items" data-bhc="flyout-label:v1-personalized-items" tabindex="-1" role="menuitem">
-												<n>Personalized Items</n>
-												<c>1012</c>
-											</a>
-											<div data-bhc="flyout-content:v1-personalized-items" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/v1-personalized-items" tabindex="-1" role="menuitem">Shop All Personalized Items</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/custom-baby-and-kids-items" tabindex="-1" role="menuitem">
-															<n>Custom Baby &amp; Kids Items</n>
-															<l>Personalized Kids Books</l>
-															<c>17</c>
-														</a>
-														<a href="https://www.groupon.com/goods/custom-jewelry" tabindex="-1" role="menuitem">
-															<n>Custom Jewelry</n>
-															<l>Custom Bracelets, Personalized Earrings...</l>
-															<c>223</c>
-														</a>
-														<a href="https://www.groupon.com/goods/custom-kitchen-accessories" tabindex="-1" role="menuitem">
-															<n>Custom Kitchen Accessories</n>
-															<l>Custom Kitchen Utensils, Custom Mugs, Pe...</l>
-															<c>153</c>
-														</a>
-														<a href="https://www.groupon.com/goods/custom-novelty-items" tabindex="-1" role="menuitem">
-															<n>Custom Novelty Items</n>
-															<l>Custom Bobbleheads, Custom Electronic Ac...</l>
-															<c>71</c>
-														</a>
-														<a href="https://www.groupon.com/goods/custom-photo-prints" tabindex="-1" role="menuitem">
-															<n>Custom Photo Prints</n>
-															<l>Acrylic Prints, Canvas Prints, Custom Po...</l>
-															<c>237</c>
-														</a>
-														<a href="https://www.groupon.com/goods/personalized-bags" tabindex="-1" role="menuitem">
-															<n>Personalized Bags</n>
-															<l></l>
-															<c>25</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/personalized-clothing-and-accessories" tabindex="-1" role="menuitem">
-															<n>Personalized Clothing &amp; Accessories</n>
-															<l>Personalized Fashion Accessories, Person...</l>
-															<c>82</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v1-personalized-home-decor" tabindex="-1" role="menuitem">
-															<n>Personalized Home Decor</n>
-															<l>Custom Holiday Decorations, Custom House...</l>
-															<c>150</c>
-														</a>
-														<a href="https://www.groupon.com/goods/personalized-stationery" tabindex="-1" role="menuitem">
-															<n>Personalized Stationery</n>
-															<l>Custom Calendars, Custom Embosser Stamps...</l>
-															<c>44</c>
-														</a>
-														<a href="https://www.groupon.com/goods/photo-book" tabindex="-1" role="menuitem">
-															<n>Photo Books</n>
-															<l></l>
-															<c>35</c>
-														</a>
-													</div>
-												</div>
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/pet-supplies" data-bhc="flyout-label:pet-supplies" tabindex="-1" role="menuitem">
-												<n>Pet Supplies</n>
-												<c>6547</c>
-											</a>
-											<div data-bhc="flyout-content:pet-supplies" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/pet-supplies" tabindex="-1" role="menuitem">Shop All Pet Supplies</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/bird-supplies" tabindex="-1" role="menuitem">
-															<n>Bird Supplies</n>
-															<l></l>
-															<c>131</c>
-														</a>
-														<a href="https://www.groupon.com/goods/cat-supplies" tabindex="-1" role="menuitem">
-															<n>Cat Supplies</n>
-															<l>Beds &amp; Blankets, Cat Feeding &amp; Watering...</l>
-															<c>1203</c>
-														</a>
-														<a href="https://www.groupon.com/goods/dog-supplies" tabindex="-1" role="menuitem">
-															<n>Dog Supplies</n>
-															<l>Dog Apparel, Dog Beds &amp; Furniture, Dog C...</l>
-															<c>4854</c>
-														</a>
-														<a href="https://www.groupon.com/goods/fish-supplies" tabindex="-1" role="menuitem">
-															<n>Fish Supplies</n>
-															<l></l>
-															<c>137</c>
-														</a>
-														<a href="https://www.groupon.com/goods/reptile-and-amphibian-supplies" tabindex="-1" role="menuitem">
-															<n>Reptile &amp; Amphibian Supplies</n>
-															<l></l>
-															<c>36</c>
-														</a>
-														<a href="https://www.groupon.com/goods/small-animal-supplies" tabindex="-1" role="menuitem">
-															<n>Small Animal Supplies</n>
-															<l></l>
-															<c>178</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-pet-supplies-emea-3b77f76470.jpg" alt="Pet Supplies">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/sports-and-outdoors" data-bhc="flyout-label:sports-and-outdoors" tabindex="-1" role="menuitem">
-												<n>Sports &amp; Outdoors</n>
-												<c>19781</c>
-											</a>
-											<div data-bhc="flyout-content:sports-and-outdoors" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/sports-and-outdoors" tabindex="-1" role="menuitem">Shop All Sports &amp; Outdoors</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/clothing-and-shoes" tabindex="-1" role="menuitem">
-															<n>Activewear &amp; Athletic Shoes</n>
-															<l>Men's Activewear, Men's Athletic Shoes...</l>
-															<c>3622</c>
-														</a>
-														<a href="https://www.groupon.com/goods/v2-cycling" tabindex="-1" role="menuitem">
-															<n>Cycling</n>
-															<l>Bikes, Clothing &amp; Footwear, Parts &amp; Acce...</l>
-															<c>821</c>
-														</a>
-														<a href="https://www.groupon.com/goods/exercise-and-fitness" tabindex="-1" role="menuitem">
-															<n>Exercise &amp; Fitness</n>
-															<l>Balance &amp; Recovery, Books &amp; Magazines, C...</l>
-															<c>4498</c>
-														</a>
-														<a href="https://www.groupon.com/goods/fan-shop" tabindex="-1" role="menuitem">
-															<n>Fan Shop</n>
-															<l>Bundesliga, Memorabilia, MLB, MLS, NASCA...</l>
-															<c>3517</c>
-														</a>
-														<a href="https://www.groupon.com/goods/golf-goods" tabindex="-1" role="menuitem">
-															<n>Golf Products</n>
-															<l>Golf Accessories, Golf Bags and Carts, G...</l>
-															<c>444</c>
-														</a>
-														<a href="https://www.groupon.com/goods/outdoors" tabindex="-1" role="menuitem">
-															<n>Outdoors</n>
-															<l>Action Sports, Boats &amp; Water Sports, Cam...</l>
-															<c>7410</c>
-														</a>
-													</div>
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/recreation" tabindex="-1" role="menuitem">
-															<n>Recreation</n>
-															<l>Lawn Games, Trampolines</l>
-															<c>184</c>
-														</a>
-														<a href="https://www.groupon.com/goods/team-sports" tabindex="-1" role="menuitem">
-															<n>Team Sports</n>
-															<l>Baseball &amp; Softball, Basketball, Footbal...</l>
-															<c>1089</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-sports-and-outdoors-f5b481b0d9.jpg" alt="Sports &amp; Outdoors">
-											</div>
-										</li>
-										<li>
-											<a class="flyMenulink" href="https://www.groupon.com/goods/womens-clothing-shoes-and-accessories" data-bhc="flyout-label:womens-clothing-shoes-and-accessories" tabindex="-1" role="menuitem">
-												<n>Women's Fashion</n>
-												<c>35312</c>
-											</a>
-											<div data-bhc="flyout-content:womens-clothing-shoes-and-accessories" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/womens-clothing-shoes-and-accessories" tabindex="-1" role="menuitem">Shop All Women's Fashion</a></h4>
-												<div class="ls-flex-wrap">
-													<div class="flyCol50">
-														<a href="https://www.groupon.com/goods/womens-intimates" tabindex="-1" role="menuitem">
-															<n>Intimates</n>
-															<l>Bras, Lingerie, Lounge &amp; Sleepwear, Pant...</l>
-															<c>3745</c>
-														</a>
-														<a href="https://www.groupon.com/goods/maternity-clothes" tabindex="-1" role="menuitem">
-															<n>Maternity Clothing</n>
-															<l>Maternity Activewear, Maternity Bottoms...</l>
-															<c>363</c>
-														</a>
-														<a href="https://www.groupon.com/goods/plus-size-womens-clothing" tabindex="-1" role="menuitem">
-															<n>Plus Size Clothing</n>
-															<l>Plus Size Activewear, Plus Size Bottoms...</l>
-															<c>1215</c>
-														</a>
-														<a href="https://www.groupon.com/goods/womens-accessories" tabindex="-1" role="menuitem">
-															<n>Women's Accessories</n>
-															<l>Women's Belts, Women's Eyewear, Women's...</l>
-															<c>8749</c>
-														</a>
-														<a href="https://www.groupon.com/goods/womens-clothing" tabindex="-1" role="menuitem">
-															<n>Women's Clothing</n>
-															<l>Dresses, Leggings, Skirts, Women's Activ...</l>
-															<c>18323</c>
-														</a>
-														<a href="https://www.groupon.com/goods/womens-shoes" tabindex="-1" role="menuitem">
-															<n>Women's Shoes</n>
-															<l>Boots &amp; Booties, Pumps &amp; Heels, Women's...</l>
-															<c>3539</c>
-														</a>
-													</div>
-												</div>
-												<img class="flyBg ls-lazy" data-original="//www2.grouponcdn.com/layout/assets/gcx-womens-clothing-shoes-and-accessories-1e58d3abde.jpg" alt="Women&#39;s Fashion">
-											</div>
-										</li>
-										<li class="flyFlatLink flyFlatLinkFirst">
-											<a class="flyFlatLink" href="https://www.groupon.com/occasion/deals-of-the-day" data-bhc="flyout-label:goods-lightning-flash" tabindex="-1" role="menuitem">
-												<n>Shop Deals of the Day</n>
-											</a>
-										</li>
-										<li class="flyFlatLink">
-											<a class="flyFlatLink" href="https://www.groupon.com/goods/all?discount=gg-clearance" data-bhc="flyout-label:all" tabindex="-1" role="menuitem">
-												<n>Shop All Clearance</n>
-												<c>369</c>
-											</a>
-										</li>
-										<li class="flyFlatLink">
-											<a class="flyFlatLink" href="https://www.groupon.com/goods/all" data-bhc="flyout-label:all-goods" tabindex="-1" role="menuitem">
-												<n>Shop All Categories</n>
-												<c>25376</c>
-											</a>
-										</li>
-									</ul>
+				
+					<nav class="subnav-flyout goods-tab-flyout row hide" id="subnav-goods-tab" data-bhw="SubNav-goods-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-2">
+						<div data-bhw="goods-flyout" class="flyContainer">
+							<ul class="flyMenu">
+							</ul>
 									<div class="flyTeaserMsg">
 										<span>FREE Shipping</span> with $34.99 Purchase |
 										<span>FREE Returns</span>
 									</div>
 								</div>
 							</nav>
-							<nav class="subnav-flyout getaways-tab-flyout row hide" id="subnav-getaways-tab" data-bhw="SubNav-getaways-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-3">
-								<div class="ls-flex-wrap">
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link" href="https://www.groupon.com/getaways?category=All+Destinations" data-bhc="category:getaways-tab-all-destinations" tabindex="-1" role="menuitem">
-											All Destinations
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/getaways?category=USA+and+Canada" data-bhc="category:getaways-tab-usa-canada" tabindex="-1" role="menuitem">
-											USA &amp; Canada
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/getaways?category=Mexico%2C+the+Caribbean%2C+%26+Latin+America" data-bhc="category:getaways-tab-mexico-the-caribbean-latin-america" tabindex="-1" role="menuitem">
-											Mexico, the Caribbean, &amp; Latin America
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/getaways?category=Europe%2C+Asia%2C+Africa%2C+%26+Oceania" data-bhc="category:getaways-tab-europe-asia-africa-oceania" tabindex="-1" role="menuitem">
-											Europe, Asia, Africa, &amp; Oceania
-
-										</a>
-									</div>
-									<div class="flyout-column subnav-cards cui-three-up" data-bhc="compound:03dc22ad-e273-4f60-b00c-3208bf653b40" data-bhd="{&quot;cardName&quot;:&quot;crossChannel_NavBar_Getaways_Container&quot;,&quot;cardUUID&quot;:&quot;03dc22ad-e273-4f60-b00c-3208bf653b40&quot;,&quot;templateView&quot;:&quot;ContainerCardView&quot;,&quot;templateUUID&quot;:&quot;1a93a921-570c-42ee-b7a3-6506d86e857d&quot;}" data-bhw="CompoundCollection" data-bh-viewport="">
-										<a href="https://www.groupon.com/occasion/spring-break" data-bhc="collection:ea27036d-c9a7-44f9-bd7e-35d623024315" data-bhd="{&quot;cardName&quot;:&quot;getaways_NavBar_springbreak&quot;,&quot;cardUUID&quot;:&quot;ea27036d-c9a7-44f9-bd7e-35d623024315&quot;,&quot;templateView&quot;:&quot;CollectionTileView&quot;,&quot;templateUUID&quot;:&quot;ca714021-c80a-49a6-954c-a9fee033fabe&quot;}" data-bh-viewport=""><img class="subnav-card" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/f6-440x420.jpg" alt="/occasion/spring-break"></a>
-										<a href="https://www.groupon.com/occasion/best-of-groupon?topcategory=travel" data-bhc="collection:58e2ea32-71a1-4fb5-9ec7-e8cc4cf356f7" data-bhd="{&quot;cardName&quot;:&quot;getaways_NavBar_bestofgetaways&quot;,&quot;cardUUID&quot;:&quot;58e2ea32-71a1-4fb5-9ec7-e8cc4cf356f7&quot;,&quot;templateView&quot;:&quot;CollectionTileView&quot;,&quot;templateUUID&quot;:&quot;ca714021-c80a-49a6-954c-a9fee033fabe&quot;}" data-bh-viewport=""><img class="subnav-card" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/q90.jpg" alt="/occasion/best-of-groupon?topcategory=travel"></a>
-										<a href="https://www.groupon.com/occasion/ga-caesars-hotels-headliners" data-bhc="collection:4869d5b0-8cd3-438e-a02c-a188d77aa4df" data-bhd="{&quot;cardName&quot;:&quot;getaways_NavBar_caesars&quot;,&quot;cardUUID&quot;:&quot;4869d5b0-8cd3-438e-a02c-a188d77aa4df&quot;,&quot;templateView&quot;:&quot;CollectionTileView&quot;,&quot;templateUUID&quot;:&quot;ca714021-c80a-49a6-954c-a9fee033fabe&quot;}" data-bh-viewport=""><img class="subnav-card" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/3m-440x420.jpg" alt="/occasion/ga-caesars-hotels-headliners"></a>
-									</div>
-
-								</div>
-							</nav>
 							<nav class="subnav-flyout coupons-tab-flyout row hide" id="subnav-coupons-tab" data-bhw="SubNav-coupons-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-5">
 								<div class="ls-flex-wrap">
 									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores" data-bhc="category:coupons-tab-all-stores" tabindex="-1" role="menuitem">
+										<a class="subnav-link" href="javascript:;" data-bhc="category:coupons-tab-all-stores" tabindex="-1" role="menuitem">
 											All Stores
 
 										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/target.com" data-bhc="category:coupons-tab-target-coupons" tabindex="-1" role="menuitem">
-											Target Coupons
+										<a class="subnav-link" href="javascript:;" data-bhc="category:coupons-tab-lowe-s-coupons" tabindex="-1" role="menuitem">
+											Lowe's Coupons
 
 										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/toysrus.com" data-bhc="category:coupons-tab-toysrus-coupons" tabindex="-1" role="menuitem">
-											ToysRUs Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/hrblock.com" data-bhc="category:coupons-tab-h-r-block-at-home-coupons" tabindex="-1" role="menuitem">
-											H&amp;R Block At Home Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/nordstrom.com" data-bhc="category:coupons-tab-nordstrom-coupons" tabindex="-1" role="menuitem">
-											Nordstrom Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/bestbuy.com" data-bhc="category:coupons-tab-best-buy-coupons" tabindex="-1" role="menuitem">
-											Best Buy Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/homedepot.com" data-bhc="category:coupons-tab-home-depot-coupons" tabindex="-1" role="menuitem">
-											Home Depot Coupons
-
-										</a>
-									</div>
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/bloomingdales.com" data-bhc="category:coupons-tab-bloomingdale-s-coupons" tabindex="-1" role="menuitem">
-											Bloomingdale's Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/sears.com" data-bhc="category:coupons-tab-sears-coupons" tabindex="-1" role="menuitem">
-											Sears Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/babiesrus.com" data-bhc="category:coupons-tab-babiesrus-coupons" tabindex="-1" role="menuitem">
-											BabiesRUs Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/barnesandnoble" data-bhc="category:coupons-tab-barnes-noble-coupons" tabindex="-1" role="menuitem">
-											Barnes &amp; Noble Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/amazon.com" data-bhc="category:coupons-tab-amazon-coupons" tabindex="-1" role="menuitem">
-											Amazon Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/jcpenney.com" data-bhc="category:coupons-tab-jcpenney-coupons" tabindex="-1" role="menuitem">
-											JCPenney Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/kohls.com" data-bhc="category:coupons-tab-kohl-s-coupons" tabindex="-1" role="menuitem">
-											Kohl's Coupons
-
-										</a>
-									</div>
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/macys.com" data-bhc="category:coupons-tab-macy-s-coupons" tabindex="-1" role="menuitem">
-											Macy's Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/saksfifthavenue.com" data-bhc="category:coupons-tab-saks-fifth-avenue-coupons" tabindex="-1" role="menuitem">
-											Saks Fifth Avenue Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/ae.com" data-bhc="category:coupons-tab-american-eagle-coupons" tabindex="-1" role="menuitem">
-											American Eagle Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/kay.com" data-bhc="category:coupons-tab-kay-jewelers-coupons" tabindex="-1" role="menuitem">
-											Kay Jewelers Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/nike.com" data-bhc="category:coupons-tab-nike-coupons" tabindex="-1" role="menuitem">
-											Nike Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/walmart.com" data-bhc="category:coupons-tab-walmart-coupons" tabindex="-1" role="menuitem">
-											Walmart Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/finishline.com" data-bhc="category:coupons-tab-finish-line-coupons" tabindex="-1" role="menuitem">
-											Finish Line Coupons
-
-										</a>
-									</div>
-									<div class="flyout-column one-up subnav-categories">
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/turbotax.intuit.com" data-bhc="category:coupons-tab-turbotax-coupons" tabindex="-1" role="menuitem">
-											TurboTax Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/shutterfly.com" data-bhc="category:coupons-tab-shutterfly-coupons" tabindex="-1" role="menuitem">
-											Shutterfly Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/oldnavy.com" data-bhc="category:coupons-tab-old-navy-coupons" tabindex="-1" role="menuitem">
-											Old Navy Coupons
-
-										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/footlocker.com" data-bhc="category:coupons-tab-foot-locker-coupons" tabindex="-1" role="menuitem">
+										<a class="subnav-link" href="javascript:;" data-bhc="category:coupons-tab-foot-locker-coupons" tabindex="-1" role="menuitem">
 											Foot Locker Coupons
 
 										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/express.com" data-bhc="category:coupons-tab-express-coupons" tabindex="-1" role="menuitem">
-											Express Coupons
+										<a class="subnav-link" href="javascript:;" data-bhc="category:coupons-tab-neiman-marcus-coupons" tabindex="-1" role="menuitem">
+											Neiman Marcus Coupons
 
 										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/vistaprint.com" data-bhc="category:coupons-tab-vistaprint-coupons" tabindex="-1" role="menuitem">
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Nike Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;" data-bhc="category:coupons-tab-home-depot-coupons" tabindex="-1" role="menuitem">
+											Home Depot Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											American Eagle Coupons
+
+										</a>
+									</div>
+									<div class="flyout-column one-up subnav-categories">
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Shutterfly Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Nordstrom Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
 											Vistaprint Coupons
 
 										</a>
-										<a class="subnav-link" href="https://www.groupon.com/coupons/stores/asos.com" data-bhc="category:coupons-tab-asos-coupons" tabindex="-1" role="menuitem">
-											ASOS Coupons
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Macy's Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											H&amp;R Block At Home Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Finish Line Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Walmart Coupons
+
+										</a>
+									</div>
+									<div class="flyout-column one-up subnav-categories">
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Target Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Kohl's Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											TurboTax Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Old Navy Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											BabiesRUs Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Saks Fifth Avenue Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Best Buy Coupons
+
+										</a>
+									</div>
+									<div class="flyout-column one-up subnav-categories">
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Amazon Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Bloomingdale's Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Saks OFF 5TH Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Guitar Center Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Bed Bath &amp; Beyond Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											eBay Coupons
+
+										</a>
+										<a class="subnav-link" href="javascript:;"  tabindex="-1" role="menuitem">
+											Express Coupons
 
 										</a>
 									</div>
 								</div>
 							</nav>
-							<nav class="subnav-flyout local-tab-flyout row hide" id="subnav-local-tab" data-bhw="SubNav-local-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-1"></nav>
-							<nav class="subnav-flyout local-tab-flyout row hide" id="subnav-local-tab" data-bhw="SubNav-local-tab" role="menu" aria-hidden="true" aria-labelledby="sls-aria-1"></nav>
 						</nav>
 					</nav>
 
@@ -1471,13 +419,12 @@
 						BOOMR.t_header = +new Date()
 					</script>
 			</div>
-
 			<div class="ls-resp-main">
 				<section id="ls-in-app-messages">
 					<div class="row">
 						<div id="in-app-messages" class="twelve column" data-bhw="SiteAnnouncement" data-bhw-path="SiteAnnouncement">
 							<div id="message-19833" class="in-app-msg-banner" data-bhc="announcement:19833" data-bhc-path="SiteAnnouncement|announcement:19833">
-								<a href="https://www.groupon.com/occasion/totally-trending-deals"><img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/m5-1056x100" alt="TOTALLY TRENDING DEALS - Electronics, Home, Apparel, and more"></a>
+								<a href="javascript:;"><img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/m5-1056x100" alt="TOTALLY TRENDING DEALS - Electronics, Home, Apparel, and more"></a>
 								<span id="ls-close-19833-link" data-bhw="site-announcement-close" data-bhw-path="SiteAnnouncement|announcement:19833|site-announcement-close">
         <a href="https://www.groupon.com/goods#" data-bhc="announcement-close:19833" class="hide-link" aria-label="close" data-bhc-path="SiteAnnouncement|announcement:19833|announcement-close:19833"></a>
       </span>
@@ -1516,7 +463,7 @@
 											<div class="dotted-border"></div>
 											<div class="long-desc c-bg-gray-bg">
 												<p>Free Standard Shipping on purchases of $34.99 or more applies in the U.S. only. Free Returns in the U.S. and Canada. Large, oversized items and products delivered by special or white glove carriers are not eligible for free shipping or free returns. Free returns are not applicable to final sale/non-returnable items. As always, check the deal's Fine Print for restrictions.
-													<a href="https://www.groupon.com/faq#faqs:content-207" target="_blank" title="Learn More">Learn More</a>
+													<a href="javascript:;" target="_blank" title="Learn More">Learn More</a>
 												</p>
 											</div>
 											<span class="close-modal icon-x c-txt-gray-dk"></span>
@@ -1530,7 +477,7 @@
 											<nav class="breadcrumb-nav">
 												<ul>
 													<li>
-														<a class="crumb" href="https://www.groupon.com/goods" title="Goods">Goods</a>
+														<a class="crumb" href="javascript:;" title="Goods">Goods</a>
 													</li>
 													<li>
 														<span class="separator c-txt-gray-md">›</span>
@@ -1581,7 +528,7 @@
 													<div class="refinement-box" data-bhw="refinementBreadcrumbFilters">
 														<h4>Selected Filters</h4>
 														<div class="grui-breadcrumb-pills-container">
-															<span class="grui-breadcrumb-container"></span><span class="grui-breadcrumb-reset-container" style="display: none;"><div class="grui-breadcrumb-reset-pill c-bd-grey-md"><a class="grui-breadcrumb-friendly-name" data-id="grui-breadcrumb-reset" data-bhc="breadcrumbPill:grui-breadcrumb-reset" href="https://www.groupon.com/goods#">
+															<span class="grui-breadcrumb-container"></span><span class="grui-breadcrumb-reset-container" style="display: none;"><div class="grui-breadcrumb-reset-pill c-bd-grey-md"><a class="grui-breadcrumb-friendly-name" href="javascript:;">
     Reset
 </a>
 <span class="grui-breadcrumb-close-btn icon-x"></span>
@@ -1596,97 +543,7 @@
 													<div class="refinement-box">
 														<h4>Categories</h4>
 														<ul id="all-list" class="refinement-list">
-															<!--<li data-id="baby-kids-and-toys" class="sub-category-links child-refinement" data-bhc="category2:baby-kids-and-toys" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:baby-kids-and-toys">
-																<a href="https://www.groupon.com/goods/baby-kids-and-toys">
-																	Baby, Kids &amp; Toys
-																	<span class="deal-counts">(18657)</span>
-
-																</a>
-															</li>
-															<li data-id="collectibles" class="sub-category-links child-refinement" data-bhc="category2:collectibles" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:collectibles">
-																<a href="https://www.groupon.com/goods/collectibles">
-																	Collectibles
-																	<span class="deal-counts">(1626)</span>
-
-																</a>
-															</li>
-															<li data-id="electronics" class="sub-category-links child-refinement" data-bhc="category2:electronics" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:electronics">
-																<a href="https://www.groupon.com/goods/electronics">
-																	Electronics
-																	<span class="deal-counts">(35179)</span>
-
-																</a>
-															</li>
-															<li data-id="entertainment-and-media" class="sub-category-links child-refinement" data-bhc="category2:entertainment-and-media" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:entertainment-and-media">
-																<a href="https://www.groupon.com/goods/entertainment-and-media">
-																	Entertainment
-																	<span class="deal-counts">(3184)</span>
-
-																</a>
-															</li>
-															<li data-id="for-the-home" class="sub-category-links child-refinement" data-bhc="category2:for-the-home" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:for-the-home">
-																<a href="https://www.groupon.com/goods/for-the-home">
-																	For the Home
-																	<span class="deal-counts">(126003)</span>
-
-																</a>
-															</li>
-															<li data-id="grocery-and-household" class="sub-category-links child-refinement" data-bhc="category2:grocery-and-household" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:grocery-and-household">
-																<a href="https://www.groupon.com/goods/grocery-and-household">
-																	Grocery &amp; Household
-																	<span class="deal-counts">(6351)</span>
-
-																</a>
-															</li>
-															<li data-id="health-and-beauty" class="sub-category-links child-refinement" data-bhc="category2:health-and-beauty" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:health-and-beauty">
-																<a href="https://www.groupon.com/goods/health-and-beauty">
-																	Health &amp; Beauty
-																	<span class="deal-counts">(66097)</span>
-
-																</a>
-															</li>
-															<li data-id="jewelry-and-watches" class="sub-category-links child-refinement" data-bhc="category2:jewelry-and-watches" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:jewelry-and-watches">
-																<a href="https://www.groupon.com/goods/jewelry-and-watches">
-																	Jewelry &amp; Watches
-																	<span class="deal-counts">(53936)</span>
-
-																</a>
-															</li>
-															<li data-id="mens-clothing-shoes-and-accessories" class="sub-category-links child-refinement" data-bhc="category2:mens-clothing-shoes-and-accessories" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:mens-clothing-shoes-and-accessories">
-																<a href="https://www.groupon.com/goods/mens-clothing-shoes-and-accessories">
-																	Men's Fashion
-																	<span class="deal-counts">(21581)</span>
-
-																</a>
-															</li>
-															<li data-id="pet-supplies" class="sub-category-links child-refinement" data-bhc="category2:pet-supplies" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:pet-supplies">
-																<a href="https://www.groupon.com/goods/pet-supplies">
-																	Pet Supplies
-																	<span class="deal-counts">(6546)</span>
-
-																</a>
-															</li>
-															<li data-id="sports-and-outdoors" class="sub-category-links child-refinement" data-bhc="category2:sports-and-outdoors" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:sports-and-outdoors">
-																<a href="https://www.groupon.com/goods/sports-and-outdoors">
-																	Sports &amp; Outdoors
-																	<span class="deal-counts">(19783)</span>
-
-																</a>
-															</li>
-															<li data-id="v1-personalized-items" class="sub-category-links child-refinement" data-bhc="category2:v1-personalized-items" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:v1-personalized-items">
-																<a href="https://www.groupon.com/goods/v1-personalized-items">
-																	Personalized Items
-																	<span class="deal-counts">(1012)</span>
-
-																</a>
-															</li>
-															<li data-id="womens-clothing-shoes-and-accessories" class="sub-category-links child-refinement" data-bhc="category2:womens-clothing-shoes-and-accessories" data-bhc-path="LeftHandBar|RefinementUI|categoryRefinement|category2:womens-clothing-shoes-and-accessories">
-																<a href="https://www.groupon.com/goods/womens-clothing-shoes-and-accessories">
-																	Women's Fashion
-																	<span class="deal-counts">(35328)</span>
-
-																</a>
-															</li>-->
+															
 														</ul>
 													</div>
 												</div>
@@ -1708,7 +565,7 @@
 															<span data-id="gg-clearance"><span class="refinement-name dynamic">
     <input type="radio" id="ref-ui-checkbox-gg-clearance" name="reset">
   <label class="name truncated" for="ref-ui-checkbox-gg-clearance">
-    <a href="https://www.groupon.com/goods?discount=gg-clearance" rel="nofollow">Clearance</a>
+    <a href="javascript:;" rel="nofollow">Clearance</a>
     
     
   </label>
@@ -1755,7 +612,7 @@
 												<h4>Customer Ratings</h4>
 												<div class="refinement-ratings">
 													<div data-bhc="rating:all" class="refinement-ratings-clear" data-bhc-path="LeftHandBar|RefinementUI|ratingRefinement|rating:all">
-														<div><input type="radio" checked="" id="ref-ui-radio-rating">
+														<div><input type="radio" checked="" id="ref-ui-radio-rating" name="customer">
 															<label for="ref-ui-radio-rating">
   <a class="c-txt-black ch-txt-ntc" href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1785,7 +642,7 @@
         														<span class="iconfont icon-star2"></span>
 														        <span class="iconfont icon-star2"></span>
 														        <span class="iconfont icon-star2"></span>
-														        <span class="iconfont icon-star-o"></span>
+														        <span class="iconfont icon-star"></span>
 									     							<span title="3 Star &amp; Up" class="refinement-rating-suffix">&amp; Up</span>
 									     						  <span class="refinement-rating-count">(31305)</span>
 									   						  </label>
@@ -1799,8 +656,8 @@
 																	<label for="ref-ui-radio-[2..5]">
 																		<span class="iconfont icon-star2"></span>
 														        <span class="iconfont icon-star2"></span>
-														        <span class="iconfont icon-star-o"></span>
-														        <span class="iconfont icon-star-o"></span>
+														        <span class="iconfont icon-star"></span>
+														        <span class="iconfont icon-star"></span>
       															<span title="2 Star &amp; Up" class="refinement-rating-suffix">&amp; Up</span>
       															<span class="refinement-rating-count">(33348)</span>
     															</label>
@@ -1813,9 +670,9 @@
 																	<input type="radio" id="ref-ui-radio-[1..5]" name="customer">
 																	<label for="ref-ui-radio-[1..5]">
         														<span class="iconfont icon-star2"></span>
-														        <span class="iconfont icon-star-o"></span>
-														        <span class="iconfont icon-star-o"></span>
-														        <span class="iconfont icon-star-o"></span>
+														        <span class="iconfont icon-star"></span>
+														        <span class="iconfont icon-star"></span>
+														        <span class="iconfont icon-star"></span>
       															<span title="1 Star &amp; Up" class="refinement-rating-suffix">&amp; Up</span>
       															<span class="refinement-rating-count">(35016)</span>
    																</label>
@@ -1830,7 +687,7 @@
 												<h4>Explore Deals</h4>
 												<div class="refinement-badges">
 													<div data-bhc="badge:all" class="refinement-badges-clear" data-bhc-path="LeftHandBar|RefinementUI|badgeRefinement|badge:all">
-														<div><input type="radio" checked="" id="ref-ui-radio-badge">
+														<div><input type="radio" checked="" id="ref-ui-radio-badge" name="deals">
 															<label for="ref-ui-radio-badge">
   <a class="c-txt-black ch-txt-ntc" href="https://www.groupon.com/goods">All</a>
 </label>
@@ -1966,7 +823,7 @@
 												<div id="browse-deals" data-bhw="BrowseDeals" class="block-grid cui-large-two-up cui-medium-two-up cui-two-up cui-480-one-up" data-bhw-path="BrowseDeals">
 													<figure class="card-ui cui-c-udc cui-c-udc-featured  has-additional-value-message " data-pingdom-info="purchasable-deal" data-bhc="deal:1bf1729a-9b03-11e6-b72d-002590604002" data-bhd="{&quot;cardUUID&quot;:&quot;1bf1729a-9b03-11e6-b72d-002590604002&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Sofa-Style Orthopedic Pet Bed Mattress&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:100000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;19,266&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$69.99 $14.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bhw="HeroDeal" data-bh-viewport="respect" data-bhc-path="BrowseDeals|HeroDeal|deal:1bf1729a-9b03-11e6-b72d-002590604002" data-bhw-path="BrowseDeals|HeroDeal">
 
-														<a href="https://www.groupon.com/deals/gg-sofa-styled-orthopedic-pet-bed-mattress">
+														<a href="javascript:;">
 															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
 
 																<div class="cui-udc-image-container">
@@ -2046,7 +903,7 @@
   
   " data-pingdom-info="purchasable-deal" data-bhc="deal:1bf1729a-9b03-11e6-b72d-002590604002" data-bhd="{&quot;cardUUID&quot;:&quot;1bf1729a-9b03-11e6-b72d-002590604002&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Sofa-Style Orthopedic Pet Bed Mattress&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:100000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;19,266&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$69.99 $14.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bhw="HeroDeal" data-bh-viewport="respect">
 
-														<a href="https://www.groupon.com/deals/gg-sofa-styled-orthopedic-pet-bed-mattress">
+														<a href="javascript:;">
 															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
 
 																<div class="cui-udc-image-container">
@@ -2123,211 +980,22 @@
 														</a>
 														</figure>
 														
-														
-													<!--<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  has-additional-value-message
-
-
-
-
-
-
-" data-pingdom-info="purchasable-deal" data-bhc="deal:9a748c28-e4d8-11e6-8830-002590604002" data-bhd="{&quot;cardUUID&quot;:&quot;9a748c28-e4d8-11e6-8830-002590604002&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Pro Spin Brush for Perfect Skin - Face and Body&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:25000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;2,410&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$100 $22.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:9a748c28-e4d8-11e6-8830-002590604002">
-
-														<a href="https://www.groupon.com/deals/gg-spin-for-perfect-skin-face-body-brush-3">
-															<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																<div class="cui-udc-image-container">
-																	<div class="cui-udc-image-overlay"></div>
-																	<div class="cui-image-lazy-container cui-image-hover-zoom">
-																		<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																		<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(5).jpg" data-original="//img.grouponcdn.com/deal/3PXbfu5uSuJR4v9N8Fa51m9JN5jo/3P-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/3PXbfu5uSuJR4v9N8Fa51m9JN5jo/3P-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/3PXbfu5uSuJR4v9N8Fa51m9JN5jo/3P-2048x1229/v1/c414x250q85.jpg" alt="image for Pro Spin Brush for Perfect Skin - Face and Body">
-																	</div>
-
-																</div>
-																<div class="cui-udc-details c-txt-gray-dk">
-																	<div class="cui-udc-title c-txt-black should-truncate is-truncated" style="word-wrap: break-word;">
-
-																		Pro Spin Brush for Perfect Skin - Face and Body
-																	</div>
-
-																	<div class="cui-udc-top-row">
-																		<div class="cui-udc-left-one">
-
-																			<div class="cui-quantity-bought c-txt-gray-dk">
-																				25,000+ bought
-																			</div>
-
-																		</div>
-																		<div class="cui-udc-right-one">
-
-																			<div class="cui-price" data-pingdom-id="deal-price">
-																				<s class="cui-price-original c-txt-gray-dk
- ">$100</s>
-																					<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$22.99</span>
-																			</div>
-
-																		</div>
-																	</div>
-																	<div class="cui-udc-bottom-row">
-																		<div class="cui-udc-left-two">
-
-																			<div class="cui-review-rating ">
-
-																				<ul class="rating" data-bhc="deal-review-rating:4.1" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:9a748c28-e4d8-11e6-8830-002590604002|deal-review-rating:4.1">
-																					<li><span class="full-star "></span></li>
-																					<li><span class="full-star "></span></li>
-																					<li><span class="full-star "></span></li>
-																					<li><span class="full-star "></span></li>
-																					<li><span class="empty-star c-txt-gray-clr"></span></li>
-																				</ul>
-
-																				<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:2410" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:9a748c28-e4d8-11e6-8830-002590604002|deal-rating-count:2410">
-																					(2,410)
-																				</div>
-
-																			</div>
-
-																		</div>
-																		<div class="cui-udc-right-two">
-
-																			<div class="cui-promotions">
-																				<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																			</div>
-
-																		</div>
-																	</div>
-
-																</div>
-
-															</div>
-														</a>
-														</figure>
-														<figure class="card-ui cui-c-udc c-bdr-gray-clr
-  has-additional-value-message
-
-
-
-
-
-
-" data-pingdom-info="purchasable-deal" data-bhc="deal:31b582b2-2c47-11e7-a1ca-002590604002" data-bhd="{&quot;cardUUID&quot;:&quot;31b582b2-2c47-11e7-a1ca-002590604002&quot;,&quot;cardSubtype&quot;:&quot;GOODS&quot;,&quot;title&quot;:{&quot;type&quot;:&quot;title&quot;,&quot;content&quot;:&quot;Emoji Collection Microfiber Sheet Set&quot;},&quot;slot_1&quot;:{&quot;type&quot;:&quot;number-bought&quot;,&quot;content&quot;:25000},&quot;slot_2&quot;:{&quot;type&quot;:&quot;rating&quot;,&quot;content&quot;:&quot;2,960&quot;},&quot;value&quot;:{&quot;type&quot;:&quot;price&quot;,&quot;content&quot;:&quot;$59.99 $12.99&quot;},&quot;additional_value&quot;:{&quot;type&quot;:&quot;urgency-pricing&quot;,&quot;content&quot;:&quot;Sale Ends 1/17&quot;}}" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:31b582b2-2c47-11e7-a1ca-002590604002">
-
-															<a href="https://www.groupon.com/deals/gg-emoji-collection-microfiber-sheet-set-2">
-																<div class="cui-content c-bdr-gray-clr ch-bdr-gray-md">
-
-																	<div class="cui-udc-image-container">
-																		<div class="cui-udc-image-overlay"></div>
-																		<div class="cui-image-lazy-container cui-image-hover-zoom">
-																			<img class="cui-svg-placeholder c-bg-gray-bg" type="image/svg+xml" height="250" width="414" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39; height=&#39;250&#39; width=&#39;414&#39;%2F%3E" alt="image placeholder">
-
-																			<img class="cui-image lazy-loaded" src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/c414x250q50(6).jpg" data-original="//img.grouponcdn.com/deal/tMo99zmjNjLvXkrS4W2ZmaDTRvG/tM-2048x1229/v1/c414x250q50.jpg" data-high-quality="//img.grouponcdn.com/deal/tMo99zmjNjLvXkrS4W2ZmaDTRvG/tM-2048x1229/v1/c414x250q85.jpg" data-high-quality-2x="//img.grouponcdn.com/deal/tMo99zmjNjLvXkrS4W2ZmaDTRvG/tM-2048x1229/v1/c414x250q85.jpg" alt="image for Emoji Collection Microfiber Sheet Set">
-																		</div>
-
-																	</div>
-																	<div class="cui-udc-details c-txt-gray-dk">
-																		<div class="cui-udc-title c-txt-black ">
-
-																			Emoji Collection Microfiber Sheet Set
-																		</div>
-
-																		<div class="cui-udc-top-row">
-																			<div class="cui-udc-left-one">
-
-																				<div class="cui-quantity-bought c-txt-gray-dk">
-																					25,000+ bought
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-one">
-
-																				<div class="cui-price" data-pingdom-id="deal-price">
-																					<s class="cui-price-original c-txt-gray-dk
- ">$59.99</s>
-																						<span class="cui-price-discount cui-urgent c-txt-err
-
-
-">$12.99</span>
-																				</div>
-
-																			</div>
-																		</div>
-																		<div class="cui-udc-bottom-row">
-																			<div class="cui-udc-left-two">
-
-																				<div class="cui-review-rating ">
-
-																					<ul class="rating" data-bhc="deal-review-rating:4.1" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:31b582b2-2c47-11e7-a1ca-002590604002|deal-review-rating:4.1">
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="full-star "></span></li>
-																						<li><span class="empty-star c-txt-gray-clr"></span></li>
-																					</ul>
-
-																					<div class="rating-count c-txt-gray-dk" data-bhc="deal-rating-count:2960" data-bh-viewport="respect" data-bhc-path="BrowseDeals|deal:31b582b2-2c47-11e7-a1ca-002590604002|deal-rating-count:2960">
-																						(2,960)
-																					</div>
-
-																				</div>
-
-																			</div>
-																			<div class="cui-udc-right-two">
-
-																				<div class="cui-promotions">
-																					<span class="cui-urgent cui-offer c-txt-err">Sale Ends 1/17</span>
-																				</div>
-
-																			</div>
-																		</div>
-
-																	</div>
-
-																</div>
-															</a>
-															</figure>-->
-																											
-																																			
+																									
 												</div>
 
 												<div class="pagination_footer">
 													<div class="pagination" data-bhw="BrowsePaginationLinks" data-bhw-path="BrowsePaginationLinks">
 														<ul class="pagination_links expanding-pagination">
 															<li class="c-txt-gray-md">
-																<span class="previous">Prev</span>
+																<a href="https://www.groupon.com/goods?page=2" class="next c-bg-prim c-txt-white iconfont icon-jiantou2">Prev</a>
 															</li>
 															<li class="box c-txt-prim c-bdr-prim c-bg-white">
-
 																1
 															</li>
-															<li>
-																<a href="https://www.groupon.com/goods?page=2" class="c-txt-gray-dk" data-bhc="page:2" data-bhc-path="BrowsePaginationLinks|page:2">2</a>
-
-															</li>
-															<li>
-																<a href="https://www.groupon.com/goods?page=3" class="c-txt-gray-dk" data-bhc="page:3" data-bhc-path="BrowsePaginationLinks|page:3">3</a>
-
-															</li>
-															<li>
-
-																...
-															</li>
-															<li>
-																<a href="https://www.groupon.com/goods?page=20" class="c-txt-gray-dk" data-bhc="page:20" data-bhc-path="BrowsePaginationLinks|page:20">20</a>
-
-															</li>
-
 															<li class="c-txt-gray-md">
-																<a href="https://www.groupon.com/goods?page=2" class="next c-bg-prim c-txt-white" data-bhc="page:next" data-bhc-path="BrowsePaginationLinks|page:next">Next</a>
+																<a href="https://www.groupon.com/goods?page=2" class="next c-bg-prim c-txt-white iconfont icon-arrow-right-copy-copy-copy">Next</a>
 															</li>
 														</ul>
-														<p class="results">
-															<span><strong>1 - 48</strong> of 598 results</span>
-														</p>
 													</div>
 												</div>
 											</div>
@@ -2346,55 +1014,16 @@
 								<div id="seo-reviews-container" data-bhw="GoodsSeoReviews" data-bhw-path="GoodsSeoReviews">
 									<div class="ugc-reviews">
 										<h2 class="ugc-reviews-title">Top Product Reviews</h2>
-										<div class="ugc-review-items">
-											<div class="ugc-review-item c-bdr-gray-clr" data-bhc="deal-review:932205f0-efdb-11e6-a136-00259069d7cc#ad287d3c-f7a3-11e7-804c-52543947f81f" data-bhc-path="GoodsSeoReviews|deal-review:932205f0-efdb-11e6-a136-00259069d7cc#ad287d3c-f7a3-11e7-804c-52543947f81f">
-												<div class="ugc-review-item-pic" data-bhw="DealImage" data-bhw-path="GoodsSeoReviews|deal-review:932205f0-efdb-11e6-a136-00259069d7cc#ad287d3c-f7a3-11e7-804c-52543947f81f|DealImage">
-													<a href="https://www.groupon.com/deals/gg-4-piece-luxury-home-bamboo-blend-sheet-set-in-dark-colors">
-														<img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/t300x182.jpg" alt="Luxury Home Bamboo-Blend Sheet Set">
-													</a>
-												</div>
-												<div class="ugc-review-item-contents">
-													<h4 class="ugc-review-item-deal" data-bhw="DealTitle" data-bhw-path="GoodsSeoReviews|deal-review:932205f0-efdb-11e6-a136-00259069d7cc#ad287d3c-f7a3-11e7-804c-52543947f81f|DealTitle">
-            <a class="c-txt-ntc" href="https://www.groupon.com/deals/gg-4-piece-luxury-home-bamboo-blend-sheet-set-in-dark-colors">
-              <span class="ugc-review-item-deal-name c-txt-black">
-                Luxury Home Bamboo-Blend Sheet Set
-              </span>
-            </a>
-          </h4>
-													<div class="ugc-review-item-review">
-														<div class="ugc-review-item-review-buyer-rating">
-															<div class="ugc-review-item-stars">
-																<span class="c-txt-alert icon-star-filled"></span>
-																<span class="c-txt-alert icon-star-filled"></span>
-																<span class="c-txt-alert icon-star-filled"></span>
-																<span class="c-txt-alert icon-star-filled"></span>
-																<span class="c-txt-alert icon-star-filled"></span>
-															</div>
-															<div class="ugc-review-item-buyer">
-																TRINA T.
-															</div>
-															<span class="c-txt-gray-md">
-                <span class="icon-check"></span> Verified Purchaser
-															</span>
-														</div>
-														<div class="ugc-review-time">
-															January 12, 2018
-														</div>
-													</div>
-													<div class="ugc-review-item-review-text">
-														The best night sleep. So amazingly comfortable. Just love the deep rich color. After 1st wash back on the bed and fit is perfect and hasn't lost softness or color. Just what everyone needs to put on their bed for a very peaceful night sleep!
-													</div>
-												</div>
-											</div>
+										<div class="ugc-review-items" style="display: flex;">
 											<div class="ugc-review-item c-bdr-gray-clr" data-bhc="deal-review:7d7e6a9e-09a4-11e7-8dc6-002590604002#5dd933ae-f9a4-11e7-8b61-52546bdb6266" data-bhc-path="GoodsSeoReviews|deal-review:7d7e6a9e-09a4-11e7-8dc6-002590604002#5dd933ae-f9a4-11e7-8b61-52546bdb6266">
 												<div class="ugc-review-item-pic" data-bhw="DealImage" data-bhw-path="GoodsSeoReviews|deal-review:7d7e6a9e-09a4-11e7-8dc6-002590604002#5dd933ae-f9a4-11e7-8b61-52546bdb6266|DealImage">
-													<a href="https://www.groupon.com/deals/gg-alberto-cardinali-mens-dress-socks-24pk">
+													<a href="javascript:;">
 														<img src="./Groupon Goods - Toys, Electronics, Clothing &amp; More! Save on All You Need with Groupon_files/t300x182(1).jpg" alt="Alberto Cardinali Men&#39;s Patterned Dress Socks (24-Pack)">
 													</a>
 												</div>
 												<div class="ugc-review-item-contents">
 													<h4 class="ugc-review-item-deal" data-bhw="DealTitle" data-bhw-path="GoodsSeoReviews|deal-review:7d7e6a9e-09a4-11e7-8dc6-002590604002#5dd933ae-f9a4-11e7-8b61-52546bdb6266|DealTitle">
-            <a class="c-txt-ntc" href="https://www.groupon.com/deals/gg-alberto-cardinali-mens-dress-socks-24pk">
+            <a class="c-txt-ntc" href="javascript:;">
               <span class="ugc-review-item-deal-name c-txt-black">
                 Alberto Cardinali Men's Patterned Dress Socks (24-Pack)
               </span>
@@ -2420,9 +1049,6 @@
 															January 15, 2018
 														</div>
 													</div>
-													<div class="ugc-review-item-review-text">
-														High quality socks and so many great patterns to choose from. The hardest part is choosing which pair to wear each day.
-													</div>
 												</div>
 											</div>
 											<div class="ugc-review-item c-bdr-gray-clr" data-bhc="deal-review:ea32937a-7881-4098-8bc4-17bccead48fe#a4bb0c1c-f8c7-11e7-a9e1-5254f06fd6d8" data-bhc-path="GoodsSeoReviews|deal-review:ea32937a-7881-4098-8bc4-17bccead48fe#a4bb0c1c-f8c7-11e7-a9e1-5254f06fd6d8">
@@ -2433,7 +1059,7 @@
 												</div>
 												<div class="ugc-review-item-contents">
 													<h4 class="ugc-review-item-deal" data-bhw="DealTitle" data-bhw-path="GoodsSeoReviews|deal-review:ea32937a-7881-4098-8bc4-17bccead48fe#a4bb0c1c-f8c7-11e7-a9e1-5254f06fd6d8|DealTitle">
-            <a class="c-txt-ntc" href="https://www.groupon.com/deals/gg-cm-heavy-duty-snow-and-ice-deflector-car-windshield-cover">
+            <a class="c-txt-ntc" href="javascript:;">
               <span class="ugc-review-item-deal-name c-txt-black">
                 Heavy-Duty Snow and Ice Deflector Car Windshield Cover
               </span>
@@ -2458,9 +1084,6 @@
 														<div class="ugc-review-time">
 															January 14, 2018
 														</div>
-													</div>
-													<div class="ugc-review-item-review-text">
-														Arrive just in time. Snow is here. Would like the other one to arrive soon, getting pummeled on other vehicle without.
 													</div>
 												</div>
 											</div>
@@ -2498,9 +1121,6 @@
 															January 14, 2018
 														</div>
 													</div>
-													<div class="ugc-review-item-review-text">
-														I haven’t had mine long but installation was easy however there was one spot that I had difficulty getting to seal but other than that great product!
-													</div>
 												</div>
 											</div>
 											<div class="ugc-review-item c-bdr-gray-clr" data-bhc="deal-review:ce8176b6-5085-11e7-92b6-002590604002#1794eade-f96b-11e7-86b8-5254e6da2953" data-bhc-path="GoodsSeoReviews|deal-review:ce8176b6-5085-11e7-92b6-002590604002#1794eade-f96b-11e7-86b8-5254e6da2953">
@@ -2537,15 +1157,12 @@
 															January 14, 2018
 														</div>
 													</div>
-													<div class="ugc-review-item-review-text">
-														Bought this for my 11 year old son. It is a bit too big for him but he should be able to wear it for a couple more years &amp; grow into it. He spent an afternoon out in the snow with it on &amp; seemed to be pretty happy with it.
-													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-								<div id="seo-texts-container" data-bhw="GoodsSeoTexts" data-bhw-path="GoodsSeoTexts">
+								<!--<div id="seo-texts-container" data-bhw="GoodsSeoTexts" data-bhw-path="GoodsSeoTexts">
 									<div id="seo-text-0">
 										<h2 class="row seo-title">Groupon Goods for All Your Online Shopping</h2>
 										<div class="row seo-text-body">Groupon is all about helping you find new experiences, and that extends to online shopping. Our collection of consumer goods is always expanding with new items to enrich your ever-changing life, whether it’s athletic apparel to wear on that upcoming 5K or cell phone accessories to outfit your newest gadget. Welcome to Groupon Goods, your source for deals on everything from cookware to pet sweaters.
@@ -2565,7 +1182,7 @@
 											<a href="https://www.groupon.com/goods/sports-and-outdoors">Sporting goods</a> keep you active in the Great Outdoors, outfitting you with new clubs for the golf course or plenty of provisions for a camping trip in the woods. And if it’s raining out, spend a couple happy hours adding to your collection of sports cards, commemorative coins, or other
 											<a href="https://www.groupon.com/goods/collectibles">collectibles</a>.</div>
 									</div>
-								</div>
+								</div>-->
 								<div id="seo-crosslinks-container" data-bhw="GoodsSeoCrosslinks" data-bhw-path="GoodsSeoCrosslinks"></div>
 							</div>
 					</div>
@@ -2582,102 +1199,6 @@
 		<a id="ls-back-to-top" data-bhw="BackToTop" title="Back to top" class="ls-back-to-top icon-arrow-up-large ls-back-to-top-visible" role="button" aria-hidden="false" data-bhw-path="BackToTop" style="z-index: 200;">
 			<span class="accessibility-hidden">Back to top</span>
 		</a>
-
-		<footer class="ls-footer" id="ls-footer">
-			<div class="row res-fo-wrapper">
-				<div class="ls-col footer-payload">
-					<div id="ls-footer-sitemap" class="footer-sitemap" data-bhw="FooterSitemap" data-bhw-path="FooterSitemap">
-						<div class="ls-footer-sitemap-col footer-links">
-							<h6 class="footer-link-headline">Company</h6>
-							<a id="ls-footer-about" href="https://www.groupon.com/press/about-groupon" data-bhw="FooterLinkAbout" data-bhw-path="FooterSitemap|FooterLinkAbout">About Groupon</a>
-							<a id="ls-footer-jobs" href="https://jobs.groupon.com/" data-bhw="FooterLinkJobs" data-bhw-path="FooterSitemap|FooterLinkJobs">Jobs</a>
-							<a id="ls-footer-blog" href="https://www.groupon.com/blog" data-bhw="FooterLinkBlog" data-bhw-path="FooterSitemap|FooterLinkBlog">Blog</a>
-							<a id="ls-footer-press" href="https://www.groupon.com/press" data-bhw="FooterLinkPress" data-bhw-path="FooterSitemap|FooterLinkPress">Press</a>
-							<a id="ls-footer-investor_relations" href="http://investor.groupon.com/" data-bhw="FooterLinkInvestorRelations" data-bhw-path="FooterSitemap|FooterLinkInvestorRelations">Investor Relations</a>
-							<a id="ls-footer-management_team" href="https://www.groupon.com/press/our-leaders" data-bhw="FooterLinkManagementTeam" data-bhw-path="FooterSitemap|FooterLinkManagementTeam">Management Team</a>
-							<a id="ls-footer-social_innovation" href="https://grassroots.groupon.com/" data-bhw="FooterLinkSocialInnovation" data-bhw-path="FooterSitemap|FooterLinkSocialInnovation">In Your Community</a>
-						</div>
-						<div class="ls-footer-sitemap-col footer-links">
-							<h6 class="footer-link-headline">Work with Groupon</h6>
-							<a id="ls-footer-join" href="https://www.groupon.com/merchant/get-started?utm_medium=referral&amp;utm_campaign=groupon-footer&amp;utm_source=groupon" data-bhw="FooterLinkJoin" data-bhw-path="FooterSitemap|FooterLinkJoin">Join the Groupon Marketplace</a>
-							<a id="ls-footer-deal" href="https://www.groupon.com/merchant/get-started?utm_medium=referral&amp;utm_campaign=groupon-footer&amp;utm_source=groupon" data-bhw="FooterLinkDeal" data-bhw-path="FooterSitemap|FooterLinkDeal">Run a Groupon Deal</a>
-							<a id="ls-footer-merchants" href="https://www.groupon.com/merchant?utm_medium=referral&amp;utm_campaign=groupon-footer&amp;utm_source=groupon" data-bhw="FooterLinkMerchants" data-bhw-path="FooterSitemap|FooterLinkMerchants">Learn About Groupon Merchant</a>
-							<a id="ls-footer-affiliates" href="http://www.grouponaffiliate.com/" data-bhw="FooterLinkAffiliates" data-bhw-path="FooterSitemap|FooterLinkAffiliates">Affiliate Program</a>
-							<a id="ls-footer-vendor_code_of_conduct" href="https://www.groupon.com/pages/vendor-code-of-conduct" data-bhw="FooterLinkVendorCodeOfConduct" data-bhw-path="FooterSitemap|FooterLinkVendorCodeOfConduct">Vendor Code of Conduct</a>
-						</div>
-						<div class="ls-footer-sitemap-col footer-links">
-							<h6 class="footer-link-headline">More</h6>
-							<a id="ls-footer-customer_support" href="https://www.groupon.com/customer_support" data-bhw="FooterLinkCustomerSupport" data-bhw-path="FooterSitemap|FooterLinkCustomerSupport">Customer Support</a>
-							<a id="ls-footer-promise" href="https://www.groupon.com/groupon-promise" data-bhw="FooterLinkPromise" data-bhw-path="FooterSitemap|FooterLinkPromise">Refund Policies</a>
-							<a id="ls-footer-faq" href="https://www.groupon.com/faq" data-bhw="FooterLinkFaq" data-bhw-path="FooterSitemap|FooterLinkFaq">FAQ</a>
-							<a id="ls-footer-coupons" href="https://www.groupon.com/coupons" data-bhw="FooterLinkCoupons" data-bhw-path="FooterSitemap|FooterLinkCoupons">Coupons</a>
-							<a id="ls-footer-giftcards" href="https://www.groupon.com/giftcards" data-bhw="FooterLinkGiftcards" data-bhw-path="FooterSitemap|FooterLinkGiftcards">Gift Cards</a>
-							<a id="ls-footer-giftshop" href="https://www.groupon.com/occasion/gift-shop" data-bhw="FooterLinkGiftshop" data-bhw-path="FooterSitemap|FooterLinkGiftshop">Gift Shop</a>
-							<a id="ls-footer-students" href="https://www.groupon.com/programs/student" data-bhw="FooterLinkStudents" data-bhw-path="FooterSitemap|FooterLinkStudents">Students</a>
-							<a id="ls-footer-loyalty" href="https://www.groupon.com/programs/loyalty" data-bhw="FooterLinkLoyalty" data-bhw-path="FooterSitemap|FooterLinkLoyalty">Miles &amp; Points</a>
-						</div>
-						<div class="ls-footer-sitemap-col footer-links">
-							<h6 class="footer-link-headline">Follow Us</h6>
-							<a id="ls-footer-twitter" target="_blank" rel="noopener" aria-label="Twitter" class="follow-us-link iconfont icon-twitter" href="https://twitter.com/groupon" data-bhw="FooterSocialTwitter" data-bhw-path="FooterSitemap|FooterSocialTwitter"></a>
-							<a id="ls-footer-facebook" target="_blank" rel="noopener" aria-label="Facebook" class="follow-us-link iconfont icon-facebookf" href="https://www.facebook.com/Groupon.US" data-bhw="FooterSocialFacebook" data-bhw-path="FooterSitemap|FooterSocialFacebook"></a>
-						</div>
-					</div>
-
-					<div id="ls-footer-gsm" class="footer-gsm" data-bhw="FooterGSM" data-bhw-path="FooterGSM">
-						<h6>Incredible Deals on Local Experiences</h6>
-						<p>Discover fun activities and huge discounts in your
-							<a id="ls-footer-city-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkCity" href="https://www.groupon.com/local" data-bhw-path="FooterGSM|FooterGSMUSLinkCity">city</a> with Groupon. Check out great deals on
-							<a id="ls-footer-activities-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkActivities" href="https://www.groupon.com/local/things-to-do" data-bhw-path="FooterGSM|FooterGSMUSLinkActivities">things to do</a> from
-							<a id="ls-footer-kids-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkKids" href="https://www.groupon.com/local/kids-activities" data-bhw-path="FooterGSM|FooterGSMUSLinkKids">kids activities</a> to
-							<a id="ls-footer-nightlife-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkNightlife" href="https://www.groupon.com/local/nightlife" data-bhw-path="FooterGSM|FooterGSMUSLinkNightlife">nightlife</a>; try out new
-							<a id="ls-footer-restaurants-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkRestaurants" href="https://www.groupon.com/local/restaurants" data-bhw-path="FooterGSM|FooterGSMUSLinkRestaurants">restaurants</a>,
-							<a id="ls-footer-spas-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkSpas" href="https://www.groupon.com/local/spa" data-bhw-path="FooterGSM|FooterGSMUSLinkSpas">spas</a>,
-							<a id="ls-footer-massages-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkMassages" href="https://www.groupon.com/local/massage" data-bhw-path="FooterGSM|FooterGSMUSLinkMassages">massages</a> and
-							<a id="ls-footer-hair-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkHair" href="https://www.groupon.com/local/hair-salons" data-bhw-path="FooterGSM|FooterGSMUSLinkHair">hair salons</a> near you, or plan a
-							<a id="ls-footer-trip-link" class="ch-txt-ntc" data-bhw="FooterGSMUSLinkTrip" href="https://www.groupon.com/getaways" data-bhw-path="FooterGSM|FooterGSMUSLinkTrip">trip away from home</a>.</p>
-					</div>
-
-					<div id="ls-groupon-guide">
-						<a id="ls-groupon-guide-logo" href="https://www.groupon.com/local/city-guide/food-and-drink">
-							<svg xmlns="http://www.w3.org/2000/svg" width="125" height="20" viewBox="0 0 125 20.3" enable-background="new 0 0 125 20.3" xml:space="preserve" aria-labelledby="guide-title">
-								<title id="guide-title">Groupon</title>
-								<path d="M20 10.2c0 2.2-0.5 4.1-1.7 5.7c-1.9 2.7-5 4.4-8.3 4.4c-2.9 0-5.3-1.1-7.2-3.1C0.9 15.2 0 12.8 0 9.9 c0-2.7 1-5.1 3-7C4.9 1 7.3 0 10.1 0c4.2 0 7.8 2.6 9.4 6.7h-5.4c-1.2-1.3-2.5-1.9-4-1.9C7.2 4.8 5 7.1 5 9.9c0 3.1 2.4 5.5 5.1 5.5 c1.8 0 3.4-0.9 4.4-2.6H8.9V8.9H20C19.9 9.3 20 9.8 20 10.2L20 10.2L20 10.2z M21.2 19.9V0.3h6.5c2 0 3.7 0.1 4.9 1.1 c1.8 1.2 2.6 3 2.6 5.5c0 3.2-1.6 5.5-4.4 6.3l4.8 6.7h-5.9L26 13.6v6.3H21.2z M26.9 9.4c2.4 0 3.5-0.6 3.5-2.4c0-1.6-1-2.3-3.1-2.3 H26v4.7H26.9L26.9 9.4z M38.9 2.9C40.8 1 43.3 0.1 46 0.1c2.6 0 5.1 1 7 2.9c2 1.9 3 4.4 3 7c0 2.8-1 5.3-2.8 7.2 c-1.9 2-4.5 3-7.2 3c-2.9 0-5.3-1-7.3-3c-1.8-2-2.8-4.4-2.8-7.2C36 7.2 37 4.8 38.9 2.9L38.9 2.9L38.9 2.9z M46 15.4 c2.8 0 5.1-2.2 5.1-5.4c0-2.8-2.3-5.1-5-5.1c-2.9 0-5.2 2.3-5.2 5.1C40.9 13 43.3 15.4 46 15.4L46 15.4z M62.1 0.4v12 c0 2.2 0.7 3.3 2.3 3.3c1.7 0 2.5-1.1 2.5-3.3v-12h4.8v12.2c0 4.8-2.9 7.6-7.3 7.6c-4.4 0-7.1-2.7-7.1-7.6V0.3L62.1 0.4L62.1 0.4z M73 19.9V0.3h6.5c2 0 3.7 0.1 4.9 1.1c1.8 1.2 2.6 3 2.6 5.5c0 2.5-1.1 4.6-3.1 5.8c-1.2 0.7-2.8 0.9-4.8 0.9h-1.4v6.3H73L73 19.9z M78.8 9.4c2.4 0 3.5-0.6 3.5-2.4c0-1.6-1-2.3-3.2-2.3h-1.3v4.7H78.8L78.8 9.4z M90.7 2.9C92.5 1 95 0.1 97.8 0.1c2.6 0 5.1 1 7 2.9 c2 1.9 3 4.4 3 7c0 2.8-1 5.3-2.8 7.2c-1.9 2-4.5 3.1-7.2 3.1c-2.9 0-5.3-1-7.3-3c-1.8-2-2.8-4.4-2.8-7.3 C87.7 7.2 88.8 4.8 90.7 2.9L90.7 2.9L90.7 2.9z M97.8 15.4c2.8 0 5.1-2.2 5.1-5.4c0-2.8-2.3-5.1-5-5.1c-2.9 0-5.2 2.3-5.2 5.1 C92.6 13 95.1 15.4 97.8 15.4L97.8 15.4z M108.7 19.9V0.3h4.3l7.2 10.8V0.3h4.8v19.5h-4.2l-7.3-10.8v10.9L108.7 19.9L108.7 19.9z"></path>
-							</svg>
-							Guide
-						</a>
-						<span id="ls-groupon-guide-text">for <a id="ls-footer-food-link" class="ch-txt-ntc" data-bhw="FooterGrouponGuideLinkFood" href="https://www.groupon.com/local/city-guide/food-and-drink" data-bhw-path="FooterGrouponGuideLinkFood">Food &amp; Drink</a>, <a id="ls-footer-arts-link" class="ch-txt-ntc" data-bhw="FooterGrouponGuideLinkArts" href="https://www.groupon.com/local/city-guide/arts-and-leisure" data-bhw-path="FooterGrouponGuideLinkArts">Arts &amp; Leisure</a>, and <a id="ls-footer-style-link" class="ch-txt-ntc" data-bhw="FooterGrouponGuideLinkStyle" href="https://www.groupon.com/local/city-guide/style-and-beauty" data-bhw-path="FooterGrouponGuideLinkStyle">Style &amp; Beauty</a></span>
-					</div>
-
-					<div id="ls-footer-copyright" class="footer-copyright" data-bhw="FooterLegalDocs" data-bhw-path="FooterLegalDocs">
-						© 2018 Groupon, Inc. All Rights Reserved.
-						<span class="footer-copyright-links">
-            <a id="ls-footer-terms_of_use" href="https://www.groupon.com/terms" data-bhw="TermsOfUse" data-bhw-path="FooterLegalDocs|TermsOfUse">Terms of Use</a>
-            <a id="ls-footer-privacy_policy" href="https://www.groupon.com/privacy" data-bhw="PrivacyPolicy" data-bhw-path="FooterLegalDocs|PrivacyPolicy">Privacy Statement</a>
-            <a id="ls-footer-licenses" href="https://www.groupon.com/licenses" data-bhw="Licenses" data-bhw-path="FooterLegalDocs|Licenses">Licenses</a>
-            <a id="ls-footer-responsible_disclosure" href="https://www.groupon.com/pages/responsible-disclosure" data-bhw="ResponsibleDisclosure" data-bhw-path="FooterLegalDocs|ResponsibleDisclosure">Responsible Disclosure</a>
-        </span>
-					</div>
-
-				</div>
-
-				<div class="ls-col footer-widgets" data-bhw="FooterWidgets" data-bhw-path="FooterWidgets">
-					<a href="https://www.groupon.com/mobile?utm_source=gp&amp;utm_medium=footer&amp;utm_campaign=mlusers" id="ls-footer-mobile_ad" class="footer-widget footer-widget-mobile" title="Groupon for mobile devices" data-bhw="FooterWidgetMobileAd" data-bhw-path="FooterWidgets|FooterWidgetMobileAd">
-						<span class="footer-widget-image">
-                  <img class="svg-groupon-mobile lazy-wl" data-original="//www2.grouponcdn.com/layout/assets/footer-i18n-mobile-app-9c41421141.svg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="> 
-                </span>
-						<span class="footer-widget-headline">Get the Groupon Mobile App <span class="icon-arrow-right-large"></span></span>
-					</a>
-
-					<a href="https://www.groupon.com/merchant/get-started?utm_medium=referral&amp;utm_campaign=groupon-footer&amp;utm_source=groupon" id="ls-footer-groupon_works" class="footer-widget footer-widget-works" title="Groupon Merchant" data-bhw="FooterWidgetGrouponWorks" data-bhw-path="FooterWidgets|FooterWidgetGrouponWorks">
-						<span class="footer-widget-image">
-                  <img class="svg-groupon-merchant lazy-wl" data-original="//www2.grouponcdn.com/layout/assets/footer-widget-merchant-works-white-73af6d249a.svg" alt="Groupon" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="> 
-                </span>
-						<span class="footer-widget-headline">Grow Your Business by Working with Groupon <span class="icon-arrow-right-large"></span></span>
-					</a>
-
-				</div>
-			</div>
-		</footer>
 		<div class="touch-footer hide">
 			<a class="row" href="https://www.groupon.com/goods">
 				Go to mobile site

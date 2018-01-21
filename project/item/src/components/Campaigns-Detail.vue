@@ -35,26 +35,27 @@
 		</div>
 		<div class="campaigns-detail-content">
 			<div>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
+				<span class="iconfont icon-shanchuanniucopy"></span>
 				<p>EPC</p>
 				<p>EPC</p>
 			</div>
 			<div>
+				<span class="iconfont icon-shanchuanniucopy"></span>
 				<p>EPC</p>
 				<p>EPC</p>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy"></span>
 				<p>EPC</p>
 				<p>EPC</p>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy"></span>
 				<p>EPC</p>
 				<p>EPC</p>
-				<p>EPC</p>
-				<p>EPC</p>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy"></span>
 				<p>EPC</p>
 				<p>EPC</p>
 			</div>
@@ -108,20 +109,23 @@
 		font-weight: 600;
 	}
 	.campaigns-detail-content{
-		display: flex;
 		padding-left: 1.6rem;
 		padding-right: .6rem;
 	}
 	.campaigns-detail-content div{
-		width: 50%;
+		display: flex;
+		color: #CCCCCC;
+	}
+	.campaigns-detail-content div .iconfont{
+		width: 16%;
+		margin: .2rem 0;
+		color: red;
 	}
 	.campaigns-detail-content div p{
+		width: 42%;
 		margin: .2rem 0;
 		font-size: .3rem;
 		text-align: left;
-	}
-	.campaigns-detail-content div:nth-child(1){
-		color: #CCCCCC;
 	}
 	.campaigns-detail-report {
 		display: block;
@@ -225,13 +229,13 @@
 		font-weight: 600;
 	}
 	.cs-campaigns-detail .campaigns-info div:nth-child(1){
-		width: 70%;
+		width: 60%;
 		text-align: left;
 	}
 	.cs-campaigns-detail .campaigns-info div:nth-child(2){
 		display: flex;
 		justify-content: space-around;
-		width: 30%;
+		width: 40%;
 		margin-right: 0;
 		-moz-border-radius: .1rem;
 	  -webkit-border-radius: .1rem;
@@ -241,8 +245,8 @@
 	.cs-campaigns-detail .campaigns-info div:nth-child(2) em{
 		height: .3rem;
 		width: .3rem;
-		line-height: .35rem;
-		margin-top: 6%;
+		line-height: .3rem;
+		margin-top: 4%;
 		font-size: .24rem;
 		color: #e4ebf3;
 		background: #bfcbd9;

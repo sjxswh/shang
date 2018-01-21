@@ -51,31 +51,36 @@
 		     id:"container",
 		     option:option,
 		     date:"",
-		     
+		     timezone:"",
+		     Years:"",
+		     Month:"",
+		     Date:""
 		    }
 		},
 		mounted(){
 			let token=document.cookie.split("=")[1];
+			let that = this
 			console.log(token)
 			this.date = new Date() 
 			
 		  this.$ajax({
 			  method: "get",
 			  url:"http://beta.newbidder.com/api/profile?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU",
-			}).then(function (data) {
+			}).then((data) => {
 			   console.log(data)
+			   that.timezone = data.data.data.timezone
+			   that.$ajax({
+				  method: "get",
+				  url:"http://beta.newbidder.com/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU&from=2018-01-15T00:00&groupBy=campaign&limit=500&order=-visits&page=1&status=1&to=2018-01-16T00:00&tz="+that.timezone,
+				  
+				}).then(function (data) {
+				    console.log(data)
+				});
 			});	
-			
-		   	/*this.$ajax({
+		
+		   /*	this.$ajax({
 			  method: "get",
-			  changeOrigin:true,
-			  url:"http://localhost:5000/api/profile"
-			}).then(function (data) {
-			   console.log(data)
-			});	*/
-		   	/*this.$ajax({
-			  method: "get",
-			  url:"http://localhost:5000/api/report",
+			  url:"http://localhost:5000/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU",
 			  data:{
 			  	from:new Date(),
 				groupBy:"hour",

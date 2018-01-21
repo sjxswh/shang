@@ -63,23 +63,29 @@
 				Months:"",
 				Datess:"",
 				timezones:"",
-				timeS:""
+				timeS:"",
+				vModal:""
 			}
 		},
 		methods: {
 	      openPicker() {
 	        this.$refs.picker.open();
 	      },
-	       openPickers() {
+	      openPickers() {
 	        this.$refs.pickers.open();
 	      },
 	      clickDate(){
 		   		this.Year = this.pickerVisible.getFullYear()
 		   		this.Month = this.pickerVisible.getMonth()+1
+		   		this.Month = this.Month<10?"0"+this.Month:this.Month
 		   		this.Dates = this.pickerVisible.getDate()
+		   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 		   		this.Years = this.pickerVisibles.getFullYear()
 		   		this.Months = this.pickerVisibles.getMonth()+1
+		   		this.Months = this.Months<10?"0"+this.Months:this.Months
 		   		this.Datess = this.pickerVisibles.getDate()
+		   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+		   		console.log(1)
 		   	}
 	    },
 	   mounted () {
@@ -96,48 +102,16 @@
    		this.Months = this.Months<10?"0"+this.Months:this.Months
    		this.Datess = this.pickerVisibles.getDate()+1
    		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-   			console.log(this.pickerVisibles)
-		   	this.$ajax({
+   	  this.vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
+	   	this.vModal.addEventListener("click",this.clickDate)
+		  this.$ajax({
 			  method: "get",
 			  url:"http://beta.newbidder.com/timezones",
-			}).then(function (data) {
+			}).then((data) => {
 			    that.timezones = data.data.data.timezones
 			});
+			console.log(this.timezones)
 	   },
-	   watch:{
-	   	
-	   },
-	   updated () {
-	   
-	   		this.Year = this.pickerVisible.getFullYear()
-	   		this.Month = this.pickerVisible.getMonth()+1
-	   		/*if(this.Month<10){
-	   			console.log()
-	   			this.Month = "0"+this.Month
-	   		}
-	   		else{
-	   			this.Month = this.Month
-	   		}*/
-	   		this.Dates = this.pickerVisible.getDate()
-	   		this.Years = this.pickerVisibles.getFullYear()
-	   		this.Months = this.pickerVisibles.getMonth()+1
-	   		this.Datess = this.pickerVisibles.getDate()+1
-   		this.Dates = this.pickerVisible.getDate()
-   		this.Years = this.pickerVisibles.getFullYear()
-   		this.Months = this.pickerVisibles.getMonth()+1
-   		this.Datess = this.pickerVisibles.getDate()+1
-	   	var vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
-	   	window.addEventListener("click",this.clickDate)
-	   	this.$ajax({
-		  method: "get",
-			  url:"https://panel.newbidder.com/timezones",
-			}).then(function (data) {
-			    that.timezones = data.data.data.timezones
-			});
-	   },
-	   updated () {
-	   	
-	   }
 	}
 </script>
 

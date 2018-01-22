@@ -4354,7 +4354,9 @@ dl.accordion dd p {
 .ch-txt-prim:hover {
 	color: #53a318!important
 }
-
+.c-bdr-prim a{
+	color: #53a318
+}
 .c-bg-prim,
 .ca-bg-prim:active,
 .cf-bg-prim:focus,
@@ -4368,7 +4370,6 @@ dl.accordion dd p {
 .ch-bdr-prim:hover {
 	border-color: #53a318!important
 }
-
 .c-txt-prim-lt,
 .ca-txt-prim-lt:active,
 .cf-txt-prim-lt:focus,

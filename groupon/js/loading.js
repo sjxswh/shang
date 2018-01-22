@@ -5,11 +5,11 @@ var handleFlag1 = false;//开关
 	var handle_width = "";//设置绿bar宽度
 	var handle_left = "";//设置绿bar的left值
 	var minMoney = 0;//最小val
-	var maxMoney = 10000;//最大val
+	var maxMoney = 100;//最大val
 	var changeLeftBar = '';//input控制左右控件的left值
 	var disx = Number($(".row").css("marginLeft").split("p")[0]);
 //$(".ui-slider-handle").eq(0)..position().left
-
+	console.log(maxMoney)
 //
 	$(".ui-slider-handle").eq(0).mousedown( function(e) {
 		var e = e || event;
@@ -31,7 +31,7 @@ var handleFlag1 = false;//开关
 				handle_width = `${handleW-( $(".ui-slider-handle").eq(0).position().left )-( handleW - $(".ui-slider-handle").eq(1).position().left )}px`;
 				$(".ui-slider-range").css( {"left":handle_left,"width":handle_width} );
 				/*同步input最小值*/
-				minMoney = parseInt( ($(".ui-slider-handle").eq(0).position().left/handleW )*10000 )
+				minMoney = parseInt( ($(".ui-slider-handle").eq(0).position().left/handleW )*maxMoney )
 				$(".refinement-range-minInput>input").val( minMoney )
 			}
 		})
@@ -65,7 +65,7 @@ var handleFlag1 = false;//开关
 				}
 				handle_width=`${$(".ui-slider-handle").eq(1).position().left-$(".ui-slider-handle").eq(0).position().left}px`;
 				$(".ui-slider-range").css("width",handle_width);
-				maxMoney=parseInt(($(".ui-slider-handle").eq(1).position().left/handleW)*10000)
+				maxMoney=parseInt(($(".ui-slider-handle").eq(1).position().left/handleW)*maxMoney)
 				$(".refinement-range-maxInput>input").val(maxMoney);
 			}
 		})
@@ -82,7 +82,7 @@ var handleFlag1 = false;//开关
 		//console.log(this.value <= maxMoney && this.value >= 0 )
 		if( this.value <= maxMoney && this.value >= 0 ){
 			this.style.border="1px solid #d8d8d8";//初始化样式
-			changeLeftBar = `${ this.value / 10000 * handleW }px` ;
+			changeLeftBar = `${ this.value / maxMoney * handleW }px` ;
 			$(".ui-slider-handle").eq(0).css("left",changeLeftBar);//改变左边控制柄的left
 			/*同步绿色bar*/
 			var handleLeft=$(".ui-slider-handle").eq(0).position().left;
@@ -98,9 +98,9 @@ var handleFlag1 = false;//开关
 	/*右侧input*/
 	$(".refinement-range-maxInput>input").blur(function(){
 		//console.log(this.value,minMoney)
-		if( this.value >= minMoney&& this.value<=10000){
+		if( this.value >= minMoney&& this.value<=maxMoney){
 			this.style.border="1px solid #d8d8d8";//初始化样式
-			changeLeftBar=`${this.value/10000*handleW}px`;
+			changeLeftBar=`${this.value/maxMoney*handleW}px`;
 			$(".ui-slider-handle").eq(1).css("left",changeLeftBar);//改变右边控制柄的left
 			/*同步绿色bar*/
 			var handleLeft=$(".ui-slider-handle").eq(1).position().left;

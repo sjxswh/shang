@@ -21,8 +21,8 @@
 			<option>This Month</option>
 		</select>
 		<div class="time-range-select">
-			<span @click="openPicker">{{Year}}/{{Month}}/{{Dates}}</span>
-			<span @click="openPickers">{{Years}}/{{Months}}/{{Datess}}</span>
+			<span @click="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>
+			<span @click="openPickers();clickDate()">{{Years}}/{{Months}}/{{Datess}}</span>
 		</div>
 		   <mt-datetime-picker
 		   	  ref="picker"
@@ -75,6 +75,7 @@
 	        this.$refs.pickers.open();
 	      },
 	      clickDate(){
+	      	this.vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
 		   		this.Year = this.pickerVisible.getFullYear()
 		   		this.Month = this.pickerVisible.getMonth()+1
 		   		this.Month = this.Month<10?"0"+this.Month:this.Month
@@ -103,6 +104,7 @@
    		this.Datess = this.pickerVisibles.getDate()+1
    		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
    	  this.vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
+   	  console.log(this.vModal)
 	   	this.vModal.addEventListener("click",this.clickDate)
 		  this.$ajax({
 			  method: "get",
@@ -110,7 +112,7 @@
 			}).then((data) => {
 			    that.timezones = data.data.data.timezones
 			});
-			console.log(this.timezones)
+			
 	   },
 	}
 </script>

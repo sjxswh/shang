@@ -8,12 +8,12 @@ $(function(){
 						for(var i in data.categories_dict){
 							++index
 							var ss = `<li>
-											<a class="flyMenulink" href="goods.html?goodname=&categoryid=${ data.categories_dict[i][1] }&type=1" data-bhc="flyout-label:auto-and-home-improvement" tabindex="-1" role="menuitem">
+											<a class="flyMenulink" href="goods.html?goodname=&categoryid=${ data.categories_dict[i][1] }&type=1&pindex=1&minprice=0&maxprice=0" data-bhc="flyout-label:auto-and-home-improvement" tabindex="-1" role="menuitem">
 												<n>${ i }</n>
 												<c>${ data.categories_dict[i][0] }</c>
 											</a>
 											<div data-bhc="flyout-content:auto-and-home-improvement" class="flyContent">
-												<h4><a href="https://www.groupon.com/goods/auto-and-home-improvement" tabindex="-1" role="menuitem">Shop All ${ i }</a></h4>
+												<h4><a href="javascript:;" tabindex="-1" role="menuitem">Shop All ${ i }</a></h4>
 												<div class="ls-flex-wrap">
 													<div class="flyCol50">
 														
@@ -24,7 +24,7 @@ $(function(){
 										</li>`
 										$('.flyMenu').append(ss)
 										for(let j = 2;j < data.categories_dict[i].length;j++){
-											var sss = `<a href="goods.html?goodname=&categoryid=${ data.categories_dict[i][j][2] }&type=2" tabindex="-1" role="menuitem">
+											var sss = `<a href="goods.html?goodname=&categoryid=${ data.categories_dict[i][j][2] }&type=2&pindex=1&minprice=0&maxprice=0" tabindex="-1" role="menuitem">
 															<n>${ data.categories_dict[i][j][0] }</n>
 															<c>${ data.categories_dict[i][j][1] }</c>
 														</a>`
@@ -64,6 +64,6 @@ $(function(){
 				})
 	$('#ls-header-search-button')[0].onclick = function(){
 					var searchText = $('.search-text').val()
-					window.location.href = "goods.html?goodname="+searchText +"&categoryid=&type=1"
+					window.location.href = "goods.html?goodname="+searchText +"&categoryid=&type=1&pindex=1&minprice=0&maxprice=0"
 				}
 })

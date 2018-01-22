@@ -3536,7 +3536,8 @@ figure.deal-card.two-column-hero-deal .deal-price {
 .card-ui .cui-image-non-lazy-container {
 	overflow: hidden;
 	position: relative;
-	height: 350px;
+	height: 220px;
+	border: 1px solid #CCCCCC;
 }
 
 .card-ui .cui-svg-placeholder {
@@ -6492,7 +6493,8 @@ figure.card-ui.cui-c-udc.c-bdr-gray-clr.cui-udc-hidden {
 }
 
 .cui-two-up .card-ui.cui-c-udc {
-	width: 50%
+	width: 33.3%;
+	height: 320px;
 }
 
 .cui-one-up .card-ui.cui-c-udc .cui-price .cui-price-discount {
@@ -8729,8 +8731,9 @@ figure.card-ui.cui-c-udc.c-bdr-gray-clr.cui-udc-hidden {
 	font-size: 14px;
 	font-weight: 600;
 	height: 24px;
-	padding: 0 15px;
-	text-align: center
+	text-align: center;
+	width: 40px;
+	padding: 0 !important;
 }
 
 .deal-space .pagination .pagination_links.expanding-pagination a.next,

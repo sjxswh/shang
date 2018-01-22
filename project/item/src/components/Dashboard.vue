@@ -54,7 +54,8 @@
 		     timezone:"",
 		     Years:"",
 		     Month:"",
-		     Date:""
+		     Date:"",
+		     day:""
 		    }
 		},
 		mounted(){
@@ -69,9 +70,10 @@
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
+			   that.day = "+day"
 			   that.$ajax({
 				  method: "get",
-				  url:"http://beta.newbidder.com/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU&from=2018-01-15T00:00&groupBy=campaign&limit=500&order=-visits&page=1&status=1&to=2018-01-16T00:00&tz="+that.timezone,
+				  url:"http://beta.newbidder.com/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU&from=2018-01-15T00:00&groupBy=day&limit=7&order="+that.day+"&page=1&status=1&to=2018-01-16T00:00&tz="+that.timezone,
 				  
 				}).then(function (data) {
 				    console.log(data)

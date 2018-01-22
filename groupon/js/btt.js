@@ -1,1 +1,0 @@
-function BTT_Small(){var msg="Skipping - Percentage Collection:0"}

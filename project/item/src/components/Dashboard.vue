@@ -5,27 +5,28 @@
 			<ul style="border: .06rem solid #e4e8f1;border-bottom: none;">
 				<li>
 					<p>Revenue</p>
-					<span>$0.00</span>
+					<span>${{ totals["revenue"] }}.00</span>
 				</li>
 				<li>
 					<p>Cost</p>
-					<span>$0.00</span>
+					<span>${{ totals["cost"] }}.00</span>
 				</li>
 				<li>
 					<p>Profit</p>
-					<span style="color: #CCCCCC;">$0.00</span>
+					<span style="color: #CCCCCC;">${{ totals["profit"] }}.00</span>
 				</li>
 				<li>
-					<p>POI</p>
-					<span style="color: #CCCCCC;">0%</span>
+					<p>ROI</p>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] != 'null' ">0%</span>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] == 'null' ">{{ totals["roi"] }}%</span>
 				</li>
 				<li>
 					<p>Visits</p>
-					<span>0</span>
+					<span>{{ totals["visits"] }}</span>
 				</li>
 				<li>
 					<p>Clicks</p>
-					<span>0</span>
+					<span>{{ totals["clicks"] }}</span>
 				</li>
 			</ul>
 			<x-chart :id="id" :option="option"></x-chart>
@@ -38,7 +39,6 @@
 
 <script>
 	import XChart from '@/components/XChart'
-	import options from '../chart-option/Dashboard-options'
 	import HomeSelect from '@/components/Home-Select'
 	
 	export default{
@@ -46,54 +46,126 @@
 			XChart,HomeSelect
 		},
 		data () {
-			let option = options.option
 		    return {
-		     id:"container",
-		     option:option,
+		    	totals:"",
 		     date:"",
 		     timezone:"",
 		     Years:"",
 		     Month:"",
 		     Date:"",
-		     day:""
+		     day:"",
+		     revenue:[],
+		     id:"container",
+		     option:{
+		     	 title: {
+					        text: ''
+					    },
+					    subtitle: {
+					        text: ''
+					    },
+					    yAxis: {
+					        title: {
+					            text: ''
+					        }
+					    },
+					    legend: {
+					        layout: 'vertical',
+					        align: 'right',
+					        verticalAlign: 'middle'
+					    },
+					    plotOptions: {
+					        series: {
+					            label: {
+					                connectorAllowed: false
+					            },
+					            pointStart: 2010
+					        }
+					    },
+					    series: [{
+					        name: 'Revenue',
+					        data: [1,2]
+					    }, {
+					        name: 'Cost',
+					        data: [24916, 24064]
+					    }, {
+					        name: 'Profit',
+					        data: [11744, 17722]
+					    }, {
+					        name: 'POI',
+					        data: [3434, 1223]
+					    }, {
+					        name: 'Visits',
+					        data: [12908, 5948]
+					    }, {
+					        name: 'Clicks',
+					        data: [12908, 5948]
+					    }],
+					    responsive: {
+					        rules: [{
+					            condition: {
+					                maxWidth: 500
+					            },
+					            chartOptions: {
+					                legend: {
+					                    layout: 'horizontal',
+					                    align: 'center',
+					                    verticalAlign: 'bottom'
+					                }
+					            }
+					        }]
+					    }
+		     },
+		     tokenCookie:[],
+		     tokenCookies:[],
+		     tokenname:"token",
+		     token:"",
 		    }
 		},
 		mounted(){
-			let token=document.cookie.split("=")[1];
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i].split("=");
+				if(this.tokenname != this.tokenCookies[0]){
+					this.token = this.tokenCookies[1];
+					
+				}
+			}
 			let that = this
-			console.log(token)
-			this.date = new Date() 
 			
+			this.date = new Date() 
 		  this.$ajax({
 			  method: "get",
-			  url:"http://beta.newbidder.com/api/profile?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU",
+			  params:{
+			  	authorization:that.token
+			  },
+			  url:"http://beta.newbidder.com/api/profile",
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
 			   that.day = "+day"
 			   that.$ajax({
 				  method: "get",
-				  url:"http://beta.newbidder.com/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU&from=2018-01-15T00:00&groupBy=day&limit=7&order="+that.day+"&page=1&status=1&to=2018-01-16T00:00&tz="+that.timezone,
-				  
+				  params:{
+				  	authorization:that.token,
+				  	from:"2018-01-22T00:00",
+				  	groupBy:"hour",
+				  	order:"hour",
+				  	status:1,
+				  	to:"2018-01-23T00:00",
+				  	tz:that.timezone
+				  },
+				  url:"http://beta.newbidder.com/api/report",
 				}).then(function (data) {
+				    console.log(data.data.data.rows)
 				    console.log(data)
+				    that.totals = data.data.data.totals
+				    for(var i =0 ;i < data.data.data.rows.length; i++){
+				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
+				    	
+				    }
 				});
 			});	
-		
-		   /*	this.$ajax({
-			  method: "get",
-			  url:"http://localhost:5000/api/report?authorization=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU",
-			  data:{
-			  	from:new Date(),
-				groupBy:"hour",
-				order:"hour",
-				status:1,
-				to:new Date(),
-				tz:"-12:00"
-			  }
-			}).then(function (data) {
-			    that.timezones = data.data.data.timezones
-			});	*/
+			
 		},
 		methods:{
 			

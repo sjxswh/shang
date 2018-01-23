@@ -16,7 +16,7 @@
 					<div class="campaigns-content-main">
 						<div class="campaigns-title">
 							<router-link to="/CampaignsDetail">
-								<span>adv-lux de</span>
+								<span>{{data["campaignName"]}}</span>
 							</router-link>
 							<span class="iconfont icon-gengduo"></span>
 						</div>
@@ -29,22 +29,25 @@
 								</router-link>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-model="data.value"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="active" class="play" @touchchange="play"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="active" disabled></mt-switch>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="archived" disabled></mt-switch>
 							</p>
 						</div>
 						<router-link to="/CampaignsDetail">
 							<div class="campaigns-info">
 								<div>
-									<p>{{data.name}}</p>
-									<span>$0.00</span>
+									<p>Revenue</p>
+									<span>${{data["revenue"]}}.00</span>
 									<p>Profit</p>
-									<em>$0.00</em>
+									<em>${{data["profit"]}}.00</em>
 								</div>
 								<div>
-									<p>Revenue</p>
-									<em>$0.00</em>
-									<p>Profit</p>
-									<span>$0.00</span>
+									<p>ROI</p>
+									<em>{{data["roi"]}}%</em>
+									<p>Cost</p>
+									<span>${{data["cost"]}}.00</span>
 								</div>
 							</div>
 						</router-link>
@@ -65,23 +68,61 @@
 		},
 		data () {
 			return {
-				dataList:[
-					{name:'Revenue',
-					 src:"dff",
-					 value:true
-					},
-					{name:'Visit',
-					 src:"dff",
-					 value:false
-					},
-					{name:'Click',
-					 src:"dff",
-					 value:true
-					},
-				],
+				tokenCookie:[],
+		     tokenCookies:[],
+		     tokenname:"token",
+		     token:"",
+				dataList:[],
+				timezone:"",
+				active:true,
+				archived:false,
+				status:""
 			}
 		},
 		mounted(){
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i].split("=");
+				if(this.tokenname != this.tokenCookies[0]){
+					this.token = this.tokenCookies[1];
+				}
+			}
+			var that = this
+			this.$ajax({
+			  method: "get",
+			  params:{
+			  	authorization:that.token
+			  },
+			  url:"http://beta.newbidder.com/api/profile",
+			}).then((data) => {
+			   console.log(data)
+			   that.timezone = data.data.data.timezone
+			   that.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token,
+				  	filter:"",
+						from:"2018-01-22T00:00",
+						groupBy:"campaign",
+						limit:500,
+						order:"-visits",
+						page:1,
+						status:2,
+						tag:"",
+						to:"2018-01-23T00:00",
+						tz:that.timezone
+				  },
+				  url:"http://beta.newbidder.com/api/report",
+				}).then(function (data) {
+					console.log(data)
+				    that.dataList = data.data.data.rows
+				});
+			});	
+		},
+		methods: {
+			play () {
+				console.log(this.active)
+			}
 		}
 	}
 </script>
@@ -144,6 +185,13 @@
 		width: 90%;
 		text-align: left;
 		color: black;
+	}
+	.cs-campaigns .campaigns-title a span{
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	.cs-campaigns .campaigns-title .iconfont{
 		color: #b0b0b0;

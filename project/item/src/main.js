@@ -5,11 +5,12 @@ import App from './App'
 import router from './router'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css'
+import './assets/iconfont/iconfont.css'
+import './assets/iconfont/iconfont1.css'
 import axios from 'axios'
 import store from './store/TodoStore'
 
 //axios.defaults.withCredentials = true
-
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 Vue.use(Mint)
@@ -36,5 +37,5 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App }
+  components: { App },
 })

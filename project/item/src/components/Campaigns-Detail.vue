@@ -4,7 +4,7 @@
 			<div class="home-header">
 		  		<em class="iconfont icon-jiankuohaoxizuo" @touchstart="back"></em>
 		  		<p class="home-name">{{title}}</p>
-		  		<em class="home-edit">Edit</em>
+		  		<em class="home-edit" @touchstart="edit">Edit</em>
 		  	</div>
 		</div>
 		<home-select></home-select>
@@ -35,29 +35,28 @@
 		</div>
 		<div class="campaigns-detail-content">
 			<div>
-				<span class="iconfont icon-shanchuanniucopy"></span>
-				<p>EPC</p>
-				<p>EPC</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>dfsdsf</p>
+				<p>df</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy"></span>
-				<p>EPC</p>
-				<p>EPC</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
+				<p>dfgfh</p>
+				<p>d</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy"></span>
-				<p>EPC</p>
-				<p>EPC</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
+				<p>ghgj</p>
+				<p>g</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy"></span>
-				<p>EPC</p>
-				<p>EPC</p>
-			</div>
-			<div>
-				<span class="iconfont icon-shanchuanniucopy"></span>
-				<p>EPC</p>
-				<p>EPC</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
+				<p>yuhj</p>
+				<p>EhPC</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 		</div>
 		<div class="campaigns-detail-report">Drilldown report</div>
@@ -90,6 +89,23 @@
 			back () {
 		  		this.$router.go(-1)
 		  	},
+	  	edit () {
+	  		var csCam = document.getElementsByClassName("campaigns-detail-content")[0];
+	  		csCam.style.paddingLeft = 0;
+	  		csCam.style.paddingRight = 0;
+	  		var iconfont = Array.from(document.getElementsByClassName("zititubiao"))
+	  		iconfont.forEach(function(v,k){
+	  			iconfont[k].className += "iconfont-active"
+	  		})
+	  	},
+	  	detele () {
+	  		var detele = Array.from(document.getElementsByClassName("icon-shanchuanniucopy"))
+	  		detele.forEach(function(v,k){
+	  			v.onclick = function(){
+	  				v.parentNode.remove()
+	  			}
+	  		})
+	  	}
 		}
 	}
 </script>
@@ -114,11 +130,18 @@
 	}
 	.campaigns-detail-content div{
 		display: flex;
-		color: #CCCCCC;
+		color: #8c8c8c;
 	}
 	.campaigns-detail-content div .iconfont{
+		display: none;
 		width: 16%;
 		margin: .2rem 0;
+	}
+	.campaigns-detail-content div .iconfont-active{
+		display: block !important;
+		transition: display 2s;
+	}
+	.icon-shanchuanniucopy{
 		color: red;
 	}
 	.campaigns-detail-content div p{
@@ -126,6 +149,9 @@
 		margin: .2rem 0;
 		font-size: .3rem;
 		text-align: left;
+	}
+	.campaigns-detail-content div p:nth-of-type(2){
+		color: #3f3f3f;
 	}
 	.campaigns-detail-report {
 		display: block;
@@ -136,7 +162,7 @@
 		border-bottom: 1px solid #CCCCCC;
 		font-size: .3rem;
 		text-align: left;
-		color: blue;
+		color: #4c98fa;
 	}
 	.cs-campaigns-detail .campaigns-all{
 		display: flex;

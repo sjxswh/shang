@@ -41,8 +41,6 @@
 			this.Months = this.Months<10? "0"+this.Months:this.Months
 			this.Datess = this.date.split("/")[2]
 			this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-			console.log(604800000)
-			console.log(this.Times)
 		},
 		methods:{
 			reduceDate(){

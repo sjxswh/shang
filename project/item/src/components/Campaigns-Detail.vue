@@ -25,7 +25,7 @@
 						<span>pause/Resume</span>
 					</p>
 					<p class="campaigns-pause">
-						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 1" v-model="active" class="play" @change="play"></mt-switch>
+						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 1" v-model="active" class="play"></mt-switch>
 						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 0" v-model="active" disabled></mt-switch>
 						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
 						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 0" v-model="archived" disabled></mt-switch>
@@ -171,7 +171,7 @@
 	  		csCam.style.paddingRight = 0.6+"rem";
 	  		var iconfont = Array.from(document.getElementsByClassName("zititubiao"))
 	  		iconfont.forEach(function(v,k){
-	  			iconfont[k].className -= "iconfont-active"
+	  			iconfont[k].className = iconfont[k].className.replace(/iconfont-active/g, ' ')
 	  		})
 	  		var edits = document.getElementsByClassName("edit")[0]
 	  		edits.style.display ="block"

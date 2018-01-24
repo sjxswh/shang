@@ -81,7 +81,7 @@
 				this.$ajax({
 			  method: "get",
 			  params:{
-			  	authorization:that.token
+			  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI"
 			  },
 			  url:"http://beta.newbidder.com/api/profile",
 			}).then((data) => {
@@ -91,7 +91,7 @@
 			   that.$ajax({
 				  method: "get",
 				  params:{
-				  	authorization:that.token,
+				  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI",
 				  	from:that.from["from"],
 				  	limit:7,
 				  	groupBy:"day",
@@ -193,6 +193,7 @@
 		},
 		mounted(){
 			this.tokenCookie=document.cookie.split(";")
+			console.log(this.tokenCookie)
 			for(var i = 0; i < this.tokenCookie.length; i++){
 				this.tokenCookies = this.tokenCookie[i].split("=");
 				if(this.tokenname != this.tokenCookies[0]){

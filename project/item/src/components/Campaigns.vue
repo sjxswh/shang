@@ -29,10 +29,10 @@
 								</router-link>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="active" class="play" @change="play"></mt-switch>
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="active" disabled></mt-switch>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="archived" disabled></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="data.active" class="play"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="data.active" disabled></mt-switch>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1" v-model="data.active" class="puse"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="data.active" disabled></mt-switch>
 							</p>
 						</div>
 						<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
@@ -70,11 +70,11 @@
 			return {
 				tokenCookie:[],
 		     tokenCookies:[],
-		     tokenname:"token",
+		     tokenname:"name",
 		     token:"",
 				dataList:[],
 				timezone:"",
-				active:true,
+				active:1,
 				archived:false,
 				status:"",
 				from:"",
@@ -94,7 +94,7 @@
 				this.$ajax({
 				  method: "get",
 				  params:{
-				  	authorization:that.token
+				  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI"
 				  },
 				  url:"http://beta.newbidder.com/api/profile",
 				}).then((data) => {
@@ -103,7 +103,7 @@
 				   that.$ajax({
 					  method: "get",
 					  params:{
-					  	authorization:that.token,
+					  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI",
 					  	filter:that.search,
 							from:that.from["from"],
 							groupBy:"campaign",
@@ -118,17 +118,23 @@
 					  url:"http://beta.newbidder.com/api/report",
 					}).then(function (data) {
 						console.log(data)
-					    that.dataList = data.data.data.rows
+					    that.dataList = data.data.data.rows;
+					    that.dataList.forEach((item)=>{
+					    	item.active=item.deleted==0?true:false;
+					    })
 					});
 				});	
 			}
 		},
 		mounted(){
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i].split("=");
-				if(this.tokenname != this.tokenCookies[0]){
+			var cookies=document.cookie.split(";")
+			console.log(cookies)
+			for(var i = 0; i < cookies.length; i++){
+				this.tokenCookies = cookies[i].split("=");
+				console.log(this.tokenCookies[0],this.tokenname)
+				if(this.tokenname == this.tokenCookies[0]){
 					this.token = this.tokenCookies[1];
+					console.log(this.token,"gggg")
 				}
 			}
 			/*var that = this
@@ -164,10 +170,7 @@
 			});	*/
 		},
 		methods: {
-			play () {
-				
-			},
-			inpVal (newVal) {
+			inpVal () {
 				this.search = document.getElementById("search").value
 				var that = this
 				this.$ajax({

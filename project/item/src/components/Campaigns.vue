@@ -3,51 +3,51 @@
 		<home-select></home-select>
 		<div style="border: .06rem solid #e4e8f1;border-bottom: none;">
 			<div class="campaigns-select">
-				<span class="iconfont icon-sousuo1-copy"></span>
-				<input type="text" placeholder="Search" style="outline: none;" />
+				<span class="iconfont icon-sousuo1-copy" @touchstart="inpVal"></span>
+				<input type="text" placeholder="Search" id="search" style="outline: none;" />
 			</div>
 			<ul class="campaigns-content">
-				<li v-for="data in dataList">
+				<li v-for="(data,index) in dataList">
 					<div class="campaigns-img">
-						<router-link to="/CampaignsDetail">
+						<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
 							<img src="../assets/img/1.jpg" width="100%" />
 						</router-link>
 					</div>
 					<div class="campaigns-content-main">
 						<div class="campaigns-title">
-							<router-link to="/CampaignsDetail">
+							<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
 								<span>{{data["campaignName"]}}</span>
 							</router-link>
 							<span class="iconfont icon-gengduo"></span>
 						</div>
 						<div class="campaigns-switch">
 							<p>
-								<router-link to="/CampaignsDetail">
+								<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
 									<span><img src="../assets/img/2.jpg" /></span>
 									<span><img src="../assets/img/3.jpg" /></span>
 									<span>pause/Resume</span>
 								</router-link>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="active" class="play" @touchchange="play"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="active" class="play" @change="play"></mt-switch>
 								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="active" disabled></mt-switch>
 								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
 								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="archived" disabled></mt-switch>
 							</p>
 						</div>
-						<router-link to="/CampaignsDetail">
+						<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
 							<div class="campaigns-info">
 								<div>
 									<p>Revenue</p>
-									<span>${{data["revenue"]}}.00</span>
+									<span>${{data["revenue"]}}</span>
 									<p>Profit</p>
-									<em>${{data["profit"]}}.00</em>
+									<em>${{data["profit"]}}</em>
 								</div>
 								<div>
 									<p>ROI</p>
 									<em>{{data["roi"]}}%</em>
 									<p>Cost</p>
-									<span>${{data["cost"]}}.00</span>
+									<span>${{data["cost"]}}</span>
 								</div>
 							</div>
 						</router-link>
@@ -76,7 +76,51 @@
 				timezone:"",
 				active:true,
 				archived:false,
-				status:""
+				status:"",
+				from:"",
+				search:""
+			}
+		},
+		computed:{
+			getSevenDate(){
+				return this.from = this.$store.state.data
+			}
+		},
+		watch: {
+			getSevenDate (newVal,oldVal) {
+				this.search = document.getElementById("search").value
+				this.from = newVal
+				var that = this
+				this.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token
+				  },
+				  url:"http://beta.newbidder.com/api/profile",
+				}).then((data) => {
+				   console.log(data)
+				   that.timezone = data.data.data.timezone
+				   that.$ajax({
+					  method: "get",
+					  params:{
+					  	authorization:that.token,
+					  	filter:that.search,
+							from:that.from["from"],
+							groupBy:"campaign",
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:2,
+							tag:"",
+							to:that.from["to"],
+							tz:that.timezone
+					  },
+					  url:"http://beta.newbidder.com/api/report",
+					}).then(function (data) {
+						console.log(data)
+					    that.dataList = data.data.data.rows
+					});
+				});	
 			}
 		},
 		mounted(){
@@ -87,7 +131,7 @@
 					this.token = this.tokenCookies[1];
 				}
 			}
-			var that = this
+			/*var that = this
 			this.$ajax({
 			  method: "get",
 			  params:{
@@ -117,17 +161,53 @@
 					console.log(data)
 				    that.dataList = data.data.data.rows
 				});
-			});	
+			});	*/
 		},
 		methods: {
 			play () {
-				console.log(this.active)
-			}
+				
+			},
+			inpVal (newVal) {
+				this.search = document.getElementById("search").value
+				var that = this
+				this.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token
+				  },
+				  url:"http://beta.newbidder.com/api/profile",
+				}).then((data) => {
+				   console.log(data)
+				   that.timezone = data.data.data.timezone
+				   that.$ajax({
+					  method: "get",
+					  params:{
+					  	authorization:that.token,
+					  	filter:that.search,
+							from:that.from["from"],
+							groupBy:"campaign",
+							limit:20,
+							order:"-visits",
+							page:1,
+							status:2,
+							tag:"",
+							to:that.from["to"],
+							tz:that.timezone
+					  },
+					  url:"http://beta.newbidder.com/api/report",
+					}).then(function (data) {
+						console.log(data)
+					    that.dataList = data.data.data.rows
+					});
+				});	
+			},
 		}
 	}
 </script>
 
 <style>
+	.input_check {position: absolute;width: 20px;height: 20px;visibility: hidden;background: #E92333;}
+	.input_check+label {display: inline-block;width: 20px;height: 20px;background: green;background-position: -31px -3px;border: 1px solid skyblue;}
 	em{
 		font-style: normal;
 	}
@@ -136,7 +216,7 @@
 		top: 1.24rem;
 		width: 100%;
 		height: 90%;
-		font-size: .3rem;
+		font-size: .26rem;
 	}
 	.cs-campaigns .campaigns-select{
 		display: flex;
@@ -184,7 +264,7 @@
 		display: block;
 		width: 90%;
 		text-align: left;
-		color: black;
+		color: #282828;
 	}
 	.cs-campaigns .campaigns-title a span{
 		display: block;
@@ -206,7 +286,7 @@
 	}
 	.cs-campaigns .campaigns-switch p a{
 		display: flex;
-		color: black;
+		color: #282828;
 	}
 	.cs-campaigns .campaigns-switch p span{
 		display: block;
@@ -260,6 +340,6 @@
 		text-align: left;
 	}
 	.cs-campaigns .campaigns-info div span{
-		color: black;
+		color: #363636;
 	}
 </style>

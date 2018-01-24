@@ -1,7 +1,8 @@
 var State = {
 	isShow:[],
 	loginShow:[],
-	campaignsShow:[]
+	campaignsShow:[],
+	data:{}
 }
 
 export default State

@@ -10,6 +10,9 @@ var Action = {
 	getCampaigns(){
 		let isShowHO = false,isShowF = true
 		this.commit("getCampaigns",[isShowHO,isShowF])
+	},
+	getSevenDate (store,data) {
+		this.commit("getSevenDate",data)
 	}
 }
 

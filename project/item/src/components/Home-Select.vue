@@ -12,9 +12,11 @@
 </template>
 
 <script>
+	import store from '../store/TodoStore'
 	export default{
 		data() {
 			return{
+				nowdate:"",
 				Year:"",
 		     Month:"",
 		     Dates:"",
@@ -24,11 +26,17 @@
 		     sss:"",
 		     Date:"",
 		     date:"",
-		     Time:1516896000000,
-		     Times:1517500800000,
+		     Time:"",
+		     Times:"",
+		     Data:"",
+		     odldateL:"",
+		     oneTime:86400000
 			}
 		},
 		mounted(){
+			this.nowDate = new Date()
+			this.Time = this.nowDate.getTime()-604800000 + 86400000
+			this.Times = this.nowDate.getTime()+86400000
 			this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
 			this.Year = this.Date.split("/")[0]
 			this.Month = this.Date.split("/")[1]
@@ -41,6 +49,11 @@
 			this.Months = this.Months<10? "0"+this.Months:this.Months
 			this.Datess = this.date.split("/")[2]
 			this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+			this.Data = {
+				"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+				"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
+			}
+			this.$store.dispatch("getSevenDate",this.Data)
 		},
 		methods:{
 			reduceDate(){
@@ -58,6 +71,11 @@
 				this.Months = this.Months<10? "0"+this.Months:this.Months
 				this.Datess = this.date.split("/")[2]
 				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+					"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+					"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
+				}
+				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
@@ -74,6 +92,11 @@
 				this.Months = this.Months<10? "0"+this.Months:this.Months
 				this.Datess = this.date.split("/")[2]
 				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+					"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+					"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
+				}
+				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		}
 	}

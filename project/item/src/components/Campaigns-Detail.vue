@@ -4,7 +4,8 @@
 			<div class="home-header">
 		  		<em class="iconfont icon-jiankuohaoxizuo" @touchstart="back"></em>
 		  		<p class="home-name">{{title}}</p>
-		  		<em class="home-edit" @touchstart="edit">Edit</em>
+		  		<em class="home-edit edit" @touchstart="edit">Edit</em>
+		  		<em class="home-edit dones" @touchstart="done" style="display: none;">Done</em>
 		  	</div>
 		</div>
 		<home-select></home-select>
@@ -14,7 +15,7 @@
 			</div>
 			<div class="campaigns-content-main">
 				<div class="campaigns-title">
-					<span>adv-lux de</span>
+					<span>{{dataList["campaignName"]}}</span>
 					<span class="iconfont icon-gengduo"></span>
 				</div>
 				<div class="campaigns-switch">
@@ -24,7 +25,10 @@
 						<span>pause/Resume</span>
 					</p>
 					<p class="campaigns-pause">
-						<mt-switch v-model="data"></mt-switch>
+						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 1" v-model="active" class="play" @change="play"></mt-switch>
+						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 0" v-model="active" disabled></mt-switch>
+						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
+						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 0" v-model="archived" disabled></mt-switch>
 					</p>
 				</div>
 				<div class="campaigns-info">
@@ -36,26 +40,92 @@
 		<div class="campaigns-detail-content">
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
-				<p>dfsdsf</p>
-				<p>df</p>
+				<p>External Campaigns</p>
+				<p>{{dataList["TheirCampName"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
-				<p>dfgfh</p>
-				<p>d</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>BID</p>
+				<p>${{dataList["bidPrice"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao " ></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Visits</p>
+				<p>{{dataList["visits"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
-				<p>ghgj</p>
-				<p>g</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Clicks</p>
+				<p>{{dataList["clicks"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao " ></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Conversions</p>
+				<p>{{dataList["conversions"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy zititubiao "></span>
-				<p>yuhj</p>
-				<p>EhPC</p>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Revenue</p>
+				<p>${{dataList["revenue"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Cost</p>
+				<p>${{dataList["cost"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>CPV</p>
+				<p>${{dataList["cpv"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>Profit</p>
+				<p>${{dataList["profit"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>CTR</p>
+				<p>{{dataList["ctr"]}}%</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>CR</p>
+				<p>{{dataList["cr"]}}%</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>CV</p>
+				<p>{{dataList["cv"]}}%</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>ROI</p>
+				<p>{{dataList["roi"]}}%</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>EPV</p>
+				<p>${{dataList["epv"]}}</p>
+				<span class="iconfont icon-icmenumore zititubiao "></span>
+			</div>
+			<div>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<p>EPC</p>
+				<p>${{dataList["epc"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 		</div>
@@ -70,6 +140,7 @@
 	import options from '../chart-option/campaigns-detail-options';
 	import HomeSelect from '@/components/Home-Select';
 	export default{
+		name:"CampaignsDetail",
 		components: {
 			XChart,HomeSelect
 		},
@@ -78,17 +149,35 @@
 		    return {
 		     id:"container",
 		     option:option,
-		     data:true,
-		     title:"CampaignsDetail"
+		     edits:"Edit",
+		     value:true,
+		     title:"CampaignsDetail",
+		     dataList:[],
+		     active:true,
+		     archived:false
 		    }
 		},
 		mounted(){
-			
+			this.dataList = this.$route.query.datas
+			console.log(this.dataList)
 		},
 		methods:{
 			back () {
 		  		this.$router.go(-1)
 		  	},
+	  	done () {
+	  		var csCam = document.getElementsByClassName("campaigns-detail-content")[0];
+	  		csCam.style.paddingLeft = 1.6+"rem";
+	  		csCam.style.paddingRight = 0.6+"rem";
+	  		var iconfont = Array.from(document.getElementsByClassName("zititubiao"))
+	  		iconfont.forEach(function(v,k){
+	  			iconfont[k].className -= "iconfont-active"
+	  		})
+	  		var edits = document.getElementsByClassName("edit")[0]
+	  		edits.style.display ="block"
+	  		var dones = document.getElementsByClassName("dones")[0]
+	  		dones.style.display ="none"
+	  	},
 	  	edit () {
 	  		var csCam = document.getElementsByClassName("campaigns-detail-content")[0];
 	  		csCam.style.paddingLeft = 0;
@@ -97,6 +186,10 @@
 	  		iconfont.forEach(function(v,k){
 	  			iconfont[k].className += "iconfont-active"
 	  		})
+	  		var dones = document.getElementsByClassName("dones")[0]
+	  		dones.style.display ="block"
+	  		var edits = document.getElementsByClassName("edit")[0]
+	  		edits.style.display ="none"
 	  	},
 	  	detele () {
 	  		var detele = Array.from(document.getElementsByClassName("icon-shanchuanniucopy"))
@@ -124,36 +217,37 @@
 	.cs-campaigns-detail .home-header em{
 		font-weight: 600;
 	}
-	.campaigns-detail-content{
+	.cs-campaigns-detail .campaigns-detail-content{
 		padding-left: 1.6rem;
 		padding-right: .6rem;
 	}
-	.campaigns-detail-content div{
+	.cs-campaigns-detail .campaigns-detail-content div{
 		display: flex;
 		color: #8c8c8c;
 	}
-	.campaigns-detail-content div .iconfont{
+	.cs-campaigns-detail .campaigns-detail-content div .iconfont{
 		display: none;
 		width: 16%;
-		margin: .2rem 0;
+		margin: .1rem 0;
 	}
-	.campaigns-detail-content div .iconfont-active{
+	.cs-campaigns-detail .campaigns-detail-content div .iconfont-active{
 		display: block !important;
 		transition: display 2s;
 	}
-	.icon-shanchuanniucopy{
+	.cs-campaigns-detail .icon-shanchuanniucopy{
 		color: red;
 	}
-	.campaigns-detail-content div p{
-		width: 42%;
-		margin: .2rem 0;
-		font-size: .3rem;
+	.cs-campaigns-detail .campaigns-detail-content div p{
+		width: 64%;
+		margin: .1rem 0;
+		font-size: .2rem;
 		text-align: left;
 	}
-	.campaigns-detail-content div p:nth-of-type(2){
+	.cs-campaigns-detail .campaigns-detail-content div p:nth-of-type(2){
+		width: 20%;
 		color: #3f3f3f;
 	}
-	.campaigns-detail-report {
+	.cs-campaigns-detail .campaigns-detail-report {
 		display: block;
 		padding: .3rem 0;
 		margin-left: 1.6rem;
@@ -189,7 +283,16 @@
 		text-align: left;
 		color: black;
 	}
-	
+	.cs-campaigns-detail .campaigns-title span:nth-child(1){
+		width: 90%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.cs-campaigns-detail .campaigns-title span:nth-child(2){
+		width: 10%;
+		text-align: center;
+	}
 	.cs-campaigns-detail .campaigns-title .iconfont{
 		color: #b0b0b0;
 	}

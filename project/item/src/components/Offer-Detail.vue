@@ -90,30 +90,30 @@
 	.cs-offer-detail .home-header em{
 		font-weight: 600;
 	}
-	.cs-campaigns-detail{
+	.cs-offer-detail .cs-campaigns-detail{
 		position: absolute;
 		top: 1.4rem;
 		width: 100%;
 		height: 90%;
 		font-size: .3rem;
 	}
-	.campaigns-detail-content{
+	.cs-offer-detail .campaigns-detail-content{
 		display: flex;
 		padding-left: 1.6rem;
 		padding-right: .6rem;
 	}
-	.campaigns-detail-content div{
+	.cs-offer-detail .campaigns-detail-content div{
 		width: 50%;
 	}
-	.campaigns-detail-content div p{
+	.cs-offer-detail .campaigns-detail-content div p{
 		margin: .2rem 0;
 		font-size: .3rem;
 		text-align: left;
 	}
-	.campaigns-detail-content div:nth-child(1){
+	.cs-offer-detail .campaigns-detail-content div:nth-child(1){
 		color: #CCCCCC;
 	}
-	.campaigns-detail-report {
+	.cs-offer-detail .campaigns-detail-report {
 		display: block;
 		padding: .3rem 0;
 		margin-left: 1.6rem;
@@ -136,7 +136,7 @@
 		padding: 0 .2rem;
 		box-sizing: border-box;
 	}
-	.campaigns-content-main{
+	.cs-offer-detail .campaigns-content-main{
 		width:80% ;
 		padding-right: .4rem;
 	}

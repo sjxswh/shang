@@ -16,7 +16,7 @@
 			}
 		},
 		mounted () {
-			HighCharts.chart(this.id,this.option)
+			
 		}
 	}
 </script>

@@ -1,19 +1,19 @@
 <template>
-	<div class="cs-dashboard">
+	<div class="cs-dashboard" :getSevenDate="getSevenDate">
 		<home-select></home-select>
 		<div >
 			<ul style="border: .06rem solid #e4e8f1;border-bottom: none;">
 				<li>
 					<p>Revenue</p>
-					<span>${{ totals["revenue"] }}.00</span>
+					<span>${{ totals["revenue"] }}</span>
 				</li>
 				<li>
 					<p>Cost</p>
-					<span>${{ totals["cost"] }}.00</span>
+					<span>${{ totals["cost"] }}</span>
 				</li>
 				<li>
 					<p>Profit</p>
-					<span style="color: #CCCCCC;">${{ totals["profit"] }}.00</span>
+					<span style="color: #CCCCCC;">${{ totals["profit"] }}</span>
 				</li>
 				<li>
 					<p>ROI</p>
@@ -29,7 +29,7 @@
 					<span>{{ totals["clicks"] }}</span>
 				</li>
 			</ul>
-			<x-chart :id="id" :option="option"></x-chart>
+			<div :id="id"></div>
 			<div style="height: 1rem;width: 100%;position: relative;top: -.5rem;background: white;">
 				<p style="height: 2rem;"></p>
 			</div>
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-	import XChart from '@/components/XChart'
+	//import XChart from '@/components/XChart'
 	import HomeSelect from '@/components/Home-Select'
-	
+	import HighCharts from 'highcharts'
 	export default{
 		components: {
-			XChart,HomeSelect
+			HomeSelect
 		},
 		data () {
 		    return {
@@ -55,18 +55,206 @@
 		     Date:"",
 		     day:"",
 		     revenue:[],
+		     cost:[],
+		     profit:[],
+		     roi:[],
+		     visits:[],
+		     clicks:[],
+		     categories:[],
 		     id:"container",
-		     option:{
+		     tokenCookie:[],
+		     tokenCookies:[],
+		     tokenname:"token",
+		     token:"",
+		     from:"",
+		    }
+		},
+		computed:{
+			getSevenDate(){
+				return this.from = this.$store.state.data
+			}
+		},
+		watch: {
+			getSevenDate (newVal,oldVal) {
+				var that = this
+				this.from = newVal;
+				this.$ajax({
+			  method: "get",
+			  params:{
+			  	authorization:that.token
+			  },
+			  url:"http://beta.newbidder.com/api/profile",
+			}).then((data) => {
+			   console.log(data)
+			   that.timezone = data.data.data.timezone
+			   that.day = "+day"
+			   that.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token,
+				  	from:that.from["from"],
+				  	limit:7,
+				  	groupBy:"day",
+				  	order:"+day",
+				  	page:1,
+				  	status:1,
+				  	to:that.from["to"],
+				  	tz:that.timezone
+				  },
+				  url:"http://beta.newbidder.com/api/report",
+				}).then(function (data) {
+				    console.log(data)
+				    that.totals = data.data.data.totals
+				    that.revenue = []
+				    that.cost = []
+				    that.profit = []
+				    that.roi = []
+				    that.visits = []
+				    that.clicks = []
+				    that.categories = []
+				    for(var i =0 ;i < data.data.data.rows.length; i++){
+				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
+				    	that.cost[i]= data.data.data.rows[i]["cost"]
+				    	that.profit[i]= data.data.data.rows[i]["profit"]
+				    	that.roi[i]= data.data.data.rows[i]["roi"]
+				    	that.visits[i]= data.data.data.rows[i]["visits"]
+				    	that.clicks[i]= data.data.data.rows[i]["clicks"]
+				    	that.categories[i] = data.data.data.rows[i]["id"]
+				    }
+				    console.log(that.categories)
+				    HighCharts.chart(that.id,{
 		     	 title: {
 					        text: ''
 					    },
 					    subtitle: {
 					        text: ''
 					    },
+					    xAxis: {
+					        categories: that.categories,
+					        tickInterval: 1
+					    },
 					    yAxis: {
 					        title: {
 					            text: ''
+					        },
+					        minPadding:0,
+					        startOnTick:false
+					    },
+					    legend: {
+					        layout: 'vertical',
+					        align: 'right',
+					        verticalAlign: 'middle'
+					    },
+					    /*plotOptions: {
+					        series: {
+					            label: {
+					                connectorAllowed: false
+					            },
+					            pointStart: 2010
 					        }
+					    },*/
+					    series: [{
+					        name: 'Revenue',
+					        data: that.revenue
+					    }, {
+					        name: 'Cost',
+					        data: that.cost
+					    }, {
+					        name: 'Profit',
+					        data: that.profit
+					    }, {
+					        name: 'ROI',
+					        data: that.roi
+					    }, {
+					        name: 'Visits',
+					        data: that.visits
+					    }, {
+					        name: 'Clicks',
+					        data: that.clicks
+					    }],
+					    responsive: {
+					        rules: [{
+					            condition: {
+					                maxWidth: 500
+					            },
+					            chartOptions: {
+					                legend: {
+					                    layout: 'horizontal',
+					                    align: 'center',
+					                    verticalAlign: 'bottom'
+					                }
+					            }
+					        }]
+					    }
+		     })
+				});
+			});	
+			}
+		},
+		mounted(){
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i].split("=");
+				if(this.tokenname != this.tokenCookies[0]){
+					this.token = this.tokenCookies[1];
+				}
+			}
+			let that = this
+		  /*this.$ajax({
+			  method: "get",
+			  params:{
+			  	authorization:that.token
+			  },
+			  url:"http://beta.newbidder.com/api/profile",
+			}).then((data) => {
+			   console.log(data)
+			   that.timezone = data.data.data.timezone
+			   that.day = "+day"
+			   that.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token,
+				  	from:that.from["from"],
+				  	limit:7,
+				  	groupBy:"day",
+				  	order:"+day",
+				  	page:1,
+				  	status:1,
+				  	to:that.from["to"],
+				  	tz:that.timezone
+				  },
+				  url:"http://beta.newbidder.com/api/report",
+				}).then(function (data) {
+				    console.log(data.data.data.rows)
+				    console.log(data)
+				    that.totals = data.data.data.totals
+				    for(var i =0 ;i < data.data.data.rows.length; i++){
+				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
+				    	that.cost[i]= data.data.data.rows[i]["cost"]
+				    	that.profit[i]= data.data.data.rows[i]["profit"]
+				    	that.roi[i]= data.data.data.rows[i]["roi"]
+				    	that.visits[i]= data.data.data.rows[i]["visits"]
+				    	that.clicks[i]= data.data.data.rows[i]["clicks"]
+				    	that.categories[i] = data.data.data.rows[i]["id"]
+				    }
+				    console.log(that.categories)
+				    HighCharts.chart(that.id,{
+		     	 title: {
+					        text: ''
+					    },
+					    subtitle: {
+					        text: ''
+					    },
+					    xAxis: {
+					        categories: that.categories,
+					        tickInterval: 1
+					    },
+					    yAxis: {
+					        title: {
+					            text: ''
+					        },
+					        minPadding:0,
+					        startOnTick:false
 					    },
 					    legend: {
 					        layout: 'vertical',
@@ -83,22 +271,22 @@
 					    },
 					    series: [{
 					        name: 'Revenue',
-					        data: [1,2]
+					        data: that.revenue
 					    }, {
 					        name: 'Cost',
-					        data: [24916, 24064]
+					        data: that.cost
 					    }, {
 					        name: 'Profit',
-					        data: [11744, 17722]
+					        data: that.profit
 					    }, {
-					        name: 'POI',
-					        data: [3434, 1223]
+					        name: 'ROI',
+					        data: that.roi
 					    }, {
 					        name: 'Visits',
-					        data: [12908, 5948]
+					        data: that.visits
 					    }, {
 					        name: 'Clicks',
-					        data: [12908, 5948]
+					        data: that.clicks
 					    }],
 					    responsive: {
 					        rules: [{
@@ -114,62 +302,15 @@
 					            }
 					        }]
 					    }
-		     },
-		     tokenCookie:[],
-		     tokenCookies:[],
-		     tokenname:"token",
-		     token:"",
-		    }
-		},
-		mounted(){
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i].split("=");
-				if(this.tokenname != this.tokenCookies[0]){
-					this.token = this.tokenCookies[1];
-					
-				}
-			}
-			let that = this
-			
-			this.date = new Date() 
-		  this.$ajax({
-			  method: "get",
-			  params:{
-			  	authorization:that.token
-			  },
-			  url:"http://beta.newbidder.com/api/profile",
-			}).then((data) => {
-			   console.log(data)
-			   that.timezone = data.data.data.timezone
-			   that.day = "+day"
-			   that.$ajax({
-				  method: "get",
-				  params:{
-				  	authorization:that.token,
-				  	from:"2018-01-22T00:00",
-				  	groupBy:"hour",
-				  	order:"hour",
-				  	status:1,
-				  	to:"2018-01-23T00:00",
-				  	tz:that.timezone
-				  },
-				  url:"http://beta.newbidder.com/api/report",
-				}).then(function (data) {
-				    console.log(data.data.data.rows)
-				    console.log(data)
-				    that.totals = data.data.data.totals
-				    for(var i =0 ;i < data.data.data.rows.length; i++){
-				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
-				    	
-				    }
+		     })
 				});
-			});	
+			});	*/
 			
 		},
 		methods:{
 			
 		},
+		
 		
 	}
 </script>

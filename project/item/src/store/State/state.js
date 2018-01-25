@@ -2,7 +2,8 @@ var State = {
 	isShow:[],
 	loginShow:[],
 	campaignsShow:[],
-	data:{}
+	data:{},
+	groupBy:""
 }
 
 export default State

@@ -1,7 +1,7 @@
 <template>
 	<div class="cs-group-by">
 		<div class="group-by-title">Campaigns that were</div>
-		<select>
+		<select @change="selects($event)" id="DrillDown">
 			<option>Campaigns</option>
 			<option>Offer</option>
 			<option>Flows</option>
@@ -29,14 +29,33 @@
 		name:"GroupBy",
 		data () {
 			return {
-				
+				DrillDown:"",
 			}
 		},
 		mounted () {
 			
-			/*if(this.$router.go(-1) == '/Dashboard' || this.$router.go(-1) == '/Campaigns' || this.$router.go(-1) == '/Offer' || this.$router.go(-1) == '/Flows'){
-				this.$store.dispatch("ShowHeader")
-				this.title = route.path.split("/").join("")
+		},
+		methods: {
+			selects (ev) {
+				var objS = ev.target;
+				this.$store.dispatch("DrillDowns",objS.value)
+        for(var i=0;i<objS.options.length;i++){
+					if(objS.options[i].value== ev.target.value){
+						objS.options[i].setAttribute("selected","selected");
+					}
+				}
+			}
+		},
+		watch: {
+			/*selects (ev) {
+				var objS = ev.target;
+				console.log(objS.value)
+				this.$store.dispatch("DrillDowns",objS.value)
+        for(var i=0;i<objS.options.length;i++){
+					if(objS.options[i].value== ev.target.value){
+						objS.options[i].setAttribute("selected","selected");
+					}
+				}
 			}*/
 		}
 	}

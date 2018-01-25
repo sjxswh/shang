@@ -9,48 +9,60 @@
 			<ul class="campaigns-content">
 				<li v-for="(data,index) in dataList">
 					<div class="campaigns-img">
-						<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
-							<img src="../assets/img/1.jpg" width="100%" />
-						</router-link>
+						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
+						</a>
 					</div>
 					<div class="campaigns-content-main">
 						<div class="campaigns-title">
-							<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
-								<span>{{data["campaignName"]}}</span>
-							</router-link>
+							<a href="javascript:;"  @touchstart="LinksHrf($event)">
+								<span :data="JSON.stringify(data)">{{data["campaignName"]}}</span>
+							</a>
 							<span class="iconfont icon-gengduo"></span>
 						</div>
 						<div class="campaigns-switch">
 							<p>
-								<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
-									<span><img src="../assets/img/2.jpg" /></span>
-									<span><img src="../assets/img/3.jpg" /></span>
-									<span>pause/Resume</span>
-								</router-link>
+								<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+									<span><img src="../assets/img/2.jpg" :data="JSON.stringify(data)"/></span>
+									<span><img src="../assets/img/3.jpg" :data="JSON.stringify(data)"/></span>
+									<span :data="JSON.stringify(data)">pause/Resume</span>
+								</a>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1" v-model="data.active" class="play"></mt-switch>
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="data.active" disabled></mt-switch>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1" v-model="data.active" class="puse"></mt-switch>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="data.active" disabled></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="puse" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="puse" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause">
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 						</div>
-						<router-link :to="{path:'CampaignsDetail',query:{datas:data}}">
-							<div class="campaigns-info">
-								<div>
+						<a href="javascript:;"  @touchstart="LinksHrf($event)">
+							<div class="campaigns-info" :data="JSON.stringify(data)">
+								<div :data="JSON.stringify(data)">
 									<p>Revenue</p>
 									<span>${{data["revenue"]}}</span>
 									<p>Profit</p>
 									<em>${{data["profit"]}}</em>
 								</div>
-								<div>
+								<div :data="JSON.stringify(data)">
 									<p>ROI</p>
 									<em>{{data["roi"]}}%</em>
 									<p>Cost</p>
 									<span>${{data["cost"]}}</span>
 								</div>
 							</div>
-						</router-link>
+						</a>
 					</div>
 				</li>
 			</ul>
@@ -70,23 +82,36 @@
 			return {
 				tokenCookie:[],
 		     tokenCookies:[],
-		     tokenname:"name",
+		     tokenname:"token",
 		     token:"",
 				dataList:[],
 				timezone:"",
-				active:1,
+				active:true,
 				archived:false,
-				status:"",
 				from:"",
-				search:""
+				search:"",
+				playSw:"",
+				dataId:"",
+				dataTrue:"",
+				status:"",
+				Data:"",
+				groupBy:"",
 			}
 		},
 		computed:{
 			getSevenDate(){
+				console.log(this.$store.state.data)
 				return this.from = this.$store.state.data
+			},
+			DrillDowns () {
+				console.log(this.$store.state.groupBy)
+				return this.groupBy = this.$store.state.groupBy
 			}
 		},
 		watch: {
+			DrillDowns(newVal,oldVal){
+				
+			},
 			getSevenDate (newVal,oldVal) {
 				this.search = document.getElementById("search").value
 				this.from = newVal
@@ -94,7 +119,7 @@
 				this.$ajax({
 				  method: "get",
 				  params:{
-				  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI"
+				  	authorization:that.token
 				  },
 				  url:"http://beta.newbidder.com/api/profile",
 				}).then((data) => {
@@ -103,7 +128,7 @@
 				   that.$ajax({
 					  method: "get",
 					  params:{
-					  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI",
+					  	authorization:that.token,
 					  	filter:that.search,
 							from:that.from["from"],
 							groupBy:"campaign",
@@ -120,54 +145,83 @@
 						console.log(data)
 					    that.dataList = data.data.data.rows;
 					    that.dataList.forEach((item)=>{
-					    	item.active=item.deleted==0?true:false;
+					    	if(item.deleted == 0 && item.status == 1){
+					    		item.active = true
+					    	}
+					    	if(item.deleted == 0 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 1){
+					    		item.active = false
+					    	}
 					    })
 					});
 				});	
-			}
+			},
+			active (val,oldval){
+          console.log(this.active)
+      },
 		},
 		mounted(){
-			var cookies=document.cookie.split(";")
-			console.log(cookies)
-			for(var i = 0; i < cookies.length; i++){
-				this.tokenCookies = cookies[i].split("=");
-				console.log(this.tokenCookies[0],this.tokenname)
-				if(this.tokenname == this.tokenCookies[0]){
-					this.token = this.tokenCookies[1];
-					console.log(this.token,"gggg")
-				}
+			this.tokenname = this.tokenname + '='
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i]
+				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
+    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
+    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
+    		}
 			}
-			/*var that = this
-			this.$ajax({
-			  method: "get",
-			  params:{
-			  	authorization:that.token
-			  },
-			  url:"http://beta.newbidder.com/api/profile",
-			}).then((data) => {
-			   console.log(data)
-			   that.timezone = data.data.data.timezone
-			   that.$ajax({
+			console.log(this.groupBy)
+				this.search = document.getElementById("search").value
+				var that = this
+				this.$ajax({
 				  method: "get",
 				  params:{
-				  	authorization:that.token,
-				  	filter:"",
-						from:"2018-01-22T00:00",
-						groupBy:"campaign",
-						limit:500,
-						order:"-visits",
-						page:1,
-						status:2,
-						tag:"",
-						to:"2018-01-23T00:00",
-						tz:that.timezone
+				  	authorization:that.token
 				  },
-				  url:"http://beta.newbidder.com/api/report",
-				}).then(function (data) {
-					console.log(data)
-				    that.dataList = data.data.data.rows
-				});
-			});	*/
+				  url:"http://beta.newbidder.com/api/profile",
+				}).then((data) => {
+				   console.log(data)
+				   that.timezone = data.data.data.timezone
+				   that.$ajax({
+					  method: "get",
+					  params:{
+					  	authorization:that.token,
+					  	filter:that.search,
+							from:that.from["from"],
+							groupBy:that.groupBy,
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:2,
+							tag:"",
+							to:that.from["to"],
+							tz:that.timezone
+					  },
+					  url:"http://beta.newbidder.com/api/report",
+					}).then(function (data) {
+						console.log(data)
+					    that.dataList = data.data.data.rows;
+					    that.dataList.forEach((item)=>{
+					    	if(item.deleted == 0 && item.status == 1){
+					    		item.active = true
+					    	}
+					    	if(item.deleted == 0 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 1){
+					    		item.active = false
+					    	}
+					    })
+					});
+				});	
 		},
 		methods: {
 			inpVal () {
@@ -204,7 +258,39 @@
 					});
 				});	
 			},
-		}
+			plays (ev) {
+					this.dataId = ev.target.getAttribute("data-id")
+					this.dataTrue = ev.target.getAttribute("data-ins")
+					if(this.dataTrue == 1){
+						this.status = 0
+					}
+					else if(this.dataTrue == 0){
+						this.status = 1
+					}
+				var that = this
+				this.$ajax({
+				  method: "post",
+				  data:{
+				  	id:that.dataId,
+				  	status:that.status
+				  },
+				  url:"http://beta.newbidder.com/api/campaigns/"+that.dataId+"?authorization="+that.token,
+				}).then((data) => {
+					console.log(data)
+				});
+			},
+			LinksHrf (ev) {
+				 this.$router.push({
+            path: 'CampaignsDetail', 
+        })
+       console.log(ev.target)
+				 this.Data = ev.target.getAttribute("data")
+				 console.log(this.Data)
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate() + 1);
+				document.cookie = 'data=' + encodeURIComponent(this.Data) + ';expires=' + oDate + ';path=/';
+			}
+		},
 	}
 </script>
 

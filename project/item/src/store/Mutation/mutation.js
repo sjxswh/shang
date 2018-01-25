@@ -11,6 +11,10 @@ var Mutation = {
 	},
 	getSevenDate (state,data) {
 		state.data = data
+	},
+	DrillDowns (state,data) {
+		state.groupBy = data
+		console.log(data)
 	}
 }
 

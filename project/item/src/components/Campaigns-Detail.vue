@@ -15,7 +15,7 @@
 			</div>
 			<div class="campaigns-content-main">
 				<div class="campaigns-title">
-					<span>{{dataList["campaignName"]}}</span>
+					<span>{{Data["campaignName"]}}</span>
 					<span class="iconfont icon-gengduo"></span>
 				</div>
 				<div class="campaigns-switch">
@@ -33,7 +33,7 @@
 				</div>
 				<div class="campaigns-info">
 					<div>Change campaigns bid</div>
-					<div><em>$</em><span>0.02</span></div>
+					<div><em>$</em><span>{{Data["bidPrice"]}}</span></div>
 				</div>
 			</div>
 		</div>
@@ -41,91 +41,91 @@
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>External Campaigns</p>
-				<p>{{dataList["TheirCampName"]}}</p>
+				<p>{{Data["TheirCampName"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>BID</p>
-				<p>${{dataList["bidPrice"]}}</p>
+				<p>${{Data["bidPrice"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao " ></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Visits</p>
-				<p>{{dataList["visits"]}}</p>
+				<p>{{Data["visits"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Clicks</p>
-				<p>{{dataList["clicks"]}}</p>
+				<p>{{Data["clicks"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao " ></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Conversions</p>
-				<p>{{dataList["conversions"]}}</p>
+				<p>{{Data["conversions"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Revenue</p>
-				<p>${{dataList["revenue"]}}</p>
+				<p>${{Data["revenue"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Cost</p>
-				<p>${{dataList["cost"]}}</p>
+				<p>${{Data["cost"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>CPV</p>
-				<p>${{dataList["cpv"]}}</p>
+				<p>${{Data["cpv"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>Profit</p>
-				<p>${{dataList["profit"]}}</p>
+				<p>${{Data["profit"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>CTR</p>
-				<p>{{dataList["ctr"]}}%</p>
+				<p>{{Data["ctr"]}}%</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>CR</p>
-				<p>{{dataList["cr"]}}%</p>
+				<p>{{Data["cr"]}}%</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>CV</p>
-				<p>{{dataList["cv"]}}%</p>
+				<p>{{Data["cv"]}}%</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>ROI</p>
-				<p>{{dataList["roi"]}}%</p>
+				<p>{{Data["roi"]}}%</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
 				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
 				<p>EPV</p>
-				<p>${{dataList["epv"]}}</p>
+				<p>${{Data["epv"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 			<div>
-				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele"></span>
+				<span class="iconfont icon-shanchuanniucopy zititubiao " @touchstart="detele($event)"></span>
 				<p>EPC</p>
-				<p>${{dataList["epc"]}}</p>
+				<p>${{Data["epc"]}}</p>
 				<span class="iconfont icon-icmenumore zititubiao "></span>
 			</div>
 		</div>
@@ -138,6 +138,7 @@
 <script>
 	import XChart from '@/components/XChart';
 	import options from '../chart-option/campaigns-detail-options';
+	import Cookie from '../js/cookie';
 	import HomeSelect from '@/components/Home-Select';
 	export default{
 		name:"CampaignsDetail",
@@ -154,12 +155,24 @@
 		     title:"CampaignsDetail",
 		     dataList:[],
 		     active:true,
-		     archived:false
+		     archived:false,
+		     tokenCookie:[],
+		     tokenCookies:[],
+		     tokenname:"data",
+		     Data:"",
 		    }
 		},
 		mounted(){
-			this.dataList = this.$route.query.datas
-			console.log(this.dataList)
+			this.tokenname = this.tokenname + '='
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i]
+				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
+    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
+    			this.Data = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)))
+    			console.log(this.Data)
+    		}
+			}
 		},
 		methods:{
 			back () {
@@ -191,13 +204,8 @@
 	  		var edits = document.getElementsByClassName("edit")[0]
 	  		edits.style.display ="none"
 	  	},
-	  	detele () {
-	  		var detele = Array.from(document.getElementsByClassName("icon-shanchuanniucopy"))
-	  		detele.forEach(function(v,k){
-	  			v.onclick = function(){
-	  				v.parentNode.remove()
-	  			}
-	  		})
+	  	detele (ev) {
+	  		ev.target.parentNode.remove()
 	  	}
 		}
 	}

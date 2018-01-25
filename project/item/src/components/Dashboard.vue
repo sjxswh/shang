@@ -81,7 +81,7 @@
 				this.$ajax({
 			  method: "get",
 			  params:{
-			  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI"
+			  	authorization:that.token
 			  },
 			  url:"http://beta.newbidder.com/api/profile",
 			}).then((data) => {
@@ -91,7 +91,7 @@
 			   that.$ajax({
 				  method: "get",
 				  params:{
-				  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzQwNzg0ODA0NTYsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.SC0U50erpR9ppc0ALRJDLTBmV7PAthTM0v18Ha1qTHI",
+				  	authorization:that.token,
 				  	from:that.from["from"],
 				  	limit:7,
 				  	groupBy:"day",
@@ -192,121 +192,15 @@
 			}
 		},
 		mounted(){
+			this.tokenname = this.tokenname + '='
 			this.tokenCookie=document.cookie.split(";")
-			console.log(this.tokenCookie)
 			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i].split("=");
-				if(this.tokenname != this.tokenCookies[0]){
-					this.token = this.tokenCookies[1];
-				}
+				this.tokenCookies = this.tokenCookie[i]
+				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
+    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
+    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
+    		}
 			}
-			let that = this
-		  /*this.$ajax({
-			  method: "get",
-			  params:{
-			  	authorization:that.token
-			  },
-			  url:"http://beta.newbidder.com/api/profile",
-			}).then((data) => {
-			   console.log(data)
-			   that.timezone = data.data.data.timezone
-			   that.day = "+day"
-			   that.$ajax({
-				  method: "get",
-				  params:{
-				  	authorization:that.token,
-				  	from:that.from["from"],
-				  	limit:7,
-				  	groupBy:"day",
-				  	order:"+day",
-				  	page:1,
-				  	status:1,
-				  	to:that.from["to"],
-				  	tz:that.timezone
-				  },
-				  url:"http://beta.newbidder.com/api/report",
-				}).then(function (data) {
-				    console.log(data.data.data.rows)
-				    console.log(data)
-				    that.totals = data.data.data.totals
-				    for(var i =0 ;i < data.data.data.rows.length; i++){
-				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
-				    	that.cost[i]= data.data.data.rows[i]["cost"]
-				    	that.profit[i]= data.data.data.rows[i]["profit"]
-				    	that.roi[i]= data.data.data.rows[i]["roi"]
-				    	that.visits[i]= data.data.data.rows[i]["visits"]
-				    	that.clicks[i]= data.data.data.rows[i]["clicks"]
-				    	that.categories[i] = data.data.data.rows[i]["id"]
-				    }
-				    console.log(that.categories)
-				    HighCharts.chart(that.id,{
-		     	 title: {
-					        text: ''
-					    },
-					    subtitle: {
-					        text: ''
-					    },
-					    xAxis: {
-					        categories: that.categories,
-					        tickInterval: 1
-					    },
-					    yAxis: {
-					        title: {
-					            text: ''
-					        },
-					        minPadding:0,
-					        startOnTick:false
-					    },
-					    legend: {
-					        layout: 'vertical',
-					        align: 'right',
-					        verticalAlign: 'middle'
-					    },
-					    plotOptions: {
-					        series: {
-					            label: {
-					                connectorAllowed: false
-					            },
-					            pointStart: 2010
-					        }
-					    },
-					    series: [{
-					        name: 'Revenue',
-					        data: that.revenue
-					    }, {
-					        name: 'Cost',
-					        data: that.cost
-					    }, {
-					        name: 'Profit',
-					        data: that.profit
-					    }, {
-					        name: 'ROI',
-					        data: that.roi
-					    }, {
-					        name: 'Visits',
-					        data: that.visits
-					    }, {
-					        name: 'Clicks',
-					        data: that.clicks
-					    }],
-					    responsive: {
-					        rules: [{
-					            condition: {
-					                maxWidth: 500
-					            },
-					            chartOptions: {
-					                legend: {
-					                    layout: 'horizontal',
-					                    align: 'center',
-					                    verticalAlign: 'bottom'
-					                }
-					            }
-					        }]
-					    }
-		     })
-				});
-			});	*/
-			
 		},
 		methods:{
 			

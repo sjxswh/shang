@@ -1,28 +1,28 @@
 <template>
 	<div class="cs-time-range">
 		<div class="time-range-title">Campaigns that were</div>
-		<select>
-			<option>Active</option>
-			<option>Archived</option>
+		<select  @touchstart="actives($event)">
+			<option selected :data-id="1">Active</option>
+			<option :data-id="0">Archived</option>
 			<option>With Traffic</option>
-			<option>All</option>
+			<option :data-id="2">All</option>
 		</select>
 		<div class="time-range-title">Timezone</div>
 		<select>
-			<option v-for="data in timezones">{{data.name}}</option>
+			<option v-for="data in timezones" style="word-break:break-all;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{data.name}}</option>
 		</select>
 		<div class="time-range-title">In</div>
 		<select>
-			<option>Today</option>
-			<option>Yesterday</option>
-			<option>Last 7 Days</option>
-			<option>Last 14 Days</option>
-			<option>This week</option>
-			<option>This Month</option>
+			<option selected data-ins="0">Today</option>
+			<option data-ins="1">Yesterday</option>
+			<option data-ins="2">Last 7 Days</option>
+			<option data-ins="3">Last 14 Days</option>
+			<option data-ins="4">This week</option>
+			<option data-ins="5">This Month</option>
 		</select>
 		<div class="time-range-select">
-			<span @click="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>
-			<span @click="openPickers();clickDate()">{{Years}}/{{Months}}/{{Datess}}</span>
+			<span @touchstart="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>
+			<span @touchstart="openPickers();clickDate()">{{Years}}/{{Months}}/{{Datess}}</span>
 		</div>
 		   <mt-datetime-picker
 		   	  ref="picker"
@@ -64,7 +64,11 @@
 				Datess:"",
 				timezones:"",
 				timeS:"",
-				vModal:""
+				vModal:"",
+				tokenCookie:[],
+		     tokenCookies:[],
+		     tokenname:"token",
+		     token:"",
 			}
 		},
 		methods: {
@@ -87,7 +91,14 @@
 		   		this.Datess = this.pickerVisibles.getDate()
 		   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 		   		console.log(1)
-		   	}
+		   	},
+	      actives (ev) {
+	      	/*console.log()
+	      	var obj=document.getElementById('mySelect');
+					var items=document.getElementById("sect").options;//获取select的所有option
+					var index=obj.selectedIndex; //序号，取当前选中选项的序号
+					var val = obj.options[index].value;*/
+	      }
 	    },
 	   mounted () {
 	   	let that = this
@@ -106,9 +117,22 @@
    	  this.vModal = document.getElementsByClassName("mint-datetime-confirm")[0]
    	  console.log(this.vModal)
 	   	this.vModal.addEventListener("click",this.clickDate)
+	   	
+	   	this.tokenname = this.tokenname + '='
+			this.tokenCookie=document.cookie.split(";")
+			for(var i = 0; i < this.tokenCookie.length; i++){
+				this.tokenCookies = this.tokenCookie[i]
+				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
+    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
+    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
+    		}
+			}
 		  this.$ajax({
 			  method: "get",
 			  url:"http://beta.newbidder.com/timezones",
+			  params:{
+			  	token:this.token
+			  }
 			}).then((data) => {
 			    that.timezones = data.data.data.timezones
 			});

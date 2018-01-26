@@ -13,8 +13,13 @@ var Mutation = {
 		state.data = data
 	},
 	DrillDowns (state,data) {
-		state.groupBy = data
-		console.log(data)
+		state.switchSta = data
+	},
+	DrillDownss (state,data) {
+		state.timeZone = data
+	},
+	DrillDownsss (state,data) {
+		state.dayIn = data
 	}
 }
 

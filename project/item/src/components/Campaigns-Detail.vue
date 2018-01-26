@@ -25,10 +25,10 @@
 						<span>pause/Resume</span>
 					</p>
 					<p class="campaigns-pause">
-						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 1" v-model="active" class="play"></mt-switch>
-						<mt-switch v-if="dataList['deleted'] == 0 && dataList['integrations'] == 0" v-model="active" disabled></mt-switch>
-						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
-						<mt-switch v-if="dataList['deleted'] == 1 && dataList['integrations'] == 0" v-model="archived" disabled></mt-switch>
+						<mt-switch v-if="Data['deleted'] == 0 && Data['integrations'] == 1" v-model="active" class="play"></mt-switch>
+						<mt-switch v-if="Data['deleted'] == 0 && Data['integrations'] == 0" v-model="active" disabled></mt-switch>
+						<mt-switch v-if="Data['deleted'] == 1 && Data['integrations'] == 1" v-model="archived" class="puse"></mt-switch>
+						<mt-switch v-if="Data['deleted'] == 1 && Data['integrations'] == 0" v-model="archived" disabled></mt-switch>
 					</p>
 				</div>
 				<div class="campaigns-info">
@@ -160,6 +160,9 @@
 		     tokenCookies:[],
 		     tokenname:"data",
 		     Data:"",
+		     switchSta:"",
+		     timeZone:"",
+		     dayIn:"",
 		    }
 		},
 		mounted(){
@@ -170,9 +173,29 @@
 				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
     		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
     			this.Data = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)))
-    			console.log(this.Data)
     		}
 			}
+			/*this.$ajax({
+			  method: "get",
+			  params:{
+			  	campaign:this.Data.id
+			  	authorization:that.token,
+			  	filter:that.search,
+					from:that.from["from"],
+					groupBy:"campaign",
+					limit:50,
+					order:"-visits",
+					page:1,
+					status:2,
+					tag:"",
+					to:that.from["to"],
+					tz:that.timezone
+			  },
+			  url:"http://beta.newbidder.com/api/report",
+			}).then((data) => {
+				console.log(data)
+			    this.dataList = data.data.data.rows;
+			});*/
 		},
 		methods:{
 			back () {
@@ -207,7 +230,8 @@
 	  	detele (ev) {
 	  		ev.target.parentNode.remove()
 	  	}
-		}
+		},
+		
 	}
 </script>
 

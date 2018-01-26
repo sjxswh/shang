@@ -103,15 +103,60 @@
 				console.log(this.$store.state.data)
 				return this.from = this.$store.state.data
 			},
-			DrillDowns () {
+			/*dateTime () {
 				console.log(this.$store.state.groupBy)
 				return this.groupBy = this.$store.state.groupBy
-			}
+			}*/
 		},
 		watch: {
-			DrillDowns(newVal,oldVal){
-				
-			},
+			/*dateTime(newVal,oldVal){
+				this.search = document.getElementById("search").value
+				var that = this
+				this.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:that.token
+				  },
+				  url:"http://beta.newbidder.com/api/profile",
+				}).then((data) => {
+				   console.log(data)
+				   that.timezone = data.data.data.timezone
+				   that.$ajax({
+					  method: "get",
+					  params:{
+					  	authorization:that.token,
+					  	filter:that.search,
+							from:that.from["from"],
+							groupBy:that.groupBy,
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:2,
+							tag:"",
+							to:that.from["to"],
+							tz:that.timezone
+					  },
+					  url:"http://beta.newbidder.com/api/report",
+					}).then(function (data) {
+						console.log(data)
+					    that.dataList = data.data.data.rows;
+					    that.dataList.forEach((item)=>{
+					    	if(item.deleted == 0 && item.status == 1){
+					    		item.active = true
+					    	}
+					    	if(item.deleted == 0 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 1){
+					    		item.active = false
+					    	}
+					    })
+					});
+				});	
+			},*/
 			getSevenDate (newVal,oldVal) {
 				this.search = document.getElementById("search").value
 				this.from = newVal
@@ -176,52 +221,7 @@
     		}
 			}
 			console.log(this.groupBy)
-				this.search = document.getElementById("search").value
-				var that = this
-				this.$ajax({
-				  method: "get",
-				  params:{
-				  	authorization:that.token
-				  },
-				  url:"http://beta.newbidder.com/api/profile",
-				}).then((data) => {
-				   console.log(data)
-				   that.timezone = data.data.data.timezone
-				   that.$ajax({
-					  method: "get",
-					  params:{
-					  	authorization:that.token,
-					  	filter:that.search,
-							from:that.from["from"],
-							groupBy:that.groupBy,
-							limit:50,
-							order:"-visits",
-							page:1,
-							status:2,
-							tag:"",
-							to:that.from["to"],
-							tz:that.timezone
-					  },
-					  url:"http://beta.newbidder.com/api/report",
-					}).then(function (data) {
-						console.log(data)
-					    that.dataList = data.data.data.rows;
-					    that.dataList.forEach((item)=>{
-					    	if(item.deleted == 0 && item.status == 1){
-					    		item.active = true
-					    	}
-					    	if(item.deleted == 0 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 1){
-					    		item.active = false
-					    	}
-					    })
-					});
-				});	
+				
 		},
 		methods: {
 			inpVal () {

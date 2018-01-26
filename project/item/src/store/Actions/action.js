@@ -14,8 +14,14 @@ var Action = {
 	getSevenDate (store,data) {
 		this.commit("getSevenDate",data)
 	},
-	DrillDowns (DrillDowns,data) {
+	DrillDowns (store,data) {
 		this.commit("DrillDowns",data)
+	},
+	DrillDownss (store,data) {
+		this.commit("DrillDownss",data)
+	},
+	DrillDownsss (store,data) {
+		this.commit("DrillDownsss",data)
 	}
 }
 

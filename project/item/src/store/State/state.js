@@ -3,7 +3,9 @@ var State = {
 	loginShow:[],
 	campaignsShow:[],
 	data:{},
-	groupBy:""
+	switchSta:"",
+	timeZone:"",
+	dayIn:""
 }
 
 export default State

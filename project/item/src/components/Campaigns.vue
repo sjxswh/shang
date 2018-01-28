@@ -1,6 +1,15 @@
 <template>
 	<div class="cs-campaigns">
-		<home-select></home-select>
+		<div class="home-select">
+			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
+				<router-link to="/SelectRange">
+					<div>
+						<span>Data range(7 days)</span>
+						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
+					</div>
+				</router-link>
+			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
+		</div>	
 		<div style="border: .06rem solid #e4e8f1;border-bottom: none;">
 			<div class="campaigns-select">
 				<span class="iconfont icon-sousuo1-copy" @touchstart="inpVal"></span>
@@ -81,14 +90,14 @@
 		data () {
 			return {
 				tokenCookie:[],
-		     tokenCookies:[],
-		     tokenname:"token",
-		     token:"",
+		    tokenCookies:[],
+		    tokenname:"token",
+		    token:"",
 				dataList:[],
 				timezone:"",
 				active:true,
 				archived:false,
-				from:"",
+				from:{},
 				search:"",
 				playSw:"",
 				dataId:"",
@@ -96,68 +105,27 @@
 				status:"",
 				Data:"",
 				groupBy:"",
+				nowDate:"",
+		     Date:"",
+		     Year:"",
+		     Month:"",
+		     Dates:"",
+		     Years:"",
+		     Months:"",
+		     Datess:"",
+		     Data:"",
 			}
 		},
 		computed:{
 			getSevenDate(){
 				console.log(this.$store.state.data)
-				return this.from = this.$store.state.data
+				this.from = this.$store.state.data
 			},
-			/*dateTime () {
-				console.log(this.$store.state.groupBy)
-				return this.groupBy = this.$store.state.groupBy
-			}*/
+			
 		},
 		watch: {
-			/*dateTime(newVal,oldVal){
-				this.search = document.getElementById("search").value
-				var that = this
-				this.$ajax({
-				  method: "get",
-				  params:{
-				  	authorization:that.token
-				  },
-				  url:"http://beta.newbidder.com/api/profile",
-				}).then((data) => {
-				   console.log(data)
-				   that.timezone = data.data.data.timezone
-				   that.$ajax({
-					  method: "get",
-					  params:{
-					  	authorization:that.token,
-					  	filter:that.search,
-							from:that.from["from"],
-							groupBy:that.groupBy,
-							limit:50,
-							order:"-visits",
-							page:1,
-							status:2,
-							tag:"",
-							to:that.from["to"],
-							tz:that.timezone
-					  },
-					  url:"http://beta.newbidder.com/api/report",
-					}).then(function (data) {
-						console.log(data)
-					    that.dataList = data.data.data.rows;
-					    that.dataList.forEach((item)=>{
-					    	if(item.deleted == 0 && item.status == 1){
-					    		item.active = true
-					    	}
-					    	if(item.deleted == 0 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 1){
-					    		item.active = false
-					    	}
-					    })
-					});
-				});	
-			},*/
-			getSevenDate (newVal,oldVal) {
+			from (newVal,oldVal){
+				console.log(newVal)
 				this.search = document.getElementById("search").value
 				this.from = newVal
 				var that = this
@@ -175,14 +143,14 @@
 					  params:{
 					  	authorization:that.token,
 					  	filter:that.search,
-							from:that.from["from"],
+							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 							groupBy:"campaign",
 							limit:50,
 							order:"-visits",
 							page:1,
 							status:2,
 							tag:"",
-							to:that.from["to"],
+							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
 					  url:"http://beta.newbidder.com/api/report",
@@ -206,9 +174,9 @@
 					});
 				});	
 			},
-			active (val,oldval){
-          console.log(this.active)
-      },
+			getSevenDate (newVal,oldVal) {
+				
+			},
 		},
 		mounted(){
 			this.tokenname = this.tokenname + '='
@@ -220,8 +188,21 @@
     			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
     		}
 			}
-			console.log(this.groupBy)
-				
+			/*this.Date = new Date()
+			this.Month = this.Date.getMonth()+1
+			this.Month = this.Month<10?"0"+this.Month:this.Month
+			this.from = {
+				"year":this.Date.getFullYear(),
+				"month":this.Month,
+				"date":this.Date.getDate(),
+				"years":this.Date.getFullYear(),
+				"months":this.Month,
+				"dates":this.Date.getDate()
+			}*/
+			console.log(this.from)
+			this.nowDate = new Date()
+			this.Time = this.nowDate.getTime()-604800000 + 86400000
+			this.Times = this.nowDate.getTime()+86400000
 		},
 		methods: {
 			inpVal () {
@@ -241,14 +222,14 @@
 					  params:{
 					  	authorization:that.token,
 					  	filter:that.search,
-							from:that.from["from"],
+							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 							groupBy:"campaign",
 							limit:20,
 							order:"-visits",
 							page:1,
 							status:2,
 							tag:"",
-							to:that.from["to"],
+							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
 					  url:"http://beta.newbidder.com/api/report",
@@ -259,12 +240,13 @@
 				});	
 			},
 			plays (ev) {
+				console.log(1)
 					this.dataId = ev.target.getAttribute("data-id")
 					this.dataTrue = ev.target.getAttribute("data-ins")
 					if(this.dataTrue == 1){
 						this.status = 0
 					}
-					else if(this.dataTrue == 0){
+					else{
 						this.status = 1
 					}
 				var that = this
@@ -289,6 +271,58 @@
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
 				document.cookie = 'data=' + encodeURIComponent(this.Data) + ';expires=' + oDate + ';path=/';
+			},
+			reduceDate(){
+				this.Time = this.Time - 604800000
+				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Year = this.Date.split("/")[0]
+				this.Month = this.Date.split("/")[1]
+				this.Month = this.Month<10? "0"+this.Month:this.Month
+				this.Dates = this.Date.split("/")[2]
+				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+				this.Times = this.Times - 604800000
+				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.Years = this.date.split("/")[0]
+				this.Months = this.date.split("/")[1]
+				this.Months = this.Months<10? "0"+this.Months:this.Months
+				this.Datess = this.date.split("/")[2]
+				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+					}
+				console.log(this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)
+			},
+			addDate(){
+				this.Time = this.Time + 604800000
+				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Year = this.Date.split("/")[0]
+				this.Month = this.Date.split("/")[1]
+				this.Month = this.Month<10? "0"+this.Month:this.Month
+				this.Dates = this.Date.split("/")[2]
+				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+				this.Times = this.Times + 604800000
+				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.Years = this.date.split("/")[0]
+				this.Months = this.date.split("/")[1]
+				this.Months = this.Months<10? "0"+this.Months:this.Months
+				this.Datess = this.date.split("/")[2]
+				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+					}
+				console.log(this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		},
 	}

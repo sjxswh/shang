@@ -22,7 +22,7 @@ var Action = {
 	},
 	DrillDownsss (store,data) {
 		this.commit("DrillDownsss",data)
-	}
+	},
 }
 
 export default Action

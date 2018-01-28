@@ -12,7 +12,7 @@
 			<option v-for="(item,index) in timezones" :data-ids="item.utcShift">{{item.name}}</option>
 		</select>
 		<div class="time-range-title">In</div>
-		<select @change="activesss($event)">
+		<select>
 			<option selected :data-ins="0">Today</option>
 			<option :data-ins="1">Yesterday</option>
 			<option :data-ins="2">Last 7 Days</option>
@@ -21,8 +21,8 @@
 			<option :data-ins="5">This Month</option>
 		</select>
 		<div class="time-range-select">
-			<span @touchstart="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>
-			<span @touchstart="openPickers();clickDate()">{{Years}}/{{Months}}/{{Datess}}</span>
+			<span @click="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>
+			<span @click="openPickers();clickDate()">{{Years}}/{{Months}}/{{Datess}}</span>
 		</div>
 		   <mt-datetime-picker
 		   	  ref="picker"
@@ -72,7 +72,9 @@
 		     objS:"",
 		     switchSta:"",
 		     timeZone:"",
-		     dayIn:""
+		     dayIn:"",
+		     ss:"123",
+		     Data:{}
 			}
 		},
 		methods: {
@@ -93,8 +95,19 @@
 		   		this.Months = this.Months<10?"0"+this.Months:this.Months
 		   		this.Datess = this.pickerVisibles.getDate()
 		   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+		   		this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+						
+					}
+					this.$store.dispatch("getSevenDate",this.Data)
 		   	},
 	      actives (ev) {
+	      	this.ss = "000"
 	      	this.objS = ev.target;
 	      	//console.log(ev.target.value)
 					//this.$store.dispatch("DrillDowns",objS.value)
@@ -104,6 +117,16 @@
 							this.objS.options[i].setAttribute("selected","selected");
 							this.switchSta = this.objS.options[i].getAttribute("data-id")
 							this.$store.dispatch("DrillDowns",this.switchSta)
+							this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+								
+							}
+							this.$store.dispatch("getSevenDate",this.Data)
 						}
 					}
 	      },
@@ -119,7 +142,7 @@
 						}
 					}
 	      },
-	      activesss (ev) {
+	      /*activesss (ev) {
 	      	this.objS = ev.target;
 					//this.$store.dispatch("DrillDowns",objS.value)
 	        for(var i=0;i<this.objS.options.length;i++){
@@ -144,7 +167,7 @@
 							}
 						}
 					}
-	      }
+	      }*/
 	    },
 	    watch: {
 				
@@ -164,10 +187,18 @@
    		this.Datess = this.pickerVisibles.getDate()+1
    		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
    		window.addEventListener("click",this.activesss)
-	   	//this.$store.dispatch("dataTime",this.objS.value)
+	   this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+					}
+			this.$store.dispatch("getSevenDate",this.Data)
 	   	this.vModal = Array.from(document.getElementsByClassName("mint-datetime-confirm"))
    	  this.vModal.forEach((v,k)=>{
-   	  	v.addEventListener("touchstart",this.clickDate)
+   	  	v.addEventListener("click",this.clickDate)
    	  })
 	   	this.tokenname = this.tokenname + '='
 			this.tokenCookie=document.cookie.split(";")

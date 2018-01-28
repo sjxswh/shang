@@ -1,6 +1,15 @@
 <template>
 	<div class="cs-dashboard" :getSevenDate="getSevenDate">
-		<home-select></home-select>
+		<div class="home-select">
+			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
+				<router-link to="/SelectRange">
+					<div>
+						<span>Data range(7 days)</span>
+						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
+					</div>
+				</router-link>
+			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
+		</div>	
 		<div >
 			<ul style="border: .06rem solid #e4e8f1;border-bottom: none;">
 				<li>
@@ -50,10 +59,15 @@
 		    	totals:"",
 		     date:"",
 		     timezone:"",
-		     Years:"",
-		     Month:"",
+		     nowDate:"",
 		     Date:"",
-		     day:"",
+		     Year:"",
+		     Month:"",
+		     Dates:"",
+		     Years:"",
+		     Months:"",
+		     Datess:"",
+		     Data:"",
 		     revenue:[],
 		     cost:[],
 		     profit:[],
@@ -67,15 +81,17 @@
 		     tokenname:"token",
 		     token:"",
 		     from:"",
+		     
 		    }
 		},
 		computed:{
 			getSevenDate(){
-				return this.from = this.$store.state.data
+				this.from = this.$store.state.data
 			}
 		},
 		watch: {
-			getSevenDate (newVal,oldVal) {
+			from(newVal,oldVal){
+				console.log(newVal)
 				var that = this
 				this.from = newVal;
 				this.$ajax({
@@ -92,13 +108,13 @@
 				  method: "get",
 				  params:{
 				  	authorization:that.token,
-				  	from:that.from["from"],
+				  	from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 				  	limit:7,
 				  	groupBy:"day",
 				  	order:"+day",
 				  	page:1,
 				  	status:1,
-				  	to:that.from["to"],
+				  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 				  	tz:that.timezone
 				  },
 				  url:"http://beta.newbidder.com/api/report",
@@ -189,6 +205,9 @@
 		     })
 				});
 			});	
+			},
+			getSevenDate (newVal,oldVal) {
+				
 			}
 		},
 		mounted(){
@@ -201,9 +220,74 @@
     			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
     		}
 			}
+			/*this.Date = new Date()
+			this.Month = this.Date.getMonth()+1
+			this.Month = this.Month<10?"0"+this.Month:this.Month
+			this.from = {
+				"year":this.Date.getFullYear(),
+				"month":this.Month,
+				"date":this.Date.getDate(),
+				"years":this.Date.getFullYear(),
+				"months":this.Month,
+				"dates":this.Date.getDate()
+			}*/
+			this.nowDate = new Date()
+			this.Time = this.nowDate.getTime()-604800000 + 86400000
+			this.Times = this.nowDate.getTime()+86400000
 		},
 		methods:{
-			
+			reduceDate(){
+				this.Time = this.Time - 604800000
+				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Year = this.Date.split("/")[0]
+				this.Month = this.Date.split("/")[1]
+				this.Month = this.Month<10? "0"+this.Month:this.Month
+				this.Dates = this.Date.split("/")[2]
+				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+				this.Times = this.Times - 604800000
+				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.Years = this.date.split("/")[0]
+				this.Months = this.date.split("/")[1]
+				this.Months = this.Months<10? "0"+this.Months:this.Months
+				this.Datess = this.date.split("/")[2]
+				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+					}
+				console.log(this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)
+			},
+			addDate(){
+				this.Time = this.Time + 604800000
+				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Year = this.Date.split("/")[0]
+				this.Month = this.Date.split("/")[1]
+				this.Month = this.Month<10? "0"+this.Month:this.Month
+				this.Dates = this.Date.split("/")[2]
+				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+				this.Times = this.Times + 604800000
+				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.Years = this.date.split("/")[0]
+				this.Months = this.date.split("/")[1]
+				this.Months = this.Months<10? "0"+this.Months:this.Months
+				this.Datess = this.date.split("/")[2]
+				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+				this.Data = {
+						"year":this.Year,
+						"month":this.Month,
+						"date":this.Dates,
+						"years":this.Years,
+						"months":this.Months,
+						"dates":this.Datess,
+					}
+				console.log(this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)
+			}
 		},
 		
 		

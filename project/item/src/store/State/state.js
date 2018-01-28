@@ -5,7 +5,8 @@ var State = {
 	data:{},
 	switchSta:"",
 	timeZone:"",
-	dayIn:""
+	dayIn:"",
+	dataTime:{}
 }
 
 export default State

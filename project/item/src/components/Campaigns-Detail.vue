@@ -175,6 +175,7 @@
     			this.Data = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)))
     		}
 			}
+			console.log(this.$store.state.switchSta)
 			/*this.$ajax({
 			  method: "get",
 			  params:{

@@ -20,7 +20,7 @@ var Mutation = {
 	},
 	DrillDownsss (state,data) {
 		state.dayIn = data
-	}
+	},
 }
 
 export default Mutation

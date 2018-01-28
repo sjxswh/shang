@@ -1,5 +1,5 @@
 <template>
-<div class="home-select">
+	<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
 				<router-link to="/SelectRange">
 					<div>
@@ -49,11 +49,11 @@
 			this.Months = this.Months<10? "0"+this.Months:this.Months
 			this.Datess = this.date.split("/")[2]
 			this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-			this.Data = {
+			/*this.Data = {
 				"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
 				"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
 			}
-			this.$store.dispatch("getSevenDate",this.Data)
+			this.$store.dispatch("getSevenDate",this.Data)*/
 		},
 		methods:{
 			reduceDate(){
@@ -71,11 +71,11 @@
 				this.Months = this.Months<10? "0"+this.Months:this.Months
 				this.Datess = this.date.split("/")[2]
 				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
+				/*this.Data = {
 					"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
 					"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
 				}
-				this.$store.dispatch("getSevenDate",this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)*/
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
@@ -92,11 +92,11 @@
 				this.Months = this.Months<10? "0"+this.Months:this.Months
 				this.Datess = this.date.split("/")[2]
 				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
+				/*this.Data = {
 					"from":this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
 					"to":this.Years+"-"+this.Months+"-"+this.Datess+"T00:00"
 				}
-				this.$store.dispatch("getSevenDate",this.Data)
+				this.$store.dispatch("getSevenDate",this.Data)*/
 			}
 		}
 	}

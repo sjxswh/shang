@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+button, input {
+    line-height: normal;
+}
+
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+}
+
+blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+ol, ul {
+    list-style: none;
+}
+
+.pcdd_number {
+    font-size: 20px;
+    width: 297px;
+height:54px;
+	line-height:1;
+        padding-top: 14px;
+	 padding-left:5px;
+	
+}
+.pcdd_number b {
+    font-size: 14px;
+    color:#808080;
+    font-weight: bold;
+    line-height: 20px;
+}
+.pcdd_number li {
+    float: left;
+    width: 21px;
+    height: 27px;
+    text-align: center;
+    line-height: 27px;
+    color: #db0100;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #dddddd;
+    margin: 0 2px;
+}
+
+.pcdd_number li.pcdd_num {
+    background: url(/img/number_line.png) repeat-x;
+}
+
+
+
+
+.pcdd_number .pcdd_nobor {
+    background: none;
+    border: 0;
+}
+ .pcdd_number li cite {
+    position: absolute;
+    width: 21px;
+    left: 0;
+}
+.pcdd_number li cite em {
+    display: block;
+     font-style:normal;
+}

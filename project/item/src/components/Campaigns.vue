@@ -59,16 +59,16 @@
 						<a href="javascript:;"  @touchstart="LinksHrf($event)">
 							<div class="campaigns-info" :data="JSON.stringify(data)">
 								<div :data="JSON.stringify(data)">
-									<p>Revenue</p>
-									<span>${{data["revenue"]}}</span>
-									<p>Profit</p>
-									<em>${{data["profit"]}}</em>
+									<p :data="JSON.stringify(data)">Revenue</p>
+									<span :data="JSON.stringify(data)">${{data["revenue"]}}</span>
+									<p :data="JSON.stringify(data)">Profit</p>
+									<em :data="JSON.stringify(data)">${{data["profit"]}}</em>
 								</div>
 								<div :data="JSON.stringify(data)">
-									<p>ROI</p>
-									<em>{{data["roi"]}}%</em>
-									<p>Cost</p>
-									<span>${{data["cost"]}}</span>
+									<p :data="JSON.stringify(data)">ROI</p>
+									<em :data="JSON.stringify(data)">{{data["roi"]}}%</em>
+									<p :data="JSON.stringify(data)">Cost</p>
+									<span :data="JSON.stringify(data)">${{data["cost"]}}</span>
 								</div>
 							</div>
 						</a>
@@ -113,7 +113,9 @@
 		     Years:"",
 		     Months:"",
 		     Datess:"",
-		     Data:"",
+		     Time:"",
+		     Times:"",
+		     data:""
 			}
 		},
 		computed:{
@@ -128,6 +130,7 @@
 				console.log(newVal)
 				this.search = document.getElementById("search").value
 				this.from = newVal
+				console.log(this.from.status)
 				var that = this
 				this.$ajax({
 				  method: "get",
@@ -148,7 +151,7 @@
 							limit:50,
 							order:"-visits",
 							page:1,
-							status:2,
+							status:that.from.status,
 							tag:"",
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
@@ -188,18 +191,6 @@
     			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
     		}
 			}
-			/*this.Date = new Date()
-			this.Month = this.Date.getMonth()+1
-			this.Month = this.Month<10?"0"+this.Month:this.Month
-			this.from = {
-				"year":this.Date.getFullYear(),
-				"month":this.Month,
-				"date":this.Date.getDate(),
-				"years":this.Date.getFullYear(),
-				"months":this.Month,
-				"dates":this.Date.getDate()
-			}*/
-			console.log(this.from)
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000
@@ -266,13 +257,14 @@
             path: 'CampaignsDetail', 
         })
        console.log(ev.target)
-				 this.Data = ev.target.getAttribute("data")
-				 console.log(this.Data)
+				 this.data = ev.target.getAttribute("data")
+				 console.log(this.data)
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'data=' + encodeURIComponent(this.Data) + ';expires=' + oDate + ';path=/';
+				document.cookie = 'data=' + encodeURIComponent(this.data) + ';expires=' + oDate + ';path=/';
 			},
 			reduceDate(){
+				console.log(this.$store.state.data)
 				this.Time = this.Time - 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
 				this.Year = this.Date.split("/")[0]
@@ -294,6 +286,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
+						"status":1
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -320,6 +313,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
+						"status":1
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)

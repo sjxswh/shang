@@ -14,28 +14,33 @@
 			<ul style="border: .06rem solid #e4e8f1;border-bottom: none;">
 				<li>
 					<p>Revenue</p>
-					<span>${{ totals["revenue"] }}</span>
+					<span v-if="totals['revenue'] == 'null' ">$0</span>
+					<span v-if="totals['revenue'] != 'null' ">${{ totals["revenue"] }}</span>
 				</li>
 				<li>
 					<p>Cost</p>
-					<span>${{ totals["cost"] }}</span>
+					<span v-if="totals['cost'] == 'null' ">$0</span>
+					<span v-if="totals['cost'] != 'null' ">${{ totals["cost"] }}</span>
 				</li>
 				<li>
 					<p>Profit</p>
-					<span style="color: #CCCCCC;">${{ totals["profit"] }}</span>
+					<span style="color: #CCCCCC;" v-if="totals['profit'] != 'null' ">${{ totals["profit"] }}</span>
+					<span style="color: #CCCCCC;" v-if="totals['profit'] == 'null' ">$0</span>
 				</li>
 				<li>
 					<p>ROI</p>
-					<span style="color: #CCCCCC;" v-if="totals['roi'] != 'null' ">0%</span>
-					<span style="color: #CCCCCC;" v-if="totals['roi'] == 'null' ">{{ totals["roi"] }}%</span>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] == 'null' ">0%</span>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] != 'null' ">{{ totals["roi"] }}%</span>
 				</li>
 				<li>
 					<p>Visits</p>
-					<span>{{ totals["visits"] }}</span>
+					<span v-if="totals['visits'] == 'null' ">0</span>
+					<span v-if="totals['visits'] != 'null' ">{{ totals["visits"] }}</span>
 				</li>
 				<li>
 					<p>Clicks</p>
-					<span>{{ totals["clicks"] }}</span>
+					<span v-if="totals['clicks'] == 'null' ">0</span>
+					<span v-if="totals['clicks'] != 'null' ">{{ totals["clicks"] }}</span>
 				</li>
 			</ul>
 			<div :id="id"></div>
@@ -81,7 +86,7 @@
 		     tokenname:"token",
 		     token:"",
 		     from:"",
-		     
+		     params:{}
 		    }
 		},
 		computed:{
@@ -103,10 +108,8 @@
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
-			   that.day = "+day"
-			   that.$ajax({
-				  method: "get",
-				  params:{
+			   if(that.from.dates - that.from.date>1 && that.from.dates - that.from.date<14){
+					this.params = {
 				  	authorization:that.token,
 				  	from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 				  	limit:7,
@@ -116,9 +119,27 @@
 				  	status:1,
 				  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 				  	tz:that.timezone
-				  },
-				  url:"http://beta.newbidder.com/api/report",
-				}).then(function (data) {
+					}
+				}
+				console.log(that.token)
+					if(that.from.dates - that.from.date == 1){
+						this.params = {
+					  	authorization:this.token,
+					  	from:this.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
+					  	limit:24,
+					  	groupBy:"hour",
+					  	order:"hour",
+					  	page:1,
+					  	status:1,
+					  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
+					  	tz:that.timezone
+						}
+					}		
+					that.$ajax({
+					  method: "get",
+					  params:that.params,
+					  url:"http://beta.newbidder.com/api/report",
+					}).then(function (data) {
 				    console.log(data)
 				    that.totals = data.data.data.totals
 				    that.revenue = []
@@ -128,14 +149,24 @@
 				    that.visits = []
 				    that.clicks = []
 				    that.categories = []
-				    for(var i =0 ;i < data.data.data.rows.length; i++){
-				    	that.revenue[i]= data.data.data.rows[i]["revenue"]
-				    	that.cost[i]= data.data.data.rows[i]["cost"]
-				    	that.profit[i]= data.data.data.rows[i]["profit"]
-				    	that.roi[i]= data.data.data.rows[i]["roi"]
-				    	that.visits[i]= data.data.data.rows[i]["visits"]
-				    	that.clicks[i]= data.data.data.rows[i]["clicks"]
-				    	that.categories[i] = data.data.data.rows[i]["id"]
+				    if(data.data.data.rows.length > 0){
+					    for(var i =0 ;i < data.data.data.rows.length; i++){
+					    	that.revenue[i]=data.data.data.rows[i]["revenue"]
+					    	that.cost[i]= data.data.data.rows[i]["cost"]
+					    	that.profit[i]= data.data.data.rows[i]["profit"]
+					    	that.roi[i]= data.data.data.rows[i]["roi"]
+					    	that.visits[i]= data.data.data.rows[i]["visits"]
+					    	that.clicks[i]= data.data.data.rows[i]["clicks"]
+					    	that.categories[i] = data.data.data.rows[i]["categories"]
+					    }
+				    }else{
+				    	that.revenue[0]=0
+					    	that.cost[0]= 0
+					    	that.profit[0]= 0
+					    	that.roi[0]= 0
+					    	that.visits[0]= 0
+					    	that.clicks[0]= 0
+					    	that.categories[0] = that.from.years+"-"+that.from.months+"-"+that.from.date
 				    }
 				    console.log(that.categories)
 				    HighCharts.chart(that.id,{

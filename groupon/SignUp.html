@@ -68,11 +68,11 @@
 					<section class="ten push-one columns login-section">
 						<div class="module">
 							<h1 class="section-title">
-            Sign In
+            Sign Up
             <span>
               or
               <a id="signup-link" href="javascript:;" data-bhw="SignUpTitleLink" data-bhw-path="SignUpTitleLink">
-                Sign Up
+                Sign In
               </a>
             </span>
         </h1>
@@ -88,7 +88,7 @@
 													<input class="field-input" id="Account-input" type="text" data-bhc="email:email" tabindex="0" name="email" autocorrect="off" data-bhc-path="LoginForm|email:email">
 													<span class="icon icon-email"></span>
 												</div>
-												<p class="one" style="width: 100%;height: 20px;"></p>
+												<p class="one" style="width: 100%;height: 20px;">可用字母、数字及下划线，长度为6-20位</p>
 												<p  class="two" style="width: 100%;height: 20px;color: red;display: none;">可用字母、数字及下划线，长度为6-20位</p>
 												<div class="field gig-field" id="field-password-input">
 													<label for="email-input" class="twelve">登录密码</label>
@@ -96,6 +96,23 @@
 													<span class="icon icon-email"></span>
 												</div>
 												<p style="width: 100%;height: 20px;">长度6－15个字符</p>
+												<div class="field gig-field" id="field-passwords-input">
+													<label for="email-input" class="twelve">确认密码</label>
+													<input class="field-input" id="qpassword-input" type="password" data-bhc="email:email" tabindex="0" name="email" autocorrect="off" data-bhc-path="LoginForm|email:email">
+													<span class="icon icon-email"></span>
+												</div>
+												<p style="width: 100%;height: 20px;"></p>
+												<div class="field gig-field" id="field-email-input">
+													<label for="email-input" class="twelve">Email</label>
+													<input class="field-input" id="email-input" type="email" data-bhc="email:email" tabindex="0" name="email" autocorrect="off" data-bhc-path="LoginForm|email:email">
+													<span class="icon icon-email"></span>
+												</div>
+												<p style="width: 100%;height: 20px;"></p>
+												<div class="field gig-field" id="field-niname-input">
+													<label for="password-input" class="twelve">昵称</label>
+													<input class="field-input" id="niname-input" type="text" data-bhc="password:password" tabindex="0" name="password" data-bhc-path="LoginForm|password:password">
+													<span class="icon icon-key"></span>
+												</div>
 
 												<div class="field field-offset" id="field-forgot-password">
 													<a id="forgot-password-link" data-bhc="link:forgot-password" href="https://www.groupon.com/forgot_password" tabindex="" data-bhc-path="LoginForm|link:forgot-password">
@@ -107,7 +124,7 @@
 
 												<div class="field  field-offset" id="field-remember-me-checkbox">
 
-													<input id="remember-me-checkbox" type="checkbox" data-bhc="checkbox:remember_me" tabindex="0" name="remember_me" value="1" data-bhc-path="LoginForm|checkbox:remember_me">
+													<input id="remember-me-checkbox" type="checkbox" data-bhc="checkbox:remember_me" tabindex="0" name="remember_me" checked="true" value="1" data-bhc-path="LoginForm|checkbox:remember_me">
 
 													<label for="remember-me-checkbox">
         Keep me signed in on this computer
@@ -118,7 +135,7 @@
 
 											<fieldset class="buttons">
 												<div class="field">
-													<a href="javascript:;" class="buttonss btn-cta btn-large signin-btn">Sign In</a>
+													<a href="javascript:;" class="buttonss btn-cta btn-large signin-btn">Sign Up</a>
 												</div>
 											</fieldset>
 										</form>
@@ -177,26 +194,71 @@
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				var remember 
-				$('#remember-me-checkbox').eq(0).click(function(){
-					if($(this).attr("checked")){
-						remember = true
-					}
-					else{
-						$(this).removeAttr("checked")
-						remember = false
-					}
-				})
+				var Account = ""
+				 $("#Account-input").eq(0).blur(function(){
+				 	var r1=/^[a-zA-Z0-9_]{6,20}$/;
+				 	if(r1.test($(this).val())){
+				 		Account = $(this).val()
+				 		$.ajax({
+				 			type:"get",
+				 			url:"http://offerwall.newbidder.com/user/check_user_exist?username="+Account,
+				 			success:function(data){
+				 				console.log(data)
+				 			}
+				 		});
+				 	}
+				 	else{
+				 		
+				 	}
+				 })
+				 var password = ""
+				 $("#password-input").eq(0).blur(function(){
+				 		if($(this).val().length >= 6 && $(this).val().length <= 15){
+				 				password = $(this).val()
+				 			console.log(1)
+				 		}
+				 		else{
+				 			console.log(2)
+				 		}
+				 })
+				 var qpassword = ""
+				 $("#qpassword-input").eq(0).blur(function(){
+				 		if($(this).val().length >= 6 && $(this).val().length <= 15 &&password == $(this).val()){
+				 			qpassword = $(this).val()
+				 			console.log(1)
+				 		}
+				 		else{
+				 			console.log(2)
+				 		}
+				 })
+				 var email = ""
+				 $("#email-input").eq(0).blur(function(){
+				 	var r1=/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+				 	if(r1.test($(this).val())){
+				 		email = $(this).val()
+				 		console.log(1)
+				 		$.ajax({
+				 			type:"get",
+				 			url:"http://offerwall.newbidder.com/user/check_user_exist?email="+email,
+				 			success:function(data){
+				 				console.log(data)
+				 			}
+				 		});
+				 	}
+				 	else{
+				 		console.log(2)
+				 	}
+				 })
 				 $(".buttonss").eq(0).click(function(){
-				 	var Account = $("#Account-input").eq(0).val()
-				 	var password = $("#password-input").eq(0).val()
 				 		$.ajax({
 				 			type:"post",
-				 			url:"http://offerwall.newbidder.com/user/login",
+				 			url:"http://offerwall.newbidder.com/user/register/",
 				 			data:{
 				 				"username":Account,
 				 				"password":password,
-				 				"remember":remember,
+				 				"nickname":qpassword,
+				 				"email":email,
+				 				"invitename":""
 				 			},
 				 			success:function(data){
 				 				console.log(data)

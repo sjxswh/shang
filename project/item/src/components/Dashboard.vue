@@ -1,5 +1,8 @@
 <template>
 	<div class="cs-dashboard" :getSevenDate="getSevenDate">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
 				<router-link to="/SelectRange">
@@ -61,6 +64,7 @@
 		},
 		data () {
 		    return {
+		    	loading:true,
 		    	totals:"",
 		     date:"",
 		     timezone:"",
@@ -104,7 +108,7 @@
 			  params:{
 			  	authorization:that.token
 			  },
-			  url:"http://beta.newbidder.com/api/profile",
+			  url:"http://localhost:5000/api/profile",
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
@@ -112,10 +116,8 @@
 					this.params = {
 				  	authorization:that.token,
 				  	from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
-				  	limit:7,
 				  	groupBy:"day",
 				  	order:"+day",
-				  	page:1,
 				  	status:1,
 				  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 				  	tz:that.timezone
@@ -126,10 +128,8 @@
 						this.params = {
 					  	authorization:this.token,
 					  	from:this.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
-					  	limit:24,
 					  	groupBy:"hour",
 					  	order:"hour",
-					  	page:1,
 					  	status:1,
 					  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 					  	tz:that.timezone
@@ -138,9 +138,10 @@
 					that.$ajax({
 					  method: "get",
 					  params:that.params,
-					  url:"http://beta.newbidder.com/api/report",
+					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
 				    console.log(data)
+				    that.loading = false
 				    that.totals = data.data.data.totals
 				    that.revenue = []
 				    that.cost = []

@@ -31,7 +31,7 @@
 		  		var that = this
 				this.$ajax({
 				  method: "post",
-				  url:"http://beta.newbidder.com/auth/login",
+				  url:"http://localhost:5000/auth/login",
 	  			  data:{
 	  				 email: that.emailValue,
 					 		password:that.pwdValue

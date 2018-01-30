@@ -1,5 +1,8 @@
 <template>
 	<div class="cs-campaigns">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
 				<router-link to="/SelectRange">
@@ -16,25 +19,25 @@
 				<input type="text" placeholder="Search" id="search" style="outline: none;" />
 			</div>
 			<ul class="campaigns-content">
-				<li v-for="(data,index) in dataList">
-					<div class="campaigns-img">
-						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
+				<li v-for="(data,index) in dataList" :data="encodeURIComponent(JSON.stringify(data))">
+					<div class="campaigns-img" :data="encodeURIComponent(JSON.stringify(data))">
+						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+							<img src="../assets/img/1.jpg" width="100%" :data="encodeURIComponent(JSON.stringify(data))" />
 						</a>
 					</div>
-					<div class="campaigns-content-main">
-						<div class="campaigns-title">
-							<a href="javascript:;"  @touchstart="LinksHrf($event)">
-								<span :data="JSON.stringify(data)">{{data["campaignName"]}}</span>
+					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
+						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
+							<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["campaignName"]}}</span>
 							</a>
 							<span class="iconfont icon-gengduo"></span>
 						</div>
-						<div class="campaigns-switch">
-							<p>
-								<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-									<span><img src="../assets/img/2.jpg" :data="JSON.stringify(data)"/></span>
-									<span><img src="../assets/img/3.jpg" :data="JSON.stringify(data)"/></span>
-									<span :data="JSON.stringify(data)">pause/Resume</span>
+						<div class="campaigns-switch"  :data="encodeURIComponent(JSON.stringify(data))">
+							<p  :data="encodeURIComponent(JSON.stringify(data))">
+								<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+									<span><img src="../assets/img/2.jpg" :data="encodeURIComponent(JSON.stringify(data))"/></span>
+									<span><img src="../assets/img/3.jpg" :data="encodeURIComponent(JSON.stringify(data))"/></span>
+									<span :data="encodeURIComponent(JSON.stringify(data))">pause/Resume</span>
 								</a>
 							</p>
 							<p class="campaigns-pause"  @touchstart='plays($event)'>
@@ -44,31 +47,36 @@
 								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
-							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="puse" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
-							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="puse" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 1" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause"  @touchstart='plays($event)'>
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>
+							<p class="campaigns-pause">
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 1" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+								<p class="campaigns-pause">
+								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 						</div>
-						<a href="javascript:;"  @touchstart="LinksHrf($event)">
-							<div class="campaigns-info" :data="JSON.stringify(data)">
-								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">Revenue</p>
-									<span :data="JSON.stringify(data)">${{data["revenue"]}}</span>
-									<p :data="JSON.stringify(data)">Profit</p>
-									<em :data="JSON.stringify(data)">${{data["profit"]}}</em>
+						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">Revenue</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data["revenue"]}}</span>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Profit</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">${{data["profit"]}}</em>
 								</div>
-								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">ROI</p>
-									<em :data="JSON.stringify(data)">{{data["roi"]}}%</em>
-									<p :data="JSON.stringify(data)">Cost</p>
-									<span :data="JSON.stringify(data)">${{data["cost"]}}</span>
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">ROI</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">{{data["roi"]}}%</em>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Cost</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data["cost"]}}</span>
 								</div>
 							</div>
 						</a>
@@ -89,6 +97,7 @@
 		},
 		data () {
 			return {
+				loading:true,
 				tokenCookie:[],
 		    tokenCookies:[],
 		    tokenname:"token",
@@ -99,9 +108,6 @@
 				archived:false,
 				from:{},
 				search:"",
-				playSw:"",
-				dataId:"",
-				dataTrue:"",
 				status:"",
 				Data:"",
 				groupBy:"",
@@ -120,10 +126,8 @@
 		},
 		computed:{
 			getSevenDate(){
-				console.log(this.$store.state.data)
 				this.from = this.$store.state.data
 			},
-			
 		},
 		watch: {
 			from (newVal,oldVal){
@@ -137,7 +141,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://beta.newbidder.com/api/profile",
+				  url:"http://localhost:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   that.timezone = data.data.data.timezone
@@ -148,7 +152,7 @@
 					  	filter:that.search,
 							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 							groupBy:"campaign",
-							limit:50,
+							limit:500,
 							order:"-visits",
 							page:1,
 							status:that.from.status,
@@ -156,9 +160,10 @@
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://beta.newbidder.com/api/report",
+					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
 						console.log(data)
+						that.loading = false
 					    that.dataList = data.data.data.rows;
 					    that.dataList.forEach((item)=>{
 					    	if(item.deleted == 0 && item.status == 1){
@@ -204,7 +209,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://beta.newbidder.com/api/profile",
+				  url:"http://localhost:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   that.timezone = data.data.data.timezone
@@ -215,18 +220,33 @@
 					  	filter:that.search,
 							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 							groupBy:"campaign",
-							limit:20,
+							limit:500,
 							order:"-visits",
 							page:1,
-							status:2,
+							status:that.from.status,
 							tag:"",
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://beta.newbidder.com/api/report",
+					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
 						console.log(data)
+						that.loading = false
 					    that.dataList = data.data.data.rows
+					    that.dataList.forEach((item)=>{
+					    	if(item.deleted == 0 && item.status == 1){
+					    		item.active = true
+					    	}
+					    	if(item.deleted == 0 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 0){
+					    		item.active = false
+					    	}
+					    	if(item.deleted == 1 && item.status == 1){
+					    		item.active = false
+					    	}
+					    })
 					});
 				});	
 			},
@@ -236,9 +256,11 @@
 					this.dataTrue = ev.target.getAttribute("data-ins")
 					if(this.dataTrue == 1){
 						this.status = 0
+						ev.target.setAttribute("data-ins",this.status)
 					}
 					else{
 						this.status = 1
+						ev.target.setAttribute("data-ins",this.status)
 					}
 				var that = this
 				this.$ajax({
@@ -247,7 +269,7 @@
 				  	id:that.dataId,
 				  	status:that.status
 				  },
-				  url:"http://beta.newbidder.com/api/campaigns/"+that.dataId+"?authorization="+that.token,
+				  url:"http://localhost:5000/api/campaigns/"+that.dataId+"?authorization="+that.token,
 				}).then((data) => {
 					console.log(data)
 				});
@@ -261,7 +283,7 @@
 				 console.log(this.data)
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'data=' + encodeURIComponent(this.data) + ';expires=' + oDate + ';path=/';
+				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
 			},
 			reduceDate(){
 				console.log(this.$store.state.data)
@@ -286,7 +308,8 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1
+						"status":1,
+						"groupBy":"campaign"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -313,7 +336,8 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1
+						"status":1,
+						"groupBy":"campaign"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -334,6 +358,7 @@
 		width: 100%;
 		height: 90%;
 		font-size: .26rem;
+		font-family: "arial, helvetica, sans-serif";
 	}
 	.cs-campaigns .campaigns-select{
 		display: flex;
@@ -358,17 +383,17 @@
 	}
 	
 	.cs-campaigns .campaigns-img{
-		width: 20%;
+		width: 18%;
 	}
 	.cs-campaigns .campaigns-img a{
 		display: block;
 		width: 100%;
-		height: 50%;
+		height: 100%;
 		padding: 0 .2rem;
 		padding-top: 0;
 	}
 	.cs-campaigns .campaigns-content-main{
-		width:80% ;
+		width:82% ;
 		padding-right: .4rem;
 	}
 	.cs-campaigns .campaigns-title{

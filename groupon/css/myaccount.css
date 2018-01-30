@@ -76,7 +76,7 @@ area {
 }
 
 .account_left ul.accout_messeageW li.active {
-	background: url(../img/myaccount/pub/account-active.gif) no-repeat;
+	background: url(../img/account-active.gif) no-repeat;
 	display: block;
 	color: #785E02;
 	font-weight: bold;
@@ -95,21 +95,21 @@ area {
 
 .account_right_center {
 	width: 704px;
-	background: url(../img/myaccount/pub/account_right_bg.gif) repeat-y;
+	background: url(../img/account_right_bg.gif) repeat-y;
 	height: auto;
 	overflow: hidden;
 }
 
 .account_right_top {
 	width: 704px;
-	background: url(../img/myaccount/pub/account_right_top.gif) no-repeat;
+	background: url(../img/account_right_top.gif) no-repeat;
 	height: 6px;
 	overflow: hidden;
 }
 
 .account_right_bottom {
 	width: 704px;
-	background: url(../img/myaccount/pub/account_right_bottom.gif) no-repeat;
+	background: url(../img/account_right_bottom.gif) no-repeat;
 	height: 30px;
 	overflow: hidden;
 }
@@ -121,7 +121,7 @@ area {
 
 .account_right_messeageT {
 	width: 686px;
-	background: url(../images/messeage-bg.gif) repeat-x;
+	background: url(../img/messeage-bg.gif) repeat-x;
 	height: 31px;
 	line-height: 31px;
 	color: #CD0000;
@@ -1468,7 +1468,7 @@ ablack_enter:active {
 
 .pay_item.pay_ask h4 {
 	font-size: 12px;
-	background: url(../myaccount/img/order/go_pay.png) no-repeat 0 -81px;
+	background: url(../img/go_pay.png) no-repeat 0 -81px;
 	padding-left: 18px;
 	font-family: simsun;
 	position: relative;
@@ -1484,7 +1484,7 @@ ablack_enter:active {
 
 .pay_item.pay_ask dt {
 	padding: 0 50px 0 34px;
-	background: url(../myaccount/img/order/go_pay.png) #F5F5F5 no-repeat 0 -188px;
+	background: url(../img/go_pay.png) #F5F5F5 no-repeat 0 -188px;
 	height: 25px;
 	line-height: 25px;
 	font-weight: bold;
@@ -1495,7 +1495,7 @@ ablack_enter:active {
 
 .pay_item.pay_ask dd {
 	padding: 0 0 0 34px;
-	background: url(../myaccount/img/order/go_pay.png) #FFF no-repeat 0 -386px;
+	background: url(../img/go_pay.png) #FFF no-repeat 0 -386px;
 	line-height: 21px;
 	margin: 5px 0 20px 0;
 	overflow: hidden;
@@ -1505,7 +1505,7 @@ ablack_enter:active {
 
 .pay_item.pay_ask .return_icon {
 	display: inline-block;
-	background: url(../myaccount/img/order/go_pay.png) no-repeat -425px -158px;
+	background: url(../img/go_pay.png) no-repeat -425px -158px;
 	width: 12px;
 	height: 16px;
 	overflow: hidden;
@@ -1530,7 +1530,7 @@ ablack_enter:active {
 	right: 8px;
 	top: 4px;
 	overflow: hidden;
-	background: url(../myaccount/img/order/go_icon.png) no-repeat -312px -22px;
+	background: url(../img/go_icon.png) no-repeat -312px -22px;
 	width: 15px;
 	height: 18px;
 }
@@ -1970,7 +1970,7 @@ ablack_enter:active {
 
 .account_right_messeageT2 {
 	width: 686px;
-	background: url(../img/myaccount/pub/messeage-bg.gif) repeat-x;
+	background: url(../img/messeage-bg.gif) repeat-x;
 	height: 31px;
 	line-height: 31px;
 	color: #CD0000;

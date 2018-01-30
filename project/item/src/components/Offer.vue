@@ -1,13 +1,16 @@
 <template>
 	<div class="cs-offer">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
-				<a @touchstart="LinksHrf($event)">
+			<router-link to="/SelectRange">
 					<div>
 						<span>Data range(7 days)</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
-				</a>
+				</router-link>
 			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
 		</div>	
 		<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 90%;">
@@ -16,32 +19,32 @@
 				<input type="text" placeholder="Search" id="search" style="outline: none;" />
 			</div>
 			<ul class="campaigns-content">
-				<li v-for="data in dataList">
-					<div class="campaigns-img">
-						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
+				<li v-for="data in dataList" :data="encodeURIComponent(JSON.stringify(data))">
+					<div class="campaigns-img" :data="encodeURIComponent(JSON.stringify(data))">
+						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+							<img src="../assets/img/1.jpg" width="100%" :data="encodeURIComponent(JSON.stringify(data))" />
 						</a>
 					</div>
-					<div class="campaigns-content-main">
-						<div class="campaigns-title">
-							<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-								<span :data="JSON.stringify(data)">{{data["offerName"]}}</span>
+					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
+						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
+							<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["offerName"]}}</span>
 							</a>
 							<span class="iconfont icon-gengduo"></span>
 						</div>
-						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-							<div class="campaigns-info" :data="JSON.stringify(data)">
-								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)"v>Revenue</p>
-									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
-									<p :data="JSON.stringify(data)">Profit</p>
-									<em :data="JSON.stringify(data)">${{data.profit}}</em>
+						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
+							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">Revenue</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.revenue}}</span>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Profit</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.profit}}</em>
 								</div>
-								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">ROI</p>
-									<em :data="JSON.stringify(data)">${{data.roi}}</em>
-									<p :data="JSON.stringify(data)">Cost</p>
-									<span :data="JSON.stringify(data)">${{data.cost}}</span>
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">ROI</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.roi}}</em>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Cost</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.cost}}</span>
 								</div>
 							</div>
 						</a>
@@ -61,6 +64,7 @@
 		},
 		data () {
 			return {
+				loading:true,
 				dataList:[],
 				tokenCookie:[],
 		    tokenCookies:[],
@@ -68,9 +72,6 @@
 		    token:"",
 		    from:{},
 				search:"",
-				playSw:"",
-				dataId:"",
-				dataTrue:"",
 				status:"",
 				Data:"",
 				groupBy:"",
@@ -106,7 +107,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://beta.newbidder.com/api/profile",
+				  url:"http://localhost:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   this.timezone = data.data.data.timezone
@@ -117,7 +118,7 @@
 					  	filter:this.search,
 							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
 							groupBy:"offer",
-							limit:50,
+							limit:500,
 							order:"-visits",
 							page:1,
 							status:this.from.status,
@@ -125,9 +126,10 @@
 							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
 							tz:this.timezone
 					  },
-					  url:"http://beta.newbidder.com/api/report",
-					}).then(function (data) {
+					  url:"http://localhost:5000/api/report",
+					}).then((data) => {
 						console.log(data)
+						this.loading = false
 					    this.dataList = data.data.data.rows;
 					    /*that.dataList.forEach((item)=>{
 					    	if(item.deleted == 0 && item.status == 1){
@@ -173,7 +175,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://beta.newbidder.com/api/profile",
+				  url:"http://localhost:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   that.timezone = data.data.data.timezone
@@ -183,17 +185,18 @@
 					  	authorization:that.token,
 					  	filter:that.search,
 							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
-							groupBy:"campaign",
-							limit:20,
+							groupBy:"offer",
+							limit:500,
 							order:"-visits",
 							page:1,
-							status:2,
+							status:that.from.status,
 							tag:"",
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://beta.newbidder.com/api/report",
+					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
+						that.loading = false
 						console.log(data)
 					    that.dataList = data.data.data.rows
 					});
@@ -208,7 +211,7 @@
 				 console.log(this.data)
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'data=' + encodeURIComponent(this.data) + ';expires=' + oDate + ';path=/';
+				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
 			},
 			reduceDate(){
 				console.log(this.$store.state.data)
@@ -233,7 +236,8 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1
+						"status":1,
+						"groupBy":"offer"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -260,7 +264,8 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1
+						"status":1,
+						"groupBy":"offer"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -275,7 +280,8 @@
 		top: 1.24rem;
 		width: 100%;
 		height: 82%;
-		font-size: .3rem;
+		font-size: .26rem;
+		font-family: "arial, helvetica, sans-serif";
 	}
 	.cs-offer .campaigns-select{
 		display: flex;
@@ -291,7 +297,7 @@
 	.cs-offer .campaigns-select input{
 		border: none;
 		width: 90%;
-		height: 96%;
+		height: 94%;
 	}
 	.cs-offer .campaigns-content {
 		height: 100%;
@@ -305,7 +311,7 @@
 		border: none;
 	}
 	.cs-offer .campaigns-img{
-		width: 20%;
+		width: 18%;
 	}
 	.cs-offer .campaigns-img a{
 		display: block;
@@ -315,7 +321,7 @@
 		box-sizing: border-box;
 	}
 	.cs-offer .campaigns-content-main{
-		width:80% ;
+		width:82% ;
 		padding-right: .4rem;
 	}
 	.cs-offer .campaigns-title{
@@ -323,14 +329,22 @@
 		justify-content: space-between;
 		color: black;
 		font-weight: 600;
-		padding-bottom: .2rem;
+		margin-top: .2rem;
+		padding-bottom: .1rem;
 		border-bottom: 1px solid #dcdcdc; 
 	}
 	.cs-offer .campaigns-title a{
 		display: block;
 		width: 90%;
 		text-align: left;
-		color: black;
+		color: #282828;
+	}
+	.cs-offer .campaigns-title a span{
+		display: block;
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	.cs-offer .campaigns-title .iconfont{
 		color: #b0b0b0;

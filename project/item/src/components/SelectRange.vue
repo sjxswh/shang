@@ -79,6 +79,11 @@
 				</select>
 				<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 90%;">
 			<ul class="campaigns-content">
+				<li v-show="length">
+					<div class="campaigns-content-main">
+						this is empty
+					</div>
+				</li>
 				<li v-for="data in dataList">
 					<div class="campaigns-content-main">
 						<div class="campaigns-title">
@@ -116,6 +121,7 @@
 				flow:"flow",
 				lander:"lander",
 				title:"Select range",
+				length:true,
 				pickerVisible: "",
 				pickerVisibles: "",
 				endDate:new Date(),
@@ -149,7 +155,7 @@
 		     switchOp:"",				groupBy:"",
 				group:"",
 				dataList:[],
-				arr:[]
+				froms:""
 			}
 		},
 		mounted () {
@@ -179,7 +185,6 @@
 	    	this.groupBy.forEach((v,k)=>{
 	    		if(v.getAttribute('selected')){
 	    			this.group = v.getAttribute("data-val")
-	    			this.arr.push(this.group)
 	    		}
 	    	})
 	   	this.Data = {
@@ -212,7 +217,7 @@
 			}
 		  this.$ajax({
 			  method: "get",
-			  url:"http://beta.newbidder.com/timezones",
+			  url:"http://localhost:5000/timezones",
 			  params:{
 			  	token:this.token
 			  }
@@ -224,33 +229,88 @@
 			  params:{
 			  	authorization:this.token
 			  },
-			  url:"http://beta.newbidder.com/api/profile",
+			  url:"http://localhost:5000/api/profile",
 			}).then((data) => {
 			   console.log(data)
 			   console.log(this.Year)
 			   this.timezone = data.data.data.timezone
-			   this.params = {
-				  	campaign:this.selectData.id,
-				  	authorization:this.token,
-				  	filter:"",
-						from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-						groupBy:this.group,
-						limit:50,
-						order:"-visits",
-						page:1,
-						status:this.status,
-						tag:"",
-						to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-						tz:this.timezone
-				  }
+			   if(this.selectData.campaignName){
+				   	this.params = {
+					  	campaign:this.selectData.id,
+					  	authorization:this.token,
+					  	filter:"",
+							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+							groupBy:this.group,
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:this.status,
+							tag:"",
+							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   else if(this.selectData.offerName){
+				   	this.params = {
+					  	offer:this.selectData.id,
+					  	authorization:this.token,
+					  	filter:"",
+							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+							groupBy:this.group,
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:this.status,
+							tag:"",
+							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   else if(this.selectData.flowName){
+				   	this.params = {
+					  	flow:this.selectData.id,
+					  	authorization:this.token,
+					  	filter:"",
+							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+							groupBy:this.group,
+							limit:50,
+							order:"-visits",
+							page:1,
+							status:this.status,
+							tag:"",
+							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+							tz:this.timezone
+					  }
+				   }
 			   this.$ajax({
 				  method: "get",
 				  params:this.params,
-				  url:"http://beta.newbidder.com/api/report",
+				  url:"http://localhost:5000/api/report",
 				}).then((data) => {
 				   this.dataList = data.data.data.rows
+				   console.log(this.dataList)
+				   if(this.dataList.length == 0){
+				   	this.length = true
+				   }
+				   else{
+				   	this.length = false
+				   }
 				});
 			});	
+		},
+		computed:{
+			getSevenDate(){
+				this.froms = this.$store.state.data
+			},
+		},
+		watch: {
+			from (newVal,oldVal){
+				console.log(newVal)
+				
+			},
+			getSevenDate (newVal,oldVal) {
+				
+			},
 		},
 		methods:{
 			 selectTile(){
@@ -335,7 +395,7 @@
 							  params:{
 							  	authorization:this.token
 							  },
-						  url:"http://beta.newbidder.com/api/groups",
+						  url:"http://localhost:5000/api/groups",
 			      	}).then((data)=>{
 			      		this.firstname = data.data.data.groups[0].firstname
 			      		this.lastname = data.data.data.groups[0].lastname
@@ -350,7 +410,7 @@
 								  	"timezone":this.timeZone,
 								  	"timezoneId":this.timeS
 								  },
-							  url:"http://beta.newbidder.com/api/profile?authorization="+this.token,
+							  url:"http://localhost:5000/api/profile?authorization="+this.token,
 				      	}).then((data) => {
 				      		//console.log(data)
 				      	})
@@ -511,30 +571,18 @@
 						if(this.objS.options[i].value== this.objS.value){
 							this.objS.options[i].setAttribute("selected","selected");
 							this.group = this.objS.options[i].getAttribute("data-val")
-							this.arr.push(this.group)
-							/*this.Data = {
-								"year":this.Year,
-								"month":this.Month,
-								"date":this.Dates,
-								"years":this.Years,
-								"months":this.Months,
-								"dates":this.Datess,
-								"status":this.switchSta,
-								"groupBy":this.group
-							}
-							this.$store.dispatch("getSevenDate",this.Data)*/
-							console.log(this.arr)
 							this.$ajax({
 							  method: "get",
 							  params:{
 							  	authorization:this.token
 							  },
-							  url:"http://beta.newbidder.com/api/profile",
+							  url:"http://localhost:5000/api/profile",
 							}).then((data) => {
 							   console.log(data)
 							   console.log(this.Year)
 							   this.timezone = data.data.data.timezone
-							   this.params = {
+							   if(this.selectData.campaignName){
+							   	this.params = {
 								  	campaign:this.selectData.id,
 								  	authorization:this.token,
 								  	filter:"",
@@ -548,12 +596,51 @@
 										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
 										tz:this.timezone
 								  }
+							   }
+							   else if(this.selectData.offerName){
+							   	this.params = {
+								  	offer:this.selectData.id,
+								  	authorization:this.token,
+								  	filter:"",
+										from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+										groupBy:this.group,
+										limit:50,
+										order:"-visits",
+										page:1,
+										status:this.status,
+										tag:"",
+										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+										tz:this.timezone
+								  }
+							   }
+							   else if(this.selectData.flowName){
+							   	this.params = {
+								  	flow:this.selectData.id,
+								  	authorization:this.token,
+								  	filter:"",
+										from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+										groupBy:this.group,
+										limit:50,
+										order:"-visits",
+										page:1,
+										status:this.status,
+										tag:"",
+										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+										tz:this.timezone
+								  }
+							   }
 							   this.$ajax({
 								  method: "get",
 								  params:this.params,
-								  url:"http://beta.newbidder.com/api/report",
+								  url:"http://localhost:5000/api/report",
 								}).then((data) => {
 								   this.dataList = data.data.data.rows
+								   if(this.dataList.length == 0){
+								   	this.length = true
+								   }
+								   else{
+								   	this.length = false
+								   }
 								});
 							});	
 						}
@@ -573,8 +660,9 @@
 		width: 100%;
 		height: 91%;
 		background: #e0e7ef;
-		font-size: .3rem;
+		font-size: .26rem;
 		overflow: auto;
+		font-family: "arial, helvetica, sans-serif";
 	}
 	.select-range-title{
 		display: flex;

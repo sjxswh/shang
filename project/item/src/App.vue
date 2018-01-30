@@ -9,18 +9,11 @@
 export default {
   name: 'app',
   components: {Home},
-  watch:{
-  	/*$route (to,from) {
-                let token = document.cookie.split("=")[1];
-　　　　　　　　   if (to.matched.some(record => record.meta.requiresAuth) && (!token || token === null)) {
-　　　　　　　　　　   next({
-  　　　　　　　　　　   path: '/login',
-  　　　　　　　　　　   query: { redirect: to.fullPath }
-　　　　　　　　　　   })
-　　　　　　　　   } else {
-　　　　　　          next()
-　　　　　　　　   }
-      　　　}*/
+  mounted () {
+  	
+  },
+  methods: {
+  	
   }
 }
 </script>
@@ -123,4 +116,24 @@ export default {
 	.home .home-header p{
 		line-height: 1.2rem;
 	}
+	.page-loading .icon-loading{
+	animation: myfirst 3s infinite;
+-moz-animation: myfirst 3s infinite;	
+-webkit-animation: myfirst 3s infinite;
+transform-origin: center;
+text-align: center;
+line-height: 50px;
+}
+@-moz-keyframes myfirst{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
+@-webkit-keyframes myfirst{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
+@keyframes myfirst{
+	from{transform: rotate(0deg);}
+	to{transform: rotate(360deg);}
+}
 </style>

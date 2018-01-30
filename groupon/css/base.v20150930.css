@@ -401,7 +401,7 @@ a.twocode_guide:active{text-decoration:underline; color:#FFF;}
 
 /*====================20130503-new=========================*/
 /* word CSS Document */
-/*ÎÞÁ´½Ó×ÖÌåÑÕÉ«*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«*/
 .index_3beta_color_green{ color:#094200;}
 .index_3beta_color_grey{ color:#a3a3a3;}
 .index_3beta_color_red14b{ color:#c30000; font-weight:bold; font-size:14px;}
@@ -419,12 +419,12 @@ a.sheader_blue{ color:#3D72A4;}
 a:hover.sheader_blue{ color:#3D72A4;}
 .sheader_red{color:#DB0100}
 
-/*¸ü¶à*/
+/*ï¿½ï¿½ï¿½*/
 a.index_3beta_link_red12:link{ color:#db0100; text-decoration:none;}
 a.index_3beta_link_red12:visited { color:#db0100;text-decoration:none;}
 a.index_3beta_link_red12:hover { color:#db0100;text-decoration:underline;}
 a.index_3beta_link_red12:active{ color:#db0100;text-decoration:underline;}
-/*¶Ò½±À¶É«×Ö*/
+/*ï¿½Ò½ï¿½ï¿½ï¿½É«ï¿½ï¿½*/
 a.index_3beta_link_blue12:link{ color:#00487b; text-decoration:none;}
 a.index_3beta_link_blue12:visited { color:#00487b;text-decoration:none;}
 a.index_3beta_link_blue12:hover { color:#00487b;text-decoration:underline;}
@@ -445,9 +445,9 @@ a.index_3beta_link_blue12:active{ color:#00487b;text-decoration:underline;}
 .sheader_conr ul li a{ text-decoration:none;}
 .sheader_img_phone{ background:url(../images/public/phone.png) left center no-repeat; padding-left:18px;}
 .sheader_img_jt{ background:url(../images/public/shead_jt.png) right center no-repeat; padding-right:10px; }
-.sheader_imgxx{ background:url(../images/public/imgxx.png)  left center no-repeat; padding-left:20px;  }
-.sheader_img_eggs{background:url(../images/public/eggs.gif) right center no-repeat; padding-right:15px;  }
-.sheader_img_jinbi{background:url(../images/public/jb.gif) right center no-repeat; padding-right:18px; }
+.sheader_imgxx{ background:url(../img/imgxx.png)  left center no-repeat; padding-left:20px;  }
+.sheader_img_eggs{background:url(../img/eggs.gif) right center no-repeat; padding-right:15px;  }
+.sheader_img_jinbi{background:url(../img/jb.gif) right center no-repeat; padding-right:18px; }
 
 
 
@@ -509,7 +509,7 @@ margin-bottom:12px;
 .footer3beta_gz_img_tengx{background:url(../images/public/tx_wb.png) left center no-repeat; padding-left:24px;}
 
 /*shouye_shortcut CSS*/
-.index3beta_topFloat{ height:37px; padding-top:6px;font-size:14px; text-align:center; font-family:"ËÎÌå"; background:url(../images/public/topFloat_bj.png) repeat-x; position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop));  width:100%; z-index:10000}
+.index3beta_topFloat{ height:37px; padding-top:6px;font-size:14px; text-align:center; font-family:"ï¿½ï¿½ï¿½ï¿½"; background:url(../images/public/topFloat_bj.png) repeat-x; position:fixed;_position:absolute;_top:expression(eval(document.documentElement.scrollTop));  width:100%; z-index:10000}
 .index3beta_topFloat span,button{vertical-align:middle;}
 .index3beta_topFloat font{ color:#FF3300; font-size:14px;}
 .index3beta_topFloat a{ color:#FF0000; text-decoration:underline;}
@@ -531,10 +531,10 @@ margin-bottom:12px;
 /****tgl20131118****/
 
 .tgl_public_1118{ width:948px; height:31px; border:1px solid #e8e8e8; margin:0 auto; line-height:30px;margin-bottom:7px;}
-.tglxx_public_1118{float:left; text-align:left; width:370px; padding-left:30px; background:url(/img/tg_bg.gif) left center no-repeat;}
+.tglxx_public_1118{float:left; text-align:left; width:370px; padding-left:30px; background:url(../img/tg_bg.gif) left center no-repeat;}
 .tglxx_public_1118 a{ color:#797979; text-decoration:none;}
 .tglxx_public_1118  span{ font-weight:bold; color:#3f3f3f;}
-.tgldt_public_1118{float:right; text-align:left; width:495px; padding-left:48px; padding-right:5px;background:url(/img/dt_bg.gif) left center no-repeat;}
+.tgldt_public_1118{float:right; text-align:left; width:495px; padding-left:48px; padding-right:5px;background:url(../img/dt_bg.gif) left center no-repeat;}
 .tgldt_public_1118 a{ color:#797979; text-decoration:none;}
 .tgldt_public_1118  span{ font-weight:bold; color:#3f3f3f;}
 #demo1   a{color:#0064ab; font-weight:normal;}

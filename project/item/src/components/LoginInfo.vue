@@ -5,7 +5,7 @@
 		  		<em class="home-cancel" @touchstart="back">Bcak</em>
 		  		<p class="home-name">{{title}}</p>
 		  		<router-link to="/">
-		  			<em class="home-done">Loginout</em>
+		  			<em class="home-done">Log out</em>
 		  		</router-link>
 		  	</div>
 		</div>
@@ -40,7 +40,7 @@
 			  params:{
 			  	authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjE0LCJleHAiOjE1MzM0NTk4MDY0NjIsImZpcnN0bmFtZSI6ImNob25nIiwiaWRUZXh0IjoiaXl0ZzNhIn0.PCyszyytd-cujLMbKe1w3n-0_aeXYsgSucLWiqrZrdU"
 			  },
-			  url:"http://beta.newbidder.com/api/profile",
+			  url:"http://localhost:5000/api/profile",
 			}).then((data) => {
 				console.log(data.data.data)
 				that.name = data.data.data

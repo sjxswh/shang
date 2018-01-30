@@ -23,7 +23,7 @@ a{ color: #666;text-decoration: none;}
 
 .yqhd_top{ width:950px; height:240px; margin:0 auto;}
 
-.yqhd_text{ width:950px; height:auto; margin:0 auto; overflow: hidden;}
+.yqhd_text{ width:950px; height:auto; margin:0 auto; overflow: hidden;position: relative;}
 .yqhd_text .yqhd_text_left { width:637px; height:auto; overflow: hidden; float:left; text-align:left; margin-top:15px;}
 .yqhd_text .yqhd_text_left .box h1{ float: left; width: 617px; font-weight:bold; font-size:16px; color:#333333; line-height:49px; border-bottom:1px solid #eceaea; padding-left:17px;margin:auto auto 13px auto; height: 49px;}
 .yqhd_text .yqhd_text_left .box h1 span{ font-size: 16px; border-left:3px solid #F00; padding-left:12px; color: #333;}

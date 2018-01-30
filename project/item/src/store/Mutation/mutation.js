@@ -12,15 +12,6 @@ var Mutation = {
 	getSevenDate (state,data) {
 		state.data = data
 	},
-	DrillDowns (state,data) {
-		state.switchSta = data
-	},
-	DrillDownss (state,data) {
-		state.timeZone = data
-	},
-	DrillDownsss (state,data) {
-		state.dayIn = data
-	},
 }
 
 export default Mutation

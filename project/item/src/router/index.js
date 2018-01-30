@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/Dashboard'
 import Campaigns from '@/components/Campaigns'
-import Flows from '@/components/Flows'
 import CampaignsDetail from '@/components/Campaigns-Detail'
+import Flows from '@/components/Flows'
+import FlowDetail from '@/components/Flow-Detail'
 import Offer from '@/components/Offer'
 import OfferDetail from '@/components/Offer-Detail'
 import SelectRange from '@/components/SelectRange'
@@ -39,6 +40,11 @@ export default new Router({
       path: '/Flows',
       name: 'Flows',
       component: Flows
+    },
+    {
+      path: '/FlowDetail',
+      name: 'FlowDetail',
+      component: FlowDetail
     },
     {
       path: '/Offer',

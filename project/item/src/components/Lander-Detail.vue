@@ -24,7 +24,7 @@
 			</div>
 			<div class="campaigns-content-main">
 				<div class="campaigns-title">
-					<span>{{Data["flowName"]}}</span>
+					<span>{{Data["landerName"]}}</span>
 					<span class="iconfont icon-gengduo"></span>
 				</div>
 			</div>
@@ -120,6 +120,7 @@
 	import options from '../chart-option/campaigns-detail-options';
 	import HomeSelect from '@/components/Home-Select';
 	export default{
+		name:"LanderDetail",
 		components:{
 			XChart,HomeSelect
 		},
@@ -129,8 +130,7 @@
 		     id:"container",
 		     option:option,
 		     data:true,
-		     title:"FlowDetail",
-		     dataList:[],
+		     title:"LanderDetail",
 		     tokenCookie:[],
 		     tokenCookies:[],
 		     tokenname:"data",
@@ -229,5 +229,5 @@
 </script>
 
 <style>
-	
+
 </style>

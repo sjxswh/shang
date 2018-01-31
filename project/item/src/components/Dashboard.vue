@@ -17,33 +17,33 @@
 			<ul style="border: .06rem solid #e4e8f1;border-bottom: none;">
 				<li>
 					<p>Revenue</p>
-					<span v-if="totals['revenue'] == 'null' ">$0</span>
-					<span v-if="totals['revenue'] != 'null' ">${{ totals["revenue"] }}</span>
+					<span v-if="totals['revenue'] == null ">$0</span>
+					<span v-if="totals['revenue'] != null ">${{ totals["revenue"] }}</span>
 				</li>
 				<li>
 					<p>Cost</p>
-					<span v-if="totals['cost'] == 'null' ">$0</span>
-					<span v-if="totals['cost'] != 'null' ">${{ totals["cost"] }}</span>
+					<span v-if="totals['cost'] == null ">$0</span>
+					<span v-if="totals['cost'] != null ">${{ totals["cost"] }}</span>
 				</li>
 				<li>
 					<p>Profit</p>
-					<span style="color: #CCCCCC;" v-if="totals['profit'] != 'null' ">${{ totals["profit"] }}</span>
-					<span style="color: #CCCCCC;" v-if="totals['profit'] == 'null' ">$0</span>
+					<span style="color: #CCCCCC;" v-if="totals['profit'] != null ">${{ totals["profit"] }}</span>
+					<span style="color: #CCCCCC;" v-if="totals['profit'] == null ">$0</span>
 				</li>
 				<li>
 					<p>ROI</p>
-					<span style="color: #CCCCCC;" v-if="totals['roi'] == 'null' ">0%</span>
-					<span style="color: #CCCCCC;" v-if="totals['roi'] != 'null' ">{{ totals["roi"] }}%</span>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] == null ">0%</span>
+					<span style="color: #CCCCCC;" v-if="totals['roi'] != null ">{{ totals["roi"] }}%</span>
 				</li>
 				<li>
 					<p>Visits</p>
-					<span v-if="totals['visits'] == 'null' ">0</span>
-					<span v-if="totals['visits'] != 'null' ">{{ totals["visits"] }}</span>
+					<span v-if="totals['visits'] == null ">0</span>
+					<span v-if="totals['visits'] != null ">{{ totals["visits"] }}</span>
 				</li>
 				<li>
 					<p>Clicks</p>
-					<span v-if="totals['clicks'] == 'null' ">0</span>
-					<span v-if="totals['clicks'] != 'null' ">{{ totals["clicks"] }}</span>
+					<span v-if="totals['clicks'] == null ">0</span>
+					<span v-if="totals['clicks'] != null ">{{ totals["clicks"] }}</span>
 				</li>
 			</ul>
 			<div :id="id"></div>
@@ -112,8 +112,7 @@
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
-			   if(that.from.dates - that.from.date>1 && that.from.dates - that.from.date<14){
-					this.params = {
+			   this.params = {
 				  	authorization:that.token,
 				  	from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
 				  	groupBy:"day",
@@ -122,8 +121,6 @@
 				  	to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 				  	tz:that.timezone
 					}
-				}
-				console.log(that.token)
 					if(that.from.dates - that.from.date == 1){
 						this.params = {
 					  	authorization:this.token,
@@ -135,9 +132,10 @@
 					  	tz:that.timezone
 						}
 					}		
+					
 					that.$ajax({
 					  method: "get",
-					  params:that.params,
+					  params:this.params,
 					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
 				    console.log(data)
@@ -158,7 +156,7 @@
 					    	that.roi[i]= data.data.data.rows[i]["roi"]
 					    	that.visits[i]= data.data.data.rows[i]["visits"]
 					    	that.clicks[i]= data.data.data.rows[i]["clicks"]
-					    	that.categories[i] = data.data.data.rows[i]["categories"]
+					    	that.categories[i] = data.data.data.rows[i]["id"]
 					    }
 				    }else{
 				    	that.revenue[0]=0
@@ -167,9 +165,8 @@
 					    	that.roi[0]= 0
 					    	that.visits[0]= 0
 					    	that.clicks[0]= 0
-					    	that.categories[0] = that.from.years+"-"+that.from.months+"-"+that.from.date
+					    	that.categories[0] = that.from.year+"-"+that.from.month+"-"+that.from.date
 				    }
-				    console.log(that.categories)
 				    HighCharts.chart(that.id,{
 		     	 title: {
 					        text: ''
@@ -252,17 +249,6 @@
     			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
     		}
 			}
-			/*this.Date = new Date()
-			this.Month = this.Date.getMonth()+1
-			this.Month = this.Month<10?"0"+this.Month:this.Month
-			this.from = {
-				"year":this.Date.getFullYear(),
-				"month":this.Month,
-				"date":this.Date.getDate(),
-				"years":this.Date.getFullYear(),
-				"months":this.Month,
-				"dates":this.Date.getDate()
-			}*/
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000

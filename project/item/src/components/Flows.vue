@@ -30,7 +30,9 @@
 							<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
 								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["flowName"]}}</span>
 							</a>
-							<span class="iconfont icon-gengduo"></span>
+							<router-link to="/Offers" :data-cId="data.flowId" :data-name="data.flowName"  @touchstart="cOffer($event)" class="flowOffer">
+								<span class="iconfont icon-gengduo" :data-cId="data.flowId" :data-name="data.flowName"   @touchstart="cOffer($event)"></span>
+							</router-link>
 						</div>
 						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
 							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
@@ -85,7 +87,8 @@
 		     Datess:"",
 		     Time:"",
 		     Times:"",
-		     data:""
+		     data:"",
+		     datas:{}
 			}
 		},
 		computed:{
@@ -212,6 +215,13 @@
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
 				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
+			},
+			cOffer(ev){
+				this.datas = {"flowName":ev.target.getAttribute("data-name"),"flowId":ev.target.getAttribute("data-cId")}
+				 console.log(this.data)
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate() + 1);
+				document.cookie = 'dataCid=' + encodeURIComponent(JSON.stringify(this.datas)) + ';expires=' + oDate + ';path=/';
 			},
 			reduceDate(){
 				this.Time = this.Time - 604800000

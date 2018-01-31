@@ -84,23 +84,23 @@
 						this is empty
 					</div>
 				</li>
-				<li v-for="data in dataList">
-					<div class="campaigns-content-main">
-						<div class="campaigns-title">
-								<span>{{data.id}}</span>
+				<li v-for="data in dataList" :data="encodeURIComponent(JSON.stringify(data))" @touchstart="LinksHrf($event)">
+					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
+						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
+								<span :data="encodeURIComponent(JSON.stringify(data))">{{data.id}}</span>
 						</div>
-							<div class="campaigns-info">
-								<div>
-									<p>Revenue</p>
-									<span>${{data.revenue}}</span>
-									<p>Profit</p>
-									<em>${{data.profit}}</em>
+							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">Revenue</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.revenue}}</span>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Profit</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.profit}}</em>
 								</div>
-								<div>
-									<p>ROI</p>
-									<em>${{data.roi}}</em>
-									<p>Cost</p>
-									<span>${{data.cost}}</span>
+								<div :data="encodeURIComponent(JSON.stringify(data))">
+									<p :data="encodeURIComponent(JSON.stringify(data))">ROI</p>
+									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.roi}}</em>
+									<p :data="encodeURIComponent(JSON.stringify(data))">Cost</p>
+									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.cost}}</span>
 								</div>
 							</div>
 					</div>
@@ -155,7 +155,8 @@
 		     switchOp:"",				groupBy:"",
 				group:"",
 				dataList:[],
-				froms:""
+				froms:"",
+				data:""
 			}
 		},
 		mounted () {
@@ -224,92 +225,139 @@
 			}).then((data) => {
 			    this.timezones = data.data.data.timezones
 			});
-			this.$ajax({
-			  method: "get",
-			  params:{
-			  	authorization:this.token
-			  },
-			  url:"http://localhost:5000/api/profile",
-			}).then((data) => {
-			   console.log(data)
-			   console.log(this.Year)
-			   this.timezone = data.data.data.timezone
-			   if(this.selectData.campaignName){
-				   	this.params = {
-					  	campaign:this.selectData.id,
-					  	authorization:this.token,
-					  	filter:"",
-							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-							groupBy:this.group,
-							limit:50,
-							order:"-visits",
-							page:1,
-							status:this.status,
-							tag:"",
-							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-							tz:this.timezone
-					  }
-				   }
-				   else if(this.selectData.offerName){
-				   	this.params = {
-					  	offer:this.selectData.id,
-					  	authorization:this.token,
-					  	filter:"",
-							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-							groupBy:this.group,
-							limit:50,
-							order:"-visits",
-							page:1,
-							status:this.status,
-							tag:"",
-							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-							tz:this.timezone
-					  }
-				   }
-				   else if(this.selectData.flowName){
-				   	this.params = {
-					  	flow:this.selectData.id,
-					  	authorization:this.token,
-					  	filter:"",
-							from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-							groupBy:this.group,
-							limit:50,
-							order:"-visits",
-							page:1,
-							status:this.status,
-							tag:"",
-							to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-							tz:this.timezone
-					  }
-				   }
-			   this.$ajax({
-				  method: "get",
-				  params:this.params,
-				  url:"http://localhost:5000/api/report",
-				}).then((data) => {
-				   this.dataList = data.data.data.rows
-				   console.log(this.dataList)
-				   if(this.dataList.length == 0){
-				   	this.length = true
-				   }
-				   else{
-				   	this.length = false
-				   }
-				});
-			});	
 		},
 		computed:{
 			getSevenDate(){
+				console.log(this.$store.state.data)
 				this.froms = this.$store.state.data
 			},
 		},
 		watch: {
-			from (newVal,oldVal){
+			froms (newVal,oldVal){
 				console.log(newVal)
-				
+				this.$ajax({
+				  method: "get",
+				  params:{
+				  	authorization:this.token
+				  },
+				  url:"http://localhost:5000/api/profile",
+				}).then((data) => {
+				   console.log(data)
+				   console.log(this.Year)
+				   this.timezone = data.data.data.timezone
+				   if(this.selectData.campaignName){
+					   	this.params = {
+						  	campaign:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+					   }
+					   else if(this.selectData.offerName){
+					   	this.params = {
+						  	offer:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+					   }
+					   else if(this.selectData.flowName){
+					   	this.params = {
+						  	flow:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+					   }
+					   else if(this.selectData.landerName){
+					   	this.params = {
+						  	lander:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+					   }
+					   else if(this.selectData.trafficName){
+					   	this.params = {
+						  	traffic:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+					   }
+					   else if(this.selectData.name){
+					   	this.params = {
+						  	affiliate:this.selectData.id,
+						  	authorization:this.token,
+						  	filter:"",
+								from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
+								groupBy:this.group,
+								limit:50,
+								order:"-visits",
+								page:1,
+								status:this.status,
+								tag:"",
+								to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
+								tz:this.timezone
+						  }
+				   }
+				   this.$ajax({
+					  method: "get",
+					  params:this.params,
+					  url:"http://localhost:5000/api/report",
+					}).then((data) => {
+					   this.dataList = data.data.data.rows
+					   if(this.dataList.length == 0){
+					   	this.length = true
+					   }
+					   else{
+					   	this.length = false
+					   }
+					});
+				});	
 			},
 			getSevenDate (newVal,oldVal) {
-				
+				console.log(newVal)
 			},
 		},
 		methods:{
@@ -340,6 +388,17 @@
 	      openPickers() {
 	        this.$refs.pickers.open();
 	      },
+	      LinksHrf (ev) {
+				 this.$router.push({
+            path: 'Detail', 
+        })
+       console.log(ev.target)
+				 this.data = ev.target.getAttribute("data")
+				 console.log(this.data)
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate() + 1);
+				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
+			},
 	      clickDate(){
 		   		this.Year = this.pickerVisible.getFullYear()
 		   		this.Month = this.pickerVisible.getMonth()+1
@@ -571,78 +630,17 @@
 						if(this.objS.options[i].value== this.objS.value){
 							this.objS.options[i].setAttribute("selected","selected");
 							this.group = this.objS.options[i].getAttribute("data-val")
-							this.$ajax({
-							  method: "get",
-							  params:{
-							  	authorization:this.token
-							  },
-							  url:"http://localhost:5000/api/profile",
-							}).then((data) => {
-							   console.log(data)
-							   console.log(this.Year)
-							   this.timezone = data.data.data.timezone
-							   if(this.selectData.campaignName){
-							   	this.params = {
-								  	campaign:this.selectData.id,
-								  	authorization:this.token,
-								  	filter:"",
-										from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-										groupBy:this.group,
-										limit:50,
-										order:"-visits",
-										page:1,
-										status:this.status,
-										tag:"",
-										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-										tz:this.timezone
-								  }
-							   }
-							   else if(this.selectData.offerName){
-							   	this.params = {
-								  	offer:this.selectData.id,
-								  	authorization:this.token,
-								  	filter:"",
-										from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-										groupBy:this.group,
-										limit:50,
-										order:"-visits",
-										page:1,
-										status:this.status,
-										tag:"",
-										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-										tz:this.timezone
-								  }
-							   }
-							   else if(this.selectData.flowName){
-							   	this.params = {
-								  	flow:this.selectData.id,
-								  	authorization:this.token,
-								  	filter:"",
-										from:this.Year+"-"+this.Month+"-"+this.Dates+"T00:00",
-										groupBy:this.group,
-										limit:50,
-										order:"-visits",
-										page:1,
-										status:this.status,
-										tag:"",
-										to:this.Years+"-"+this.Months+"-"+this.Datess+"T00:00",
-										tz:this.timezone
-								  }
-							   }
-							   this.$ajax({
-								  method: "get",
-								  params:this.params,
-								  url:"http://localhost:5000/api/report",
-								}).then((data) => {
-								   this.dataList = data.data.data.rows
-								   if(this.dataList.length == 0){
-								   	this.length = true
-								   }
-								   else{
-								   	this.length = false
-								   }
-								});
-							});	
+							this.Data = {
+								"year":this.Year,
+								"month":this.Month,
+								"date":this.Dates,
+								"years":this.Years,
+								"months":this.Months,
+								"dates":this.Datess,
+								"status":this.switchSta,
+								"groupBy":this.group
+							}
+							this.$store.dispatch("getSevenDate",this.Data)
 						}
 					}
 	      },

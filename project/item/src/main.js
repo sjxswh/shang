@@ -10,6 +10,7 @@ import './assets/iconfont/iconfont1.css'
 import './assets/iconfont/iconfont2.css'
 import axios from 'axios'
 import store from './store/TodoStore'
+import './assets/js/commont.js'
 import { Indicator, MessageBox } from 'mint-ui'
 //axios.defaults.withCredentials = true
 Vue.prototype.$ajax = axios

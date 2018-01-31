@@ -10,7 +10,7 @@
 		</div>
 		<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo"></span>
-				<router-link to="/SelectRange">
+				<router-link to="">
 					<div>
 						<span>Data range(7 days)</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
@@ -24,7 +24,7 @@
 			</div>
 			<div class="campaigns-content-main">
 				<div class="campaigns-title">
-					<span>{{Data["flowName"]}}</span>
+					<span>{{Data["id"]}}</span>
 					<span class="iconfont icon-gengduo"></span>
 				</div>
 			</div>
@@ -120,6 +120,7 @@
 	import options from '../chart-option/campaigns-detail-options';
 	import HomeSelect from '@/components/Home-Select';
 	export default{
+		name:"OfferDetail",
 		components:{
 			XChart,HomeSelect
 		},
@@ -129,8 +130,7 @@
 		     id:"container",
 		     option:option,
 		     data:true,
-		     title:"FlowDetail",
-		     dataList:[],
+		     title:"Detail",
 		     tokenCookie:[],
 		     tokenCookies:[],
 		     tokenname:"data",
@@ -223,11 +223,10 @@
 	  	detele (ev) {
 	  		ev.target.parentNode.remove()
 	  	},
-	  	
 		}
 	}
 </script>
 
 <style>
-	
+
 </style>

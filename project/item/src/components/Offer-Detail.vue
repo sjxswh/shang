@@ -9,14 +9,14 @@
 		  	</div>
 		</div>
 		<div class="home-select">
-			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
+			<span class="iconfont icon-jiankuohaoxizuo"></span>
 				<router-link to="/SelectRange">
 					<div>
 						<span>Data range(7 days)</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
-			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
+			<span class="iconfont icon-jiankuohaoxiyou"></span>
 		</div>
 		<div class="campaigns-all">
 			<div class="campaigns-img">
@@ -110,8 +110,9 @@
 			</div>
 		</div>
 		<div class="campaigns-detail-report">Drilldown report</div>
-		<x-chart :id="id" :option="option"></x-chart>
-		<div style="height: 2rem;width: 100%;position: relative;top: -.5rem;background: white;"></div>
+		<!--<x-chart :id="id" :option="option"></x-chart>
+		<div style="height: 2rem;width: 100%;position: relative;top: -.5rem;background: white;"></div>-->
+		<div style="height: 2rem;width: 100%;position: relative;background: white;"></div>
 	</div>
 </template>
 
@@ -223,165 +224,11 @@
 	  	detele (ev) {
 	  		ev.target.parentNode.remove()
 	  	},
-	  	reduceDate(){
-				console.log(this.$store.state.data)
-				this.Time = this.Time - 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
-				this.Times = this.Times - 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-						"status":1
-					}
-				console.log(this.Data)
-				this.$store.dispatch("getSevenDate",this.Data)
-			},
-			addDate(){
-				this.Time = this.Time + 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
-				this.Times = this.Times + 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-						"status":1
-					}
-				console.log(this.Data)
-				this.$store.dispatch("getSevenDate",this.Data)
-			}
+	  	
 		}
 	}
 </script>
 
 <style>
-	.cs-offer-detail{
-		position: absolute;
-		top: 1.24rem;
-		width: 100%;
-		height: 90%;
-		font-size: .26rem;
-		font-family: "arial, helvetica, sans-serif";
-	}
-	.cs-offer-detail .home-header{
-		padding-left: 0;
-	}
-	.cs-offer-detail .home-header em{
-		font-weight: 600;
-	}
-	.cs-offer-detail .cs-campaigns-detail{
-		position: absolute;
-		top: 1.4rem;
-		width: 100%;
-		height: 90%;
-		font-size: .3rem;
-	}
-	.cs-offer-detail .campaigns-detail-content{
-		padding-left: 1.6rem;
-		padding-right: .6rem;
-	}
-	.cs-offer-detail .campaigns-detail-content div{
-		display: flex;
-		color: #8c8c8c;
-	}
-	.cs-offer-detail .campaigns-detail-content div .iconfont{
-		display: none;
-		width: 30%;
-		margin: .1rem 0;
-	}
-	.cs-offer-detail .campaigns-detail-content div .iconfont-active{
-		display: block !important;
-		transition: display 2s;
-	}
-	.cs-offer-detail .icon-shanchuanniucopy{
-		color: red;
-	}
-	.cs-offer-detail .campaigns-detail-content div p{
-		width: 64%;
-		margin: .1rem 0;
-		font-size: .2rem;
-		text-align: left;
-	}
-	.cs-offer-detail .campaigns-detail-content div p:nth-of-type(2){
-		width: 20%;
-		color: #3f3f3f;
-	}
-	.cs-offer-detail .campaigns-detail-report {
-		display: block;
-		padding: .3rem 0;
-		margin-left: 1.6rem;
-		margin-right: .6rem;
-		border-top: 1px solid #CCCCCC;
-		border-bottom: 1px solid #CCCCCC;
-		font-size: .3rem;
-		text-align: left;
-		color: #4c98fa;
-	}
-	.cs-offer-detail .campaigns-all{
-		display: flex;
-		padding-top: .2rem;
-		border-top: .08rem solid #e4e8f1;
-	}
-	.cs-offer-detail .campaigns-img {
-		display: block;
-		width: 20%;
-		height: 50%;
-		padding: 0 .2rem;
-		box-sizing: border-box;
-	}
-	.cs-offer-detail .campaigns-content-main{
-		width:80% ;
-		padding-right: .4rem;
-	}
-	.cs-offer-detail .campaigns-title{
-		display: flex;
-		justify-content: space-between;
-		height: .5rem;
-		margin-top: .2rem;
-		color: black;
-		font-weight: 600;
-		border-bottom: 1px solid #dcdcdc; 
-	}
-	.cs-offer-detail .campaigns-title span:nth-child(1){
-		width: 90%;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		text-align: left;
-	}
-	.cs-offer-detail .campaigns-title span:nth-child(2){
-		width: 10%;
-		text-align: center;
-	}
-.cs-offer-detail .campaigns-title .iconfont{
-	color: #b0b0b0;
-}
+
 </style>

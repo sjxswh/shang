@@ -28,9 +28,11 @@
 					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
 						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
 							<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
-								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["offerName"]}}</span>
+								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["trafficName"]}}</span>
 							</a>
-							<span class="iconfont icon-gengduo"></span>
+							<router-link to="/Offers" :data-cId="data.trafficId" :data-name="data.trafficName" @touchstart="cOffer($event)" class="flowOffer">
+								<span class="iconfont icon-gengduo" :data-cId="data.trafficId" :data-name="data.trafficName" @touchstart="cOffer($event)"></span>
+							</router-link>
 						</div>
 						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
 							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
@@ -85,7 +87,8 @@
 		     Datess:"",
 		     Time:"",
 		     Times:"",
-		     data:""
+		     data:"",
+		     datas:{}
 			}
 		},
 		computed:{
@@ -117,7 +120,7 @@
 					  	authorization:that.token,
 					  	filter:this.search,
 							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
-							groupBy:"offer",
+							groupBy:"traffic",
 							limit:500,
 							order:"-visits",
 							page:1,
@@ -153,6 +156,7 @@
 			},
 		},
 		mounted(){
+			console.log(this.$route.params.id)
 			this.tokenname = this.tokenname + '='
 			this.tokenCookie=document.cookie.split(";")
 			for(var i = 0; i < this.tokenCookie.length; i++){
@@ -185,7 +189,7 @@
 					  	authorization:that.token,
 					  	filter:that.search,
 							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
-							groupBy:"offer",
+							groupBy:"traffic",
 							limit:500,
 							order:"-visits",
 							page:1,
@@ -204,7 +208,7 @@
 			},
 			LinksHrf (ev) {
 				 this.$router.push({
-            path: 'OfferDetail', 
+            path: 'TrafficSourceDetail', 
         })
        console.log(ev.target)
 				 this.data = ev.target.getAttribute("data")
@@ -212,6 +216,13 @@
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
 				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
+			},
+			cOffer(ev){
+				this.datas = {"trafficName":ev.target.getAttribute("data-name"),"trafficId":ev.target.getAttribute("data-cId")}
+				 console.log(this.data)
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate() + 1);
+				document.cookie = 'dataCid=' + encodeURIComponent(JSON.stringify(this.datas)) + ';expires=' + oDate + ';path=/';
 			},
 			reduceDate(){
 				console.log(this.$store.state.data)
@@ -237,7 +248,7 @@
 						"months":this.Months,
 						"dates":this.Datess,
 						"status":this.$store.state.data.status,
-						"groupBy":"offer"
+						"groupBy":"traffic"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)
@@ -265,7 +276,7 @@
 						"months":this.Months,
 						"dates":this.Datess,
 						"status":this.$store.state.data.status,
-						"groupBy":"offer"
+						"groupBy":"traffic"
 					}
 				console.log(this.Data)
 				this.$store.dispatch("getSevenDate",this.Data)

@@ -30,10 +30,12 @@
 							<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
 								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["campaignName"]}}</span>
 							</a>
-							<span class="iconfont icon-gengduo"></span>
+							<router-link to="/Offers" :data-cId="data.campaignId" :data-name="data.campaignName" @touchstart="cOffer($event)">
+								<span class="iconfont icon-gengduo" :data-cId="data.campaignId" :data-name="data.campaignName" @touchstart="cOffer($event)"></span>
+							</router-link>
 						</div>
 						<div class="campaigns-switch"  :data="encodeURIComponent(JSON.stringify(data))">
-							<p  :data="encodeURIComponent(JSON.stringify(data))">
+							<p :data="encodeURIComponent(JSON.stringify(data))">
 								<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
 									<span><img src="../assets/img/2.jpg" :data="encodeURIComponent(JSON.stringify(data))"/></span>
 									<span><img src="../assets/img/3.jpg" :data="encodeURIComponent(JSON.stringify(data))"/></span>
@@ -121,7 +123,9 @@
 		     Datess:"",
 		     Time:"",
 		     Times:"",
-		     data:""
+		     data:"",
+		     datas:{},
+		     dataCid:""
 			}
 		},
 		computed:{
@@ -285,6 +289,13 @@
 				oDate.setDate(oDate.getDate() + 1);
 				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
 			},
+			cOffer(ev){
+				this.datas = {"campaignName":ev.target.getAttribute("data-name"),"campaignId":ev.target.getAttribute("data-cId")}
+				 console.log(this.data)
+				var oDate = new Date();
+				oDate.setDate(oDate.getDate() + 1);
+				document.cookie = 'dataCid=' + encodeURIComponent(JSON.stringify(this.datas)) + ';expires=' + oDate + ';path=/';
+			},
 			reduceDate(){
 				console.log(this.$store.state.data)
 				this.Time = this.Time - 604800000
@@ -308,7 +319,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1,
+						"status":this.$store.state.data.status,
 						"groupBy":"campaign"
 					}
 				console.log(this.Data)
@@ -336,7 +347,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":1,
+						"status":this.$store.state.data.status,
 						"groupBy":"campaign"
 					}
 				console.log(this.Data)
@@ -379,9 +390,11 @@
 	.cs-campaigns .campaigns-content li{
 		display: flex;
 		padding: .2rem 0;
-		border-bottom: .06rem solid #e4e8f1;
+		border-top: .06rem solid #e4e8f1;
 	}
-	
+	.cs-campaigns .campaigns-content li:nth-child(1){
+		border-top: 0;
+	}
 	.cs-campaigns .campaigns-img{
 		width: 18%;
 	}
@@ -414,6 +427,12 @@
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
+	}
+	.cs-campaigns .campaigns-title a:nth-child(2){
+		display: block;
+		width: 10%;
+		text-align: left;
+		color: #282828;
 	}
 	.cs-campaigns .campaigns-title .iconfont{
 		color: #b0b0b0;

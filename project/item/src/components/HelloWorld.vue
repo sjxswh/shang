@@ -40,14 +40,14 @@ export default {
   		this.$router.push("/Account")
   	},
   	NavShow(route){
-	  		if(route.path == '/Dashboard' || route.path == '/Campaigns' || route.path == '/Offer' || route.path == '/Flows'){
+	  		if(route.path == '/Dashboard' || route.path == '/Campaigns' || route.path == '/Offer' || route.path == '/Flows' || route.path == '/Lander' || route.path == '/Offers' || route.path == '/TrafficSource' || route.path == '/AffiliateNetwork'){
 						this.$store.dispatch("ShowHeader")
 						this.title = route.path.split("/").join("")
 					}
 	  		else if(route.path == '/' || route.path == '/Account' || route.path == '/SelectRange'){
 	  			this.$store.dispatch("getLogin")
 	  		}
-	  		else if(route.path == '/CampaignsDetail' || route.path == '/OfferDetail'){
+	  		else if(route.path == '/CampaignsDetail' || route.path == '/OfferDetail' || route.path == '/FlowDetail' || route.path == '/LanderDetail' || route.path == '/TrafficSourceDetail' || route.path == '/AffiliateNetworkDetail' || route.path == '/Detail'){
 	  			this.$store.dispatch("getCampaigns")
 	  		}
 	  	}

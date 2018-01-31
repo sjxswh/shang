@@ -15,7 +15,7 @@
 		    <swiper-slide>
 		    	<router-link to="/Offer">
 		    		<div class="iconfont icon-icon-life-flag"></div>
-		    		<div class="swiper-content">offers</div>
+		    		<div class="swiper-content">offer</div>
 		    	</router-link>
 		    </swiper-slide>
 		    <swiper-slide>
@@ -25,16 +25,22 @@
 		    	</router-link>
 		    </swiper-slide>
 		    <swiper-slide>
-		    	<div class="iconfont icon-Landers"></div>
-		    	<div class="swiper-content">Landers</div>
+		    	<router-link to="/Lander">
+			    	<div class="iconfont icon-Landers"></div>
+			    	<div class="swiper-content">Landers</div>
+			    </router-link>
 		    </swiper-slide>
 		    <swiper-slide>
-		    	<div class="iconfont icon-jiaotong"></div>
-		    	<div class="swiper-content">TrafficSource</div>
+		    	<router-link to="/TrafficSource">
+			    	<div class="iconfont icon-jiaotong"></div>
+			    	<div class="swiper-content">TrafficSource</div>
+			    </router-link>
 		    </swiper-slide>
 		    <swiper-slide>
-		    	<div class="iconfont icon-ren"></div>
-		    	<div class="swiper-content">AffiliateNet</div>
+		    	<router-link to="/AffiliateNetwork">
+			    	<div class="iconfont icon-ren"></div>
+			    	<div class="swiper-content">AffiliateNet</div>
+			    </router-link>
 		    </swiper-slide>
 		    <swiper-slide>
 		    	<div class="iconfont icon-networkstate_b"></div>

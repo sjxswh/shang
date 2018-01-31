@@ -7,10 +7,17 @@ import Flows from '@/components/Flows'
 import FlowDetail from '@/components/Flow-Detail'
 import Offer from '@/components/Offer'
 import OfferDetail from '@/components/Offer-Detail'
+import Offers from '@/components/Offers'
 import SelectRange from '@/components/SelectRange'
 import LoginInfo from '@/components/LoginInfo'
 import LoginIn from '@/components/LoginIn'
-
+import Lander from '@/components/Lander'
+import LanderDetail from '@/components/Lander-Detail'
+import TrafficSource from '@/components/TrafficSource'
+import TrafficSourceDetail from '@/components/TrafficSource-Detail'
+import AffiliateNetwork from '@/components/Affiliate'
+import AffiliateNetworkDetail from '@/components/Affiliate-Detail'
+import Detail from '@/components/Detail'
 
 Vue.use(Router)
 
@@ -57,6 +64,11 @@ export default new Router({
       component: OfferDetail
     },
     {
+      path: '/Offers',
+      name: 'Offers',
+      component: Offers
+    },
+    {
       path: '/SelectRange',
       name: 'SelectRange',
       component: SelectRange
@@ -66,6 +78,40 @@ export default new Router({
       name: 'LoginInfo',
       component: LoginInfo
     },
-    
+    {
+      path: '/Lander',
+      name: 'Lander',
+      component: Lander
+    },
+    {
+      path: '/LanderDetail',
+      name: 'LanderDetail',
+      component: LanderDetail
+    },
+    {
+      path: '/TrafficSource',
+      name: 'TrafficSource',
+      component: TrafficSource
+    },
+    {
+      path: '/TrafficSourceDetail',
+      name: 'TrafficSourceDetail',
+      component: TrafficSourceDetail
+    },
+    {
+      path: '/AffiliateNetwork',
+      name: 'AffiliateNetwork',
+      component: AffiliateNetwork
+    },
+    {
+      path: '/AffiliateNetworkDetail',
+      name: 'AffiliateNetworkDetail',
+      component: AffiliateNetworkDetail
+    },
+    {
+      path: '/Detail',
+      name: 'Detail',
+      component: Detail
+    },
   ]
 })

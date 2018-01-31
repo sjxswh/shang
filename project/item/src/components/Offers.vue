@@ -3,6 +3,14 @@
 		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
 			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
 		</div>
+		<!--<div class="home-top">
+			<div class="home-header">
+		  		<em class="iconfont icon-jiankuohaoxizuo" @touchstart="back"></em>
+		  		<p class="home-name">{{title}}</p>
+		  		<em class="home-edit edit">Edit</em>
+		  		<em class="home-edit dones" style="display: none;">Done</em>
+		  	</div>
+		</div>-->
 		<div class="home-select">
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
 			<router-link to="/SelectRange">
@@ -13,7 +21,7 @@
 				</router-link>
 			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
 		</div>	
-		<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 90%;">
+		<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 92%;">
 			<div class="campaigns-select">
 				<span class="iconfont icon-sousuo1-copy" @touchstart="inpVal"></span>
 				<input type="text" placeholder="Search" id="search" style="outline: none;" />
@@ -64,11 +72,13 @@
 		},
 		data () {
 			return {
+				title:"Offers",
 				loading:true,
 				dataList:[],
 				tokenCookie:[],
 		    tokenCookies:[],
 		    tokenname:"token",
+		    tokennames:"dataCid",
 		    token:"",
 		    from:{},
 				search:"",
@@ -85,7 +95,9 @@
 		     Datess:"",
 		     Time:"",
 		     Times:"",
-		     data:""
+		     data:"",
+		     DataCid:"",
+		     params:{}
 			}
 		},
 		computed:{
@@ -111,10 +123,10 @@
 				}).then((data) => {
 				   console.log(data)
 				   this.timezone = data.data.data.timezone
-				   that.$ajax({
-					  method: "get",
-					  params:{
-					  	authorization:that.token,
+				   if(this.DataCid.campaignName){
+				   	this.params = {
+					  	campaign:this.DataCid.campaignId,
+					  	authorization:this.token,
 					  	filter:this.search,
 							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
 							groupBy:"offer",
@@ -125,7 +137,75 @@
 							tag:"",
 							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
 							tz:this.timezone
-					  },
+					  }
+				   }
+				   if(this.DataCid.flowName){
+				   	this.params = {
+					  	flow:this.DataCid.flowId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.affiliateName){
+				   	this.params = {
+					  	affiliate:this.DataCid.affiliateId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.trafficName){
+				   	this.params = {
+					  	traffic:this.DataCid.trafficId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.landerName){
+				   	this.params = {
+					  	lander:this.DataCid.landerId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   that.$ajax({
+					  method: "get",
+					  params:this.params,
 					  url:"http://localhost:5000/api/report",
 					}).then((data) => {
 						console.log(data)
@@ -154,12 +234,18 @@
 		},
 		mounted(){
 			this.tokenname = this.tokenname + '='
+			this.tokennames = this.tokennames + '='
 			this.tokenCookie=document.cookie.split(";")
 			for(var i = 0; i < this.tokenCookie.length; i++){
 				this.tokenCookies = this.tokenCookie[i]
 				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
     		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
     			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
+    			console.log(this.token)
+    		}
+    		if(this.tokenCookies.indexOf(this.tokennames) != -1) {
+    			this.DataCid = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokennames.length, this.tokenCookies.length)))
+    			console.log(this.DataCid)
     		}
 			}
 			this.nowDate = new Date()
@@ -167,6 +253,9 @@
 			this.Times = this.nowDate.getTime()+86400000
 		},
 		methods: {
+			back () {
+		  		this.$router.go(-1)
+		  	},
 			inpVal () {
 				this.search = document.getElementById("search").value
 				var that = this
@@ -179,21 +268,89 @@
 				}).then((data) => {
 				   console.log(data)
 				   that.timezone = data.data.data.timezone
-				   that.$ajax({
-					  method: "get",
-					  params:{
-					  	authorization:that.token,
-					  	filter:that.search,
-							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
+				   if(this.DataCid.campaignName){
+				   	this.params = {
+					  	campaign:this.DataCid.campaignId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
 							groupBy:"offer",
 							limit:500,
 							order:"-visits",
 							page:1,
-							status:that.from.status,
+							status:this.from.status,
 							tag:"",
-							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
-							tz:that.timezone
-					  },
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.flowName){
+				   	this.params = {
+					  	flow:this.DataCid.flowId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.affiliateName){
+				   	this.params = {
+					  	flow:this.DataCid.affiliateId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.landerName){
+				   	this.params = {
+					  	flow:this.DataCid.landerId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   if(this.DataCid.trafficName){
+				   	this.params = {
+					  	flow:this.DataCid.trafficId,
+					  	authorization:this.token,
+					  	filter:this.search,
+							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
+							groupBy:"offer",
+							limit:500,
+							order:"-visits",
+							page:1,
+							status:this.from.status,
+							tag:"",
+							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
+							tz:this.timezone
+					  }
+				   }
+				   that.$ajax({
+					  method: "get",
+					  params:this.params,
 					  url:"http://localhost:5000/api/report",
 					}).then(function (data) {
 						that.loading = false
@@ -236,7 +393,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":this.$store.state.data.status,
+						"status":1,
 						"groupBy":"offer"
 					}
 				console.log(this.Data)
@@ -264,7 +421,7 @@
 						"years":this.Years,
 						"months":this.Months,
 						"dates":this.Datess,
-						"status":this.$store.state.data.status,
+						"status":1,
 						"groupBy":"offer"
 					}
 				console.log(this.Data)

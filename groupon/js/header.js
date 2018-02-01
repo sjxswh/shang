@@ -1,7 +1,7 @@
 $(function(){
 	$.ajax({
 					type:"get",
-					url:"http://offerwall.newbidder.com",
+					url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088",
 					dataType:"json",
 					success:function(data){
 						var index = -1

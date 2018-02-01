@@ -19,34 +19,34 @@
 				<input type="text" placeholder="Search" id="search" style="outline: none;" />
 			</div>
 			<ul class="campaigns-content">
-				<li v-for="data in dataList" :data="encodeURIComponent(JSON.stringify(data))">
-					<div class="campaigns-img" :data="encodeURIComponent(JSON.stringify(data))">
-						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
-							<img src="../assets/img/1.jpg" width="100%" :data="encodeURIComponent(JSON.stringify(data))" />
+				<li v-for="data in dataList" :data="JSON.stringify(data)">
+					<div class="campaigns-img" :data="JSON.stringify(data)">
+						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
 						</a>
 					</div>
-					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
-						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
-							<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
-								<span :data="encodeURIComponent(JSON.stringify(data))">{{data["flowName"]}}</span>
+					<div class="campaigns-content-main" :data="JSON.stringify(data)">
+						<div class="campaigns-title" :data="JSON.stringify(data)">
+							<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+								<span :data="JSON.stringify(data)">{{data["flowName"]}}</span>
 							</a>
 							<router-link to="/Offers" :data-cId="data.flowId" :data-name="data.flowName"  @touchstart="cOffer($event)" class="flowOffer">
 								<span class="iconfont icon-gengduo" :data-cId="data.flowId" :data-name="data.flowName"   @touchstart="cOffer($event)"></span>
 							</router-link>
 						</div>
-						<a @touchstart="LinksHrf($event)" :data="encodeURIComponent(JSON.stringify(data))">
-							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
-								<div :data="encodeURIComponent(JSON.stringify(data))">
-									<p :data="encodeURIComponent(JSON.stringify(data))"v>Revenue</p>
-									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.revenue}}</span>
-									<p :data="encodeURIComponent(JSON.stringify(data))">Profit</p>
-									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.profit}}</em>
+						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+							<div class="campaigns-info" :data="JSON.stringify(data)">
+								<div :data="JSON.stringify(data)">
+									<p :data="JSON.stringify(data)"v>Revenue</p>
+									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
+									<p :data="JSON.stringify(data)">Profit</p>
+									<em :data="JSON.stringify(data)">${{data.profit}}</em>
 								</div>
-								<div :data="encodeURIComponent(JSON.stringify(data))">
-									<p :data="encodeURIComponent(JSON.stringify(data))">ROI</p>
-									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.roi}}</em>
-									<p :data="encodeURIComponent(JSON.stringify(data))">Cost</p>
-									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.cost}}</span>
+								<div :data="JSON.stringify(data)">
+									<p :data="JSON.stringify(data)">ROI</p>
+									<em :data="JSON.stringify(data)">${{data.roi}}</em>
+									<p :data="JSON.stringify(data)">Cost</p>
+									<span :data="JSON.stringify(data)">${{data.cost}}</span>
 								</div>
 							</div>
 						</a>
@@ -59,11 +59,8 @@
 </template>
 
 <script>
-	import HomeSelect from '@/components/Home-Select'
+	import commont from '../assets/js/commont.js'
 	export default{
-		components: {
-			HomeSelect
-		},
 		data () {
 			return {
 				loading:true,
@@ -79,12 +76,6 @@
 				groupBy:"",
 				nowDate:"",
 		     Date:"",
-		     Year:"",
-		     Month:"",
-		     Dates:"",
-		     Years:"",
-		     Months:"",
-		     Datess:"",
 		     Time:"",
 		     Times:"",
 		     data:"",
@@ -110,7 +101,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://localhost:5000/api/profile",
+				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   this.timezone = data.data.data.timezone
@@ -129,7 +120,7 @@
 							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
 							tz:this.timezone
 					  },
-					  url:"http://localhost:5000/api/report",
+					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
 					}).then((data) => {
 						console.log(data)
 						this.loading= false
@@ -156,15 +147,7 @@
 			},
 		},
 		mounted () {
-			this.tokenname = this.tokenname + '='
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i]
-				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
-    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
-    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
-    		}
-			}
+			this.token = commont.getCookie(this.tokenname).token
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000
@@ -178,7 +161,7 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://localhost:5000/api/profile",
+				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   that.timezone = data.data.data.timezone
@@ -197,7 +180,7 @@
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://localhost:5000/api/report",
+					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
 					}).then((data) => {
 						console.log(data)
 						that.loading = false
@@ -207,76 +190,29 @@
 			},
 			LinksHrf (ev) {
 				 this.$router.push({
-            path: 'FlowDetail', 
+            path: 'OfferDetail', 
         })
-       console.log(ev.target)
-				 this.data = ev.target.getAttribute("data")
-				 console.log(this.data)
-				var oDate = new Date();
-				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
+			 this.data = ev.target.getAttribute("data")
+				commont.LinksHrf(this.data)
 			},
 			cOffer(ev){
 				this.datas = {"flowName":ev.target.getAttribute("data-name"),"flowId":ev.target.getAttribute("data-cId")}
-				 console.log(this.data)
-				var oDate = new Date();
-				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'dataCid=' + encodeURIComponent(JSON.stringify(this.datas)) + ';expires=' + oDate + ';path=/';
+				commont.cOffer(this.datas)
 			},
 			reduceDate(){
 				this.Time = this.Time - 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
 				this.Times = this.Times - 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-						"status":1,
-						"groupBy":"flow"
-					}
-				console.log(this.Data)
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"flow")
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
 				this.Times = this.Times + 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-						"status":1,
-						"groupBy":"flow"
-					}
-				console.log(this.Data)
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"flow")
 				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		}

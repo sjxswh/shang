@@ -9,7 +9,7 @@
 				
 				$.ajax({
 					type:"post",
-					url:"http://offerwall.newbidder.com/search/",
+					url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/search/",
 					data:{
 						"goodname":goodname,
 						"categoryid":categoryid,

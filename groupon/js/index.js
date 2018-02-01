@@ -1,7 +1,7 @@
 $(function(){
 				$.ajax({
 					type:"get",
-					url:"http://offerwall.newbidder.com",
+					url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088",
 					dataType:"json",
 					success:function(data){
 						console.log(data)
@@ -110,8 +110,9 @@ $(function(){
 													${ data.goods_score_list[q]["productTitle"] }
 												</div>
 											</a>
-												<div class="cui-udc-top-row">
-													<span class="iconfont icon-heart"></span>
+												<div class="cui-udc-top-row" style="display: flex;justify-content: space-between;">
+													<div><span class="iconfont icon-heart"></span></div>
+													<div style="color: #68b93a;"><span style="background-color: #68b93a;padding: 0px 2px 2px 2px;border-radius: 2px;font-size: 12px;color: #fff;">返</span>123445</div>
 												</div>
 												<div class="cui-udc-bottom-row">
 													<div class="cui-udc-left-two">
@@ -178,4 +179,20 @@ $(function(){
             }
           }
 				});
+				$('.subOrder').eq(0).click(function(){
+					$('.orderCode').eq(0).css({display:"block"})
+				})
+				$('.close').eq(0).click(function(){
+					$('.orderCode').eq(0).css({display:"none"})
+				})
+				$('.submit-code').eq(0).click(function(){
+					var text = $('.order-input').eq(0).val()
+					if(text == '' || text.length<15 ||text.length>20){
+						$('.prompt').eq(0).html("Please enter the correct order number. The order number should be within 15 to 20 characters.").css({color:"red"})
+					}
+					if(text != '' && text.length>=15 &&text.length<=20){
+						console.log(1)
+						$('.prompt').eq(0).html("After the Taobao order, we need to submit the order number to get the rebate!").css({color:"black"})
+					}
+				})
 			})

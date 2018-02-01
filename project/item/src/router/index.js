@@ -4,7 +4,6 @@ import Dashboard from '@/components/Dashboard'
 import Campaigns from '@/components/Campaigns'
 import CampaignsDetail from '@/components/Campaigns-Detail'
 import Flows from '@/components/Flows'
-import FlowDetail from '@/components/Flow-Detail'
 import Offer from '@/components/Offer'
 import OfferDetail from '@/components/Offer-Detail'
 import Offers from '@/components/Offers'
@@ -12,12 +11,10 @@ import SelectRange from '@/components/SelectRange'
 import LoginInfo from '@/components/LoginInfo'
 import LoginIn from '@/components/LoginIn'
 import Lander from '@/components/Lander'
-import LanderDetail from '@/components/Lander-Detail'
 import TrafficSource from '@/components/TrafficSource'
-import TrafficSourceDetail from '@/components/TrafficSource-Detail'
 import AffiliateNetwork from '@/components/Affiliate'
-import AffiliateNetworkDetail from '@/components/Affiliate-Detail'
 import Detail from '@/components/Detail'
+import Conversion from '@/components/Conversion'
 
 Vue.use(Router)
 
@@ -47,11 +44,6 @@ export default new Router({
       path: '/Flows',
       name: 'Flows',
       component: Flows
-    },
-    {
-      path: '/FlowDetail',
-      name: 'FlowDetail',
-      component: FlowDetail
     },
     {
       path: '/Offer',
@@ -84,19 +76,9 @@ export default new Router({
       component: Lander
     },
     {
-      path: '/LanderDetail',
-      name: 'LanderDetail',
-      component: LanderDetail
-    },
-    {
       path: '/TrafficSource',
       name: 'TrafficSource',
       component: TrafficSource
-    },
-    {
-      path: '/TrafficSourceDetail',
-      name: 'TrafficSourceDetail',
-      component: TrafficSourceDetail
     },
     {
       path: '/AffiliateNetwork',
@@ -104,14 +86,14 @@ export default new Router({
       component: AffiliateNetwork
     },
     {
-      path: '/AffiliateNetworkDetail',
-      name: 'AffiliateNetworkDetail',
-      component: AffiliateNetworkDetail
-    },
-    {
       path: '/Detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/Conversion',
+      name: 'Conversion',
+      component: Conversion
     },
   ]
 })

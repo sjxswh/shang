@@ -116,34 +116,18 @@
 </template>
 
 <script>
-	import XChart from '@/components/XChart';
-	import options from '../chart-option/campaigns-detail-options';
-	import HomeSelect from '@/components/Home-Select';
+	import commont from '../assets/js/commont.js'
 	export default{
 		name:"OfferDetail",
-		components:{
-			XChart,HomeSelect
-		},
 		data () {
-			let option = options.option
 		    return {
-		     id:"container",
-		     option:option,
-		     data:true,
 		     title:"Detail",
 		     tokenCookie:[],
 		     tokenCookies:[],
 		     tokenname:"data",
-		     tokennames:"token",
 		     token:"",
 		     nowDate:"",
 		     Date:"",
-		     Year:"",
-		     Month:"",
-		     Dates:"",
-		     Years:"",
-		     Months:"",
-		     Datess:"",
 		     Data:"",
 		     Time:"",
 		     Times:"",
@@ -170,22 +154,7 @@
 			}
 		},
 		mounted(){
-			this.tokenname = this.tokenname + '='
-			this.tokennames = this.tokennames + '='
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i]
-				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
-    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
-    			this.Data = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)))
-    			console.log(this.Data)
-    		}
-    		if(this.tokenCookies.indexOf(this.tokennames) != -1) {
-    			this.token = decodeURIComponent(this.tokenCookies.substring(this.tokennames.length, this.tokenCookies.length))
-    			console.log(this.token)
-    		}
-			}
-			console.log(this.$store.state.switchSta)
+			this.Data = commont.getCookie(this.tokenname)
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000

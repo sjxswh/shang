@@ -4,7 +4,7 @@
 
 	<head data-app="user_sessions" data-country="US" data-lang="en" data-locale="en_US" data-domain=".groupon.com" data-brand="groupon" data-categoryid="">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Sign In</title>
+		<title>Sign Up</title>
 
 		<link href="css/brnd-grpn-gig-v7.8.7-caca587eef.css" rel="stylesheet" type="text/css" id="gig-css">
 		<link href="css/brnd-grpn-sls-v6.0.53-a3603fb87b.css" rel="stylesheet" type="text/css">
@@ -201,7 +201,7 @@
 				 		Account = $(this).val()
 				 		$.ajax({
 				 			type:"get",
-				 			url:"http://offerwall.newbidder.com/user/check_user_exist?username="+Account,
+				 			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/check_user_exist?username="+Account,
 				 			success:function(data){
 				 				console.log(data)
 				 			}
@@ -239,7 +239,7 @@
 				 		console.log(1)
 				 		$.ajax({
 				 			type:"get",
-				 			url:"http://offerwall.newbidder.com/user/check_user_exist?email="+email,
+				 			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/check_user_exist?email="+email,
 				 			success:function(data){
 				 				console.log(data)
 				 			}
@@ -252,7 +252,7 @@
 				 $(".buttonss").eq(0).click(function(){
 				 		$.ajax({
 				 			type:"post",
-				 			url:"http://offerwall.newbidder.com/user/register/",
+				 			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/register/",
 				 			data:{
 				 				"username":Account,
 				 				"password":password,

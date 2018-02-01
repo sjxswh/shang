@@ -192,7 +192,7 @@
 				 	var password = $("#password-input").eq(0).val()
 				 		$.ajax({
 				 			type:"post",
-				 			url:"http://offerwall.newbidder.com/user/login",
+				 			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/login/",
 				 			data:{
 				 				"username":Account,
 				 				"password":password,
@@ -200,6 +200,10 @@
 				 			},
 				 			success:function(data){
 				 				console.log(data)
+				 				
+				 			},
+				 			error:function(err){
+				 				alert("失败")
 				 			}
 				 		});
 				 		location.href = "javascript:;"

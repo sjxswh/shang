@@ -43,8 +43,10 @@
 			    </router-link>
 		    </swiper-slide>
 		    <swiper-slide>
-		    	<div class="iconfont icon-networkstate_b"></div>
-		    	<div class="swiper-content">Conversions</div>
+		    	<router-link to="/Conversion">
+			    	<div class="iconfont icon-networkstate_b"></div>
+			    	<div class="swiper-content">Conversions</div>
+			    </router-link>
 		    </swiper-slide>
 		     <swiper-slide>
 		    	

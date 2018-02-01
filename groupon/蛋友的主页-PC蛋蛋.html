@@ -28,77 +28,8 @@
 			</div>
 
 			<link href="css/pcdd_num.css" rel="stylesheet" type="text/css">
-			<script src="css/makeconform.js.下载" type="text/javascript"></script>
 			<div id="msgdiv" style="position:absolute;display:none;"></div>
 			<div id="overdiv" style="position:absolute;display:none;"></div>
-
-			<script type="text/javascript" src="./蛋友的主页-PC蛋蛋_files/cookie.js.下载"></script>
-			<script src="./蛋友的主页-PC蛋蛋_files/Head.js.下载" type="text/javascript"></script>
-			<script type="text/javascript">
-				//去除IE6背景缓存
-				document.execCommand("BackgroundImageCache", false, true);
-
-				function addfavorite(a, b) {
-					if(document.all) {
-						window.external.addFavorite('http://www.pceggs.com' + "", "PC蛋蛋-专业体验营销平台");
-					} else if(window.sidebar) {
-						window.sidebar.addPanel("PC蛋蛋-专业体验营销平台", 'http://www.pceggs.com' + "", "");
-					}
-				}
-
-				function doSomething(evt) {
-					var e = (evt) ? evt : window.event; //判断浏览器的类型，在基于ie内核的浏览器中的使用cancelBubble
-					if(window.event) {
-						e.cancelBubble = true;
-					} else {
-						//e.preventDefault(); //在基于firefox内核的浏览器中支持做法stopPropagation
-						e.stopPropagation();
-					}
-				}
-
-				function answerqenstion() {
-
-					ShowMsgo.show("/activity/201209/dt/dtfc/fuceng/answer.aspx", 740, 610);
-
-				}
-
-				function closedd() {
-
-					ShowMsgo.ok();
-				}
-
-				function closelinqu() {
-					ShowMsgo.cancel();
-					window.location.reload(true);
-				}
-
-				function aaddgame() {
-					ShowMsgo.show("/Gain/new_guide_game.aspx", 658, 390);
-				}
-
-				function aaddgg() {
-					ShowMsgo.show("/Gain/new_guide_gg.aspx", 658, 390);
-				}
-				var isgain = "1";
-				var autoopen = "0";
-				var registdays = "8";
-				var userid = "26240494";
-
-				var tohref = window.location.href;
-				//if(tohref.indexOf("bbsPost.aspx")>-1||tohref.indexOf("bbsMain.aspx")>-1||tohref.indexOf("ShowList.aspx")>-1||tohref.indexOf("ShowInfo.aspx")>-1||tohref.indexOf("duobao_index.aspx")>-1||tohref.indexOf("duobao_next.aspx")>-1||tohref.indexOf("duobao_historylist.aspx")>-1||tohref.indexOf("bbsPostShow.aspx")>-1 ){
-
-				$(window).bind("scroll", function() {
-					var top_top = $(document).scrollTop(); //卷上去的高度
-					if(top_top > 0) {
-						$("#topNavUP").css("display", "");
-					} else {
-						$("#topNavUP").css("display", "none");
-					}
-
-				})
-
-				// }
-			</script>
 
 			<link rel="stylesheet" type="text/css" href="css/hongbao.css">
 
@@ -425,9 +356,7 @@
 			</div>
 			<div class="tgl_public_1118" style="display: none; margin-top: -5px;">
 				<div class="tglxx_public_1118">
-					<script>
-						ShowWords_new()
-					</script><span style="color:#3f3f3f;">【喜讯】</span>
+					<span style="color:#3f3f3f;">【喜讯】</span>
 					<a href="http://www.pceggs.com/activity2017/201712/ccc/2017_yxccc.aspx">第11期游戏试玩冲冲冲活动来袭，万元现金等你来战！</a>
 				</div>
 				<div class="tgldt_public_1118" style="height:25px; overflow:hidden;">
@@ -498,127 +427,6 @@
         </map>
 				</div>
 			</div>
-
-			<script>
-				var FeedData = new Array({ title: '蛋友<a href="/FriendInfor/FriendPrize.aspx?userid=25230753">25230753</a>兑换了<a href="/prize/prizeDetail.aspx?ISSUE=ZC0132">"京东E卡100元（卡密）"</a>', userid: '25230753', datatype: '奖品', time: '8分钟前', url: '' }, { title: '蛋友17038577提现了200元', userid: '17038577', datatype: '提现', time: '9分钟前', url: '' }, { title: '蛋友24807415提现了100元', userid: '24807415', datatype: '提现', time: '9分钟前', url: '' }, { title: '蛋友<a href="/FriendInfor/FriendPrize.aspx?userid=25024798">25024798</a>兑换了<a href="/prize/prizeDetail.aspx?ISSUE=ZC0138">"京东钢镚200元（卡密）"</a>', userid: '25024798', datatype: '奖品', time: '9分钟前', url: '' });
-				var msg = "";
-				var speed = 40; //数字越大速度越慢 20
-				var tab = document.getElementById("demo");
-				var tab1 = document.getElementById("demo1");
-				var tab2 = document.getElementById("demo2");
-				var MyMar = null;
-
-				function Marquee() {
-					if(tab2.offsetWidth - tab.scrollLeft <= 0) {
-						tab.scrollLeft -= tab1.offsetWidth;
-					} else {
-						tab.scrollLeft++;
-					}
-				}
-
-				tab.onmouseover = function() { clearInterval(MyMar) };
-				tab.onmouseout = function() { MyMar = setInterval(Marquee, speed) };
-
-				if(FeedData != null && FeedData.length > 0) {
-
-					for(var i = 0; i < FeedData.length; i++) {
-						msg += "<span>【" + FeedData[i].datatype + "】</span>" + FeedData[i].title + " " + FeedData[i].time + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
-					}
-					MyMar = setInterval(Marquee, speed);
-				}
-
-				tab1.innerHTML = msg;
-				tab2.innerHTML = msg;
-			</script>
-			<script type="text/javascript">
-				function closeTop(day) {
-					document.getElementById("topFloat").style.display = "none";
-					document.getElementById("top_hidden").style.display = "none";
-					SetCookie_top('dd_top_url', '1', day);
-				}
-
-				function SetCookie_top(name, value, day) {
-					var exp = new Date(); //1天过期代码,下面是当天过期代码
-					exp.setTime(exp.getTime() + parseInt(day) * 24 * 60 * 60 * 1000);
-					document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/;domain=pceggs.com";
-
-					//var curDate = new Date();  
-
-					//当前时间戳  
-					//     var curTamp = curDate.getTime();  
-
-					//当日凌晨的时间戳,减去一毫秒是为了防止后续得到的时间不会达到00:00:00的状态  
-					//    var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;  
-
-					//当日已经过去的时间（毫秒）  
-					//    var passedTamp = curTamp - curWeeHours;  
-
-					//当日剩余时间  
-					//   var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;  
-					//   var leftTime = new Date();  
-					//   leftTime.setTime(leftTamp + curTamp);  
-					//创建cookie  
-					//  document.cookie = name + "=" + escape(value) + ";expires=" + leftTime.toGMTString() + ";path=/;domain=pceggs.com";
-				}
-
-				function getCookie_top(name) //取cookies函数        
-				{
-					var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-					if(arr != null) return unescape(arr[2]);
-					return null;
-
-				}
-
-				function showSiteTop(i) {
-					if(i < 70) {
-						var hh = i - 70;
-						// document.getElementById("topFloat").style.top = hh + "px";
-						i = i + 1;
-						setTimeout("showSiteTop(" + i + ")", 30);
-					}
-				}
-				var mob_status = 1;
-				//alert(vip_level);
-				if(mob_status != 1) {
-					if(getCookie_top('dd_top_url') != 1) {
-						//showSiteTop(0);
-						// document.getElementById("topFloat").style.display = "";
-						//document.getElementById("top_hidden").style.display="";
-					}
-				}
-
-				function showSiteTop2(i) {
-					if(i <= 22) {
-						i++;
-						setTimeout("showSiteTop2(" + i + ")", 50);
-					}
-				}
-			</script>
-			<script>
-				function closeWX(i) {
-					document.getElementById("pceggsmoblie" + i).style.display = "none";
-				}
-			</script>
-			<script type="text/javascript" language="javascript">
-				function closeMapCCC() {
-					document.getElementById("201311yxccc").style.display = "none";
-				}
-
-				$(document).ready(function() {
-
-				});
-			</script>
-			<script>
-				$(function() {
-					$(".hb_tc_ssy .close").click(function() {
-						$(".hb_tc_ssy").css("display", "none");
-					})
-					$(".hb_tc_know").click(function() {
-						$(".hb_tc_ssy").css("display", "none");
-					})
-				})
-			</script>
 
 			<div class="doc">
 				<div class="myaccount">

@@ -28,11 +28,9 @@
 					<div class="campaigns-content-main" :data="JSON.stringify(data)">
 						<div class="campaigns-title" :data="JSON.stringify(data)">
 							<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-								<span :data="JSON.stringify(data)">{{data["landerName"]}}</span>
+								<span :data="JSON.stringify(data)">{{data["offerName"]}}</span>
 							</a>
-							<router-link to="/Offers" :data-cId="data.landerId" :data-name="data.landerName" @touchstart="cOffer($event)" class="flowOffer">
-								<span class="iconfont icon-gengduo"  :data-cId="data.landerId" :data-name="data.landerName"  @touchstart="cOffer($event)"></span>
-							</router-link>
+							<span class="iconfont icon-gengduo"></span>
 						</div>
 						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
 							<div class="campaigns-info" :data="JSON.stringify(data)">
@@ -65,6 +63,7 @@
 			return {
 				loading:true,
 				dataList:[],
+				dataLists:[],
 				tokenCookie:[],
 		    tokenCookies:[],
 		    tokenname:"token",
@@ -76,11 +75,9 @@
 				groupBy:"",
 				nowDate:"",
 		     Date:"",
-		     date:"",
 		     Time:"",
 		     Times:"",
-		     data:"",
-		     datas:{}
+		     data:""
 			}
 		},
 		computed:{
@@ -110,36 +107,17 @@
 					  method: "get",
 					  params:{
 					  	authorization:that.token,
-					  	filter:this.search,
 							from:this.from.year+"-"+this.from.month+"-"+this.from.date+"T00:00",
-							groupBy:"lander",
 							limit:500,
-							order:"-visits",
+							order:"PostbackTimestamp",
 							page:1,
-							status:this.from.status,
-							tag:"",
 							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
 							tz:this.timezone
 					  },
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/conversions",
 					}).then((data) => {
-						console.log(data)
 						this.loading = false
-					    this.dataList = data.data.data.rows;
-					    /*that.dataList.forEach((item)=>{
-					    	if(item.deleted == 0 && item.status == 1){
-					    		item.active = true
-					    	}
-					    	if(item.deleted == 0 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 0){
-					    		item.active = false
-					    	}
-					    	if(item.deleted == 1 && item.status == 1){
-					    		item.active = false
-					    	}
-					    })*/
+					  this.dataList = data.data.data.rows;
 					});
 				});	
 			},
@@ -172,7 +150,7 @@
 					  	authorization:that.token,
 					  	filter:that.search,
 							from:that.from.year+"-"+that.from.month+"-"+that.from.date+"T00:00",
-							groupBy:"lander",
+							groupBy:"offer",
 							limit:500,
 							order:"-visits",
 							page:1,
@@ -196,16 +174,12 @@
 			 this.data = ev.target.getAttribute("data")
 				commont.LinksHrf(this.data)
 			},
-			cOffer(ev){
-				this.datas = {"landerName":ev.target.getAttribute("data-name"),"landerId":ev.target.getAttribute("data-cId")}
-				commont.cOffer(this.datas)
-			},
 			reduceDate(){
 				this.Time = this.Time - 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
 				this.Times = this.Times - 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"lander")
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,'campaign')
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
@@ -213,7 +187,7 @@
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
 				this.Times = this.Times + 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"lander")
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,'campaign')
 				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		}

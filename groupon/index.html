@@ -46,6 +46,24 @@
 		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 999;background: white;opacity: .5;">
 			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
 		</div>
+		<div class="orderCode" style="display: none;">
+			<div class="mask" style="position: absolute;z-index: 990; width: 100%; height: 3000px; left: 0px; top: 0px; opacity: 0.4; background-color: rgb(0, 0, 0);"></div>
+			<div class="mask-content" style="position: absolute;z-index: 1000;width: 600px;height: auto;left: 50%;top: 30%;margin-left: -300px;">
+				<div style="height: 50px;background: #53a318;color: white;display: flex;justify-content: space-between;padding: 0 10px;line-height: 50PX;">
+					<span>Reminder</span>
+					<a href="javascript:;" style="color: white;height: 24px;width: 24px;text-align: center;text-decoration: none;border: 1px solid white;border-radius: 50%;margin: auto 0;line-height: 24px;" class="close">X</a>
+				</div>
+				<div style="height: 250px;background: white;overflow: hidden;">
+					<div style="width: 74%;margin: 20px auto 20px;">
+						<div style="margin: 20px auto 20px;">
+							<input type="text" placeholder="Please enter the order code" style="margin: 0;outline: none;" class="order-input" />
+						</div>
+						<div class="prompt">After the Taobao order, we need to submit the order number to get the rebate!</div>
+						<a style="padding: 10px 10px;background: #53a318;color: white;border-radius: 5px;display: inline-block;margin: 20px 26% 0;font-size: 16px;text-decoration: none;" class="submit-code">Confirmation of submission</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div id="global-container">
 			<div class="header-v2" id="header-v">
 				<header data-bhw="Header" role="banner" class="header
@@ -65,16 +83,17 @@
                 			</label>
 											<input type="search" name="search" id="ls-search" class="search-text" data-bhw="FreeTextSearchField" maxlength="50" autocomplete="off" spellcheck="false" placeholder="Search Newbidder" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" data-bhw-path="Header|SearchBar|FreeTextSearchField">
 										</div>
-										<label for="ls-location" class="search-box location-search search-bar-icon iconfont icon-location">
+										<!--<label for="ls-location" class="search-box location-search search-bar-icon iconfont icon-location">
                 <span id="placeholderLocation" class="ls-flex-placeholder isHidden">
                   
                   Zip Code, Neighborhood, City
                 </span>
                 <input type="text" name="location" id="ls-location" class="search-text" data-bhw="LocationBarField" autocomplete="off" spellcheck="false" maxlength="50" placeholder="placeholderLocation" aria-autocomplete="list" aria-haspopup="true" aria-owns="autocomplete-list" aria-busy="true" role="combobox" placeholder="Chicago" data-bhw-path="Header|SearchBar|LocationBarField">
-              </label>
+              </label>-->
 										<a href="javascript:;" id="ls-header-search-button" class="ls-header-search-button iconfont icon-searchamagnifyingglass" >
                 <span class="accessibility-hidden">Search</span>
               </a>
+              <div style="border: 1px solid white;padding: 5px 4px;margin-left: 10px;" class="subOrder">提交订单编号</div>
 										<div class="typeahead-response" id="ls-search-results" aria-hidden="true" aria-live="polite">
 											<ul id="autocomplete-list" role="list" aria-busy="true"></ul>
 										</div>

@@ -40,7 +40,7 @@ export default {
   		this.$router.push("/Account")
   	},
   	NavShow(route){
-	  		if(route.path == '/Dashboard' || route.path == '/Campaigns' || route.path == '/Offer' || route.path == '/Flows' || route.path == '/Lander' || route.path == '/Offers' || route.path == '/TrafficSource' || route.path == '/AffiliateNetwork'){
+	  		if(route.path == '/Dashboard' || route.path == '/Campaigns' || route.path == '/Offer' || route.path == '/Flows' || route.path == '/Lander' || route.path == '/Offers' || route.path == '/TrafficSource' || route.path == '/AffiliateNetwork' || route.path == '/Conversion'){
 						this.$store.dispatch("ShowHeader")
 						this.title = route.path.split("/").join("")
 					}

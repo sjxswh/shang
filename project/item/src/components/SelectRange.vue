@@ -22,7 +22,7 @@
 				</select>
 				<div class="time-range-title">Timezone</div>
 				<select @change="activess($event)" id="timezone">
-					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.name}}</option>
+					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.detail}}</option>
 				</select>
 				<div class="time-range-title">In</div>
 				<select @change="activess($event)" id="dayin">
@@ -79,28 +79,23 @@
 				</select>
 				<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 90%;">
 			<ul class="campaigns-content">
-				<li v-show="length">
-					<div class="campaigns-content-main">
-						this is empty
-					</div>
-				</li>
-				<li v-for="data in dataList" :data="encodeURIComponent(JSON.stringify(data))" @touchstart="LinksHrf($event)">
-					<div class="campaigns-content-main" :data="encodeURIComponent(JSON.stringify(data))">
-						<div class="campaigns-title" :data="encodeURIComponent(JSON.stringify(data))">
-								<span :data="encodeURIComponent(JSON.stringify(data))">{{data.id}}</span>
+				<li v-for="data in dataList" :data="JSON.stringify(data)" @touchstart="LinksHrf($event)">
+					<div class="campaigns-content-main" :data="JSON.stringify(data)">
+						<div class="campaigns-title" :data="JSON.stringify(data)">
+								<span :data="JSON.stringify(data)">{{data.id}}</span>
 						</div>
-							<div class="campaigns-info" :data="encodeURIComponent(JSON.stringify(data))">
-								<div :data="encodeURIComponent(JSON.stringify(data))">
-									<p :data="encodeURIComponent(JSON.stringify(data))">Revenue</p>
-									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.revenue}}</span>
-									<p :data="encodeURIComponent(JSON.stringify(data))">Profit</p>
-									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.profit}}</em>
+							<div class="campaigns-info" :data="JSON.stringify(data)">
+								<div :data="JSON.stringify(data)">
+									<p :data="JSON.stringify(data)">Revenue</p>
+									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
+									<p :data="JSON.stringify(data)">Profit</p>
+									<em :data="JSON.stringify(data)">${{data.profit}}</em>
 								</div>
-								<div :data="encodeURIComponent(JSON.stringify(data))">
-									<p :data="encodeURIComponent(JSON.stringify(data))">ROI</p>
-									<em :data="encodeURIComponent(JSON.stringify(data))">${{data.roi}}</em>
-									<p :data="encodeURIComponent(JSON.stringify(data))">Cost</p>
-									<span :data="encodeURIComponent(JSON.stringify(data))">${{data.cost}}</span>
+								<div :data="JSON.stringify(data)">
+									<p :data="JSON.stringify(data)">ROI</p>
+									<em :data="JSON.stringify(data)">${{data.roi}}</em>
+									<p :data="JSON.stringify(data)">Cost</p>
+									<span :data="JSON.stringify(data)">${{data.cost}}</span>
 								</div>
 							</div>
 					</div>
@@ -114,6 +109,7 @@
 </template>
 
 <script>
+	import commont from '../assets/js/commont.js'
 	export default{
 		name:"SelectRange",
 		data(){
@@ -121,7 +117,6 @@
 				flow:"flow",
 				lander:"lander",
 				title:"Select range",
-				length:true,
 				pickerVisible: "",
 				pickerVisibles: "",
 				endDate:new Date(),
@@ -149,6 +144,9 @@
 		     Data:{},
 		     firstname:"",
 		     lastname:"",
+		     companyname:"",
+		     homescreen:"",
+		     tel:"",
 		     Time:"",
 		     Times:"",
 		     nowDate:"",
@@ -203,22 +201,12 @@
    	  this.vModal.forEach((v,k)=>{
    	  	v.addEventListener("click",this.clickDate)
    	  })
-	   	this.tokenname = this.tokenname + '='
-	   	this.tokennames = this.tokennames + '='
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i]
-				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
-    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
-    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
-    		}
-    		if(this.tokenCookies.indexOf(this.tokennames) != -1) {
-    			this.selectData = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokennames.length, this.tokenCookies.length)))
-    		}
-			}
+	   	this.token = commont.getCookie(this.tokenname).token
+	   	console.log(this.token)
+    	this.selectData = commont.getCookie(this.tokennames)
 		  this.$ajax({
 			  method: "get",
-			  url:"http://localhost:5000/timezones",
+			  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/timezones",
 			  params:{
 			  	token:this.token
 			  }
@@ -240,7 +228,7 @@
 				  params:{
 				  	authorization:this.token
 				  },
-				  url:"http://localhost:5000/api/profile",
+				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 				}).then((data) => {
 				   console.log(data)
 				   console.log(this.Year)
@@ -344,15 +332,9 @@
 				   this.$ajax({
 					  method: "get",
 					  params:this.params,
-					  url:"http://localhost:5000/api/report",
+					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
 					}).then((data) => {
 					   this.dataList = data.data.data.rows
-					   if(this.dataList.length == 0){
-					   	this.length = true
-					   }
-					   else{
-					   	this.length = false
-					   }
 					});
 				});	
 			},
@@ -454,22 +436,26 @@
 							  params:{
 							  	authorization:this.token
 							  },
-						  url:"http://localhost:5000/api/groups",
+						  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 			      	}).then((data)=>{
-			      		this.firstname = data.data.data.groups[0].firstname
-			      		this.lastname = data.data.data.groups[0].lastname
+			      		console.log(data.data.data)
+			      		this.firstname = data.data.data.firstname
+			      		this.lastname = data.data.data.lastname
+			      		this.companyname = data.data.data.companyname
+			      		this.homescreen = data.data.data.homescreen
+			      		this.tel = data.data.data.tel
 			      		this.$ajax({
 				      		method: "post",
 								  data:{
-								  	"companyname":"Tzula Entertainment Co.,LTD",
+								  	"companyname":this.companyname,
 								  	"firstname":this.firstname,
-								  	"homescreen":"Campaign list",
+								  	"homescreen":this.homescreen,
 								  	"lastname":this.lastname,
-								  	"tel":"",
+								  	"tel":this.tel,
 								  	"timezone":this.timeZone,
 								  	"timezoneId":this.timeS
 								  },
-							  url:"http://localhost:5000/api/profile?authorization="+this.token,
+							  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile?authorization="+this.token,
 				      	}).then((data) => {
 				      		//console.log(data)
 				      	})

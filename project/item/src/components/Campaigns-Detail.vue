@@ -164,20 +164,11 @@
 </template>
 
 <script>
-	import XChart from '@/components/XChart';
-	import options from '../chart-option/campaigns-detail-options';
-	import Cookie from '../js/cookie';
-	import HomeSelect from '@/components/Home-Select';
+	import commont from '../assets/js/commont.js'
 	export default{
 		name:"CampaignsDetail",
-		components: {
-			XChart,HomeSelect
-		},
 		data () {
-			let option = options.option
 		    return {
-		     id:"container",
-		     option:option,
 		     edits:"Edit",
 		     value:true,
 		     title:"CampaignsDetail",
@@ -187,20 +178,9 @@
 		     tokenCookie:[],
 		     tokenCookies:[],
 		     tokenname:"data",
-		     tokennames:"token",
 		     token:"",
 		     Data:"",
-		     switchSta:"",
-		     timeZone:"",
-		     dayIn:"",
 		     nowDate:"",
-		     Date:"",
-		     Year:"",
-		     Month:"",
-		     Dates:"",
-		     Years:"",
-		     Months:"",
-		     Datess:"",
 		     Data:"",
 		     Time:"",
 		     Times:"",
@@ -228,22 +208,8 @@
 			}
 		},
 		mounted(){
-			this.tokenname = this.tokenname + '='
-			this.tokennames = this.tokennames + '='
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i]
-				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
-    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
-    			this.Data = JSON.parse(decodeURIComponent(this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)))
-    			console.log(this.Data.deleted)
-    		}
-    		if(this.tokenCookies.indexOf(this.tokennames) != -1) {
-    			this.token = decodeURIComponent(this.tokenCookies.substring(this.tokennames.length, this.tokenCookies.length))
-    			console.log(this.token)
-    		}
-			}
-			console.log(this.$store.state.switchSta)
+    	this.Data = commont.getCookie(this.tokenname)
+    	console.log(this.Data)
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000
@@ -300,7 +266,7 @@
 				  	id:that.dataId,
 				  	status:that.status
 				  },
-				  url:"http://localhost:5000/api/campaigns/"+that.dataId+"?authorization="+that.token,
+				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/campaigns/"+that.dataId+"?authorization="+that.token,
 				}).then((data) => {
 					console.log(data)
 				});

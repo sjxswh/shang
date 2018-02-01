@@ -55,13 +55,9 @@
 </template>
 
 <script>
-	//import XChart from '@/components/XChart'
-	import HomeSelect from '@/components/Home-Select'
 	import HighCharts from 'highcharts'
+	import commont from '../assets/js/commont.js'
 	export default{
-		components: {
-			HomeSelect
-		},
 		data () {
 		    return {
 		    	loading:true,
@@ -70,12 +66,6 @@
 		     timezone:"",
 		     nowDate:"",
 		     Date:"",
-		     Year:"",
-		     Month:"",
-		     Dates:"",
-		     Years:"",
-		     Months:"",
-		     Datess:"",
 		     Data:"",
 		     revenue:[],
 		     cost:[],
@@ -108,7 +98,7 @@
 			  params:{
 			  	authorization:that.token
 			  },
-			  url:"http://localhost:5000/api/profile",
+			  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 			}).then((data) => {
 			   console.log(data)
 			   that.timezone = data.data.data.timezone
@@ -136,7 +126,7 @@
 					that.$ajax({
 					  method: "get",
 					  params:this.params,
-					  url:"http://localhost:5000/api/report",
+					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
 					}).then(function (data) {
 				    console.log(data)
 				    that.loading = false
@@ -240,15 +230,7 @@
 			}
 		},
 		mounted(){
-			this.tokenname = this.tokenname + '='
-			this.tokenCookie=document.cookie.split(";")
-			for(var i = 0; i < this.tokenCookie.length; i++){
-				this.tokenCookies = this.tokenCookie[i]
-				while (this.tokenCookies.charAt(0) == " ") this.tokenCookies = this.tokenCookies.substring(1);
-    		if(this.tokenCookies.indexOf(this.tokenname) != -1) {
-    			this.token = this.tokenCookies.substring(this.tokenname.length, this.tokenCookies.length)
-    		}
-			}
+			this.token = commont.getCookie(this.tokenname).token
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000
@@ -257,53 +239,17 @@
 			reduceDate(){
 				this.Time = this.Time - 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
 				this.Times = this.Times - 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-					}
-				console.log(this.Data)
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
 				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-				this.Year = this.Date.split("/")[0]
-				this.Month = this.Date.split("/")[1]
-				this.Month = this.Month<10? "0"+this.Month:this.Month
-				this.Dates = this.Date.split("/")[2]
-				this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
 				this.Times = this.Times + 604800000
 				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Years = this.date.split("/")[0]
-				this.Months = this.date.split("/")[1]
-				this.Months = this.Months<10? "0"+this.Months:this.Months
-				this.Datess = this.date.split("/")[2]
-				this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-				this.Data = {
-						"year":this.Year,
-						"month":this.Month,
-						"date":this.Dates,
-						"years":this.Years,
-						"months":this.Months,
-						"dates":this.Datess,
-					}
-				console.log(this.Data)
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		},

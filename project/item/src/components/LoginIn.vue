@@ -31,7 +31,7 @@
 		  		var that = this
 				this.$ajax({
 				  method: "post",
-				  url:"http://localhost:5000/auth/login",
+				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/auth/login",
 	  			  data:{
 	  				 email: that.emailValue,
 					 		password:that.pwdValue
@@ -39,7 +39,7 @@
 				}).then(function (data) {
 					console.log(data)
 				    if(data.status == 200){
-				    	document.cookie= "token=" + data.data.token;
+				    	document.cookie= "token=" + JSON.stringify({"token":data.data.token});
 				    	that.$router.push('/Dashboard')
 				    }
 				});

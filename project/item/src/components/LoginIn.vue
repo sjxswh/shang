@@ -15,6 +15,12 @@
 				<button @touchstart="ajaxClcik">Log in</button>
 			<p style="font-size: .4rem;color: #8199e6;text-align: center;padding: 0;">log in as guest</p>
 		</div>
+		<mt-popup
+		  v-model="popupVisible"
+		  position="top"
+		  >
+		  {{value}}
+		</mt-popup>
 	</div>
 </template>
 
@@ -23,7 +29,9 @@
 		data () {
 			return {
 				emailValue:'',
-				pwdValue:''
+				pwdValue:'',
+				popupVisible:false,
+				value:"",
 			}
 		},
 		methods:{
@@ -37,11 +45,19 @@
 					 		password:that.pwdValue
 	  			  },
 				}).then(function (data) {
-					console.log(data)
-				    if(data.status == 200){
-				    	document.cookie= "token=" + JSON.stringify({"token":data.data.token});
-				    	that.$router.push('/Dashboard')
-				    }
+					
+			    if(data.status == 200){
+			    	document.cookie= "token=" + JSON.stringify({"token":data.data.token});
+			    	that.$router.push('/Dashboard')
+			    }
+				},function(err){
+					that.popupVisible = true
+					that.value = "email: must be a valid email or account/password error"
+					
+					setTimeout(() =>{
+						that.popupVisible = false
+						document.getElementsByClassName("mint-popup-top")[0].style.display = "none"
+					},4000)
 				});
 			}
 		}
@@ -97,5 +113,18 @@
 		font-size: .3rem;
 		color: white;
 		outline: none;
+	}
+	.cs-login-in .v-modal{
+		width: 100%;
+		height: .8rem !important;
+	}
+	.mint-popup{
+		background: #1b1b1b !important;
+		opacity: 0.3;
+		color: white;
+		width: 100%;
+		height: .8rem;
+		text-align: center;
+		line-height: .8rem;
 	}
 </style>

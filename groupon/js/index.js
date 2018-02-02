@@ -191,8 +191,17 @@ $(function(){
 						$('.prompt').eq(0).html("Please enter the correct order number. The order number should be within 15 to 20 characters.").css({color:"red"})
 					}
 					if(text != '' && text.length>=15 &&text.length<=20){
-						console.log(1)
 						$('.prompt').eq(0).html("After the Taobao order, we need to submit the order number to get the rebate!").css({color:"black"})
+						$.ajax({
+							type:"post",
+							url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingaward/",
+							data:{
+								"orderid":text
+							},
+							success:function(data){
+								console.log(data)
+							}
+						});
 					}
 				})
 			})

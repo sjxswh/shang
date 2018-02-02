@@ -9,9 +9,7 @@
 		</title>
 		<link href="css/base.v20150930.css" rel="stylesheet" type="text/css">
 		<link href="css/daohang.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="./我的淘宝返利-我的帐户-PC蛋蛋_files/jquery-1.6.2.min.js.下载"></script>
 		<link href="css/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="./我的淘宝返利-我的帐户-PC蛋蛋_files/jquery-ui-1.8.16.custom.min.js.下载"></script>
 		<link href="css/tm_fc.css" rel="stylesheet" type="text/css">
 		<link href="css/myaccount.css" rel="stylesheet" type="text/css">
 	</head>
@@ -19,7 +17,6 @@
 	<body>
 
 		<link href="css/pcdd_num.css" rel="stylesheet" type="text/css">
-		<script src="css/makeconform.js.下载" type="text/javascript"></script>
 		<div id="msgdiv" style="position:absolute;display:none;"></div>
 		<div id="overdiv" style="position:absolute;display:none;"></div>
 
@@ -609,8 +606,8 @@
 </select> -->
 								</div>
 								<div class="item_search myorder_bt_r">
-									<input name="order_no" type="text" id="order_no" class="inp_box b_item" onfocus="orderfocus(this);" onblur="orderblur(this);" value="请输入订单号，查询订单是否被跟踪到">
-									<input type="image" name="FindOrder" onclick="searchorderno()" class="img_button" src="img/img_button.png" style="border-width:0px;">
+									<input name="order_no" type="text" id="order_no" class="inp_box b_item" placeholder="Please enter the order number.">
+									<input type="image" name="FindOrder" class="img_button" src="img/img_button.png" style="border-width:0px;">
 
 								</div>
 
@@ -801,5 +798,26 @@
 		</div>
 
 	</body>
-
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			type:"post",
+			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
+			success:function(data){
+				
+			}
+		});
+		$('.img_button').eq(0).click(function(){
+			$.ajax({
+			type:"post",
+			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
+			data:{
+				"orderid":$('.b_item').eq(0).val()
+			},
+			success:function(data){
+				console.log(data)
+			}
+		});
+		})
+	</script>
 </html>

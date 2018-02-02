@@ -22,7 +22,7 @@
 				</select>
 				<div class="time-range-title">Timezone</div>
 				<select @change="activess($event)" id="timezone">
-					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.detail}}</option>
+					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.name}}</option>
 				</select>
 				<div class="time-range-title">In</div>
 				<select @change="activess($event)" id="dayin">
@@ -30,8 +30,8 @@
 					<option :data-ins="1">Yesterday</option>
 					<option :data-ins="2">Last 7 Days</option>
 					<option :data-ins="3">Last 14 Days</option>
-					<option :data-ins="4">This week</option>
-					<option :data-ins="5">This Month</option>
+					<!--<option :data-ins="4">This week</option>
+					<option :data-ins="5">This Month</option>-->
 				</select>
 				<div class="time-range-select">
 					<span @click="openPicker();clickDate()">{{Year}}/{{Month}}/{{Dates}}</span>

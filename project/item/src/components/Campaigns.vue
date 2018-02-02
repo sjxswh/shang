@@ -116,7 +116,7 @@
 		     Times:"",
 		     data:"",
 		     datas:{},
-		     dataCid:""
+		     dataCid:"",
 			}
 		},
 		computed:{

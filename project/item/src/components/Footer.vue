@@ -48,13 +48,6 @@
 			    	<div class="swiper-content">Conversions</div>
 			    </router-link>
 		    </swiper-slide>
-		     <swiper-slide>
-		    	
-		    </swiper-slide>
-		     <swiper-slide>
-		    </swiper-slide>
-		    
-		    
 		</swiper>
 	</div>
 </template>
@@ -70,7 +63,7 @@ export default {
   data () {
     return {
       swiperOption:{
-      	slidesPerView: 5
+      	slidesPerView: 4
       }
     }
   },
@@ -122,7 +115,6 @@ export default {
 	}
 	.Footer .swiper-container{
 		width: 80%;
-		overflow: hidden;
 	}
 	
 	.Footer .swiper-slide{

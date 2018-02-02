@@ -199,8 +199,8 @@
 				 				"remember":remember,
 				 			},
 				 			success:function(data){
-				 				console.log(data)
-				 				
+				 				document.cookie = "dataLink="+JSON.stringify(data)
+				 				window.location.href = "myAccount.html"
 				 			},
 				 			error:function(err){
 				 				alert("失败")

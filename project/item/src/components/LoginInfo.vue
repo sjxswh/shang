@@ -1,5 +1,8 @@
 <template>
 	<div class="cs-login-info">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div class="home-top">
 			<div class="home-header">
 		  		<em class="home-cancel" @touchstart="back">Bcak</em>
@@ -31,6 +34,7 @@
 			return {
 				title:"Account",
 				name:"",
+				loading:true
 			}
 		},
 		mounted () {
@@ -42,7 +46,7 @@
 			  },
 			  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
 			}).then((data) => {
-				console.log(data.data.data)
+				that.loading = false
 				that.name = data.data.data
 			})
 		},

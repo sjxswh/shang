@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+.account_right_messeage_titlered{ color:#c80b07; font-weight:bolder; height:32px; line-height:32px; }
+
+.blue_load2:link{color:#3B5888;text-decoration:none;}
+.blue_load2:visited{text-decoration: none;color:#3B5888;}
+.blue_load2:hover{text-decoration:none;color:#3B5888;}
+.blue_load2:active{text-decoration:none;color:#3B5888;}
+
+.account_right_messeage_jg33{ height:30px;}
+.account_right_changeok{ height:56px; border:#4cc200 1px solid; margin-top:8px; background-color:#f1ffe6;}
+
+.account_right_changeok_bg{ background:url(../images/account-changeok.gif) no-repeat; height:56px; line-height:56px; padding-left:58px; font-size:14px; color:#40433c; font-weight:bolder;}

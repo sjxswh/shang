@@ -96,15 +96,15 @@
 							</li>
 							<li class="sheader_line">&nbsp;</li>
 							<li>
-								<a href="http://www.pceggs.com/myaccount/MyMoney/my_zhgk.aspx?id=1" class="sheader_img_eggs">金蛋：<span class="sheader_red" style="font-weight: bolder">953,486</span></a>
+								<a href="myAccount.html" class="sheader_img_eggs">金蛋：<span class="sheader_red" style="font-weight: bolder">953,486</span></a>
 							</li>
 							<li class="sheader_line">&nbsp;</li>
 							<li>
-								<a href="http://www.pceggs.com/myaccount/MyMoney/my_zhgk.aspx?id=1" class="sheader_img_jinbi">金币：<span class="sheader_red" style="font-weight: bolder">26,754</span></a>
+								<a href="myAccount.html" class="sheader_img_jinbi">金币：<span class="sheader_red" style="font-weight: bolder">26,754</span></a>
 							</li>
 							<li class="sheader_line">&nbsp;</li>
 							<li>
-								<a href="http://www.pceggs.com/myaccount/MyMoney/my_zhgk.aspx?id=1" class="sheader_red" style="color: #DB0100;">
+								<a href="myAccount.html" class="sheader_red" style="color: #DB0100;">
 									我的帐户</a>
 							</li>
 							<li class="sheader_line">&nbsp;</li>
@@ -630,37 +630,15 @@
 									</thead>
 
 									<tbody>
-										<tr id="order_Ycontent">
-											<td align="center" bgcolor="#FFFFFF">2018-01-24</td>
-											<!--   <td align="center" bgcolor="#FFFFFF" >普通搜索</td>      -->
-											<td align="center" bgcolor="#FFFFFF">2222222222222222</td>
-											<td height="24" align="right" title="订单金额参考仅供参考，返利以
-实际支付金额（除运费）为准">
 
-												</td>
-												<td height="24" align="right" style="padding-right:20px" title="预返金蛋仅供参考，返利以
-实际支付金额（除运费）为准">
-
-													</td>
-													<td align="center" bgcolor="#FFFFFF" id="YFdate2"></td>
-													<td height="24" align="center">
-
-													</td>
-													<td height="24" align="center" bgcolor="#FFFFFF">待返利</td>
-										</tr>
-
-										<tr>
+										<tr class="paging">
 											<td colspan="8" id="YFdate4" style="text-align: right">
-
-												<!-- AspNetPager V6.0.0 for VS2005  Copyright:2003-2006 Webdiyer (www.webdiyer.com) -->
 												<div id="AspNetPager1" class="anpager" style="font-size:12px;width: 100%">
 													<a disabled="true" style="margin-right:5px;">首页</a>
 													<a disabled="true" style="margin-right:5px;">上一页</a><span class="cpb" style="margin-right:5px;">1</span>
 													<a disabled="true" style="margin-right:5px;">下一页</a>
 													<a disabled="true" style="margin-right:5px;">末页</a>
 												</div>
-												<!-- AspNetPager V6.0.0 for VS2005 End -->
-
 											</td>
 										</tr>
 									</tbody>
@@ -799,25 +777,85 @@
 
 	</body>
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="js/commont.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		var account = getCookie("Account")
 		$.ajax({
-			type:"post",
-			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
-			success:function(data){
-				
-			}
-		});
-		$('.img_button').eq(0).click(function(){
-			$.ajax({
-			type:"post",
-			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
-			data:{
-				"orderid":$('.b_item').eq(0).val()
+			type: "post",
+			url: "http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
+			data: {
+				"username": account
 			},
-			success:function(data){
+			success: function(data) {
 				console.log(data)
+				var orders = data.orders
+				for(var i in orders) {
+					var html = `<tr id="order_Ycontent" class="order_Ycontents">
+											<td align="center" bgcolor="#FFFFFF">${ orders[i].createtime }</td>
+											<!--   <td align="center" bgcolor="#FFFFFF" >普通搜索</td>      -->
+											<td align="center" bgcolor="#FFFFFF">${ orders[i].orderid }</td>
+											<td height="24" align="right" title="订单金额参考仅供参考，返利以
+实际支付金额（除运费）为准">
+
+												</td>
+												<td height="24" align="right" style="padding-right:20px" title="预返金蛋仅供参考，返利以
+实际支付金额（除运费）为准">
+
+													</td>
+													<td align="center" bgcolor="#FFFFFF" id="YFdate2"></td>
+													<td height="24" align="center">
+
+													</td>
+										</tr>`
+					$('.paging').before(html)
+					if(orders[i].orderStatus == null) {
+						var aa = `<td height="24" align="center" bgcolor="#FFFFFF">待审核</td>`
+						$('.order_Ycontents').eq(i).append(aa)
+					}
+
+				}
 			}
 		});
+		$('.img_button').eq(0).click(function() {
+			$.ajax({
+				type: "post",
+				url: "http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingorders/",
+				data: {
+					"orderid": $('.b_item').eq(0).val(),
+					"username": account
+				},
+				success: function(data) {
+					console.log(data)
+					var orders = data.orders
+					$('.order_Ycontents').remove()
+					for(var i in orders) {
+						var html = `<tr id="order_Ycontent" class="order_Ycontents">
+											<td align="center" bgcolor="#FFFFFF">${ orders[i].createtime }</td>
+											<!--   <td align="center" bgcolor="#FFFFFF" >普通搜索</td>      -->
+											<td align="center" bgcolor="#FFFFFF">${ orders[i].orderid }</td>
+											<td height="24" align="right" title="订单金额参考仅供参考，返利以
+实际支付金额（除运费）为准">
+
+												</td>
+												<td height="24" align="right" style="padding-right:20px" title="预返金蛋仅供参考，返利以
+实际支付金额（除运费）为准">
+
+													</td>
+													<td align="center" bgcolor="#FFFFFF" id="YFdate2"></td>
+													<td height="24" align="center">
+
+													</td>
+										</tr>`
+						$('.paging').before(html)
+						if(orders[i].orderStatus == null) {
+							var aa = `<td height="24" align="center" bgcolor="#FFFFFF">待审核</td>`
+							$('.order_Ycontents').eq(i).append(aa)
+						}
+
+					}
+				}
+			});
 		})
 	</script>
+
 </html>

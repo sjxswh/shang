@@ -186,6 +186,8 @@ $(function(){
 					$('.orderCode').eq(0).css({display:"none"})
 				})
 				$('.submit-code').eq(0).click(function(){
+					var account = getCookie("Account")
+					console.log(account)
 					var text = $('.order-input').eq(0).val()
 					if(text == '' || text.length<15 ||text.length>20){
 						$('.prompt').eq(0).html("Please enter the correct order number. The order number should be within 15 to 20 characters.").css({color:"red"})
@@ -196,10 +198,13 @@ $(function(){
 							type:"post",
 							url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/shoppingaward/",
 							data:{
-								"orderid":text
+								"orderid":text,
+								"username":account
 							},
 							success:function(data){
-								console.log(data)
+								if(data.res == 1){
+									$('.orderCode').eq(0).css({display:"none"})
+								}
 							}
 						});
 					}

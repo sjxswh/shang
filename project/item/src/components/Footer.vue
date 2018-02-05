@@ -63,7 +63,7 @@ export default {
   data () {
     return {
       swiperOption:{
-      	slidesPerView: 4
+      	slidesPerView: 4,
       }
     }
   },

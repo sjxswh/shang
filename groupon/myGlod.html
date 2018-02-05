@@ -784,10 +784,10 @@
 											<li class="aeggsuoyou">
 												<a href="http://www.pceggs.com/myaccount/MyMoney/mygoldmoney.aspx?id=1">所有明细</a>
 											</li>
-											<li class="eggmx_m">|</li>
+											<!--<li class="eggmx_m">|</li>
 											<li class="eggmx_tyjl">
 												<a href="http://www.pceggs.com/myaccount/MyMoney/mygoldmoney.aspx?id=2">体验奖励明细</a>
-											</li>
+											</li>-->
 											<li class="eggmx_m">|</li>
 											<li class="eggmx_tyjl">
 												<a href="http://www.pceggs.com/myaccount/MyMoney/mygoldmoney.aspx?id=3">推广奖励明细</a>
@@ -1247,5 +1247,18 @@
 		</form>
 
 	</body>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			type:"post",
+			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/golds/",
+			data.{
+				
+			},
+			success:function(data){
+				console.log(data)
+			}
+		});
+	</script>
 
 </html>

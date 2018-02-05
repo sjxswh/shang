@@ -199,8 +199,15 @@
 				 				"remember":remember,
 				 			},
 				 			success:function(data){
-				 				document.cookie = "dataLink="+JSON.stringify(data)
-				 				window.location.href = "myAccount.html"
+				 				console.log(data.golds)
+				 				if(data.res == 1){
+				 					document.cookie = "dataLink="+JSON.stringify(data)
+				 					document.cookie = "golds="+JSON.stringify(data.golds)
+				 					document.cookie = "Account="+JSON.stringify(Account)
+				 					window.location.href = "myAccount.html"
+				 				}else{
+				 					alert("用户名或密码错误")
+				 				}
 				 			},
 				 			error:function(err){
 				 				alert("失败")

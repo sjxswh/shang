@@ -7,7 +7,7 @@
 			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
 				<router-link to="/SelectRange">
 					<div>
-						<span>Data range(7 days)</span>
+						<span>Data range({{num}})</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
@@ -47,7 +47,7 @@
 				</li>
 			</ul>
 			<div :id="id"></div>
-			<div style="height: 1rem;width: 100%;position: relative;top: -.5rem;background: white;">
+			<div style="height: 1rem;width: 100%;position: relative;top: -.3rem;background: white;">
 				<p style="height: 2rem;"></p>
 			</div>
 		</div>
@@ -80,7 +80,8 @@
 		     tokenname:"token",
 		     token:"",
 		     from:"",
-		     params:{}
+		     params:{},
+		     num:""
 		    }
 		},
 		computed:{
@@ -90,17 +91,25 @@
 		},
 		watch: {
 			from(newVal,oldVal){
-				console.log(newVal)
 				var that = this
 				this.from = newVal;
+				if(Number(newVal.dates) - Number(newVal.date) <1){
+					var nums = 30 - Number(newVal.date)
+					this.num = Number(newVal.dates) + nums+" days"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) ==1){
+					this.num = "today"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) > 1){
+					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				}
 				this.$ajax({
 			  method: "get",
 			  params:{
 			  	authorization:that.token
 			  },
-			  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+			  url:"https://panel.newbidder.com/api/profile",
 			}).then((data) => {
-			   console.log(data)
 			   that.timezone = data.data.data.timezone
 			   this.params = {
 				  	authorization:that.token,
@@ -126,9 +135,8 @@
 					that.$ajax({
 					  method: "get",
 					  params:this.params,
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then(function (data) {
-				    console.log(data)
 				    that.loading = false
 				    that.totals = data.data.data.totals
 				    that.revenue = []
@@ -232,23 +240,23 @@
 		mounted(){
 			this.token = commont.getCookie(this.tokenname).token
 			this.nowDate = new Date()
-			this.Time = this.nowDate.getTime()-604800000 + 86400000
-			this.Times = this.nowDate.getTime()+86400000
+			this.Time = this.nowDate.getTime()
+			this.Times = this.nowDate.getTime()+ 604800000
 		},
 		methods:{
 			reduceDate(){
 				this.Time = this.Time - 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times - 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.date = new Date(parseInt(this.Times))
 				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times + 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
+				this.date = new Date(parseInt(this.Times))
 				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			}
@@ -261,7 +269,7 @@
 <style>
 	.cs-dashboard{
 		width: 100%;
-		height: 73%;
+		height: 82%;
 		position: absolute;
 		top: 1.24rem;
 		color: #797979;

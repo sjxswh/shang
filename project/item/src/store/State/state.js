@@ -3,6 +3,8 @@ var State = {
 	loginShow:[],
 	campaignsShow:[],
 	data:{},
+	FooterShow:true,
+	FooterHide:false
 }
 
 export default State

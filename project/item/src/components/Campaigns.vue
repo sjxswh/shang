@@ -4,41 +4,41 @@
 			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
 		</div>
 		<div class="home-select">
-			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
+			<span class="iconfont icon-jiankuohaoxizuo" @click="reduceDate"></span>
 				<router-link to="/SelectRange">
 					<div>
-						<span>Data range(7 days)</span>
+						<span>Data range({{num}})</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
-			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
+			<span class="iconfont icon-jiankuohaoxiyou" @click="addDate"></span>
 		</div>	
 		<div style="border: .06rem solid #e4e8f1;border-bottom: none;">
 			<div class="campaigns-select">
-				<span class="iconfont icon-sousuo1-copy" @touchstart="inpVal"></span>
-				<input type="text" placeholder="Search" id="search" style="outline: none;" />
+				<span class="iconfont icon-sousuo1-copy" @click="inpVal"></span>
+				<form @submit="inpVal"><input type="text" placeholder="Search" id="search" style="outline: none;" @focus="inputOnFocus" @blur="inputFocus"  /></form>
 			</div>
 			<ul class="campaigns-content">
 				<li v-for="(data,index) in dataList" :data="JSON.stringify(data)">
 					<div class="campaigns-img" :data="JSON.stringify(data)">
-						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+						<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
 							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
 						</a>
 					</div>
 					<div class="campaigns-content-main" :data="JSON.stringify(data)">
 						<div class="campaigns-title" :data="JSON.stringify(data)">
-							<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+							<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
 								<span :data="JSON.stringify(data)">{{data["campaignName"]}}</span>
 							</a>
-							<router-link to="/Offers" :data-cId="data.campaignId" :data-name="data.campaignName" @touchstart="cOffer($event)">
-								<span class="iconfont icon-gengduo" :data-cId="data.campaignId" :data-name="data.campaignName" @touchstart="cOffer($event)"></span>
+							<router-link to="/Offers" :data-cId="data.campaignId" :data-name="data.campaignName" @click="cOffer($event)">
+								<span class="iconfont icon-gengduo" :data-cId="data.campaignId" :data-name="data.campaignName" @click="cOffer($event)"></span>
 							</router-link>
 						</div>
 						<div class="campaigns-switch"  :data="JSON.stringify(data)">
 							<p :data="JSON.stringify(data)">
-								<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
-									<span><img src="../assets/img/2.jpg" :data="JSON.stringify(data)"/></span>
-									<span><img src="../assets/img/3.jpg" :data="JSON.stringify(data)"/></span>
+								<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
+									<span :data="JSON.stringify(data)"><img src="../assets/img/2.jpg" :data="JSON.stringify(data)"/></span>
+									<span :data="JSON.stringify(data)"><img src="../assets/img/3.jpg" :data="JSON.stringify(data)"/></span>
 									<span :data="JSON.stringify(data)">pause/Resume</span>
 								</a>
 							</p>
@@ -66,19 +66,19 @@
 								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
 						</div>
-						<a href="javascript:;"  @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+						<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
 							<div class="campaigns-info" :data="JSON.stringify(data)">
 								<div :data="JSON.stringify(data)">
 									<p :data="JSON.stringify(data)">Revenue</p>
 									<span :data="JSON.stringify(data)">${{data["revenue"]}}</span>
-									<p :data="JSON.stringify(data)">Profit</p>
-									<em :data="JSON.stringify(data)">${{data["profit"]}}</em>
+									<p :data="JSON.stringify(data)">Visits</p>
+									<em :data="JSON.stringify(data)">{{data["visits"]}}</em>
 								</div>
 								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">ROI</p>
-									<em :data="JSON.stringify(data)">{{data["roi"]}}%</em>
-									<p :data="JSON.stringify(data)">Cost</p>
-									<span :data="JSON.stringify(data)">${{data["cost"]}}</span>
+									<p :data="JSON.stringify(data)">Conversion</p>
+									<em :data="JSON.stringify(data)">{{data["conversions"]}}</em>
+									<p :data="JSON.stringify(data)">Click</p>
+									<span :data="JSON.stringify(data)">{{data["clicks"]}}</span>
 								</div>
 							</div>
 						</a>
@@ -117,6 +117,7 @@
 		     data:"",
 		     datas:{},
 		     dataCid:"",
+		     num:"",
 			}
 		},
 		computed:{
@@ -126,19 +127,27 @@
 		},
 		watch: {
 			from (newVal,oldVal){
-				console.log(newVal)
 				this.search = document.getElementById("search").value
 				this.from = newVal
-				console.log(this.from.status)
+				console.log(newVal)
+				if(Number(newVal.dates) - Number(newVal.date) <1){
+					var nums = 30 - Number(newVal.date)
+					this.num = Number(newVal.dates) + nums+" days"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) ==1){
+					this.num = "today"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) > 1){
+					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				}
 				var that = this
 				this.$ajax({
 				  method: "get",
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
-				   console.log(data)
 				   that.timezone = data.data.data.timezone
 				   that.$ajax({
 					  method: "get",
@@ -155,9 +164,8 @@
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then(function (data) {
-						console.log(data)
 						that.loading = false
 					    that.dataList = data.data.data.rows;
 					    that.dataList.forEach((item)=>{
@@ -184,8 +192,8 @@
 		mounted(){
 			this.token = commont.getCookie(this.tokenname).token
 			this.nowDate = new Date()
-			this.Time = this.nowDate.getTime()-604800000 + 86400000
-			this.Times = this.nowDate.getTime()+86400000
+			this.Time = this.nowDate.getTime()//-604800000 + 86400000
+			this.Times = this.nowDate.getTime()+604800000
 		},
 		methods: {
 			inpVal () {
@@ -196,9 +204,8 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
-				   console.log(data)
 				   that.timezone = data.data.data.timezone
 				   that.$ajax({
 					  method: "get",
@@ -215,9 +222,8 @@
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then(function (data) {
-						console.log(data)
 						that.loading = false
 					    that.dataList = data.data.data.rows
 					    that.dataList.forEach((item)=>{
@@ -256,17 +262,26 @@
 				  	id:that.dataId,
 				  	status:that.status
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/campaigns/"+that.dataId+"?authorization="+that.token,
+				  url:"https://panel.newbidder.com/api/campaigns/"+that.dataId+"?authorization="+that.token,
 				}).then((data) => {
 					console.log(data)
 				});
 			},
 			LinksHrf (ev) {
+				console.log(ev.target)
 				 this.$router.push({
             path: 'CampaignsDetail', 
         })
 			 this.data = ev.target.getAttribute("data")
 				commont.LinksHrf(this.data)
+			},
+			inputFocus () {
+				console.log(2)
+				this.$store.dispatch("FooterHide")
+			},
+			inputOnFocus () {
+				console.log(1)
+				this.$store.dispatch("FooterShow")
 			},
 			cOffer(ev){
 				this.datas = {"campaignName":ev.target.getAttribute("data-name"),"campaignId":ev.target.getAttribute("data-cId")}
@@ -274,18 +289,18 @@
 			},
 			reduceDate(){
 				this.Time = this.Time - 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times - 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,'campaign')
+				this.date = new Date(parseInt(this.Times))
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times + 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,'campaign')
+				this.date = new Date(parseInt(this.Times))
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			}
 		},
@@ -302,7 +317,7 @@
 		position: absolute;
 		top: 1.24rem;
 		width: 100%;
-		height: 90%;
+		height: 82%;
 		font-size: .26rem;
 		font-family: "arial, helvetica, sans-serif";
 	}
@@ -313,14 +328,19 @@
 		border-bottom: .06rem solid #e4e8f1;
 	}
 	.cs-campaigns .campaigns-select .iconfont{
-		width: 10%;
+		width: 15%;
 		height: 100%;
 		line-height: .8rem;
 	}
-	.cs-campaigns .campaigns-select input{
+	.cs-campaigns .campaigns-select form{
+		width: 85%;
+		height: 88%;
+	}
+	.cs-campaigns .campaigns-select form input{
 		border: none;
-		width: 90%;
-		height: 94%;
+		width: 100%;
+		height: 100%;
+		vertical-align: top;
 	}
 	.cs-campaigns .campaigns-content li{
 		display: flex;
@@ -432,8 +452,7 @@
 		margin: .2rem 0 .06rem;
 	}
 	.cs-campaigns .campaigns-info div em{
-		color: #e1e4ed;
-		text-align: left;
+		color: #c1c1c1;
 	}
 	.cs-campaigns .campaigns-info div span{
 		color: #363636;

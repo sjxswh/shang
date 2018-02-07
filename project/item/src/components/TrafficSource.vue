@@ -4,49 +4,49 @@
 			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
 		</div>
 		<div class="home-select">
-			<span class="iconfont icon-jiankuohaoxizuo" @touchstart="reduceDate"></span>
+			<span class="iconfont icon-jiankuohaoxizuo" @click="reduceDate"></span>
 			<router-link to="/SelectRange">
 					<div>
-						<span>Data range(7 days)</span>
+						<span>Data range({{num}})</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
-			<span class="iconfont icon-jiankuohaoxiyou" @touchstart="addDate"></span>
+			<span class="iconfont icon-jiankuohaoxiyou" @click="addDate"></span>
 		</div>	
 		<div style="border: .06rem solid #e4e8f1;border-bottom: none;min-height: 90%;">
 			<div class="campaigns-select">
-				<span class="iconfont icon-sousuo1-copy" @touchstart="inpVal"></span>
-				<input type="text" placeholder="Search" id="search" style="outline: none;" />
+				<span class="iconfont icon-sousuo1-copy" @click="inpVal"></span>
+				<form @submit="inpVal"><input type="text" placeholder="Search" id="search" style="outline: none;" @focus="inputOnFocus" @blur="inputFocus"  /></form>
 			</div>
 			<ul class="campaigns-content">
 				<li v-for="data in dataList" :data="JSON.stringify(data)">
 					<div class="campaigns-img" :data="JSON.stringify(data)">
-						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+						<a @click="LinksHrf($event)" :data="JSON.stringify(data)">
 							<img src="../assets/img/1.jpg" width="100%" :data="JSON.stringify(data)" />
 						</a>
 					</div>
 					<div class="campaigns-content-main" :data="JSON.stringify(data)">
 						<div class="campaigns-title" :data="JSON.stringify(data)">
-							<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+							<a @click="LinksHrf($event)" :data="JSON.stringify(data)">
 								<span :data="JSON.stringify(data)">{{data["trafficName"]}}</span>
 							</a>
-							<router-link to="/Offers" :data-cId="data.trafficId" :data-name="data.trafficName" @touchstart="cOffer($event)" class="flowOffer">
-								<span class="iconfont icon-gengduo" :data-cId="data.trafficId" :data-name="data.trafficName" @touchstart="cOffer($event)"></span>
+							<router-link to="/Offers" :data-cId="data.trafficId" :data-name="data.trafficName" @click="cOffer($event)" class="flowOffer">
+								<span class="iconfont icon-gengduo" :data-cId="data.trafficId" :data-name="data.trafficName" @click="cOffer($event)"></span>
 							</router-link>
 						</div>
-						<a @touchstart="LinksHrf($event)" :data="JSON.stringify(data)">
+						<a @click="LinksHrf($event)" :data="JSON.stringify(data)">
 							<div class="campaigns-info" :data="JSON.stringify(data)">
 								<div :data="JSON.stringify(data)">
 									<p :data="JSON.stringify(data)">Revenue</p>
 									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
-									<p :data="JSON.stringify(data)">Profit</p>
-									<em :data="JSON.stringify(data)">${{data.profit}}</em>
+									<p :data="JSON.stringify(data)">Visits</p>
+									<em :data="JSON.stringify(data)">{{data.visits}}</em>
 								</div>
 								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">ROI</p>
-									<em :data="JSON.stringify(data)">${{data.roi}}</em>
-									<p :data="JSON.stringify(data)">Cost</p>
-									<span :data="JSON.stringify(data)">${{data.cost}}</span>
+									<p :data="JSON.stringify(data)">Conversion</p>
+									<em :data="JSON.stringify(data)">{{data.conversions}}</em>
+									<p :data="JSON.stringify(data)">Click</p>
+									<span :data="JSON.stringify(data)">{{data.clicks}}</span>
 								</div>
 							</div>
 						</a>
@@ -80,7 +80,8 @@
 		     Time:"",
 		     Times:"",
 		     data:"",
-		     datas:{}
+		     datas:{},
+		     num:""
 			}
 		},
 		computed:{
@@ -92,19 +93,26 @@
 		},
 		watch: {
 			from (newVal,oldVal){
-				console.log(newVal)
 				this.search = document.getElementById("search").value
 				this.from = newVal
-				console.log(this.from.status)
+				if(Number(newVal.dates) - Number(newVal.date) <1){
+					var nums = 30 - Number(newVal.date)
+					this.num = Number(newVal.dates) + nums+" days"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) ==1){
+					this.num = "today"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) > 1){
+					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				}
 				var that = this
 				this.$ajax({
 				  method: "get",
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
-				   console.log(data)
 				   this.timezone = data.data.data.timezone
 				   that.$ajax({
 					  method: "get",
@@ -121,9 +129,8 @@
 							to:this.from.years+"-"+this.from.months+"-"+this.from.dates+"T00:00",
 							tz:this.timezone
 					  },
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then((data) => {
-						console.log(data)
 						this.loading = false
 					    this.dataList = data.data.data.rows;
 					    /*that.dataList.forEach((item)=>{
@@ -150,8 +157,8 @@
 		mounted(){
 			this.token = commont.getCookie(this.tokenname).token
 			this.nowDate = new Date()
-			this.Time = this.nowDate.getTime()-604800000 + 86400000
-			this.Times = this.nowDate.getTime()+86400000
+			this.Time = this.nowDate.getTime()//-604800000 + 86400000
+			this.Times = this.nowDate.getTime()+604800000
 		},
 		methods: {
 			inpVal () {
@@ -162,9 +169,8 @@
 				  params:{
 				  	authorization:that.token
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
-				   console.log(data)
 				   that.timezone = data.data.data.timezone
 				   that.$ajax({
 					  method: "get",
@@ -181,10 +187,9 @@
 							to:that.from.years+"-"+that.from.months+"-"+that.from.dates+"T00:00",
 							tz:that.timezone
 					  },
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then(function (data) {
 						that.loading = false
-						console.log(data)
 					    that.dataList = data.data.data.rows
 					});
 				});	
@@ -202,20 +207,26 @@
 			},
 			reduceDate(){
 				this.Time = this.Time - 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times - 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"traffic")
+				this.date = new Date(parseInt(this.Times))
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
 			},
 			addDate(){
 				this.Time = this.Time + 604800000
-				this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
+				this.Date = new Date(parseInt(this.Time))
 				this.Times = this.Times + 604800000
-				this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status,"traffic")
+				this.date = new Date(parseInt(this.Times))
+				this.Data = commont.reduceDate(this.Date,this.date,this.$store.state.data.status)
 				this.$store.dispatch("getSevenDate",this.Data)
-			}
+			},
+			inputFocus () {
+				this.$store.dispatch("FooterHide")
+			},
+			inputOnFocus () {
+				this.$store.dispatch("FooterShow")
+			},
 		}
 	}
 </script>

@@ -64,6 +64,7 @@ export default {
     return {
       swiperOption:{
       	slidesPerView: 4,
+      	shows:false
       }
     }
   },
@@ -102,6 +103,7 @@ export default {
 		bottom: 0;
 		left: 0;
 		display: flex;
+		z-index: 999;
 		border-top: .08rem solid #e4e8f1;
 		background: white;
 	}
@@ -115,6 +117,7 @@ export default {
 	}
 	.Footer .swiper-container{
 		width: 80%;
+		height: 100%;
 	}
 	
 	.Footer .swiper-slide{

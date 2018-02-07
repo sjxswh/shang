@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import SelectRange from '@/components/SelectRange'
 import Dashboard from '@/components/Dashboard'
 import Campaigns from '@/components/Campaigns'
 import CampaignsDetail from '@/components/Campaigns-Detail'
@@ -7,7 +8,6 @@ import Flows from '@/components/Flows'
 import Offer from '@/components/Offer'
 import OfferDetail from '@/components/Offer-Detail'
 import Offers from '@/components/Offers'
-import SelectRange from '@/components/SelectRange'
 import LoginInfo from '@/components/LoginInfo'
 import LoginIn from '@/components/LoginIn'
 import Lander from '@/components/Lander'
@@ -24,6 +24,11 @@ export default new Router({
       path: '/',
       name: 'LoginIn',
       component: LoginIn
+    },
+    {
+      path: '/SelectRange',
+      name: 'SelectRange',
+      component: SelectRange
     },
     {
       path: '/Dashboard',
@@ -59,11 +64,6 @@ export default new Router({
       path: '/Offers',
       name: 'Offers',
       component: Offers
-    },
-    {
-      path: '/SelectRange',
-      name: 'SelectRange',
-      component: SelectRange
     },
     {
       path: '/Account',

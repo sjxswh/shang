@@ -1,15 +1,15 @@
 export function reduceDate(Date,date,status,groupBy){
 	console.log(Date)
 	var Year,Month,Dates,Years,Months,Datess,Data
-				Year = Date.split("/")[0]
-				Month = Date.split("/")[1]
+				Year = Date.getFullYear()
+				Month = Date.getMonth()+1
 				Month = Month<10? "0"+Month:Month
-				Dates = Date.split("/")[2]
+				Dates = Date.getDate()
 				Dates = Dates<10? "0"+Dates:Dates
-				Years = date.split("/")[0]
-				Months = date.split("/")[1]
+				Years = date.getFullYear()
+				Months = date.getMonth()+1
 				Months = Months<10? "0"+Months:Months
-				Datess = date.split("/")[2]
+				Datess = date.getDate()
 				Datess = Datess<10? "0"+Datess:Datess
 				
 				return Data = {

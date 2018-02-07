@@ -12,7 +12,7 @@
 			<span class="iconfont icon-jiankuohaoxizuo"></span>
 				<router-link to="">
 					<div>
-						<span>Data range(7 days)</span>
+						<span>Data range( {{num}})</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
@@ -124,28 +124,36 @@
 		     title:"Detail",
 		     tokenCookie:[],
 		     tokenCookies:[],
-		     tokenname:"data",
+		     tokenname:"datas",
 		     token:"",
 		     nowDate:"",
 		     Date:"",
 		     Data:"",
 		     Time:"",
 		     Times:"",
-		     from:""
+		     from:"",
+		     num:""
 		    }
 		},
 		computed:{
 			getSevenDate(){
-				console.log(this.$store.state.data)
 				this.from = this.$store.state.data
 			},
 			
 		},
 		watch: {
 			from(newVal,oldVAl){
-				console.log(newVal)
 				this.from = newVal
-				console.log(this.from.status)
+				if(Number(newVal.dates) - Number(newVal.date) <1){
+					var nums = 30 - Number(newVal.date)
+					this.num = Number(newVal.dates) + nums+" days"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) ==1){
+					this.num = "today"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) > 1){
+					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				}
 				var that = this
 				
 			},

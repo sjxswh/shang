@@ -12,23 +12,23 @@
 			<span class="iconfont icon-jiankuohaoxizuo"></span>
 				<router-link to="/SelectRange">
 					<div>
-						<span>Data range(7 days)</span>
+						<span>Data range({{num}})</span>
 						<p id="time">{{from.year}}/{{from.month}}/{{from.date}}-{{from.years}}/{{from.months}}/{{from.dates}}</p>
 					</div>
 				</router-link>
 			<span class="iconfont icon-jiankuohaoxiyou"></span>
 		</div>	
 		<div class="campaigns-all">
-			<div class="campaigns-img">
+			<div class="campaigns-img" @click="back">
 				<img src="../assets/img/1.jpg" width="100%" />
 			</div>
 			<div class="campaigns-content-main">
-				<div class="campaigns-title">
+				<div class="campaigns-title" @click="back">
 					<span>{{Data["campaignName"]}}</span>
 					<span class="iconfont icon-gengduo"></span>
 				</div>
 				<div class="campaigns-switch">
-					<p>
+					<p @click="back">
 						<span><img src="../assets/img/2.jpg" /></span>
 						<span><img src="../assets/img/3.jpg" /></span>
 						<span>pause/Resume</span>
@@ -59,7 +59,7 @@
 					</p>
 					
 				</div>
-				<div class="campaigns-info">
+				<div class="campaigns-info" @click="back">
 					<div>Change campaigns bid</div>
 					<div><em>$</em><span>{{Data["bidPrice"]}}</span></div>
 				</div>
@@ -178,6 +178,7 @@
 		     tokenCookie:[],
 		     tokenCookies:[],
 		     tokenname:"data",
+		     tokennames:"token",
 		     token:"",
 		     Data:"",
 		     nowDate:"",
@@ -185,21 +186,29 @@
 		     Time:"",
 		     Times:"",
 		     from:"",
-		     params:""
+		     params:"",
+		     num:""
 		    }
 		},
 		computed:{
 			getSevenDate(){
-				console.log(this.$store.state.data)
 				this.from = this.$store.state.data
 			},
 			
 		},
 		watch: {
 			from(newVal,oldVAl){
-				console.log(newVal)
 				this.from = newVal
-				console.log(this.from.status)
+				if(Number(newVal.dates) - Number(newVal.date) <1){
+					var nums = 30 - Number(newVal.date)
+					this.num = Number(newVal.dates) + nums+" days"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) ==1){
+					this.num = "today"
+				}
+				if(Number(newVal.dates) - Number(newVal.date) > 1){
+					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				}
 				var that = this
 				
 			},
@@ -208,8 +217,8 @@
 			}
 		},
 		mounted(){
+			this.token = commont.getCookie(this.tokennames).token
     	this.Data = commont.getCookie(this.tokenname)
-    	console.log(this.Data)
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()-604800000 + 86400000
 			this.Times = this.nowDate.getTime()+86400000
@@ -266,7 +275,7 @@
 				  	id:that.dataId,
 				  	status:that.status
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/campaigns/"+that.dataId+"?authorization="+that.token,
+				  url:"https://panel.newbidder.com/api/campaigns/"+that.dataId+"?authorization="+that.token,
 				}).then((data) => {
 					console.log(data)
 				});

@@ -14,6 +14,14 @@ var Action = {
 	getSevenDate (store,data) {
 		this.commit("getSevenDate",data)
 	},
+	FooterShow () {
+		let ss = false
+		this.commit("FooterShow",ss)
+	},
+	FooterHide () {
+		let ss = true
+		this.commit("FooterShow",ss)
+	},
 }
 
 export default Action

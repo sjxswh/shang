@@ -1,10 +1,13 @@
 <template>
 	<div class="cs-select-range">
+		<div class="page-loading" style="width: 100%;height: 100%;position: absolute;top: 0;left: 0;z-index: 99;background: white;opacity: .5;" v-show="loading">
+			<span class="iconfont icon-loading" style="display: block;color: black;font-size: 40px;width: 50px;height: 50px;position: absolute;top: 50%;left: 50%;margin-left: -25px;margin-top: -25px;"></span>
+		</div>
 		<div class="home-top">
 		  	<div class="home-header">
 		  		<em class="home-cancel" @touchstart="back">Cancel</em>
 		  		<p class="home-name">{{title}}</p>
-		  		<em class="home-done">Done</em>
+		  		<em class="home-done" @click="dones">Done</em>
 		  	</div>
 	  	</div>
 		<div class="select-range-title">
@@ -17,15 +20,14 @@
 				<select @change="actives($event)" id="switch">
 					<option selected :data-id="1">Active</option>
 					<option :data-id="0">Archived</option>
-					<option>With Traffic</option>
 					<option :data-id="2">All</option>
 				</select>
 				<div class="time-range-title">Timezone</div>
 				<select @change="activess($event)" id="timezone">
-					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.name}}</option>
+					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.detail}}</option>
 				</select>
 				<div class="time-range-title">In</div>
-				<select @change="activess($event)" id="dayin">
+				<select @change="activesss($event)" id="dayin">
 					<option selected :data-ins="0">Today</option>
 					<option :data-ins="1">Yesterday</option>
 					<option :data-ins="2">Last 7 Days</option>
@@ -104,7 +106,7 @@
 		</div>
 			</div>
 		</div>
-		<component style="margin: .6rem .8rem 0;"></component>
+		
 	</div>
 </template>
 
@@ -154,26 +156,27 @@
 				group:"",
 				dataList:[],
 				froms:"",
-				data:""
+				data:"",
+				loading:true
 			}
 		},
 		mounted () {
 			this.nowDate = new Date()
 			this.Time = this.nowDate.getTime()//-604800000 + 86400000
-	   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-			this.Year = this.pickerVisible.split("/")[0]
-			this.Month = this.pickerVisible.split("/")[1]
-			this.Month = this.Month<10? "0"+this.Month:this.Month
-			this.Dates = this.pickerVisible.split("/")[2]
-			this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+	   	this.pickerVisible = new Date(parseInt(this.Time))
+			this.Year = this.pickerVisible.getFullYear()
+   		this.Month = this.pickerVisible.getMonth()+1
+   		this.Month = this.Month<10?"0"+this.Month:this.Month
+   		this.Dates = this.pickerVisible.getDate()
+   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 			this.Times = this.nowDate.getTime()+86400000
-			this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-			this.Years = this.pickerVisibles.split("/")[0]
-			this.Months = this.pickerVisibles.split("/")[1]
-			this.Months = this.Months<10? "0"+this.Months:this.Months
-			this.Datess = this.pickerVisibles.split("/")[2]
-			this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-   		window.addEventListener("change",this.activesss)
+			this.pickerVisibles = new Date(parseInt(this.Times))
+			this.Years = this.pickerVisibles.getFullYear()
+   		this.Months = this.pickerVisibles.getMonth()+1
+   		this.Months = this.Months<10?"0"+this.Months:this.Months
+   		this.Datess = this.pickerVisibles.getDate()
+   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+   		//window.addEventListener("change",this.activesss)
    		this.switchOp = Array.from(document.getElementById("switch").options)
 	    	this.switchOp.forEach((v,k)=>{
 	    		if(v.getAttribute('selected')){
@@ -196,44 +199,41 @@
 				"status":this.switchSta,
 				"groupBy":this.group
 			}
-			this.$store.dispatch("getSevenDate",this.Data)
+			//this.$store.dispatch("getSevenDate",this.Data)
 	   	this.vModal = Array.from(document.getElementsByClassName("mint-datetime-confirm"))
    	  this.vModal.forEach((v,k)=>{
    	  	v.addEventListener("click",this.clickDate)
    	  })
 	   	this.token = commont.getCookie(this.tokenname).token
-	   	console.log(this.token)
     	this.selectData = commont.getCookie(this.tokennames)
 		  this.$ajax({
 			  method: "get",
-			  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/timezones",
+			  url:"https://panel.newbidder.com/timezones",
 			  params:{
 			  	token:this.token
 			  }
 			}).then((data) => {
+				this.loading = false
 			    this.timezones = data.data.data.timezones
 			});
 		},
 		computed:{
 			getSevenDate(){
-				console.log(this.$store.state.data)
 				this.froms = this.$store.state.data
 			},
 		},
 		watch: {
 			froms (newVal,oldVal){
-				console.log(newVal)
 				this.$ajax({
 				  method: "get",
 				  params:{
 				  	authorization:this.token
 				  },
-				  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
-				   console.log(data)
-				   console.log(this.Year)
 				   this.timezone = data.data.data.timezone
-				   if(this.selectData.campaignName){
+				   
+				   	if(this.selectData.campaignName){
 					   	this.params = {
 						  	campaign:this.selectData.id,
 						  	authorization:this.token,
@@ -329,10 +329,12 @@
 								tz:this.timezone
 						  }
 				   }
+				   
+				   
 				   this.$ajax({
 					  method: "get",
 					  params:this.params,
-					  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/report",
+					  url:"https://panel.newbidder.com/api/report",
 					}).then((data) => {
 					   this.dataList = data.data.data.rows
 					});
@@ -379,7 +381,7 @@
 				 console.log(this.data)
 				var oDate = new Date();
 				oDate.setDate(oDate.getDate() + 1);
-				document.cookie = 'data=' + this.data + ';expires=' + oDate + ';path=/';
+				document.cookie = 'datas=' + this.data + ';expires=' + oDate + ';path=/';
 			},
 	      clickDate(){
 		   		this.Year = this.pickerVisible.getFullYear()
@@ -402,14 +404,12 @@
 						"status":this.switchSta,
 						"groupBy":this.group
 					}
-					this.$store.dispatch("getSevenDate",this.Data)
+					//this.$store.dispatch("getSevenDate",this.Data)
 		   	},
 	      actives (ev) {
 	      	this.objS = ev.target;
 	        for(var i=0;i<this.objS.options.length;i++){
-	        	this.objS.options[i].removeAttribute("selected");
 						if(this.objS.options[i].value== this.objS.value){
-							this.objS.options[i].setAttribute("selected","selected");
 							this.switchSta = this.objS.options[i].getAttribute("data-id")
 							this.Data = {
 								"year":this.Year,
@@ -421,7 +421,7 @@
 								"status":this.switchSta,
 								"groupBy":this.group
 							}
-							this.$store.dispatch("getSevenDate",this.Data)
+							//this.$store.dispatch("getSevenDate",this.Data)
 						}
 					}
 	      },
@@ -436,7 +436,7 @@
 							  params:{
 							  	authorization:this.token
 							  },
-						  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile",
+						  url:"https://panel.newbidder.com/api/profile",
 			      	}).then((data)=>{
 			      		console.log(data.data.data)
 			      		this.firstname = data.data.data.firstname
@@ -455,7 +455,7 @@
 								  	"timezone":this.timeZone,
 								  	"timezoneId":this.timeS
 								  },
-							  url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:5000/api/profile?authorization="+this.token,
+							  url:"https://panel.newbidder.com/api/profile?authorization="+this.token,
 				      	}).then((data) => {
 				      		//console.log(data)
 				      	})
@@ -464,26 +464,26 @@
 					}
 	      },
 	      activesss (ev) {
+	      	console.log(this.token)
 	      	this.objS = ev.target;
 	        for(var i=0;i<this.objS.options.length;i++){
-	        	this.objS.options[i].removeAttribute("selected");
 						if(this.objS.options[i].value== this.objS.value){
 							this.dayIn = this.objS.options[i].getAttribute("data-ins")
 							if(this.dayIn == 0){
 					   		this.Time = this.nowDate.getTime()//-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-								this.Year = this.pickerVisible.split("/")[0]
-								this.Month = this.pickerVisible.split("/")[1]
-								this.Month = this.Month<10? "0"+this.Month:this.Month
-								this.Dates = this.pickerVisible.split("/")[2]
-								this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+						   	this.pickerVisible = new Date(parseInt(this.Time))
+								this.Year = this.pickerVisible.getFullYear()
+					   		this.Month = this.pickerVisible.getMonth()+1
+					   		this.Month = this.Month<10?"0"+this.Month:this.Month
+					   		this.Dates = this.pickerVisible.getDate()
+					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 								this.Times = this.nowDate.getTime()+86400000
-								this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-								this.Years = this.pickerVisibles.split("/")[0]
-								this.Months = this.pickerVisibles.split("/")[1]
-								this.Months = this.Months<10? "0"+this.Months:this.Months
-								this.Datess = this.pickerVisibles.split("/")[2]
-								this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+								this.pickerVisibles = new Date(parseInt(this.Times))
+								this.Years = this.pickerVisibles.getFullYear()
+					   		this.Months = this.pickerVisibles.getMonth()+1
+					   		this.Months = this.Months<10?"0"+this.Months:this.Months
+					   		this.Datess = this.pickerVisibles.getDate()
+					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 					   		this.Data = {
 									"year":this.Year,
 									"month":this.Month,
@@ -494,23 +494,23 @@
 									"status":this.switchSta,
 									"groupBy":this.group
 								}
-					   		this.$store.dispatch("getSevenDate",this.Data)
+					   		//this.$store.dispatch("getSevenDate",this.Data)
 							}
 							if(this.dayIn == 1){
 					   		this.Time = this.nowDate.getTime()-86400000//-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-								this.Year = this.pickerVisible.split("/")[0]
-								this.Month = this.pickerVisible.split("/")[1]
-								this.Month = this.Month<10? "0"+this.Month:this.Month
-								this.Dates = this.pickerVisible.split("/")[2]
-								this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+						   	this.pickerVisible = new Date(parseInt(this.Time))
+								this.Year = this.pickerVisible.getFullYear()
+					   		this.Month = this.pickerVisible.getMonth()+1
+					   		this.Month = this.Month<10?"0"+this.Month:this.Month
+					   		this.Dates = this.pickerVisible.getDate()
+					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 								this.Times = this.nowDate.getTime()
-								this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-								this.Years = this.pickerVisibles.split("/")[0]
-								this.Months = this.pickerVisibles.split("/")[1]
-								this.Months = this.Months<10? "0"+this.Months:this.Months
-								this.Datess = this.pickerVisibles.split("/")[2]
-								this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+								this.pickerVisibles = new Date(parseInt(this.Times))
+								this.Years = this.pickerVisibles.getFullYear()
+					   		this.Months = this.pickerVisibles.getMonth()+1
+					   		this.Months = this.Months<10?"0"+this.Months:this.Months
+					   		this.Datess = this.pickerVisibles.getDate()
+					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 					   		this.Data = {
 									"year":this.Year,
 									"month":this.Month,
@@ -522,23 +522,23 @@
 									"groupBy":this.group
 								}
 					   		console.log(this.Data)
-					   		this.$store.dispatch("getSevenDate",this.Data)
+					   		//this.$store.dispatch("getSevenDate",this.Data)
 							}
 							if(this.dayIn == 2){
 					   		this.Time = this.nowDate.getTime()-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-								this.Year = this.pickerVisible.split("/")[0]
-								this.Month = this.pickerVisible.split("/")[1]
-								this.Month = this.Month<10? "0"+this.Month:this.Month
-								this.Dates = this.pickerVisible.split("/")[2]
-								this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+						   	this.pickerVisible = new Date(parseInt(this.Time))
+								this.Year = this.pickerVisible.getFullYear()
+					   		this.Month = this.pickerVisible.getMonth()+1
+					   		this.Month = this.Month<10?"0"+this.Month:this.Month
+					   		this.Dates = this.pickerVisible.getDate()
+					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-								this.Years = this.pickerVisibles.split("/")[0]
-								this.Months = this.pickerVisibles.split("/")[1]
-								this.Months = this.Months<10? "0"+this.Months:this.Months
-								this.Datess = this.pickerVisibles.split("/")[2]
-								this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+								this.pickerVisibles = new Date(parseInt(this.Times))
+								this.Years = this.pickerVisibles.getFullYear()
+					   		this.Months = this.pickerVisibles.getMonth()+1
+					   		this.Months = this.Months<10?"0"+this.Months:this.Months
+					   		this.Datess = this.pickerVisibles.getDate()
+					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 					   		this.Data = {
 									"year":this.Year,
 									"month":this.Month,
@@ -549,23 +549,23 @@
 									"status":this.switchSta,
 									"groupBy":this.group
 								}
-					   		this.$store.dispatch("getSevenDate",this.Data)
+					   		//this.$store.dispatch("getSevenDate",this.Data)
 							}
 							if(this.dayIn == 3){
 					   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-								this.Year = this.pickerVisible.split("/")[0]
-								this.Month = this.pickerVisible.split("/")[1]
-								this.Month = this.Month<10? "0"+this.Month:this.Month
-								this.Dates = this.pickerVisible.split("/")[2]
-								this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+						   	this.pickerVisible = new Date(parseInt(this.Time))
+								this.Year = this.pickerVisible.getFullYear()
+					   		this.Month = this.pickerVisible.getMonth()+1
+					   		this.Month = this.Month<10?"0"+this.Month:this.Month
+					   		this.Dates = this.pickerVisible.getDate()
+					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-								this.Years = this.pickerVisibles.split("/")[0]
-								this.Months = this.pickerVisibles.split("/")[1]
-								this.Months = this.Months<10? "0"+this.Months:this.Months
-								this.Datess = this.pickerVisibles.split("/")[2]
-								this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+								this.pickerVisibles = new Date(parseInt(this.Times))
+								this.Years = this.pickerVisibles.getFullYear()
+					   		this.Months = this.pickerVisibles.getMonth()+1
+					   		this.Months = this.Months<10?"0"+this.Months:this.Months
+					   		this.Datess = this.pickerVisibles.getDate()
+					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 					   		this.Data = {
 									"year":this.Year,
 									"month":this.Month,
@@ -576,23 +576,23 @@
 									"status":this.switchSta,
 									"groupBy":this.group
 								}
-					   		this.$store.dispatch("getSevenDate",this.Data)
+					   		//this.$store.dispatch("getSevenDate",this.Data)
 							}
 							if(this.dayIn == 3){
 					   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-								this.Year = this.pickerVisible.split("/")[0]
-								this.Month = this.pickerVisible.split("/")[1]
-								this.Month = this.Month<10? "0"+this.Month:this.Month
-								this.Dates = this.pickerVisible.split("/")[2]
-								this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
+						   	this.pickerVisible = new Date(parseInt(this.Time))
+								this.Year = this.pickerVisible.getFullYear()
+					   		this.Month = this.pickerVisible.getMonth()+1
+					   		this.Month = this.Month<10?"0"+this.Month:this.Month
+					   		this.Dates = this.pickerVisible.getDate()
+					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
 								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-								this.Years = this.pickerVisibles.split("/")[0]
-								this.Months = this.pickerVisibles.split("/")[1]
-								this.Months = this.Months<10? "0"+this.Months:this.Months
-								this.Datess = this.pickerVisibles.split("/")[2]
-								this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
+								this.pickerVisibles = new Date(parseInt(this.Times))
+								this.Years = this.pickerVisibles.getFullYear()
+					   		this.Months = this.pickerVisibles.getMonth()+1
+					   		this.Months = this.Months<10?"0"+this.Months:this.Months
+					   		this.Datess = this.pickerVisibles.getDate()
+					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
 					   		this.Data = {
 									"year":this.Year,
 									"month":this.Month,
@@ -603,7 +603,7 @@
 									"status":this.switchSta,
 									"groupBy":this.group
 								}
-					   		this.$store.dispatch("getSevenDate",this.Data)
+					   		//this.$store.dispatch("getSevenDate",this.Data)
 							}
 						}
 					}
@@ -612,9 +612,7 @@
 	  		var that = this
 	      	this.objS = ev.target;
 	        for(var i=0;i<this.objS.options.length;i++){
-	        	this.objS.options[i].removeAttribute("selected");
 						if(this.objS.options[i].value== this.objS.value){
-							this.objS.options[i].setAttribute("selected","selected");
 							this.group = this.objS.options[i].getAttribute("data-val")
 							this.Data = {
 								"year":this.Year,
@@ -626,10 +624,15 @@
 								"status":this.switchSta,
 								"groupBy":this.group
 							}
-							this.$store.dispatch("getSevenDate",this.Data)
+							//this.$store.dispatch("getSevenDate",this.Data)
 						}
 					}
 	      },
+	      dones () {
+	      	this.$router.go(-1)
+	      	console.log(this.Data)
+	      	this.$store.dispatch("getSevenDate",this.Data)
+	      }
 		},
 		
 	}

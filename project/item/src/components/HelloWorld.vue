@@ -8,7 +8,7 @@
 	  	</div>
   	</div>
     <router-view></router-view>
-    <Footer :isTrue ="LoginShows" :isFalse= "getIsTrues" :campaignsShow="CampaignsShow" v-show="isShowF"></Footer>
+    <Footer :isTrue ="LoginShows" :isFalse= "getIsTrues" :campaignsShow="CampaignsShow" :ss="show" :aa="hide" v-show="isShowF"></Footer>
   </div>
 </template>
 
@@ -24,15 +24,6 @@ export default {
      title:"Dashboard",
      isShowHO:true,
      isShowF:true,
-     Date:"",
-     date:"",
-     Year:"",
-     Month:"",
-     Dates:"",
-     Years:"",
-     Months:"",
-     Datess:"",
-     Data:""
     }
   },
   methods:{
@@ -64,7 +55,13 @@ export default {
 			CampaignsShow(){
 				this.isShowHO = this.$store.state.campaignsShow[0]
 				this.isShowF = this.$store.state.campaignsShow[1]
-			}
+			},
+			show(){
+	  		this.isShowF = this.$store.state.FooterShow
+	  	},
+			hide(){
+	  		this.isShowF = this.$store.state.FooterHide
+	  	}
 		},
 		watch:{
 			$route(route){
@@ -73,31 +70,6 @@ export default {
 		},
   mounted(){
   	this.NavShow(this.$route)
-  	this.nowDate = new Date()
-		this.Time = this.nowDate.getTime()-604800000 + 86400000
-   	this.Date = new Date(parseInt(this.Time)).toLocaleString().split(" ")[0]
-		this.Year = this.Date.split("/")[0]
-		this.Month = this.Date.split("/")[1]
-		this.Month = this.Month<10? "0"+this.Month:this.Month
-		this.Dates = this.Date.split("/")[2]
-		this.Dates = this.Dates<10? "0"+this.Dates:this.Dates
-		this.Times = this.nowDate.getTime()+86400000
-		this.date = new Date(parseInt(this.Times)).toLocaleString().split(" ")[0]
-		this.Years = this.date.split("/")[0]
-		this.Months = this.date.split("/")[1]
-		this.Months = this.Months<10? "0"+this.Months:this.Months
-		this.Datess = this.date.split("/")[2]
-		this.Datess = this.Datess<10? "0"+this.Datess:this.Datess
-		this.Data = {
-				"year":this.Year,
-				"month":this.Month,
-				"date":this.Dates,
-				"years":this.Years,
-				"months":this.Months,
-				"dates":this.Datess,
-				"status":1
-			}
-		this.$store.dispatch("getSevenDate",this.Data)
   },
 }
 </script>

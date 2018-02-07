@@ -12,6 +12,12 @@ var Mutation = {
 	getSevenDate (state,data) {
 		state.data = data
 	},
+	FooterShow (state,data) {
+		state.FooterShow = data
+	},
+	FooterHide (state,data) {
+		state.FooterHide = data
+	},
 }
 
 export default Mutation

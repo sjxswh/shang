@@ -622,14 +622,14 @@
 															<ul>
 																<li class="txgzcon_nrev1">兑换金蛋数：</li>
 																<li>
-																	<input name="input" type="text" class="txgzcon_nrinput_zh" id="inp_GoldEggs">&nbsp;<span style="color: #797979;" id="need_GoldMoney">1金币=1金蛋</span>
+																	<input name="input" type="text" class="txgzcon_nrinput_zh" value="0" id="inp_GoldEggs">&nbsp;<span class="gold" style="color: #797979;" id="need_GoldMoney">1金币=1金蛋</span>
 																</li>
 															</ul>
 														</div>
 														<div class="wdrynr_wdtg_txgzcon_nran">
 															<ul>
 																<li class="gn_anniu">
-																	<a href="javascript:WEggs();">兑换金蛋</a>
+																	<a href="javascript:;">兑换金蛋</a>
 																</li>
 															</ul>
 														</div>
@@ -719,7 +719,18 @@
 			</div>
 
 		</form>
-
+	<div class="dialogs" style="display: none;">
+		<div class="confirm" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: #666666;opacity: .2;filter:alpha(opacity=20);"></div>
+	<div class="cancel" style="width: 400px;height: 170px;position: absolute;left: 50%;top: 50%;margin-left: -200px;margin-top: -85px;background: white;border: 5px solid #c7c7c7;">
+			<div class="remain" style="height: 30px;background: url(img/remind-bg.png) no-repeat;padding: 0 18px;display: flex;justify-content: space-between;line-height: 30px;">
+				<span style="color: #535353;">Remind</span>
+				<span style="color: #CFCFCF;cursor: pointer;display: inline-block;width: 6%;text-align: center;">X</span>
+			</div>
+			<div style="padding: 30px 20px 20px;" class="btn-content">
+				
+			</div>
+		</div>
+	</div>
 	</body>
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="js/commont.js"></script>
@@ -728,24 +739,57 @@
 		var goldnum = getCookie("golds")
 		var aa = `<li class="word_red_20131210">&nbsp;${ goldnum }<span class="jb0914">&nbsp;&nbsp;&nbsp;</span> </li>`
 		$('.txgzcon_nrevs').after(aa)
-			$('.gn_anniu').eq(0).click(function(){
-			$.ajax({
-				type:"post",
-				url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/goldtoeggs/",
-				data:{
-					"username":account,
-					"goldnum":$('#inp_GoldEggs').val()
-				},
-				success:function(data){
-					console.log(data)
-					document.cookie = "golds="+JSON.stringify(data.golds)
-					window.location.href = "glodChangeegg.html"
-					if(data.res == 3){
-						alert("你的金币不足")
-					}
-				}
-			});
+			
+		$(".remain span:nth-child(2)").eq(0).click(function(){
+			$(".dialogs").eq(0).css({display:"none"})
 		})
 		
+		$(".gn_anniu a").eq(0).click(function(){
+			var ss = `<p style="height: 30px;line-height: 30px;font-size: 14px;text-align: center;">确认使用<b style="color: red;">${ $('#inp_GoldEggs').val() }</b>金币兑换<b style="color: red;">${ $('#inp_GoldEggs').val() }</b>金蛋吗</p>
+				<p style="text-align: center;height: 30px;margin-top: 20px;" class="btn-cancel">
+					<a href="javascript:;" style="background: url(img/bg_anniu.gif) no-repeat;padding: 5px 4px;background-position: 0 -28px;color: white;">Determine</a>
+					<a href="javascript:;" style="background: url(img/bg_anniu.gif) no-repeat;padding: 5px 14px;background-position: 0 2px;color: black;margin-left: 4px;">Cancel</a>
+				</p>`
+				$('.btn-content').html(ss)
+				$(".btn-cancel a:nth-child(2)").on("click",function(){
+					$(".dialogs").eq(0).css({display:"none"})
+				})
+			if($('#inp_GoldEggs').val() <= 0){
+				$(".gold").eq(0).html("兑换数不能小于等于0")
+				$(".gold").eq(0).css({color:"red"})
+			}else{
+				$(".dialogs").eq(0).css({display:"block"})
+				$(".btn-cancel a:nth-child(1)").eq(0).click(function(){
+					$.ajax({
+						type:"post",
+						url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/goldtoeggs/",
+						data:{
+							"username":account,
+							"goldnum":$('#inp_GoldEggs').val()
+						},
+						success:function(data){
+							console.log(data)
+							if(data.res == 1){
+								document.cookie = "golds="+JSON.stringify(data.golds)
+								var html = `<p style="height: 30px;line-height: 30px;font-size: 14px;text-align: center;">你兑换的<b style="color: red;">${ $('#inp_GoldEggs').val() }</b>的金蛋已成功到账，请至“我的金蛋”查看</p>
+				<p style="text-align: center;height: 30px;margin-top:20px;" class="btn-cancel">
+					<a href="javascript:;" class="btn" style="background: url(img/bg_anniu.gif) no-repeat;padding: 5px 14px;background-position: 0 2px;color: black;margin-left: 4px;">Determine</a>
+				</p>`
+				$('.btn-content').html(html)
+				$('.btn').on("click",function(){
+					$(".dialogs").eq(0).css({display:"none"})
+					window.location.href = "glodChangeegg.html"
+				})
+								
+							}
+							if(data.res == 3){
+								alert("你的金币不足")
+							}
+						}
+					});
+				})
+				
+			}
+		})
 </script>
 </html>

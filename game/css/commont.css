@@ -1,0 +1,201 @@
+body,html{
+	height: 100%;
+	background: #eaeaea;
+	font-family: Helvetica, Arial, "Microsoft YaHei New", "Microsoft Yahei", 微软雅黑, 华文细黑, sans-serif;
+	font-size: 12px;
+}
+body,div,h1,h2,h3,h4,h5,h6,ul,li,dt,dd,p,button,input,span,a{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+.game-content{
+	width: 100%;
+	height: 100%;
+}
+.game-header{
+	width: 100%;
+	height: 56px;
+	background: #1ea1f7;
+}
+.game-header header{
+	width: 1300px;
+	margin: auto;
+	padding: 12px 0;
+	position: relative;
+}
+.game-header-list{
+	width: 100%;
+	display: flex;
+	margin: auto 0;
+}
+.game-header-list li{
+	height: 32px;
+	line-height: 32px;
+	margin-right: 20px;
+}
+.game-header-list li a{
+	display: block;
+	color: white;
+	font-size: 12px;
+	line-height: 32px;
+}
+.game-header-list li a img{
+	vertical-align: middle;
+}
+.game-header-list li a span{
+	vertical-align: middle;
+	margin-left: 8px;
+}
+.game-header-list-first a{
+	height: 100%;
+
+}
+.game-header-list-first a span{
+	display: inline-block;
+	width: 66px;
+	height: 14px;
+	vertical-align: initial !important;
+}
+.game-header-list-first a span img{
+	height: 16px;
+	
+}
+.game-header-seacher{
+	position: absolute;
+	top: 15px;
+	right: 0;
+	display: flex;
+}
+.game-header-seacher li{
+	margin-right: 10px;
+	line-height: 32px;
+}
+.game-header-seacher li button{
+	border: 0;
+	background: none;
+	color: white;
+}
+.game-header-seacher li button span:nth-child(1){
+	background: white;
+	color: #0bacfc;
+	padding: 5px;
+}
+.game-header-seacher-first{
+	display: flex;
+	width: 260px;
+	height: 32px;
+}
+.game-header-seacher-first form{
+	width: 100%;
+	height: 100%;
+}
+.game-header-seacher-first input{
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 10px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+.game-header-seacher-first button{
+	background: white;
+	width: 50px;
+	height: 32px;
+	position: absolute;
+	top: 0;
+	right: 176px;
+	padding: 9px 8px;
+}
+.game-header-seacher-first button img{
+	width: 100%;
+	height: 100%;
+}
+nav {
+	width: 100%;
+	height: 40px;
+	background: #1d2e51;
+}
+nav .game-nav{
+	width: 1300px;
+	margin: 0 auto;
+	display: flex;
+}
+nav .game-nav li{
+	line-height: 40px;
+	margin-right: 6px;
+}
+nav .game-nav li a{
+	color: #73a1cb;
+	font-size: 15px;
+	padding: 11px 8px 9px;
+}
+nav .game-nav li .nav-active{
+	color: white;
+	border-bottom: 3px solid white;
+}
+nav .game-nav li a:hover{
+	color: white;
+	border-bottom: 3px solid white;
+}
+.game-article{
+	width: 100%;
+	height: 80px;
+	background: rgba(0,0,0,.5);
+}
+.game-article div{
+	width: 1080px;
+	height: 50%;
+	margin: 0 auto;
+}
+.game-article div a{
+	display: block;
+	color: white;
+	width: 100%;
+	height: 100%;
+	line-height: 40px;
+}
+.game-article div a:hover{
+	text-decoration: underline;
+}
+.game-footer{
+	width: 1080px;
+	margin: 0 auto;
+	padding: 40px 0;
+	color: black;
+	font-weight: bold;
+}
+.game-footer-list{
+	display: flex;
+}
+.game-footer-list li{
+	margin-left: 30px;
+}
+.game-footer-list li:nth-child(1){
+	margin-left: 0;
+}
+.game-footer-list li a{
+	color: black;
+	font-weight: bold;
+ font-family: Helvetica,Arial,"Microsoft YaHei New","Microsoft Yahei","微软雅黑","华文细黑",sans-serif;
+}
+.game-footer div{
+	margin-top: 10px;
+}
+.game-footer-list2{
+	 justify-content: flex-end;
+	 position: relative;
+	 top: -15px;
+}
+.game-footer-list2 li{
+	margin-left: 10px;
+}

@@ -1,0 +1,102 @@
+.game-detail section{
+	width: 100%;
+	background: #292e38;
+	color: white;
+}
+
+.game-detail-header-list{
+	width: 1080px;
+	margin: 0 auto 0;
+	display: flex;
+	justify-content: space-between;
+	font-size: 15px;
+}
+.game-detail-header-list li:nth-child(1) a{
+	display: block;
+	color: white;
+	width: 200px;
+	height: 40px;
+	background: #2e7fdd;
+	margin-top: 30px;
+	padding: 8px 20px 8px 16px
+}
+.game-detail-header-list li:nth-child(1) a i{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+}
+.game-detail-header-list li:nth-child(1) a i img{
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+.game-detail-header-list li:nth-child(1) a span{
+	line-height: 24px;
+}
+.game-detail-header-list li:nth-child(1) a span:nth-child(2){
+	margin-right: 50px;
+	margin-left: 10px;
+}
+.game-detail-header-content{
+	width: 1080px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+.game-detail-header-left{
+	margin: 30px 0 24px;
+	display: flex;
+}
+.game-detail-header-left span{
+	margin-right: 20px;
+	border: 4px solid #00d298;
+}
+.game-detail-header-left div h1{
+	margin: 42px 0 10px;
+	font-size: 24px;
+	font-weight: normal;
+}
+.game-detail-header-left div p{
+	font-size: 14px;
+	color: #9c9c9c;
+}
+.game-detail-header-left div p b{
+	color: #00d298;
+}
+.game-detail-header-left div ul{
+	display: flex;
+	margin-top: 10px;
+}
+.game-detail-header-left div ul li{
+	margin-left: 10px;
+	position: relative;
+}
+.game-detail-header-left div ul li img{
+	border: 1px solid black;
+}
+.game-detail-header-left div ul li:nth-child(1){
+	margin-left: 0;
+}
+.game-detail-title{
+	display: none;
+	width: 250px;
+	padding: 10px;
+	background: #15110d;
+	border: 1px solid #271f15;
+	position: absolute;
+	z-index: 99;
+	top: -250px;
+	left: -120px;
+}
+.game-detail-title div b{
+	color: #ffc659;
+}
+.game-detail-title div div{
+	margin-top: 20px;
+}
+.game-detail-title div i{
+	display: block;
+	color: #ffc659;
+	font-style: normal;
+	margin-top: 20px;
+}

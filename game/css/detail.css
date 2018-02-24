@@ -100,3 +100,6 @@
 	font-style: normal;
 	margin-top: 20px;
 }
+.game-detail-header-right ul{
+	display: flex;
+}

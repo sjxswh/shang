@@ -1,9 +1,8 @@
-.game-detail section{
+.game-detail-introduce{
 	width: 100%;
 	background: #292e38;
 	color: white;
 }
-
 .game-detail-header-list{
 	width: 1080px;
 	margin: 0 auto 0;
@@ -102,4 +101,210 @@
 }
 .game-detail-header-right ul{
 	display: flex;
+	margin-top: 20px;
+}
+.game-detail-right-list li{
+	width: 150px;
+  margin-left: 4px;
+  padding: 6px 0 5px;
+  border-radius: 2px;
+  border: solid 1px #979797;
+  color: #9c9c9c;
+  background: none;
+  text-align: center;
+}
+.game-detail-right-list .game-detail-right-active{
+	background-color: #f2f2f2;
+  border-color: #f2f2f2;
+  color: #28272c;
+  font-weight: bold;
+}
+.game-detail-right-table{
+	margin-top: 20px;
+}
+.game-detail-right-table table td img{
+	width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  margin-right: 12px;
+  border-radius: 16px;
+}
+.game-detail-right-table table td{
+	text-align: center;
+	height: 40px;
+	font-size: 13px;
+}
+.game-detail-right-table table td:nth-of-type(1){
+	text-align: left;
+}
+.game-detail-right-table table td:nth-of-type(3){
+	color: #9c9c9c;
+	font-size: 12px;
+}
+.game-detail-right-table table:nth-child(2){
+	display: none;
+}
+.game-detail-nav{
+	width: 100%;
+	height: 50px;
+	background: white;
+	border-bottom: 1px solid #dcdcdc;
+}
+.game-detail-nav ul{
+	display: flex;
+	width: 1080px;
+	margin: 0 auto;
+}
+.game-detail-nav ul li a{
+	  display: block;
+    border-bottom: 2px solid transparent;
+    padding: 14px 20px 15px;
+    line-height: 19px;
+    font-size: 15px;
+    color: #777;
+    text-decoration: none;
+}
+.game-detail-nav .game-detail-nav-active a{
+	  color: #3c8eec;
+    border-bottom-color: #3c8eec;
+    font-weight: bold;
+}
+.game-detail-content-table{
+	width: 100%;
+	margin-top: 20px;
+}
+.game-detail-conten-table1{
+	width: 1080px;
+	margin: 0 auto;
+}
+.game-detail-content-table article{
+	width: 734px;
+}
+.game-detail-content-table article table{
+		width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: #f5f5f5;
+}
+.game-detail-content-table article table thead{
+	background: white;
+}
+.game-detail-content-table article table thead th{
+	  height: 40px;
+    background: #fff;
+    border-bottom: solid 1px #e6e6e6;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: #777;
+}
+.game-detail-content-table article table h2{
+	  line-height: 17px;
+    font-size: 14px;
+    padding-left: 20px;
+    font-weight: bold;
+    text-align: left;
+    color: #222;
+}
+.game-detail-content-table article table tbody tr{
+	 border-top: 1px solid #e6e6e6
+}
+.game-detail-content-table article table tbody td {
+	text-align: center;
+}
+.game-detail-content-table article table tbody td:nth-of-type(1){
+	text-align: left;
+	padding: 10px 0 10px 20px;
+}
+.game-detail-content-table article table tbody td ul{
+	display: flex;
+}
+.game-detail-content-table article table tbody td ul li{
+	margin-right: 20px;
+	display: flex;
+}
+.game-detail-content-table .game-detail-Builds td ul li{
+	margin-right: 0;
+}
+.game-detail-Builds td ul li span{
+	display: block;
+	width: 10px;
+	height: 100%;
+	line-height: 40px !important;
+	margin: 0 10px;
+}
+.game-detail-Builds table{
+	border: 1px solid #e6e6e6;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 10px;
+}
+.game-detail-Builds table tr td{
+    line-height: 14px;
+    font-family: "Helvetica Neue",Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+    letter-spacing: -0.5px;
+    color: #4a4a4a;
+}
+.game-detail-Builds table tr:nth-child(1){
+	background: #f9f9fa;
+}
+.game-detail-Builds table tr:nth-child(2) td{
+	position: relative;
+}
+.game-detail-Builds table td img{
+	width: 30px !important;
+	height: 32px !important;
+}
+.game-detail-Builds table td span{
+	  position: absolute;
+    right: 0;
+    bottom: 2px;
+    width: 16px;
+    height: 16px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.8);
+    line-height: 16px;
+    font-size: 11px;
+    letter-spacing: -0.4px;
+    color: #fff;
+}
+.game-detail-Builds table td:nth-child(1){
+	padding-left: 0 !important;
+	text-align: center !important; 
+}
+.game-detail-content-table article table tbody td img{
+	border: 1px solid #000;
+  border-radius: 2px;
+  display: block;
+  width: 42px;
+  height: 42px;
+  box-sizing: border-box;
+}
+.game-detail-content-table article table tbody td span{
+	display: block;
+  margin-top: 3px;
+  line-height: 15px;
+  font-family: "Helvetica Neue",Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+  font-size: 13px;
+  color: #777
+}
+.game-detail-tablt-two{
+	margin-top: 20px;
+}
+.game-detail-table-two tbody th{
+	    background: #f9f9fa;
+    border-top: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    line-height: 16px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: -1.1px;
+    text-align: center;
+    color: #4a4a4a;
+    vertical-align: middle;
+}
+.game-detail-table-three{
+	margin-top: 20px;
 }

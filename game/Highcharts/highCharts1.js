@@ -7,7 +7,6 @@ function hightchartData(id){
     title: {
         text: null
     },
-    
     subtitle: {
         text: null
     },
@@ -135,4 +134,84 @@ function hightchartData(id){
     }
 });
 
+}
+function highchartColumn(id){
+	var chart = Highcharts.chart(id, {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            categories: ['Brone', 'Silver', 'Gold', 'Platinum', 'Diamond','Master','Challenger']
+        },
+        yAxis: {
+        		type: "percent",
+	          min:0,
+						labels: {
+							format:'{value}%',
+							style: {
+								color: "#525252",
+								fontWeight: "bold"
+							},
+						},
+            title: {
+                text: '占有率'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        legend: {
+            align: 'right',
+            x: -30,
+            verticalAlign: 'top',
+            y: 25,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>' +
+                    this.series.name + ': ' + this.y + '<br/>' +
+                    '总量: ' + this.point.stackTotal;
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
+                    style: {
+                        textShadow: '0 0 3px black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'V',
+            data: [3.94, 10.21, 7.55, 2.43, 0.9,null,null]
+        }, {
+            name: 'IV',
+            data: [3.45, 10.26, 4.41, 1.49, 0.29,null,null]
+        }, {
+            name: 'III',
+            data: [4.51, 10.94, 3.54, 1.48, 0.15,null,null]
+        }, {
+            name: 'II',
+            data: [5.3, 10.87, 2.3, 1.4, 0.08,null,null]
+        }, {
+            name: 'I',
+            data: [5.21, 6.69, 1.75, 0.74, 0.05, 0.05,0.01]
+        }]
+    });
 }

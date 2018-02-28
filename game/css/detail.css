@@ -55,12 +55,20 @@
 	font-size: 24px;
 	font-weight: normal;
 }
-.game-detail-header-left div p{
-	font-size: 14px;
+.game-detail-title div p{
+	font-size: 12px;
 	color: #9c9c9c;
 }
-.game-detail-header-left div p b{
-	color: #00d298;
+.game-detail-table-two .game-detail-title div p{
+	font-size: 12px;
+	color: white;
+}
+.game-detail-table-three {
+	color: white;
+}
+.game-detail-table-three .game-detail-title div p{
+	font-size: 12px;
+	color: white;
 }
 .game-detail-header-left div ul{
 	display: flex;
@@ -73,7 +81,7 @@
 .game-detail-header-left div ul li img{
 	border: 1px solid black;
 }
-.game-detail-header-left div ul li:nth-child(1){
+.game-detail-title div ul li:nth-child(1){
 	margin-left: 0;
 }
 .game-detail-title{
@@ -84,11 +92,14 @@
 	border: 1px solid #271f15;
 	position: absolute;
 	z-index: 99;
-	top: -250px;
+	top: -230px;
 	left: -120px;
 }
 .game-detail-title div b{
 	color: #ffc659;
+}
+.game-detail-title div strong{
+	color: #00cfbc;
 }
 .game-detail-title div div{
 	margin-top: 20px;
@@ -98,6 +109,16 @@
 	color: #ffc659;
 	font-style: normal;
 	margin-top: 20px;
+}
+ .game-detail-title div i{
+	display: inline-block;
+	color: #ffc659;
+	font-style: normal;
+	margin-left: 4px;
+	margin-top: 0;
+}
+.game-detail-table-two .game-detail-title div div:nth-child(2){
+	margin-top: 6px;
 }
 .game-detail-header-right ul{
 	display: flex;
@@ -225,6 +246,8 @@
 .game-detail-content-table article table tbody td ul li{
 	margin-right: 20px;
 	display: flex;
+	position: relative;
+	color: white;
 }
 .game-detail-content-table .game-detail-Builds td ul li{
 	margin-right: 0;
@@ -393,6 +416,10 @@
 	justify-content: space-around;
 	padding: 4px 0;
 }
+.game-detail-imgActive{
+	display: inline-block;
+	position: relative;
+}
 .game-detail-smallImg img{
 	width: 32px;
 	height: 32px;
@@ -530,5 +557,202 @@
     text-align: right;
 }
 .game-detail-table2-leftContent{
+	width: 535px !important;
+}
+.game-detail-table2-leftContent table{
+	margin-top: 20px;
+}
+.game-detail-table2-leftContent table:nth-child(1){
+	margin-top: 0;
+}
+.game-detail-shoes{
+	display: flex;
+}
+.game-detail-shoesName{
+	font-size: 14px !important;
+  color: #666 !important;
+  margin-top: 0 !important;
+  line-height: 40px !important;
+  margin-left: 10px;
+}
+.game-detail-content-table2 aside{
 	width: 535px;
+}
+.game-detail-content-table2 aside table{
+	    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: #f5f5f5;
+}
+.game-detail-content-table2 aside table{
+	background: white;
+}
+.game-detail-content-table2 aside table th{
+	height: 40px;
+    background: #fff;
+    border-bottom: solid 1px #e6e6e6;
+    vertical-align: middle;
+    line-height: 17px;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    color: #777
+}
+.game-detail-content-table2 aside table th h2{
+	line-height: 17px;
+    font-size: 14px;
+    padding-left: 20px;
+    font-weight: bold;
+    text-align: left;
+    color: #222;
+}
+.game-detail-content-table2 aside table tbody td:nth-of-type(1) {
+    text-align: left;
+    padding: 10px 0 10px 20px;
+}
+.game-detail-content-table2 aside table tbody td span {
+    display: block;
+    margin-top: 3px;
+    line-height: 15px;
+    font-family: "Helvetica Neue",Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+    font-size: 13px;
+    color: #777;
+}
+.game-detail-content-table2 table tbody tr td:nth-of-type(1){
+	padding-left: 30px;
+}
+.game-detail-content-table3 aside{
+	width: 228px !important;
+}
+.game-detail-skill-ImgList{
+	display: flex;
+}
+.game-detail-skill-lists>li{
+	 border-left: 8px solid #f9f9fa;
+    padding: 13px 0 13px 22px;
+    background-color: #f9f9fa;
+    border-top: solid 1px #e9eff4;
+    cursor: pointer
+}
+.game-detail-skill-ImgList li{
+	position: relative;
+	display: flex;
+}
+.game-detail-skill-ImgList li span{
+	    position: absolute;
+    width: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    color: #fff;
+    text-align: center;
+    right: 20px;
+    bottom: 2px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 1px;
+	
+}
+.game-detail-skill-ImgList li:last-child span{
+	right: 0;
+}
+.game-detail-skill-ImgList li b{
+	display: inline-block;
+	height: 100%;
+	line-height: 42px;
+	margin: 0 6px;
+	color: #777;
+}
+.game-detail-skill-win{
+	margin-top: 10px;
+}
+.game-detail-skill-win div b{
+	display: table-cell;
+    padding-top: 4px;
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #222
+}
+.game-detail-skill-win div:nth-child(2) b{
+	font-weight: normal;
+}
+.game-detail-skill-win div span{
+	    padding-top: 5px;
+    display: table-cell;
+    font-size: 12px;
+}
+.game-detail-skill-active{
+	  border-left: 8px solid #3c8eec !important;
+	  background: white !important;
+}
+.game-detail-skill-lists .game-detail-skill-last{
+	  background: #fff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    border-left: 8px solid white;
+}
+.game-detail-content-table3 aside{
+	margin-left: 0 !important;
+}
+.game-detail-content-table3 article{
+	margin-left: 10px !important;
+	width: 840px;
+}
+.game-detail-content-table3 .game-detail-Builds table{
+	width: 86%;
+}
+.game-detail-content-table3 .game-detail-Builds table td img{
+	width: 32px !important;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.game-detail-content-table3 .game-detail-Builds table td span{
+	right: 3px;
+	font-size: 12px;
+}
+.game-detail-tableCommont article > table{
+	border: 1px solid #e6e6e6;
+}
+.game-detail-tableCommont article > table tbody tr{
+	border-top: none;
+}
+.game-detail-tableCommont article > table tbody tr:nth-child(2n){
+	background: #f5f5f5;
+}
+.game-detail-tableCommont article > table tbody tr:nth-child(2n+1){
+	background: #ebebed;
+}
+.game-detail-content-table2 aside > table{
+	border: 1px solid #e6e6e6;
+}
+.game-detail-content-table2 aside > table tbody tr{
+	border-top: none;
+}
+.game-detail-content-table2 aside > table tbody tr:nth-child(2n){
+	background: #f5f5f5;
+}
+.game-detail-content-table2 aside > table tbody tr:nth-child(2n+1){
+	background: #ebebed;
+}
+.game-detail-content-table4 aside{
+	margin-left: 0 !important;
+	width: 316px !important;
+}
+.game-detail-content-table4 article{
+	margin-left: 10px !important;
+	width: 750px;
+}
+.game-detail-content-table4 article table tbody th{
+	    width: 104px;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    color: #4a4a4a;
+}
+.displayBlock{
+	display: none;
 }

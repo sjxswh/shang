@@ -176,11 +176,73 @@ table{
     border-color: #d3962b;
 }
 .highchart-header{
-	  position: relative;
-    display: block;
     padding: 10px 15px;
     border-bottom: 1px solid #cdd2d2;
     color: #555e5e;
     font-size: 12px;
     font-weight: bold;
+}
+.game-statistics-data-content{
+	margin-bottom: 10px;
+}
+.game-statistics-dataTwo{
+	display: flex;
+}
+.game-statistics-dataTwo article{
+	width: 640px;
+}
+.game-statistics-dataTwo aside{
+	width: 320px;
+	margin-left: 10px;
+	color: #555e5e;
+}
+.title{
+	font-size: 14px;
+  padding: 11px 0 11px 20px
+}
+.game-statistics-aside-table thead th {
+	height: 32px;
+    background-color: #ededed;
+    font-size: 13px !important;
+    text-align: left !important;
+    text-indent: 0 !important;
+    font-weight: bold !important;
+    padding: 0 !important;
+}
+.game-statistics-aside-table thead th:nth-child(1){
+	padding-left: 10px !important;
+}
+.game-statistics-aside-table .asideCell{
+	  height: 22px;
+    border-bottom: 1px solid #ededed;
+    background-color: #dde0e0;
+    text-align: left;
+    font-size: 11px;
+    vertical-align: middle !important;
+    border-right: none !important;
+}
+.game-statistics-aside-table .ascell{
+	 background-color: #fa576f;
+}
+.towCell{
+	padding-left: 10px;
+}
+.game-statistics-aside-table tfoot td{
+	padding: 20px 16px 16px;
+    color: #879292;
+    font-size: 11px;
+    line-height: 1.4;
+    text-align: center;
+}
+.game-statistics-aside-table .tfCell{
+	padding: 0 16px 16px 0;
+    font-size: 12px;
+    text-align: right;
+    color: #555e5e;
+}
+.highchartColumnar p{
+	    color: #657070;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 12px;
 }

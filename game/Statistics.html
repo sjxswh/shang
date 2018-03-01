@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title></title>
 		<link href="css/commont.css" type="text/css" rel="stylesheet" />
 		<link href="css/statistics.css" type="text/css" rel="stylesheet" />
@@ -60,15 +61,15 @@
 			<nav>
 				<ul class="game-nav">
 					<li><a href="javascript:;">首頁</a></li>
-					<li><a href="javascript:;" class="nav-active">英雄数据</a></li>
-					<li><a href="javascript:;">统计</a></li>
+					<li><a href="javascript:;">英雄数据</a></li>
+					<li><a href="javascript:;" class="nav-active">统计</a></li>
 					<li><a href="javascript:;">排行榜</a></li>
 					<li><a href="javascript:;">职业选手市场观战</a></li>
 				</ul>
 			</nav>
 			<article class="game-article">
 				<div><a href="javascript:;">绝地求生战绩搜索就在OP.GG!</a></div>
-				<div><a href="javascript:;">Garena stats are coming to OP.GG for testing! <span style="color: yellow;">[read more]</span> </a></div>
+				<!--<div><a href="javascript:;">Garena stats are coming to OP.GG for testing! <span style="color: yellow;">[read more]</span> </a></div>-->
 			</article>
 			<section>
 				<div class="game-section-img">
@@ -651,29 +652,312 @@
 							</table>
 						</div>
 					</div>
-					<div class="game-statistics-dataTwo">
-						<article>
-							<div>
-								<div class="game-statistics-data-content">
-									<div class="highchart-header">
-										柱形段位分布图
+					<div class="dataTwo" style="display: none;">
+						<div class="game-statistics-dataTwo">
+							<article>
+								<div>
+									<div class="game-statistics-data-content">
+										<div class="highchart-header">
+											柱形段位分布图
+										</div>
+										<div class="highchart-content">
+											<div id="highchart1" style="width: 100%; height: 348px; margin: 0 auto"></div>
+										</div>
 									</div>
-									<div class="highchart-content">
-										<div id="highchart1"></div>
+									<div class="game-statistics-data-content">
+										<div class="highchart-header">
+											段位分布图
+										</div>
+										<div class="highchart-content">
+											<div id="highchart2" style="width: 100%; height: 368px; margin: 0 auto"></div>
+										</div>
 									</div>
 								</div>
+								<div></div>
+							</article>
+							<aside>
 								<div class="game-statistics-data-content">
-									<div class="highchart-header">
-										段位分布图
-									</div>
-									<div class="highchart-content">
-										<div id="highchart2"></div>
-									</div>
+									<div class="highchart-header title">详细英雄统计</div>
+									<table class="game-statistics-aside-table">
+										<colgroup>
+											<col width="4" />
+											<col width="102" />
+											<col width="106" />
+											<col width="106" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th colspan="2">段位</th>
+												<th>召唤师数量</th>
+												<th>累计</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Challenger">Challenger I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Master">Master I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Diamond">Diamond I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Diamond">Diamond I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Diamond">Diamond I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Diamond">Diamond I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Platinum">Platinum I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Platinum">Platinum I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Platinum">Platinum I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Platinum">Platinum I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Platinum">Platinum I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Gold">Gold I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Gold">Gold I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Gold">Gold I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Gold">Gold I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Gold">Gold I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Silver">Silver I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Silver">Silver I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Silver">Silver I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Silver">Silver I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Silver">Silver I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Brone">Brone I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Brone">Brone I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Brone">Brone I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Brone">Brone I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+											<tr>
+												<td class="asideCell ascell"></td>
+												<td class="asideCell towCell" data-name="Brone">Brone I</td>
+												<td class="asideCell">200(0.01%)</td>
+												<td class="asideCell">200(0.01%)</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="4">当召唤师搜索其排名的百分比时，排名到青铜分段的玩家，此表累计计算到非排位。</td>
+											</tr>
+											<tr>
+												<td colspan="4" class="tfCell">更新时间：<span>3小时前</span></td>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</aside>
+						</div>
+						<div class="highchartColumnar">
+							<div class="game-statistics-data-content">
+								<table>
+									<colgroup>
+										<col width="242" />
+										<col width="242" />
+										<col width="242" />
+										<col width="242" />
+									</colgroup>
+									<thead>
+										<tr>
+											<th colspan="4">按段位统计</th>
+										</tr>
+									</thead>
+									<tbody style="border-bottom:1px solid #cdd2d2;">
+										<tr>
+											<td>
+												<div>
+													<p>图表类型</p>
+													<div class="cellActive Active">
+														<b></b>
+														<span>KDA</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>CS</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>金币</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>购买守卫</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div>
+													<p>时间</p>
+													<div class="cellActive Active">
+														<b></b>
+														<span>最近一个月</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>一周内</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>今天</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div>
+													<p>地图</p>
+													<div class="cellActive Active">
+														<b></b>
+														<span>召唤师峡谷</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>扭曲丛林</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>嚎哭深渊</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<div>
+													<p>游戏方式</p>
+													<div class="cellActive Active">
+														<b></b>
+														<span>排行榜</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>匹配</span>
+													</div>
+													<div class="cellActive">
+														<b></b>
+														<span>极地大斗乱</span>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="highchartsColm">
+									<div id="highchart3" style="width: 100%;height: 400px;"></div>
 								</div>
 							</div>
-							<div></div>
-						</article>
-						<aside></aside>
+						</div>
 					</div>
 				</div>
 				<div class="game-section-img" style="margin-top: 20px;">
@@ -733,6 +1017,43 @@
 			console.log(goldNum)
 			$('.goldBg').css("width",csNum)
 			highchartColumn("highchart1")
+			highchartsPie("highchart2")
+			var towcell = Array.from($('.towCell'))
+			towcell.forEach(function(v,k){
+				var colorBg = $('.towCell').eq(k).attr("data-name")
+				if(colorBg == "Challenger" || colorBg == "Master"){
+					$('.towCell').eq(k).css("background","#f4d9db").siblings().css("background","#f4d9db")
+					$('.towCell').eq(k).prev().css("background","#fa576f")
+				}
+				else if(colorBg == "Diamond"){
+					$('.towCell').eq(k).css("background","#cfe6ee").siblings().css("background","#cfe6ee")
+					$('.towCell').eq(k).prev().css("background","#048ab4")
+				}
+				else if(colorBg == "Platinum"){
+					$('.towCell').eq(k).css("background","#cfeeeb").siblings().css("background","#cfeeeb")
+					$('.towCell').eq(k).prev().css("background","#04b1a1")
+				}
+				else if(colorBg == "Gold"){
+					$('.towCell').eq(k).css("background","#f5ebd7").siblings().css("background","#f5ebd7")
+					$('.towCell').eq(k).prev().css("background","#fabc44")
+				}
+				else if(colorBg == "Silver"){
+					$('.towCell').eq(k).css("background","aliceblue").siblings().css("background","aliceblue")
+					$('.towCell').eq(k).prev().css("background","#9ea3b0")
+				}
+				else if(colorBg == "Brover"){
+					$('.towCell').eq(k).css("background","#e6e6e6").siblings().css("background","#e6e6e6")
+					$('.towCell').eq(k).prev().css("background","#9ea3b0")
+				}
+			})
+			highchartsColm("highchart3")
+			var heroList = Array.from($('.game-statistics-header ul li'))
+			heroList.forEach(function(v,k){
+				v.onclick = function(){
+					$(this).addClass("game-statistics-header-active").siblings().removeClass("game-statistics-header-active")
+					$('.game-statistics-data').children().eq(k).css("display","block").siblings().css("display","none")
+				}
+			})
 		})
 	</script>
 </html>

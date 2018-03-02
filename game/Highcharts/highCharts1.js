@@ -482,26 +482,55 @@ function highchartsColm(id){
 
 
 function hightchartNetwork(id){
-	var chart = Highcharts.chart(id, {
+	
+    var chart = Highcharts.chart(id, {
         chart: {
             polar: true,
-            type: 'line'
+            type: 'line',
+            backgroundColor:"#f2f2f2"
         },
         title: {
-            text: null,
-            x: -80
+            text: null
         },
         pane: {
-            size: '70%'
+            startAngle: 0,
+            endAngle: 360
         },
         xAxis: {
-            tickmarkPlacement: null,
-            lineWidth: 0
-        },
-        yAxis: {
-            gridLineInterpolation: 'polygon',
+            tickInterval: 60,
             lineWidth: 0,
             min: 0,
+            max: 360,
+            labels: {
+                formatter: function () {
+                    return null;
+                }
+            }
+        },
+        yAxis: {
+        	gridLineInterpolation: 'polygon',
+        	lineWidth: 0,
+            min: 0,
+            labels: {
+                formatter: function () {
+                    return null;
+                }
+            },
+            zoneAxis: 'y',
+						zones: [{
+							fillColor: '#e7e7e7',
+							color: '#e7e7e7'
+						}] 
+        },
+        plotOptions: {
+            series: {
+                pointStart: 0,
+                pointInterval: 60
+            },
+            column: {
+                pointPadding: 0,
+                groupPadding: 0
+            }
         },
         tooltip: {
             enabled: false
@@ -510,19 +539,23 @@ function hightchartNetwork(id){
             enabled: false
         },
         series: [{
-            name: '实际支出',
-            data: [480, 500, 490, 350, 500, 480],
-            pointPlacement: null,
-            dataLabels: {
-							formatter: function(){
-								return null;
-							}
-						},
+        		type: 'polygon',
+            name: '柱形',
+            data: [650, 560, 460, 700, 520, 650],
+            color: 'rgba(75, 119, 254, 0.3)',  
+            pointPlacement: 'on' ,
             marker: {
+            	enabled: true,
 							symbol: "circle",
+							radius:2,
 							lineWidth: '1px',
 							lineColor: '#2857a6',
 							fillColor: '#fff'
+						},
+						states: {
+							hover: {
+								enabled: false
+							}
 						},
         }]
     });

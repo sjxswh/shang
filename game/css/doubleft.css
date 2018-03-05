@@ -603,6 +603,7 @@ table{
 .match-header{
 	display: flex;
 	justify-content: space-between;
+	border-bottom: 1px solid #cdd2d2;
 }
 .match-header-list{
 	display: flex;
@@ -685,7 +686,7 @@ table{
 .select-lists{
 	  position: absolute;
     right: -1px;
-    top: 36px;
+    top: 35px;
     width: 303px;
     height: 332px;
     margin-top: -1px;
@@ -713,7 +714,6 @@ table{
 }
 .select-cell:nth-child(2){
 	background: url(../img/img_boxbg.png);
-  border-top: 1px solid #f2f2f2;
 }
 .select-list-title{
 	      height: 13px;
@@ -741,4 +741,681 @@ table{
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+}
+.match-table-title{
+	padding: 16px 0 14px 20px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #666;
+    height: 14px;
+    border-left: 1px solid #cdd2d2;
+}
+.match-table-list{
+	    font-size: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+.match-table-list li{
+	display: flex;
+	margin-bottom: 10px;
+}
+.match-table-content{
+	    width: 229px;
+    border-left: 1px solid #cdd2d2;
+}
+.match-table-img{
+	    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.match-table-img img {
+	    display: block;
+    width: 100%;
+    height: 100%;
+}
+.match-table-name{
+	margin-left: 10px;
+}
+.match-table-name p:nth-child(1){
+	margin-bottom: 2px;
+    line-height: 16px;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.match-table-name p:nth-child(2){
+    font-size: 11px;
+    line-height: 12px;
+    color: #333;
+}
+.match-table-kda {
+	 font-size: 11px;
+    line-height: 12px;
+    color: #2daf7f;
+    line-height: 30px;
+    margin-left: 10px;
+}
+.match-row-rate{
+	    color: #879292;
+    font-size: 11px;
+    line-height: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.match-row-rate span{
+	color: #555e5e;
+}
+.match-row-rate b{
+	color: #c6443e;
+}
+.match-row-rate:nth-child(2){
+	    font-size: 16px;
+    line-height: 19px;
+    margin-top: 7px;
+    font-weight: normal; 
+}
+.match-row-rate:nth-child(2) b{
+	font-weight: normal;
+}
+.match-row-img{
+	background: url(../img/site.png);
+	  background-position: -177px -3991px;
+    width: 28px;
+    height: 28px;
+}
+.match-row-list{
+	    padding: 0 16px 0 12px;
+    font-size: 0;
+}
+.match-row-list li{
+	display: flex;
+}
+.match-row-list li:nth-child(2){
+	margin-top: 20px;
+}
+.match-row-content{
+	    vertical-align: middle;
+    padding-bottom: 1px;
+    margin-left: 4px;
+}
+.match-row-content p{
+	     line-height: 16px;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 4px;
+}
+.match-row-content b{
+	    line-height: 12px;
+    font-size: 11px;
+    color: #1f8ecd;
+}
+.match-row-content span{
+	    line-height: 12px;
+    font-size: 11px;
+    color: #666;
+    margin-left: 10px;
+}
+.match-row-content span b{
+	color: #333;
+	margin-left: 6;
+}
+.doubleft-content{
+	    margin-top: 8px;
+}
+.doubleft-row{
+    position: relative;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+.doubleft-row-content{
+	    display: table;
+    width: 689px;
+    border-collapse: collapse;
+    border: 1px solid #cdd2d2;
+}
+.doubleft-row-content{
+	    background-color: #a3cfec;
+    border-color: #99b9cf;
+}
+.doubleft-row-content>div{
+	    display: table-cell;
+    height: 96px;
+    vertical-align: middle
+}
+.GameStats{
+	 width: 70px;
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+    line-height: 16px;
+}
+.GameStats .GameType{
+	     font-weight: bold;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.Bar{
+	    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #99b9cf;
+}
+.GameResult{
+	color: #1a78ae;
+	font-weight: bold;
+}
+.GameSettingInfo{
+	    width: 100px;
+    font-size: 0;
+}
+.GameSettingInfo .ChampionImage{
+	    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.GameSettingInfo .ChampionImage .Image{
+	    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+.SummonerSpell{
+	    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.Spell{
+	    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.Spell .Image{
+	    display: block;
+    width: 100%;
+    height: 100%;
+}
+.Runes{
+	    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.Rune{
+	    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+.Rune:nth-child(1){
+	margin-top: 0;
+}
+.ChampionName{
+	    margin-top: 8px;
+    font-size: 11px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ChampionName a{
+	 color: #555;
+}
+.game-KDA{
+	    width: 90px;
+    font-size: 11px;
+    text-align: center;
+}
+.KDA{
+	    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+.KDA span{
+	color: #555e5e;
+	font-weight: bold;
+}
+.KDA .Death{
+	    color: #c6443e;
+}
+.KDARatio{
+	    color: #555e5e;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.KDARatio span{
+	    color: #353a3a;
+}
+.MultiKill{
+	    margin-top: 8px;
+    font-size: 10px;
+}
+.MultiKill .Kill{
+	    display: inline-block;
+    background: #ee5a52;
+    border: 1px solid #c6443e;
+    border-radius: 15px;
+    padding: 2px 8px;
+    color: #f2f2f2;
+}
+.Stats{
+	    width: 110px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #555e5e
+}
+.CKRate{
+	    color: #c6443e;
+}
+.MMR b{
+	    color: #353a3a;
+}
+.ItemList{
+	    width: 100px;
+    margin: 0 auto;
+}
+.ItemList .Item{
+	    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    overflow: hidden;
+        background-color: #99b9cf;
+}
+.Item .Image{
+	width: 100%;
+	height: 100%;
+}
+.ItemList .Button{
+	    margin-top: 2px;
+    border: none;
+    padding: 0;
+    background: none;
+    width: 22px;
+    height: 22px;
+}
+.ItemList .Button img{
+	width: 100%;
+}
+.Trinket{
+	    margin-top: 7px;
+    color: #353a3a;
+    line-height: 13px;
+    font-size: 11px;
+    text-align: center;
+}
+.FollowPlayers{
+	    width: 180px;
+    font-size: 0;
+}
+.FollowPlayers .Team{
+	    float: left;
+    width: 50%;
+}
+.FollowPlayers .Summoner {
+	    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+.Summoner .ChampionImage{
+	    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.Summoner .ChampionImage .__spc16{
+	background: url(../img/champion16.png);
+		 background-position: 0px 0px;
+    width: 16px;
+    height: 16px;
+}
+.SummonerName{
+	    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #555;
+}
+.SummonerName a{
+	    display: block;
+	    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.StatsButton{
+	    width: 30px;
+    border: 1px solid #000;
+}
+.StatsButton{
+	      border-color: #4aa1d2;
+    background: #64b1e4;
+}
+.StatsButton .Content{
+	    position: relative;
+    width: 30px;
+    height: 96px;
+}
+.StatsButton .Content .Item{
+	    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 30px;
+    height: 100%;
+}
+.MatchDetail{
+	height: 100%;
+}
+.MatchDetail span{
+	    position: absolute;
+    bottom: 10px;
+    left: 9px;
+    background: url(../img/site.png);
+    background-position: -192px -5529px;
+    width: 13px;
+    height: 10px;
+}
+.tabItem{
+	    margin: -1px 0 0 0;
+    border: 1px solid #cdd2d2;
+    border-top: none;
+}
+
+.tabHeaders{
+	    padding: 3px 15px 0;
+    box-sizing: border-box;
+    font-size: 0;
+    border-bottom: none;
+    background: #64b1e4;
+}
+.tabHeaders li{
+	    display: inline-block;
+    width: 156px;
+    margin-left: 8px;
+    border-bottom: 1px solid #cdd2d2;
+    vertical-align: top;
+}
+.tabHeaders li a{
+	    border: 1px solid transparent;
+    border-bottom: none;
+    display: block;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 13px;
+    color: #111;
+    text-decoration: none;
+        background: #89c8f2;
+    border-color: #4aa1d2;
+}
+.tablist-active{
+	    position: relative;
+    border-bottom-color: #fff !important;
+
+}
+.tablist-active a{
+	    font-weight: bold;
+    border-color: #cdd2d2 !important;
+    background: #fff !important;
+}
+.tabHeaders a:hover{
+	background: #9fd1f3;
+}
+.Result-WIN{
+	border-bottom: 0;
+}
+.Result-WIN thead{
+	    border: solid 1px #cdd2d2;
+    background-color: #fff;
+}
+.Result-WIN thead th{
+	    height: 32px;
+    color: #555e5e;
+    font-size: 12px;
+    font-weight: normal;
+}
+.Result-WIN thead th:nth-child(1){
+	    padding-left: 15px;
+    text-align: left;
+}
+.Result-WIN .win span{
+	    color: #1a78ae;
+}
+.Result-WIN .win-body{
+	  background-color: #d8e4ec;
+    border: solid 1px #bacedc;
+}
+.first-img{
+	    padding-left: 10px;
+    padding-right: 4px;
+}
+.first-img a{
+	position: relative;
+}
+.ImgBg{
+	    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: url(../img/champion32.png);
+   background-position: 0px -3872px;
+}
+.level{
+	    position: absolute;
+    left: -3px;
+    bottom: -3px;
+    width: 15px;
+    height: 15px;
+    background: url(../img/levelholder.png);
+    color: #ddd;
+    font-size: 10px;
+    font-family: "Tahoma";
+    text-align: center;
+    line-height: 15px;
+}
+.smallImg{
+    width: 16px;
+    height: 16px;
+    margin-bottom: 2px;
+}
+.smallImg img{
+	width: 100%;
+	height: 100%;
+	border-radius: 2px;
+}
+.radius img{
+	    border-radius: 8px;
+}
+.name-link{
+	    color: #555e5e;
+    font-size: 11px;
+}
+.imglist{
+	float: left;
+    width: 22px;
+    height: 22px;
+    margin-left: 1px;
+    vertical-align: middle;
+}
+.imglist img{
+	    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+}
+.cellCenter{
+	text-align: center;
+	    color: #777;
+    font-size: 11px
+}
+.diff{
+	    color: #e19205;
+}
+.progress{
+	    width: 50px;
+    height: 8px;
+    margin: 0 auto;
+    border: 1px solid #cdd2d2;
+    background-color: #f2f2f2;
+}
+.progress div{
+	width: 36%;
+	    height: 100%;
+    border: 1px solid #c6443e;
+    background-color: #ee5a52;
+}
+.SummaryList{
+	display: flex;
+	height: 32px;
+	line-height: 32px;
+	justify-content: space-between;
+	  background-color: #d8e4ec;
+    border-color: #bacedc;
+    box-sizing: border-box;
+    margin-top: -1px;
+}
+.SummaryImgLists{
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+	padding: 0 10px;
+}
+.SummaryImgLists:nth-child(2){
+	    background-color: #e9e0e0;
+    border-color: #d8c0be;
+}
+.SummaryImgList{
+	display: flex;
+}
+.SummaryImgList div{
+	    display: inline-block;
+    font-size: 11px;
+    color: #555;
+    margin-right: 10px;
+}
+.SummaryImgList div img{
+	vertical-align: middle;
+}
+.winning{
+    font-size: 11px;
+    color: #879292;
+}
+.winning b{
+	    color: #c6443e;
+}
+.Result-WIN .lose span{
+	color: #c6443e;
+}
+.lose-body{
+	    background-color: #e9e0e0;
+    border: solid 1px #d8c0be;
+}
+.SummaryChartHeaderList{
+	display: flex;
+	    font-size: 0;
+    background-color: #fff;
+    border-bottom: solid 1px #cdd2d2;
+    text-align: center;
+}
+.SummaryChartHeaderList li{
+	width: 50%;
+}
+.SummaryChartHeaderList li a{
+	display: inline-block;
+	width: 50%;
+    padding: 7px 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    color: #555;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+.SummaryChartHeaderList .HeaderList-active a{
+	    font-weight: bold;
+    color: #1a78ae;
+    border-bottom-color: #1a78ae;
+}
+.SummaryChartWin{
+	    text-align: center;
+    padding: 9px 0;
+}
+.SummaryChartWin li{
+	    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    color: #c6443e;
+}
+.SummaryChartWin li:before{
+	display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    content: '';
+    width: 10px;
+    border-top: 4px solid #c6443e
+}
+.SummaryChartWin li:nth-child(1):before{
+	border-top-color: #1a78ae;
+}
+.SummaryChartWin li:nth-child(1){
+	color: #1a78ae;
+}
+.ratelists>li{
+	padding-top: 30px;
+    float: left;
+    width: 50%;
+}
+.ratelists h4{
+	    font-size: 13px;
+    line-height: 16px;
+    color: #555;
+    font-weight: normal;
+    text-align: center;
+}
+.rate-table{
+	    margin-top: 12px;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.ratelist{
+	    display: table-cell;
+}
+.ratelist li{
+	margin-top: 5px;
+}
+.highchartpie{
+	display: table-cell;
+}
+.ratelist-img{
+	    float: left;
+    width: 20px;
+    height: 20px;
+}
+.ratelist-img img{
+	width: 100%;
+	height: 100%;
+}
+.ratelist-progress{
+	    margin-left: 20px;
+    height: 20px;
+    position: relative;
+    background: #afafaf
 }

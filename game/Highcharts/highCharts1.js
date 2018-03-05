@@ -346,7 +346,7 @@ function highchartsPie(id){
         },
         yAxis: {
             title: {
-                text: '总百分比市场份额'
+                text: null
             }
         },
         plotOptions: {
@@ -558,5 +558,70 @@ function hightchartNetwork(id){
 							}
 						},
         }]
+    });
+}
+function highchartsPies(id){
+	var highwidth = $('.highcharts-container').width()
+	var chart = Highcharts.chart(id, {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            spacing : [0, 0 , 0, 0],
+            backgroundColor:"#f2f2f2",
+        },
+       colors: ['red', 'rgb(0,160,210)' ],
+        title: {
+            floating:true,
+            text: '65%'
+        },
+       tooltip: {
+            enabled: false
+        },
+        legend: {
+            enabled: false,
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                },
+                point: {
+                    events: {
+                        mouseOver: function(e) {  
+                            return null
+                        }
+                    }
+                },
+            }
+        },
+        series: [{
+            type: 'pie',
+            size:'100%',
+            innerSize: '70%',
+            name: '市场份额',
+            data: [
+                ['Opera', 3.2],
+                ['其他', 6.7]
+            ],
+            marker: {
+            	enabled: false,
+						},
+						states: {
+							hover: {
+								enabled: false
+							}
+						},
+        }]
+    }, function(c) {
+        // 环形图圆心
+        var centerY = c.series[0].center[1],
+            titleHeight = parseInt(c.title.styles.fontSize);
+        c.setTitle({
+            y:centerY + titleHeight/2
+        });
+        chart = c;
     });
 }

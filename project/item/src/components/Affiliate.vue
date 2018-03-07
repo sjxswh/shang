@@ -94,15 +94,17 @@
 			from (newVal,oldVal){
 				this.search = document.getElementById("search").value
 				this.from = newVal
-				if(Number(newVal.dates) - Number(newVal.date) <1){
-					var nums = 30 - Number(newVal.date)
-					this.num = Number(newVal.dates) + nums+" days"
-				}
-				if(Number(newVal.dates) - Number(newVal.date) ==1){
+				var s = newVal.years+"-"+newVal.months+"-"+newVal.dates
+				var sss = newVal.year+"-"+newVal.month+"-"+newVal.date
+				var ss = new Date(s)
+				var ssss = new Date(sss)
+				var time = ss.getTime()-ssss.getTime()
+				var d = time/1000/3600/24
+				if(d ==1){
 					this.num = "today"
 				}
-				if(Number(newVal.dates) - Number(newVal.date) > 1){
-					this.num = Number(newVal.dates) - Number(newVal.date)+" days"
+				else{
+					this.num = d+" days"
 				}
 				var that = this
 				this.$ajax({

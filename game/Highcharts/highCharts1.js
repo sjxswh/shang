@@ -431,7 +431,7 @@ function highchartsColm(id){
             crosshair: true,
             labels: {
 						formatter: function(){
-							return "<div style='text-align: center;'><img src='" + this.value.image + "' style='width:40px;height:40px;margin:-5px 0 -5px 0;'><br>" + this.value.name + "</div>";
+							return "<div style='text-align: center;'><img src='" + this.value.image + "' style='width:40px;height:40px;margin:-5px 0 -5px 0;'><br/>" + this.value.name + "</div>";
 						},
 						useHTML: true
 					}
@@ -560,20 +560,19 @@ function hightchartNetwork(id){
         }]
     });
 }
-function highchartsPies(id){
-	var highwidth = $('.highcharts-container').width()
-	var chart = Highcharts.chart(id, {
+function highchartsPies(op){
+	var chart = Highcharts.chart(op.id, {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
             spacing : [0, 0 , 0, 0],
-            backgroundColor:"#f2f2f2",
+            backgroundColor: op.background,
         },
        colors: ['red', 'rgb(0,160,210)' ],
         title: {
             floating:true,
-            text: '65%'
+            text: op.title
         },
        tooltip: {
             enabled: false
@@ -600,7 +599,7 @@ function highchartsPies(id){
         series: [{
             type: 'pie',
             size:'100%',
-            innerSize: '70%',
+            innerSize: op.innersize,
             name: '市场份额',
             data: [
                 ['Opera', 3.2],
@@ -624,4 +623,93 @@ function highchartsPies(id){
         });
         chart = c;
     });
+}
+
+
+function highchartsspline(op){
+	Highcharts.chart(op.id, {
+    chart: {
+        type: 'spline',
+        backgroundColor:"#eaeaea",
+    },
+    title: {
+        text: null
+    },
+    subtitle: {
+        text: null
+    },
+    xAxis: {
+    	lineWidth: 1, lineColor: '#585551',
+        categories :["0分钟","2分钟","4分钟","6分钟","8分钟","10分钟","12分钟","14分钟","16分钟","18分钟","20分钟","22分钟","24分钟","26分钟","28分钟","30分钟","32分钟","34分钟","36分钟","38分钟"]
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        min: 0,
+        minorGridLineWidth: 0,
+        gridLineWidth: 1, gridLineColor: "#dcdcdc",
+        alternateGridColor: null,
+        format:'{value}k',
+        plotBands: [{ // Light air
+            from: 0.3,
+            to: 60,
+            color: '#eaeaea',
+        }]
+    },
+    tooltip: {
+         crosshairs: true,
+         shared: true,
+         formatter: function(){
+         	var line2 = Array.from($('.liness'))
+         	var s
+						var points = this.points[0]
+						var points1 = this.points[1]
+         	line2.forEach((v,i) => {
+         		var id = "linesd"+i
+         		var ids = "lines"+i
+         		if (op.id == id) {
+							s = '<span>' + this.x + '</span><br/><div style="width:40px;height:40px;">'+ points.series.name +'</div>' + ": " + this.y;
+						}
+         		if (op.id == ids) {
+							s = '<span>' + this.x + '</span><br/><span style="color:#1a78ae">' + points.series.name + '</span>'+":"+' <b>' + points.y+'</b><br/><span style="color:#c6443e">' + points1.series.name + '</span>' + ":" + '<b>' + points1.y +'</b>';
+						}
+         	})
+         	return s
+					},
+    },
+    legend:{
+    	enabled:false
+    },
+    plotOptions: {
+        spline: {
+            lineWidth: 2,
+            states: {
+                hover: {
+                    lineWidth: 2
+                }
+            },
+            marker: {
+                enabled: false
+            },
+            pointInterval: null, // one hour
+            pointStart:null
+        }
+    },
+    series: [{
+        name: 'Winning Team',
+        data: op.win,
+        color:'#1a78ae'
+    }, {
+        name: 'Losing Team',
+        data: op.lose,
+        color:'#c6443e'
+    }],
+    navigation: {
+        menuItemStyle: {
+            fontSize: '10px'
+        }
+    }
+});
+
 }

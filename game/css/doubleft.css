@@ -180,7 +180,7 @@ b,strong{
     background-color: #fff;
     color: #1a78ae
 }
-.doubleft-introduce-navList  .navList-active{
+.doubleft-introduce-navList  .navList-active a{
 	  border-bottom: 1px solid #e8eaea;
     background: #e8eaea;
     color: #141717;
@@ -188,9 +188,14 @@ b,strong{
 .doubleft-introduce-navList li a:hover{
 	 background: #e8eaea;
 }
-.doubleft-introduce-dataContent{
+.doubleft-introduces{
 	width: 1000px;
 	margin: 0 auto;
+}
+.doubleft-introduces>div{
+	display: none;
+}
+.doubleft-introduce-dataContent{
 	display: flex;
 }
 .doubleft-introduce-dataContent aside{
@@ -600,6 +605,9 @@ table{
 .play-table tbody td:last-child{
 	color: #676f89;
 }
+.play-table tbody tr:nth-child(2n) td{
+	background-color: #e0e3e3;
+}
 .match-header{
 	display: flex;
 	justify-content: space-between;
@@ -877,9 +885,13 @@ table{
     border-collapse: collapse;
     border: 1px solid #cdd2d2;
 }
-.doubleft-row-content{
+.win-row-content{
 	    background-color: #a3cfec;
     border-color: #99b9cf;
+}
+.lose-row-content{
+	      background-color: #e2b6b3;
+    border-color: #cea7a7;
 }
 .doubleft-row-content>div{
 	    display: table-cell;
@@ -905,7 +917,6 @@ table{
     width: 27px;
     margin: 5px auto;
     height: 2px;
-    background: #99b9cf;
 }
 .GameResult{
 	color: #1a78ae;
@@ -1104,9 +1115,25 @@ table{
 	    width: 30px;
     border: 1px solid #000;
 }
-.StatsButton{
+.blueBg{
 	      border-color: #4aa1d2;
     background: #64b1e4;
+}
+.blueBg .Off{
+	background-position: -192px -5529px;
+}
+.blueBg .on{
+	background-position: -192px -5519px;
+}
+.redBg{
+	      border-color: #d67b77;
+    background: #e89d99;
+}
+.redBg .Off{
+	    background-position: -192px -5569px;
+}
+.redBg .on{
+	    background-position: -192px -5559px;
 }
 .StatsButton .Content{
 	    position: relative;
@@ -1121,6 +1148,10 @@ table{
     height: 100%;
 }
 .MatchDetail{
+}
+.switch1,.switch2{
+	display: inline-block;
+	width: 100%;
 	height: 100%;
 }
 .MatchDetail span{
@@ -1128,7 +1159,6 @@ table{
     bottom: 10px;
     left: 9px;
     background: url(../img/site.png);
-    background-position: -192px -5529px;
     width: 13px;
     height: 10px;
 }
@@ -1297,10 +1327,7 @@ table{
 	width: 50%;
 	padding: 0 10px;
 }
-.SummaryImgLists:nth-child(2){
-	    background-color: #e9e0e0;
-    border-color: #d8c0be;
-}
+
 .SummaryImgList{
 	display: flex;
 }
@@ -1328,18 +1355,18 @@ table{
     border: solid 1px #d8c0be;
 }
 .SummaryChartHeaderList{
-	display: flex;
 	    font-size: 0;
     background-color: #fff;
     border-bottom: solid 1px #cdd2d2;
     text-align: center;
 }
 .SummaryChartHeaderList li{
-	width: 50%;
+	display: inline-block;
+	width: 25%;
 }
 .SummaryChartHeaderList li a{
 	display: inline-block;
-	width: 50%;
+	width: 100%;
     padding: 7px 0;
     text-align: center;
     font-size: 12px;
@@ -1377,10 +1404,14 @@ table{
 .SummaryChartWin li:nth-child(1){
 	color: #1a78ae;
 }
+.ratelists{
+	min-height: 600px;
+}
 .ratelists>li{
-	padding-top: 30px;
     float: left;
     width: 50%;
+    padding: 0 20px;
+    padding-top: 30px;
 }
 .ratelists h4{
 	    font-size: 13px;
@@ -1403,6 +1434,14 @@ table{
 }
 .highchartpie{
 	display: table-cell;
+	    vertical-align: middle;
+    text-align: center;
+}
+.highchartData{
+   position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 120px;
 }
 .ratelist-img{
 	    float: left;
@@ -1418,4 +1457,600 @@ table{
     height: 20px;
     position: relative;
     background: #afafaf
+}
+.progress-bar{
+	    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+.ratelist:nth-child(1) .progress-bar{
+	background: #1a78ae;
+}
+.ratelist:nth-child(3) .progress-bar{
+  background: #c6443e;
+}
+.ratelist-progress span{
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    font-size: 11px;
+    line-height: 16px;
+    color: #000;
+}
+.highchartsvalues{
+	    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    margin-top: -23px;
+    text-align: center;
+}
+.highchartsvalues div{
+	display: block;
+    margin: 0 auto;
+    line-height: 17px;
+    font-size: 12px;
+    color: #555;
+    font-weight: bold;
+    width: 60px;
+    color: #c6443e;
+}
+.highchartsvalues div:nth-child(1){
+	    border-bottom: 1px solid #cdd2d2;
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+    color: #1a78ae;
+}
+.SummaryChartContent{
+	display: none;
+}
+.highchartsdataTitle{
+	    display: inline-block;
+    font-size: 0;
+    padding: 4px;
+    background: #f2f2f2;
+    border: 1px solid #cdd2d2;
+    border-radius: 15px;
+    
+}
+.highchartsdataTitle li{
+	display: inline-block;
+}
+.highchartsdataTitle li a{
+	border-radius: 11px;
+    display: block;
+    padding: 5px 18px;
+    text-align: center;
+    line-height: 12px;
+    font-size: 11px;
+    color: #555;
+}
+.highchartsdataTitle .dataTitle-active a{
+	color: #333;
+  background: #d7d7d7;
+}
+.highchartsLine div{
+	width: 100%;
+	height: 400px;
+}
+.ItemBuildTitle{
+	   padding: 7px 14px 9px;
+    background: #fff;
+    border-bottom: 1px solid #cdd2d2;
+    font-size: 12px;
+    line-height: 16px;
+    color: #333;
+}
+.ItemBuildList{
+	    font-size: 0;
+    margin-top: 9px;
+}
+.ItemBuildItem{
+	    position: relative;
+    display: inline-block;
+    margin: 0 0 23px;
+}
+.ItemBuildItem:nth-child(1){
+	    margin-left: 10px;
+}
+.ItemBuildBar{
+	    display: inline-block;
+    width: 20px;
+    height: 16px;
+    line-height: 16px;
+    margin: 8px -1px 0;
+    background-color: #d7d7d7;
+    vertical-align: top;
+    text-align: center;
+}
+.ItemBuildItem:nth-child(1) .ItemBuildBar{
+	display: none;
+}
+.spSite{
+	background: url(../img/site.png);
+}
+.ItemBuildBar i{
+	    display: inline-block;
+    vertical-align: middle;
+    text-indent: -99999px;
+	    background-position: -202px -2738px;
+    width: 3px;
+    height: 5px;
+}
+.ItemBuildItems{
+	display: inline-block;
+    padding: 4px;
+    background-color: #d7d7d7;
+    border-radius: 3px;
+    vertical-align: top;
+}
+.ItemBuildItems li{
+	    display: inline-block;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+.ItemBuildItems li:nth-child(1){
+	margin-left: 0;
+}
+.ItemBuildItems li img{
+	    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+}
+.Extra{
+	    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.Extra span{
+	display: inline-block;
+    border-top-left-radius: 3px;
+    padding: 1px 3px;
+    color: #f2f2f2;
+    background-color: #000;
+    font-weight: bold;
+    font-size: 11px;
+}
+.Extra i{
+	display: inline-block;
+	    background-position: -189px -2494px;
+    width: 16px;
+    height: 16px;
+}
+.ItemBuildTime{
+	    position: absolute;
+    bottom: -18px;
+    font-size: 10px;
+    color: #777;
+    left: 20px;
+    right: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+.ItemBuildContent{
+	display: table;
+}
+.SideContent{
+	    display: table-cell;
+    width: 170px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 0;
+}
+.RealContent{
+	    display: table-cell;
+    vertical-align: middle;
+    padding-top: 12px;
+    padding-bottom: 11px;
+    padding-right: 12px;
+}
+.SideContentItem{
+	    position: relative;
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+}
+.SideContentItem img{
+	width: 28px;
+    height: 28px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.SideContentItem span{
+	    display: block;
+    text-align: center;
+    line-height: 16px;
+    font-size: 11px;
+    color: #555;
+}
+.SideContentBar{
+	    display: inline-block;
+    width: 20px;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 12px;
+}
+.SideContentBar i{
+	display: inline-block;
+	    background-position: -200px -5013px;
+    width: 5px;
+    height: 7px;
+}
+.RealContent table{
+	width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+        border-spacing: 0;
+}
+.RealContent table tbody td{
+	    position: relative;
+    min-width: 20px;
+    height: 20px;
+    border: 1px solid #cdd2d2;
+    color: #1f8ecd;
+    font-family: "Helvetica Neue",Arial,SansSerif;
+    font-size: 12px;
+    text-align: center;
+}
+.RealContent table tbody tr td:nth-child(1){
+	    border: none;
+    color: #555;
+    font-size: 11px;
+    vertical-align: middle;
+    text-align: center;
+}
+.RealContent .blue{
+	    background: #1a79ae;
+    color: #f2f2f2;
+}
+.RealContent .green{
+	  background: #249069;
+    color: #f2f2f2;
+}
+.perk-page-wrap span{
+	display: inline-block;
+	    vertical-align: bottom;
+    width: 50%;
+    max-width: 164px;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    color: #4a4a4a;
+    margin: 10px 0;
+}
+.perk-page{
+	    display: inline-block;
+    vertical-align: bottom;
+    width: 50%;
+    max-width: 164px;
+    box-sizing: border-box;
+}
+.perk-page:nth-child(1){
+	    border-right: 1px solid #d2d2d2;
+}
+.perk-page__row{
+	    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.perk-page__row .perk-page__item{
+	    display: table-cell;
+    padding: 4px 0;
+    text-align: center;
+}
+.perk-page__row .big img{
+	display: block;
+     width: 42px;
+    height: 42px;
+     background: #ddd;
+}
+.perk-page__item img{
+	    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ededed;
+    margin: 0 auto;
+}
+.opcity{
+	opacity: 0.5;
+}
+.row-header img{
+	display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ededed;
+    margin: 0 auto;
+    overflow: hidden;
+
+}
+.MatchDetailGoldFilter{
+	    text-align: center;
+    margin-top: 12px;
+    border-bottom: 12px;
+    font-size: 0;
+}
+.MatchDetailGoldFilter>div{
+	    display: inline-block;
+    vertical-align: middle;
+}
+.VS{
+    margin: 0 12px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #999;
+}
+.VsTeam h4{
+	    font-size: 11px;
+    line-height: 16px;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: normal;
+}
+.VsTeam ul li{
+	display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+.VsTeam ul li:nth-child(1){
+	margin-left: 0;
+}
+.VsTeam ul li img{
+	width: 36px;
+    height: 36px;
+    border-bottom: 12px solid #999;
+}
+.VsTeam .VsTeam-active img{
+	border-color: #0076ff;
+}
+.liness{
+	display: none;
+}
+.Matchselects{
+	display: none;
+}
+.dataContent-TierBox{
+	margin-top: 10px;
+}
+.TierBoxList{
+    border-bottom: 1px solid #cdd2d2;
+    margin-bottom: -1px;
+    overflow: hidden;
+    height: 34px;
+    padding-left: 10px;
+}
+.TierBoxList li{
+	  display: inline-block;
+    height: 33px;
+    margin: 0 10px;
+    vertical-align: top;
+    color: #555e5e;
+    font-size: 12px;
+    line-height: 36px;
+}
+.TierBoxList .TierBoxList-active{
+	    color: #1f8ecd;
+    font-weight: bold;
+    border-bottom: 2px solid #1f8ecd;
+}
+.TierBox-tableHeader{
+	    background-color: #f2f2f2;
+    border-bottom: solid 1px #cdd2d2;
+    padding: 6px 0;
+    text-align: center;
+    margin-top: 2px;
+    display: flex;
+    justify-content: center;
+}
+.TierBox-tableHeader div{
+    margin-left: -1px;
+    background-color: #fafafa;
+    border: solid 1px #cdd2d2;
+    line-height: 15px;
+    font-size: 12px;
+    color: #555;
+    padding: 9px 16px 8px;
+}
+.TierBox-tableHeader .TierBox-tableHeader-active{
+	    background-color: #1f8ecd;
+    border: solid 1px #1a78ae;
+    color: white;
+}
+.TierBox-tablelist thead th{
+	    height: 54px;
+    border-bottom: 1px solid #cdd2d2;
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+   background-image: url(../img/bg-tableSorter.png);
+    background-repeat: no-repeat;
+    background-position: 90% center;
+    cursor: pointer;
+    outline: none;
+}
+.CompetitionRate{
+	display: inline-block;
+}
+.CompetitionRate span{
+	    color: #879292;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.Num{
+	margin-left: 6px;
+}
+.CompetitionRate .win-rates{
+	width: 90px;
+	    height: 20px;
+    vertical-align: middle;;
+}
+.TierBox-tablelist tbody{
+	    background-color: #ededed;
+}
+.TierBox-tablelist tbody td{
+	text-align: center;
+	    height: 52px;
+    border-bottom: 1px solid #cdd2d2;
+    color: #999;
+    font-size: 12px;
+    font-weight: bold;
+}
+.TierBox-tablelist tbody td:nth-child(3){
+	text-align: left;
+	padding-left: 10px;
+}
+.TierBox-tablelist tbody td:nth-child(3) a{
+	    color: #555e5e;
+	    font-size: 13px;
+}
+.spt{
+	display: inline-block;
+	   width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: url(../img/champion32.png);
+    background-position: 0px -832px;
+}
+.text span{
+	color: white;
+}
+.TierBox-table{
+	display: none;
+}
+.TierBox-tableContent .TierBox-tablelist{
+	display: none;
+}
+.WarzoneHeader{
+	display: flex;
+}
+.WarzoneHeader-img{
+	    display: inline-block;
+    margin: 14px 0 14px 35px;
+    width: 160px;
+    vertical-align: top;
+}
+.WarzoneHeader-img img{
+	width: 130px;
+	height: 130px;
+}
+.WarzoneHeader-title{
+	    display: inline-block;
+    width: 490px;
+    margin: 26px 0 16px 26px;
+    vertical-align: top;
+    color: #555e5e;
+}
+.WarzoneHeader-title h4{
+	color: #242929;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+.WarzoneHeader-title p{
+	    font-size: 20px;
+    margin-bottom: 20px;
+}
+.WarzoneHeader-title button{
+	    display: inline-block;
+    width: 68px;
+    padding: 7px 0;
+    font-size: 16px;
+     border: 1px solid #ccd1d1;
+	    background-color: #1f8ecd;
+    border-color: #1a78ae;
+    color: #f2f2f2;
+}
+.WarzoneTable thead th{
+	    height: 40px;
+    border-bottom: 1px solid #cdd2d2;
+    color: #555e5e;
+    font-size: 13px;
+    text-align: center;
+    font-weight: normal;
+}
+.WarzoneTable tbody td{
+	    height: 42px;
+    border-bottom: 1px solid #cdd2d2;
+    color: #555e5e;
+    font-size: 13px;
+    text-align: center
+}
+.wartable-img a img{
+	    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+.WarzoneTable .wartable-name{
+	text-align: left;
+	padding-left: 10px;
+}
+.wartable-name a{
+	 color: #555e5e;
+}
+.wartable-bg .ispt{
+	display: inline-block;
+	margin-right: 6px;
+	background: url(../img/site.png);
+}
+.wartable-bg .ispt1{
+	    background-position: -186px -3505px;
+    width: 19px;
+    height: 16px;
+}
+.wartable-bg .ispt2{
+	     background-position: -191px -3449px;
+    width: 14px;
+    height: 16px;
+}
+.wartable-bg .ispt3{
+	     background-position: -189px -3417px;
+    width: 16px;
+    height: 16px;
+}
+.wartable-bg .ispt4{
+	    background-position: -189px -3481px;
+    width: 16px;
+    height: 4px;
+}
+.warRate .win-rates{
+	    position: relative;
+    display: inline-block;
+    width: 98px;
+    height: 20px;
+    vertical-align: middle;
+}
+.wartable-rate .rateNum{
+	
+}
+.liveMore{
+	    width: 1000px;
+    min-height: 500px;
+    margin: 0 auto;
+}
+.liveMoreContent{
+	    margin-top: 10px;
+    border: 1px solid #cdd2d2;
+    border-radius: 2px;
+    background: #f2f2f2;
+    text-align: center;
+    padding: 12px;
+}
+.liveMoreContent h2{
+	    line-height: 20px;
+    font-size: 20px;
+    color: #222;
+    margin: 10px 0;
+}
+.liveMoreContent p{
+	    line-height: 20px;
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
 }

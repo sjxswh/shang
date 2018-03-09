@@ -199,7 +199,58 @@ nav .game-nav li a:hover{
 	margin-left: 10px;
 }
 .game-section-img{
-	margin: 0 auto;
+	margin: 20px auto 0;
 	width: 728px;
 	height: 90px;
+}
+.win-rates{
+	    position: relative;
+    display: inline-block;
+    width: 140px;
+    height: 20px;
+    vertical-align: middle;
+}
+.spite1{
+	background: url(../img/site.png) -65px -545px no-repeat;
+}
+.fill{
+	  position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: 3px;
+}
+.fill.left{
+	    z-index: 2;
+    background: #3d95e5;
+    border: 1px solid #3480c6;
+}
+.fill.right{
+	    width: 100%;
+    z-index: 1;
+    background: #ee5a52;
+    border: 1px solid #c6443e;
+}
+.spite2{
+	background: url(../img/site.png) -65px -565px no-repeat;
+}
+.text{
+	position: absolute;
+    top: 0;
+    height: 100%;
+    font-size: 11px;
+    z-index: 3;
+    color: #f2f2f2;
+    line-height: 22px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.text.left{
+	left: 6px;
+   text-align: left;
+}
+.text.right{
+	    right: 5px;
+    text-align: right
 }

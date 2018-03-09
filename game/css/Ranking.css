@@ -1,0 +1,512 @@
+.game-ranking section{
+	width: 970px;
+	margin: 20px auto 0;
+}
+.ranking-header-list{
+	display: flex;
+	justify-content: space-between;
+	    position: relative;
+    margin: 0 0 17px;
+    border-bottom: 1px solid #d7dada;
+}
+.ranking-header-list ul{
+	display: flex;
+	
+}
+.ranking-header-list ul li{
+	    margin: 0 30px -1px 0;
+    padding: 0;
+    border-bottom: 1px solid transparent;
+    vertical-align: middle;
+}
+.ranking-header-list ul li a{
+	    display: block;
+    color: #555e5e;
+    font-size: 28px;
+    line-height: 32px;
+    text-decoration: none;
+    letter-spacing: -1px;
+    padding-bottom: 17px;
+}
+.ranking-header-list .ranking-header-list-active{
+	    border-color: #000;
+}
+.ranking-header-list .ranking-header-list-active a{
+	font-weight: bold;
+}
+.ranking-header-list form div{
+	box-sizing: content-box;
+	    position: relative;
+    display: inline-block;
+    width: 168px;
+    vertical-align: middle;
+}
+.ranking-header-list form div input{
+	    width: 100%;
+    padding: 10px 13px 9px;
+    border: 1px solid #cdd2d2;
+    color: #555e5e;
+    font-size: 14px;
+    line-height: 17px;
+    outline: none;
+    background: #fff;
+}
+.ranking-header-list form button{
+	padding: 9px 12px;
+    margin-left: 6px;
+    font-size: 13px;
+    vertical-align: middle;
+    outline: none;
+        border: 1px solid #1a78ae;
+    background: #1f8ecd;
+    color: #f2f2f2;
+}
+.ranking-header-tip{
+	display: flex;
+	justify-content: space-between;
+}
+.ranking-header-tip span{
+	    color: #4a4a4a;
+    font-size: 14px;
+}
+.ranking-header-tip small{
+	     color: #9b9b9b;
+    font-size: 12px;
+}
+.ranking-heroList {
+	margin-top: 20px;
+}
+.ranking-heroList li{
+	  position: relative;
+    display: inline-block;
+    padding: 14px 18px;
+    border: 2px solid #bdbbbb;
+    width: 220px;
+    background: #fff;
+    box-sizing: border-box;
+    text-align: left;
+    margin-top: 24px;
+    margin-left: 24px;
+}
+.ranking-heroList li:nth-child(2){
+	 margin-left: 0;
+}
+.ranking-heroList .ranking-heroFirst{
+	    display: flex;
+	    justify-content: space-between;
+    width: 650px;
+    margin: 0 auto;
+    padding: 35px 40px;
+    border-width: 5px;
+}
+.ranking-hero-introduce{
+	display: flex;
+}
+.ranking-heroImg{
+	position: relative;
+	    width: 100px;
+    height: 100px;
+    margin: 0 20px 0 0;
+    float: left;
+}
+.ranking-heroImg a img{
+	display: block;
+    width: 100%;
+    height: 100%;
+}
+.ranking-heroBg{
+	    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: 120px;
+    height: 120px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background: url(../img/challenger.png);
+}
+.ranking-heroNum{
+	position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: -14px;
+    margin-left: -22px;
+    width: 44px;
+    height: 24px;
+    padding-top: 3px;
+    box-sizing: border-box;
+    background: url(../img/bg-levelbox.png);
+    background-size: 100%;
+    line-height: 20px;
+    font-family: Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+    font-size: 12px;
+    text-align: center;
+    color: #eabd56;
+}
+.ranking-heroContent h2{
+	margin-top: 10px;
+}
+.rateNum span{
+	    vertical-align: middle;
+    margin-left: 10px;
+    line-height: 16px;
+    font-size: 14px;
+    color: #4a4a4a;
+}
+.ranking-heroContent-img{
+	margin-top: 14px;
+}
+.ranking-heroContent-img img{
+	width: 33px;
+	vertical-align: middle;
+}
+.ranking-heroContent-img span{
+	    line-height: 17px;
+    font-size: 14px;
+        color: #666;
+    vertical-align: middle;
+}
+.ranking-heroContent-img b{
+	    line-height: 17px;
+    font-size: 14px;
+        color: #666;
+    vertical-align: middle;
+}
+.ranking-heroImg-list{
+	    white-space: nowrap;
+    line-height: 15px;
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+}
+.ranking-heroImg-list:nth-child(1){
+	margin-top: 0;
+}
+.ranking-heroImg-list img{
+	    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+.rankingNum{
+	    width: 30px;
+    background: #bdbbbb;
+    padding: 3px 0;
+    line-height: 24px;
+    font-size: 21px;
+    text-align: center;
+    color: #fff;
+        position: absolute;
+    top: 0;
+    left: 0;
+}
+.ranking-range{
+	  position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 3px;
+    margin-right: 4px;
+    line-height: 14px;
+    font-size: 12px;
+    text-align: right;
+    color: #1d2f51;
+}
+.ranking-range-img{
+	    position: relative;
+    display: block;
+    width: 49px;
+    height: 49px;
+    margin: 10px auto 0;
+}
+.ranking-range-img a img{
+	    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.ranking-range-title{
+	    display: block;
+    margin-top: 5px;
+    line-height: 17px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #444b4b;
+}
+.Img img{
+	width: 25px;
+}
+.Img span{
+	font-size: 12px;
+}
+.Img b{
+	font-size: 12px;
+	margin-right: 10px;
+}
+table{
+	width: 100%;
+    table-layout: fixed;
+	    border-collapse: collapse;
+    border-spacing: 0;
+}
+.ranking-content>div{
+	display: none;
+}
+.ranking-content-table{
+	margin-top: 20px;
+    background-color: #ededed;
+    border: solid 1px #cdd2d2
+}
+.ranking-content-table thead th{
+	    height: 41px;
+    padding: 0;
+    border-bottom: 1px solid #cdd2d2;
+    background: #f2f2f2;
+    line-height: 17px;
+    font-size: 14px;
+    text-align: left;
+    color: #444b4b;
+    font-weight: normal;
+}
+.ranking-content-table tbody td{
+	    border-bottom: 1px solid #cdd2d2;
+    height: 54px;
+    line-height: 16px;
+    font-family: Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+    font-size: 14px;
+        color: #787878;
+}
+.tdFirst{
+	    text-align: center;
+    color: #444b4b;
+}
+.seconfTd a{
+	display:block;
+}
+.seconfTd a img{
+	    margin-right: 12px;
+    vertical-align: middle;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+}
+.seconfTd a span{
+	    vertical-align: middle;
+    line-height: 19px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #444b4b;
+}
+.ranking-page-list{
+	margin-top: 30px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: center;
+}
+.ranking-page-list li{
+	margin-left: 10px;
+}
+.ranking-page-list li:nth-child(1){
+	margin-left: 0;
+}
+.ranking-page-list li:nth-child(1) a{
+	    background: #f2f2f2;
+}
+.ranking-page-list li:last-child a{
+	    background: #f2f2f2;
+}
+.ranking-page-list li a{
+	    display: block;
+    width: 90px;
+    padding: 4px 0 8px;
+    background-color: #fff;
+    border: solid 1px #cdd2d2;
+    line-height: 16px;
+    font-family: Helvetica,AppleSDGothic,"Apple SD Gothic Neo",AppleGothic,Arial,Tahoma;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #444b4b;
+    box-sizing: border-box;
+}
+.ranking-page-list .ranking-page-active a{
+	    outline: none;
+    cursor: default;
+    background: #d8d8d8;
+}
+.ranking-page-range{
+	    margin-top: 20px;
+    line-height: 17px;
+    font-size: 14px;
+    text-align: center;
+    color: #a0a0a0;
+}
+.ranking-page-range span{
+	    color: #4a4a4a;
+}
+.ranking-border{
+	    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+}
+.hero-lists{
+	width: 282px;
+	height: 400px;
+}
+.ranking-position{
+	z-index: auto;
+    position: static;
+    top: auto;
+}
+.hero-lists .hero-position{
+	   z-index: 100;
+    position: fixed;
+    top: 10px;
+    margin-left: 0px;
+    width: 280px;
+    left: 68.5px;
+}
+.hero-list{
+	 height: 328px;
+	 overflow-y: auto;
+	 padding: 6px 11px;
+}
+.hero-select{
+	    padding: 10px;
+    border-bottom: 1px solid #d5d8d8;
+    background-color: #ededed;
+}
+.hero-select input{
+	    display: block;
+    width: 100%;
+    padding: 12px 35px 12px 10px;
+    border: 1px solid #d7dada;
+    color: #879292;
+    background: #fafafa;
+    font-size: 12px;
+    box-sizing: border-box;
+    outline: none;
+}
+.ranking-hero-list{
+	display: inline-block;
+    width: 50px;
+    margin: 8px 4px 0
+}
+.ispt{
+	display: inline-block;
+	background: url(../img/champion50.png);
+	    background-position: 0px -4850px;
+    width: 50px;
+    height: 50px;
+}
+.hero-list-name{
+	    padding-top: 7px;
+    color: #9b9b9b;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ranking-summary-list{
+	display: flex;
+	    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #d7dada;
+}
+.ranking-summary-list:nth-child(1){
+	 margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+.ranking-article{
+	    width: 678px;
+    vertical-align: top;
+}
+.ranking-summary-img{
+	    width: 75px;
+    margin-right: 18px;
+}
+.ranking-summary-img a{
+	display: block;
+}
+.ranking-summary-img a img{
+	width: 100%;
+}
+.ranking-summary-img a div{
+	    margin-top: 10px;
+    line-height: 17px;
+    font-size: 14px;
+    text-align: left;
+    color: #444b4b;
+}
+.ranking-summarys{
+	display: flex;
+}
+.ranking-summary-content{
+	    width: 180px;
+	    margin-left: 20px;
+	    position: relative;
+     text-align: center;
+}
+.ranking-summary-content:first-child{
+	margin-left: 0;
+}
+.ranking-summary-num{
+	position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 0;
+    width: 30px;
+    line-height: 24px;
+    font-size: 21px;
+    color: #fff;
+    background: #c1c1c1;
+    text-align: center;
+}
+.ranking-summary-name img{
+	    display: block;
+    margin: 12px auto 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.ranking-summary-name div{
+	    margin-top: 5px;
+    line-height: 17px;
+    font-size: 14px;
+    text-align: center;
+    color: #444b4b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+.ranking-summary-game{
+	margin-top: 5px;
+    line-height: 17px;
+    font-size: 14px;
+    color: #444b4b;
+    text-align: center;
+
+}
+.ranking-summary-button{
+	border-top: 1px solid #cdd2d2;
+    margin-top: 9px;
+    padding: 4px 5px 3px;
+}
+.ranking-summary-button button{
+	    display: block;
+    width: 100%;
+    padding: 7px 0 8px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: solid 1px #cdd2d2;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    color: #9b9b9b;
+}

@@ -1,0 +1,858 @@
+.user-info{
+	position: relative;
+	top: 0;
+	    background: #efefef;
+    padding: 6px 20px 6px 6px;
+    line-height: 46px;
+    display: flex;
+    width: 1240px;
+    z-index: 10;
+}
+.user-info-detail{
+	display: flex;
+}
+.user-content{
+	display: flex;
+	margin-right: 20px;
+}
+.user-img img{
+	width: 46px;
+	height: 46px;
+	vertical-align: middle;
+}
+.user-img span{
+	    font-size: 14px;
+    color: #404040;
+    padding: 0 6px;
+}
+.user-qu span{
+	    color: #a4a4a4;
+}
+.user-qu i{
+	display: inline-block;
+	    width: 13px;
+    height: 8px;
+    background: url(../img/sprite-landing.png);
+    background-position: -168px 0;
+    margin: 0 10px;
+}
+.user-content p{
+	    color: #0fb09a;
+}
+.gold,.orange{
+	  color: #a4a4a4;
+	  margin: 0 10px;
+}
+.gold span,.orange span{
+	    color: #cea04a;
+}
+.user-content div b{
+	display: inline-block;
+	    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    background: url(../img/sprite-coin.png);
+    background-position: 0 -100px
+}
+.user-content .orange b{
+	    background-position: 0 -138px;
+}
+.orange i{
+	display: inline-block;
+	    width: 24px;
+    height: 26px;
+    vertical-align: middle;
+    background: url(../img/sprite-landing.png);
+    background-position: -25px 0;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.user-content a{
+	display: inline-block;
+	vertical-align: middle;
+	height: 30px;
+	 line-height: 20px;
+	border: 2px solid #d1a656;
+	padding: 4px 12px;
+   border-radius: 4px;
+	  color: #c49f58;
+    background-color: #fff;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.user-content a:hover{background: #fae8c4;}
+.jieti{
+    position: fixed;
+    right: 20px;
+    top: 40%;
+    text-align: center;
+    z-index: 9;
+    display: block;
+}
+.jieti ul li{
+    width: 100%;
+    min-width: 50px;
+    font-size: 14px;
+    padding: 0 8px;
+    margin-bottom: 2px;
+    color: #787878;
+    line-height: 50px;
+    background: #ededed;
+}
+.jietiTop i{
+	display: inline-block;
+	    width: 26px;
+    height: 16px;
+    background: url(../img/sprite-landing.png);
+    background-position: -34px -34px;
+}
+.game-guessing{
+	    background: #f8f8f8;
+}
+.game-guessing>section{
+	width: 1240px;
+	margin: 0 auto 0;
+	position: relative;
+}
+.guessing-mark{
+	display: none;
+}
+.mark{
+	width: 100%;
+	height: 100%;
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    top: 134px;
+    background: #000;
+    background: rgba(0,0,0,.6);
+}
+.mark-content{
+	width: 830px;
+	 position: absolute;
+    z-index: 100;
+    left: 50%;
+    top: 40%;
+    margin-left: -415px;
+        border-radius: 4px;
+    padding-bottom: 32px;
+    background: white;
+}
+.mark-content header{
+	    padding: 8px 34px;
+	    display: flex;
+	    justify-content: space-between;
+}
+.mark-content header h6{
+	    font-style: italic;
+    font-size: 24px;
+        color: #cea04a;
+      font-weight: 400;
+}
+.mark-content header i{
+	display: inline-block;
+	    width: 18px;
+    height: 18px;
+    background: url(../img/sprite-landing.png);
+    background-position: -141px 0;
+}
+.mark-content table thead{
+	    background: #ededee;
+    color: #a4a4a4;
+    font-size: 16px;
+}
+.mark-content table{
+	width: 100%;
+	    border-collapse: collapse;
+    border-spacing: 0;
+}
+.mark-content table thead th select{
+	background: #ededee;
+	outline: none;
+	border: 2px solid #bcbcbd;
+	color: #a4a4a4;
+	 padding: 2px 12px;
+ border-radius: 4px 4px 0 0;
+ font-size: 16px;
+}
+.mark-content table thead th{
+	    font-weight: 400;
+    padding: 10px 0;
+    text-align: center;
+        color: #a4a4a4;
+}
+.mark-content table tbody tr{
+	 font-size: 14px;
+   color: gray;
+}
+.mark-content table tbody tr:nth-child(4n-1){
+	   background: #f6f6f6;
+}
+.mark-content table tbody tr:nth-child(2n){
+	display: none;
+	    background: #b7b7b7;
+    font-size: 14px;
+    color: #fff;
+}
+.mark-content table tbody td{
+	    font-weight: 400;
+    padding: 10px 0;
+    text-align: center;
+}
+.mark-content table tbody td i{
+	    color: #a4a4a4;
+	    font-style: normal;
+}
+.mark-content table tbody td span{
+	color: #e25b51;
+}
+.mark-content table tbody td b{
+	    color: #cea04a;
+	    font-weight: normal;
+}
+.game-guessing>section>div{
+	margin-top: 30px;
+}
+.game-guessing>section>div:nth-child(1){
+	margin-top: 0;
+}
+.guessing-title{
+	    line-height: 1;
+    position: relative;
+    padding: 12px 0;
+    font-size: 16px;
+    border-bottom: 3px solid #ededee;
+    display: flex;
+    justify-content: space-between;
+}
+.guessing-title h3{
+	    color: #555;
+	    font-weight: 400;
+    font-size: 25px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 31px;
+}
+.guessing-title>a{
+	position: absolute;
+	top: 26px;
+	right: 0;
+	color: #A6A6A6;
+}
+.guessing-title .two{
+	display: inline-block;
+	height: 30px;
+	right: 70px;
+}
+.guessing-title .two i{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 4px;
+	    width: 17px;
+    height: 15px;
+    background: url(../img/sprite-landing.png);
+    background-position: -114px 0;
+}
+.guessing-title-list{
+	position: absolute;
+	top: 5px;
+	left: 120px;
+	display: flex;
+}
+
+.guessing-title-list li a{
+	display: inline-block;
+	 padding: 14px 10px;
+	 color: #666;
+	 font-size: 16px;
+	 border-bottom: 3px solid transparent;
+}
+
+.guessing-title-list .guessing-title-active a{
+	border-bottom-color: #cea04a;
+	color: #cea04a;
+}
+.guessing-title-list li a:hover{
+	border-bottom-color: #cea04a;
+	color: #cea04a;
+}
+
+.guessing-title div i{
+	position: absolute;
+    z-index: 2;
+    right: 150px;
+    bottom: -2px;
+    display: inline-block;
+    font-size: 15px;
+    white-space: nowrap;
+    width: 218px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 14px 0 0 26px;
+    text-align: center;
+    color: #cea04a;
+    margin-left: 15px;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+.guessing-ranking{
+	display: flex;
+	flex-flow: row wrap;
+}
+.guessing-ranking>li{
+    vertical-align: top;
+    width: 25%;
+    padding: 0 8px;
+    margin-top: 35px;
+    
+}
+.guessing-ranking li>section{
+	 position: relative;
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+}
+.guessing-header{
+	  padding: 8px 6px;
+    text-align: center;
+    line-height: 50px;
+    color: #a3a3a3;
+    border-top: 5px solid #d0d0d0;
+    display: flex;
+    background: #fafafa;
+    height: 74px;
+   background-image: -webkit-linear-gradient(135deg,#f5f2ec 25%,#f7f5f2 25%,#f7f5f2 50%,#f5f2ec 50%,#f5f2ec 75%,#f7f5f2 75%,#f7f5f2);
+    background-image: linear-gradient(-45deg,#f5f2ec 25%,#f7f5f2 25%,#f7f5f2 50%,#f5f2ec 50%,#f5f2ec 75%,#f7f5f2 75%,#f7f5f2);
+        border-top-color: #cea04a;
+    color: #cea04a
+}
+.guessing-header span{
+	display: block;
+	    color: #cea04a;
+}
+.guessing-header-title{
+	width: 28%;
+  vertical-align: middle;
+  font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.guessing-header span:nth-child(2){
+	width: 44%;
+	    font-size: 22px;
+    white-space: nowrap;
+}
+.guessing-header span:nth-child(2) b{
+	    font-weight: 700;
+    padding-left: .4em;
+}
+.guessing-content{
+	padding: 6px 13px 16px;
+    background: #fff;
+}
+.guessing-vs{
+	display: flex;
+	justify-content: space-between;
+}
+.guessing-vs-img{
+	width: 28%;
+	text-align: center;
+	    color: #505050;
+    font-size: 14px;
+}
+.guessing-vs-img img{
+	width: 62px;
+	height: 62px;
+}
+.guessing-vs div:nth-child(2){
+	width: 44%;
+	text-align: center;
+}
+.guessing-vs div:nth-child(2) b{
+	    font-size: 26px;
+    color: #cea04a;
+    display: block;
+    font-weight: 700;
+    line-height: 1;
+    font-style: italic;
+    padding: 4px 0;
+    text-align: center;
+}
+.guessing-vs div:nth-child(2) span{
+	    color: #a3a3a3;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 1000px;
+    display: inline-block;
+    line-height: 1;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 94px;
+    border: 3px solid #e0e0e0;
+}
+.guessing-resualt>div:nth-child(1){
+	color: #505050;
+    font-size: 14px;
+    margin: 16px 0 12px;
+    white-space: nowrap;
+    line-height: 1;
+    padding-left: 6px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-left: 4px solid #404040;
+}
+.guessing-rate{
+	position: relative;
+}
+.guessing-rate-content{
+	position: absolute;
+	top: 94%;
+	z-index: 8;
+	display: flex;
+	background: white;
+	border: 1px solid #cea04a;
+ padding: 18px 32px 18px 24px;
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,.08);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.08);
+    font-size: 12px;
+    display: none;
+}
+.guessing-rate-content div p{
+	color: #a4a4a4;
+	padding-bottom: 6px;
+}
+.rate-list{
+	display: flex;
+ border: 2px solid #d1a656;
+ border-radius: 8px;
+}
+.rate-list li{
+	    border-radius: 0;
+    font-size: 16px;
+    height: 30px;
+    width: 60px;
+        color: #c49f58;
+     line-height: 30px;
+     text-align: center;
+}
+.guessing-get{
+	margin: 0 10px;
+	width: 48px;
+}
+.guessing-get b{
+	    color: #e25b51;
+	    font-size: 18px;
+	    font-weight: 400;
+}
+.guessing-immediately{
+	width: 160px;
+}
+.guessing-immediately a{
+	display: inline-block;
+	    min-width: 160px;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 12px;
+        color: #c49f58;
+    background-color: #fff;
+    border: 2px solid #d1a656;
+        border-radius: 8px;
+        text-align: center;
+        line-height: 48px;
+}
+.close{
+	position: absolute;
+	top: 9px;
+	right: 4px;
+}
+
+.guessing-num-active{
+	background: #c49f58 !important;
+	color: white !important;
+}
+.close i{
+	display: inline-block;
+	    width: 18px;
+    height: 18px;
+    background: url(../img/sprite-landing.png);
+    background-position: -141px 0;
+    
+}
+.guessing-resualt .guessing-rates{
+	display: flex;
+	  position: relative;
+    border-radius: 4px;
+    border: 2px solid #cea04a;
+    overflow: hidden;
+}
+.guessing-resualt .guessing-rates a{
+	display: inline-block;
+	    height: 66px;
+    width: 50%;
+    padding-top: 14px;
+    vertical-align: middle;
+    text-align: center;
+}
+.guessing-resualt .guessing-rates a:hover{
+	background: #fae8c4;
+}
+.guessing-nums-active{
+	background: #cea04a;
+}
+.guessing-nums-active span{
+	color: white !important;
+}
+.guessing-nums-active p{
+	color: white !important;
+}
+ .guessing-rates a span{
+	color: #cea04a;
+	font-size: 16px;
+}
+ .guessing-rates a p{
+	    font-size: 14px;
+    color: #4c4c4c;
+}
+.guessing-resualt .guessing-rates a:nth-child(1){
+	border-right: 2px solid #cea04a;
+}
+.guessing-more{
+	    background: #fafafa;
+    width: 100%;
+    padding: 6px 0;
+    color: #a4a4a4;
+    font-size: 12px;
+    text-align: center;
+    position: relative;
+}
+.spit{
+	display: inline-block;
+	background: url(../img/sprite-landing.png);
+	    width: 13px;
+    height: 8px;
+    background-position: -168px 0;
+        margin: 0 6px;
+}
+.more-guessing-list{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index:9;
+    background: #fff;
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+    padding: 30px;
+    border: 1px solid #cea04a;
+    display: none;
+}
+.guessing-ranking li:nth-child(4n-2) .more-guessing-list{
+	 left: -100px;
+}
+.guessing-ranking li:nth-child(4n-1) .more-guessing-list{
+	 left: -696px;
+}
+.guessing-ranking li:nth-child(4n) .more-guessing-list{
+	 left: -796px;
+}
+.more-guessing-content{
+	    width: 1028px;
+	    display: flex;
+	    justify-content: space-between;
+	    flex-flow: row wrap;
+    max-height: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 60px;
+}
+.more-guessing-content .more-guessing-item{
+	    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding: 30px 25px 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.guessing-list-border{
+	display: flex;
+	    position: relative;
+    border-radius: 4px;
+    border: 2px solid #cea04a;
+}
+.guessing-list-four a{
+	width: 25%;
+}
+
+.more-guessing-content .more-guessing-item {
+	margin-top: 0;
+}
+.more-guessing-item a{
+	border-right: 2px solid #cea04a;
+	height: 66px;
+	text-align: center;
+	padding-top: 16px;
+}
+.more-guessing-item a:hover{
+	background: #fae8c4;
+}
+
+.more-guessing-item a span{
+	color: #cea04a;
+	    font-size: 16px;
+}
+.more-guessing-item a p{
+	font-size: 14px;
+	color: #4c4c4c;
+}
+.more-guessing-item a:last-child{
+	border-right: none;
+}
+.more-guessing-item div:nth-child(1){
+	    font-size: 14px;
+    white-space: normal;
+}
+.guessing-time{
+	    color: #a4a4a4;
+    font-size: 12px;
+    padding: 2px 0 12px;
+}
+.guessing-time i{
+	display: inline-block;
+	    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    vertical-align: middle;
+    background: url(../img/sprite-landing.png);
+    background-position: -213px 0;
+}
+.guessing-list-two a{
+	width: 50%;
+}
+.guessing-close {
+	    position: absolute;
+    right: 12px;
+    top: 8px;
+    padding: 6px 12px;
+}
+.guessing-close i{
+	display: inline-block;
+	    width: 18px;
+    height: 18px;
+    background: url(../img/sprite-landing.png);
+    background-position: -141px 0;
+}
+.guessing-hot{
+	display: flex;
+	flex-flow: row wrap;
+	margin: 10px 0;
+}
+.guessing-hot li{
+	    min-width: 75px;
+    color: #8e8e8e;
+    font-size: 14px;
+    height: 32px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #ececec;
+    background: #ececec;
+    border-radius: 1000px;
+    margin: 0 6px;
+    text-align: center;
+    line-height: 30px;
+}
+.guessing-hot .guessing-hot-active{
+	    color: #c49f58;
+    border-color: #cea04a;
+    background: white;
+}
+.people-img-list{
+	display: flex;
+	flex-flow: row wrap;
+}
+.people-img-list li{
+    vertical-align: top;
+    padding: 7px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    width: 16.66666667%;
+}
+.people-content{
+	    font-size: 16px;
+    background: #fff;
+    min-height: 306px;
+    color: #555;
+    padding-bottom: 18px;
+}
+.people-content .people-img{
+	    margin: 0;
+    line-height: 196px;
+    height: 196px;
+    position: relative;
+    background: #ececec;
+    overflow: hidden;
+}
+.people-content .people-img img{
+	    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+}
+.people-content h6{
+	    margin: 12px 0;
+    color: #555;
+    font-size: 18px;
+    padding: 0 12px;
+}
+.people-num{
+	    margin: 12px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.people-num i{
+	display: inline-block;
+	    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    background: url(../img/sprite-coin.png);
+    background-position: 0 -138px;
+}
+.people-img-list .more-guessing-item a{
+	line-height: 40px;
+	padding: 0;
+	height: 40px;
+}
+.people-bg{
+	    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 25px;
+    color: white;
+    line-height: 1;
+}
+.people-bg i{
+	display: inline-block;
+	    background: url(../img/sprite-landing.png) no-repeat 0 0;
+    background-size: 320px auto;
+    width: 32px;
+    height: 44px;
+    background-position: -140px -233px;
+}
+.guessing-reward{
+	    display: flex;
+    margin: 17px 0 10px;
+    position: relative;
+    
+}
+.guessing-reward-swiper{
+	padding-right: 10px;
+}
+.guessing-reward-swiper i{
+	display: inline-block;
+	    width: 24px;
+    height: 17px;
+    vertical-align: middle;
+    background: url(../img/sprite-landing.png);
+    background-position: 0 -34px;
+}
+.guessing-reward-swiper span{
+	    color: #fff;
+    background: #cea04a;
+    padding: 3px 4px;
+    margin-left: 10px;
+    border-radius: 1000px;
+}
+.guessing-swiper{
+	width: 90%;
+	overflow: hidden;
+	position: relative;
+}
+.guessing-reward-list{
+	position: absolute;
+	
+	display: flex;
+	width: 2300px;
+}.guessing-reward-list li{
+	margin: 0 5px;
+}
+.guessing-reward-list li span:nth-child(1){
+	color: #cea04a;
+	font-size: 14px;
+}
+.guessing-reward-list li span:nth-child(2){
+	color: #666;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.guessing-hero-list{
+	display: flex;
+	flex-flow: row wrap;
+}
+.guessing-hero-list li{
+	    padding: 8px;
+    vertical-align: top;
+    font-size: 14px;
+    width: 20%;
+}
+.guessing-hero-content{
+	    background: #fff;
+    -webkit-box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.1);
+    position: relative;
+    overflow: hidden;
+}
+.hero-img{
+	   position: relative;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    height: 240px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 240px;
+}
+.hero-img img{
+	    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+}
+.hero-title{
+	padding: 14px 10px 16px;
+}
+.guessing-hero-content h6{
+	        color: #555;
+    padding-bottom: 4px;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+.guessing-hero-content p{
+	    color: #a4a4a4;
+	    font-size: 14px;
+}
+.hero-purchase{
+	text-align: center;
+	    padding: 0 20px 18px;
+}
+.hero-purchase a{
+	display: inline-block;
+	    color: #c49f58;
+    background-color: #fff;
+    border: 2px solid #d1a656;
+    border-width: 2px;
+    border-radius: 1000px;
+     padding: 10px;
+    width: 100%;
+}
+.hero-purchase a:hover{
+	background: #fae8c4;
+}

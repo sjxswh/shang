@@ -986,6 +986,7 @@ table{
 .ItemList{
 	    width: 100px;
     margin: 0 auto;
+    display: flex;
 }
 .ItemList .Item{
 	    display: inline-block;
@@ -1021,6 +1022,9 @@ table{
 .FollowPlayers{
 	    width: 180px;
     font-size: 0;
+    display: flex !important;
+    justify-content: space-between;
+    flex-flow: row wrap;
 }
 .FollowPlayers .Team{
 	    float: left;

@@ -47,11 +47,18 @@
 	display: flex;
 }
 .game-detail-header-left span{
+	display: inline-block;
+	width: 140px;
+	height: 140px;
 	margin-right: 20px;
 	border: 4px solid #00d298;
 }
+.game-detail-header-left span img{
+	width: 100%;
+	height: 100%;
+}
 .game-detail-header-left div h1{
-	margin: 42px 0 10px;
+	margin: 28px 0 10px;
 	font-size: 24px;
 	font-weight: normal;
 }
@@ -70,16 +77,30 @@
 	font-size: 12px;
 	color: white;
 }
-.game-detail-header-left div ul{
+.game-detail-img-list{
 	display: flex;
 	margin-top: 10px;
 }
-.game-detail-header-left div ul li{
-	margin-left: 10px;
+.game-detail-img-list li{
+	margin-right: 10px;
 	position: relative;
 }
-.game-detail-header-left div ul li img{
+.game-detail-img-list li>b{
+	    position: absolute;
+    right: 0;
+    bottom: 2px;
+    line-height: 14px;
+    font-size: 12px;
+    letter-spacing: -0.5px;
+    padding: 3px 4px 3px 5px;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 1px;
+}
+.game-detail-img-list li img{
 	border: 1px solid black;
+	width: 42px;
+	height: 42px;
 }
 .game-detail-title div ul li:nth-child(1){
 	margin-left: 0;
@@ -92,8 +113,8 @@
 	border: 1px solid #271f15;
 	position: absolute;
 	z-index: 99;
-	top: -230px;
-	left: -120px;
+	top: 0;
+	left: -130px;
 }
 .game-detail-title div b{
 	color: #ffc659;

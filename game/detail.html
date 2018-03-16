@@ -94,6 +94,7 @@
 								<ul class="game-detail-img-list">
 									<li>
 										<img src="img/KatarinaEWrapper.png" />
+										<b>Q</b>
 										<div class="game-detail-title">
 											<div>
 												<b>死亡莲华</b>
@@ -15250,7 +15251,9 @@
 			var imgList = Array.from($('.game-detail-img-list').children())
 			imgList.forEach(function(v,k){
 				v.onmouseenter = function(){
-					$(this).children("div").css("display","block")
+					console.log($(this).children("div").height())
+					var Top = $(this).children("div").height()+40
+					$(this).children("div").css({"display":"block",top:-Top})
 					$(this).siblings().children("div").css("display","none")
 				}
 				v.onmouseleave = function(){
@@ -15260,7 +15263,8 @@
 			var imgLists = Array.from($('.game-detail-content-table article table tbody td ul').children())
 			imgLists.forEach(function(v,k){
 				v.onmouseenter = function(){
-					$(this).children("div").css("display","block")
+					var Top = $(this).children("div").height()+40
+					$(this).children("div").css({"display":"block",top:-Top})
 					$(this).siblings().children("div").css("display","none")
 				}
 				v.onmouseleave = function(){

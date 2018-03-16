@@ -23,7 +23,7 @@
 					<option :data-id="2">All</option>
 				</select>
 				<div class="time-range-title">Timezone</div>
-				<select @change="activess($event)" id="timezone">
+				<select id="timezone">
 					<option v-for="(item,index) in timezones" :key="index" :data-ins="item.utcShift" :data-ids="item.id">{{item.detail}}</option>
 				</select>
 				<div class="time-range-title">In</div>
@@ -425,8 +425,8 @@
 						}
 					}
 	      },
-	      activess (ev) {
-	      	this.objS = ev.target;
+	      activess () {
+	      	this.objS = document.getElementById("timezone")
 	        for(var i=0;i<this.objS.options.length;i++){
 						if(this.objS.options[i].value== this.objS.value){
 							this.timeZone = this.objS.options[i].getAttribute("data-ins")
@@ -624,12 +624,13 @@
 								"status":this.switchSta,
 								"groupBy":this.group
 							}
-							//this.$store.dispatch("getSevenDate",this.Data)
 						}
 					}
+	        this.$store.dispatch("getSevenDate",this.Data)
 	      },
 	      dones () {
 	      	this.$router.go(-1)
+	      	this.activess()
 	      	console.log(this.Data)
 	      	this.$store.dispatch("getSevenDate",this.Data)
 	      }

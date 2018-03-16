@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link href="css/commont.css" type="text/css" rel="stylesheet" />
+		<link href="css/match.css" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/jquery.pagination.css" />
+	</head>
+	<body>
+		<div class="game-match">
+			<div class="game-header">
+				<header>
+					<ul class="game-header-list">
+						<li class="game-header-list-first">
+							<a href="javascript:;">
+								<img src="img/logo-lol.png" />
+								<span>
+									<img src="img/l_logo.png" />
+								</span>
+								<em style="display: inline-block;width: 2px;height: 20px;border-left: 1px solid white;margin:0 15px 0;vertical-align: middle;"></em>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/logo-bestgg-small.png" />
+								<span>Overwatch</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/logo-overwatch-small.png" />
+								<span>Battlegrounds</span>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<img src="img/logo-pubg-small.png" />
+								<span>BEST.GG</span>
+							</a>
+						</li>
+					</ul>
+					<ul class="game-header-seacher">
+						<li class="game-header-seacher-first">
+							<form>
+								<input type="text" placeholder="召唤师名，召唤师名，…" />
+								<button>
+									<img src="img/btn-gnb-search@2x.png" />
+								</button>
+							</form>
+						</li>
+						<li>
+							<button>
+								<span>EUW</span>
+								<span>Simplified Chinese</span>
+							</button>
+						</li>
+					</ul>
+				</header>
+			</div>
+			<nav>
+				<ul class="game-nav">
+					<li><a href="page.html">首頁</a></li>
+					<li><a href="javascript:;" class="nav-active">英雄数据</a></li>
+					<li><a href="Statistics.html">统计</a></li>
+					<li><a href="RankingList.html">排行榜</a></li>
+					<li><a href="guessing.html">竞猜</a></li>
+					<li><a href="javascript:;">职业选手市场观战</a></li>
+				</ul>
+			</nav>
+			<article class="game-article">
+				<div><a href="javascript:;">绝地求生战绩搜索就在OP.GG!</a></div>
+			</article>
+			<div class="nav-match">
+				<div class="nav-match-img">
+					<img src="img/logo-lol.png" />
+				</div>
+				<ul class="nav-match-list">
+					<li><a href="javascript:;">看比赛</a></li>
+					<li class="match-time">
+						<a href="javascript:;">赛事</a>
+						<div class="select-list">
+							<a href="javascript:;">2018 LPL春季赛	</a>
+							<a href="javascript:;">2017德玛西亚杯长沙站</a>
+							<a href="javascript:;">2018 LPL春季赛	</a>
+							<a href="javascript:;">2017德玛西亚杯长沙站	</a>
+							<a href="javascript:;">2018 LPL春季赛	</a>
+							<a href="javascript:;">2018 LPL春季赛	</a>
+							<a href="javascript:;">2018 LPL春季赛	</a>
+							<a href="javascript:;">2018 LPL春季赛	</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<section>
+				<article class="match-seclects">
+					<ul class="match-selects">
+						<!--<li style="display: none;">
+							<div class="input-append date form_datetime datapicker" data-date="2012-12-21">
+								<input size="16" type="text" value="" readonly>
+							</div>
+							<span class="delete">清除选择</span>
+						</li>-->
+						<li class="match-times">
+							<div class="list">
+								<a href="javascript:;" class="match-text">选择赛事</a>
+								<div class="select-list">
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2017德玛西亚杯长沙站</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2017德玛西亚杯长沙站	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2017德玛西亚杯长沙站</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2017德玛西亚杯长沙站	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+									<a href="javascript:;">2018 LPL春季赛	</a>
+								</div>
+							</div>
+							<span class="delete">清除选择</span>
+						</li>	
+						<li>
+							<span class="delete">清除选择</span>
+							<div class="list">
+								<a href="javascript:;" class="ranking">选择战队</a>
+								<div class="ranking-match">
+									<ul class="ranking-match-list">
+										<li class="match-list-active"><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2017德玛西亚杯长沙站	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2017德玛西亚杯长沙站	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2017德玛西亚杯长沙站</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2017德玛西亚杯长沙站	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2017德玛西亚杯长沙站	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
+									</ul>
+									<div class="ranking-name">
+										<div class="ranking-lists" style="display: flex;">
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+										</div>
+										<div class="ranking-lists">
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>WE</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>WE</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+											<a href="javascript:;">
+												<div>
+													<img src="img/1216432030728_100X100.png" />
+												</div>
+												<span>JT</span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<div class="match-list">
+						<div class="beginning">
+							<header>进行中</header>
+							<ul class="match-table">
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li>
+							</ul>
+							<div class="papegration" style="display: flex;flex-direction: row-reverse;">
+								<div class="box">
+									<div id="pagination1" class="page fl"></div>
+								</div>
+							</div>
+						</div>
+						<div class="Notbeginning">
+							<header>未进行</header>
+							<ul class="match-table">
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li>
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li>
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li><li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li>
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">直播入口</a>
+									</div>
+								</li>
+								
+							</ul>
+							<div class="papegration" style="display: flex;flex-direction: row-reverse;">
+								<div class="box">
+									<div id="pagination2" class="page fl"></div>
+								</div>
+							</div>
+						</div>
+						<div class="Finished">
+							<header>已结束</header>
+							<ul class="match-table">
+								<li class="match-table-list">
+									<div class="match-time">
+										<p>19:00</p>
+										<b>2018-03-15</b>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1114213190985_100X100.png" />
+									</div>
+									<div class="match-rate">
+										<div class="match-name">2018 LCK春季赛 - 常规赛</div>
+										<div class="match-ranking">
+											<span>KZ</span>
+											<span class="rates"> 0 : 0</span>
+											<span>KT</span>
+										</div>
+									</div>
+									<div class="ranking-Icon">
+										<img src="img/1216432030728_100X100.png" />
+									</div>
+									<div class="match-time">
+										<a href="javascript:;" class="video-door">比赛回放</a>
+										<a href="javascript:;" class="match-info video-door">赛后战报</a>
+									</div>
+								</li>
+							</ul>
+							<div class="papegration" style="display: flex;flex-direction: row-reverse;">
+								<div class="box">
+									<div id="pagination3" class="page fl"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<aside></aside>
+			</section>
+		</div>
+	</body>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+	<script src="js/jquery.pagination.min.js"></script>
+	<script>
+		$(function(){
+			$('.match-time').eq(0).mouseenter(function(){
+				$(this).children('div').css('display','block')
+			})
+			$('.match-time').eq(0).mouseleave(function(){
+				$(this).children('div').css('display','none')
+			})
+			var matchSelect = Array.from($('.list'))
+			matchSelect.forEach(function(v,k){
+				v.onclick = function(){
+					$(this).children("a").css('color','#ff8400')
+					$(this).children("div").css('display','block')
+				}
+				v.onmouseleave = function(){
+					$(this).children('a').css('color','#333')
+					$(this).children("div").css('display','none')
+				}
+			})
+			var selectList = Array.from($('.select-list a'))
+			selectList.forEach(function(v,k){
+				v.onclick = function(){
+					$('.match-text').html($(this).html()).css('font-weight','600')
+					$(this).parent().parent().next().css('display','block')
+				}
+			})
+			$('.delete').eq(0).click(function(){
+				$('.match-text').html('选择赛事').css('font-weight','500')
+				$(this).css('display','none')
+			})
+			/* $('.form_datetime').datepicker({
+			  	format: 'yyyy-mm-dd',
+	        weekStart: 1,
+	        autoclose: true,
+	        todayBtn: false,
+	        language: 'zh-CN',
+	        todayHighlight:'true',
+	        linkField: "mirror_field",
+        	linkFormat: "yyyy-mm-dd"
+			 })*/
+			 
+			 /*var tableList = Array.from($('.datapicker table tbody td'))
+			 tableList.forEach(function(v,k){
+			 	var day = $('.datapicker table tbody td').eq(k).attr('class')
+			 	if(day == 'day'){
+			 		$('.datapicker table tbody td').eq(k).addClass('have')
+			 	}
+			 	v.onclick = function(){
+			 		$(this).addClass("active")
+			 		$(this).parent().children().siblings().removeClass('active')
+			 		console.log($(this).attr('class'))
+			 	}
+			 })*/
+			$('.ranking').eq(0).click(function(){
+				$('.ranking-match').eq(0).addClass('show')
+			})
+			var matchList = Array.from($('.ranking-match-list li'))
+			matchList.forEach(function(v,k){
+				v.onclick = function(){
+					$(this).addClass('match-list-active').siblings().removeClass('match-list-active')
+					$('.ranking-lists').eq(k).css('display','flex').siblings().css('display','none')
+				}
+			})
+			var rankingList = Array.from($('.ranking-lists a'))
+			rankingList.forEach(function(v,k){
+				v.onclick = function(){
+					$('.ranking').eq(0).html($(this).children('span').html()).css('font-weight','600')
+					$('.delete').eq(1).css('display','block')
+				}
+			})
+			$('.delete').eq(1).click(function(){
+				$('.ranking').eq(0).html("选择战队").css('font-weight','500')
+				$(this).css('display','none')
+			})
+			$("#pagination1").pagination({
+					currentPage: 1,
+					totalPage: 16,
+					isShow: true,
+					count: 10,
+					homePageText: "首页",
+					endPageText: "尾页",
+					prevPageText: "上一页",
+					nextPageText: "下一页",
+					callback: function(current) {
+						$("#current1").text(current)
+					}
+				});
+				$("#pagination2").pagination({
+					currentPage: 1,
+					totalPage: 16,
+					isShow: true,
+					count: 10,
+					homePageText: "首页",
+					endPageText: "尾页",
+					prevPageText: "上一页",
+					nextPageText: "下一页",
+					callback: function(current) {
+						$("#current1").text(current)
+					}
+				});
+				$("#pagination3").pagination({
+					currentPage: 1,
+					totalPage: 16,
+					isShow: true,
+					count: 10,
+					homePageText: "首页",
+					endPageText: "尾页",
+					prevPageText: "上一页",
+					nextPageText: "下一页",
+					callback: function(current) {
+						$("#current1").text(current)
+					}
+				});
+				var matchList = Array.from($('.match-table-list'))
+				matchList.forEach(function(v,k){
+					v.onmouseenter = function(){
+						$(this).css('background','#f7f7f7')
+					}
+					v.onmouseleave = function(){
+						$(this).css('background','white')
+					}
+				})
+		})
+	</script>
+</html>

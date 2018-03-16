@@ -28,43 +28,53 @@
 					<div class="campaigns-content-main" :data="JSON.stringify(data)">
 						<div class="campaigns-title" :data="JSON.stringify(data)">
 							<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
-								<span :data="JSON.stringify(data)">{{data["campaignName"]}}</span>
+								<span class="dsps" v-if="data['deleted'] == 0  && data['integrations'] == 0" :data="JSON.stringify(data)">
+									<img src="../assets/img/3.jpg" />
+								</span>
+								<span class="iconfont icon-cuowu dsps" v-if="data['deleted'] == 1" :data="JSON.stringify(data)"></span>
+								<span :data="JSON.stringify(data)" class="camNmae">{{data["campaignName"]}}</span>
 							</a>
 							<router-link to="/Offers" :data-cId="data.campaignId" :data-name="data.campaignName" @click="cOffer($event)">
 								<span class="iconfont icon-gengduo" :data-cId="data.campaignId" :data-name="data.campaignName" @click="cOffer($event)"></span>
 							</router-link>
 						</div>
-						<div class="campaigns-switch"  :data="JSON.stringify(data)">
+						<div class="campaigns-switch"  :data="JSON.stringify(data)" v-if="data['deleted'] == 0 && data['integrations'] == 1">
 							<p :data="JSON.stringify(data)">
 								<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
-									<span :data="JSON.stringify(data)"><img src="../assets/img/2.jpg" :data="JSON.stringify(data)"/></span>
-									<span :data="JSON.stringify(data)"><img src="../assets/img/3.jpg" :data="JSON.stringify(data)"/></span>
-									<span :data="JSON.stringify(data)">pause/Resume</span>
+									<span class="dsp" :data="JSON.stringify(data)" v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 1">{{data.campaignName.substring(0,4)}}</span>
+									<span class="dsp" :data="JSON.stringify(data)" v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 0">{{data.campaignName.substring(0,4)}}</span>
+									<span class="iconfont icon-bofang1 dsps" v-if="data['deleted'] == 0 && data['status'] == 1 && data['integrations'] == 1" :data="JSON.stringify(data)"></span>
+									<span class="iconfont icon-zanting2 dsps" v-if="data['deleted'] == 0 && data['status'] == 0 && data['integrations'] == 1" :data="JSON.stringify(data)"></span>
 								</a>
 							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause"  @touchstart='plays($event)' v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 1">
+								<span class="dspss" :data="JSON.stringify(data)">pause/Resume</span>
+								<mt-switch v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause"  @touchstart='plays($event)' v-if="data['deleted'] == 0 && data['integrations'] == 1 && data['status'] == 0">
+								<span class="dspss" :data="JSON.stringify(data)">pause/Resume</span>
+								<mt-switch v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
-							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 1" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause" v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 1">
+								<mt-switch v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']" style="display: none;"></mt-switch>
 							</p>
-							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause" v-if="data['deleted'] == 0 && data['integrations'] == 0 && data['status'] == 0">
+								<mt-switch v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']" style="display: none;"></mt-switch>
 							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 0" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause" v-if="data['deleted'] == 1">
+								<mt-switch v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']" disabled></mt-switch>
 							</p>
-							<p class="campaigns-pause"  @touchstart='plays($event)'>
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 1" v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<!--<p class="campaigns-pause"  @touchstart='plays($event)' v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 0">
+								<mt-switch v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
-							<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 1" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
-								<p class="campaigns-pause">
-								<mt-switch v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 0" v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause"  @touchstart='plays($event)' v-if="data['deleted'] == 1 && data['integrations'] == 1 && data['status'] == 1">
+								<mt-switch v-model="data.active" class="play" :data-ins="data['status']" :data-id="data['id']"></mt-switch>
 							</p>
+							<p class="campaigns-pause" @touchstart='plays($event)' v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 1">
+								<mt-switch v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							<p class="campaigns-pause" @touchstart='plays($event)' v-if="data['deleted'] == 1 && data['integrations'] == 0 && data['status'] == 0">
+								<mt-switch v-model="data.active" disabled :data-ins="data['status']" :data-id="data['id']"></mt-switch>
+							</p>-->
 						</div>
 						<a href="javascript:;"  @click="LinksHrf($event)" :data="JSON.stringify(data)">
 							<div class="campaigns-info" :data="JSON.stringify(data)">
@@ -91,6 +101,7 @@
 </template>
 
 <script>
+	import '../assets/iconfont/iconfont3.css'
 	import commont from '../assets/js/commont.js'
 	export default{
 		data () {
@@ -124,6 +135,7 @@
 			getSevenDate(){
 				this.from = this.$store.state.data
 			},
+			
 		},
 		watch: {
 			from (newVal,oldVal){
@@ -197,6 +209,10 @@
 			this.Times = this.nowDate.getTime()+604800000
 		},
 		methods: {
+			sub(name){
+				var dsp = name.substring(0,4)
+				console.log(dsp)
+			},
 			inpVal () {
 				this.search = document.getElementById("search").value
 				var that = this
@@ -372,14 +388,15 @@
 		font-weight: 600;
 	}
 	.cs-campaigns .campaigns-title a{
-		display: block;
+		display: flex;
 		width: 90%;
 		text-align: left;
 		color: #282828;
+		border-bottom: 1px solid #dcdcdc; 
 	}
-	.cs-campaigns .campaigns-title a span{
+	.camNmae{
 		display: block;
-		width: 100%;
+		width: 80%;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
@@ -396,30 +413,53 @@
 	.cs-campaigns .campaigns-switch{
 		display: flex;
 		justify-content: space-between;
-		height: .8rem;
 		padding: 0.1rem 0;
-		border-top: 1px solid #dcdcdc;
 		border-bottom: 1px solid #dcdcdc; 
 	}
+	.cs-campaigns .campaigns-switch p:nth-child(1){
+		width: 60%;
+	}
 	.cs-campaigns .campaigns-switch p a{
-		display: flex;
 		color: #282828;
 	}
 	.cs-campaigns .campaigns-switch p span{
 		display: block;
 	}
-	.cs-campaigns .campaigns-switch p span:nth-child(1) img{
+.dsp{
+	float: left;
 		width: .8rem;
 		height: .5rem;
+		background: #02b697;
+		border-radius: 4px;
+		line-height: .5rem;
+		color: white;
+		padding: 0 .2rem;
 	}
-	.cs-campaigns .campaigns-switch p span:nth-child(2) img{
+.dsps{
+	float: left;
 		width: .5rem;
 		height: .5rem;
+		line-height: .5rem;
+		font-size: .5rem;
+		vertical-align: middle;
+		margin-right: .1rem;
 	}
-	.cs-campaigns .campaigns-switch p span:nth-child(3){
+	.dsps img{
+		width: 100%;
+		height: 100%;
+	}
+	 .dspss{
 		margin-top: .08rem;
-		margin-left: 1.2rem;
 		font-weight: 600;
+	}
+	.icon-cuowu{
+		    color: red !important;
+	}
+	.icon-bofang1,.icon-yuanxuankuang2{
+		color: green !important;
+	}
+	.icon-zanting2{
+		color: #616161 !important;
 	}
 	.cs-campaigns .campaigns-switch .campaigns-pause{
 		display: flex;

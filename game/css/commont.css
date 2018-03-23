@@ -4,7 +4,7 @@ body,html{
 	font-family: Helvetica, Arial, "Microsoft YaHei New", "Microsoft Yahei", 微软雅黑, 华文细黑, sans-serif;
 	font-size: 12px;
 }
-body,div,h1,h2,h3,h4,h5,h6,ul,li,dt,dd,p,button,input,span,a{
+body,div,h1,h2,h3,h4,h5,h6,ul,li,dt,dd,p,button,input,span,a,strong,b{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;

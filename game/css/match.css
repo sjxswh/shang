@@ -118,6 +118,7 @@
 	color: #333;
 	font-size: 16px;
 	height: 100%;
+	
 }
 .delete{
 	padding: 0 10px;
@@ -223,7 +224,6 @@
     position: absolute;
     right: 0;
     top: 40px;
-    width: 500px;
     background-color: #fff;
     padding: 20px;
     z-index: 5;
@@ -233,7 +233,7 @@
 }
 .ranking-match.show {
     visibility: visible;
-    height: 350px;
+    height: 100px;
     opacity: 1;
 }
 .ranking-match-list{
@@ -258,6 +258,28 @@
 }
 .ranking-match-list li a:hover{
 	background: none;
+}
+.week{
+	display: inline-block !important;
+}
+.week>div{
+	display: none;
+}
+.weeknum{
+	display: flex;
+}
+.round{
+	display: flex;
+}
+.week div div{
+	margin-right: 10px;
+}
+.weeknum-active a{
+	background: #eee;
+	color: #ff8400;
+}
+.week p{
+	margin: 0 6px;
 }
 .ranking-name{
 	width: calc(100% - 95px);

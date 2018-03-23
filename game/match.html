@@ -125,12 +125,34 @@
 							</div>
 							<span class="delete">清除选择</span>
 						</li>	
+						<li class="week">
+							<div class="weeknum">
+								<div>week</div>
+								<p class="weeknum-active"><a href="javascript:;">1</a></p>
+								<p><a href="javascript:;">2</a></p>
+								<p><a href="javascript:;">3</a></p>
+								<p><a href="javascript:;">4</a></p>
+								<p><a href="javascript:;">5</a></p>
+								<p><a href="javascript:;">6</a></p>
+								<p><a href="javascript:;">7</a></p>
+								<p><a href="javascript:;">8</a></p>
+								<p><a href="javascript:;">9</a></p>
+							</div>
+							<div class="round">
+								<p class="weeknum-active"><a href="javascript:;">Round 1</a></p>
+								<p><a href="javascript:;">Round 2</a></p>
+								<p><a href="javascript:;">Round 3</a></p>
+								<p><a href="javascript:;">Finals</a></p>
+							</div>
+						</li>
 						<li>
 							<span class="delete">清除选择</span>
 							<div class="list">
-								<a href="javascript:;" class="ranking">选择战队</a>
+								<a href="javascript:;" class="ranking">选择日期</a>
 								<div class="ranking-match">
-									<ul class="ranking-match-list">
+									<p><a href="javascript:;">regular season</a></p>
+									<p><a href="javascript:;">playoffs</a></p>
+									<!--<ul class="ranking-match-list">
 										<li class="match-list-active"><a href="javascript:;">2018 LPL春季赛	</a></li>
 										<li><a href="javascript:;">2018 LPL春季赛	</a></li>
 										<li><a href="javascript:;">2017德玛西亚杯长沙站	</a></li>
@@ -210,7 +232,7 @@
 												<span>JT</span>
 											</a>
 										</div>
-									</div>
+									</div>-->
 								</div>
 							</div>
 						</li>
@@ -473,23 +495,37 @@
 			$('.ranking').eq(0).click(function(){
 				$('.ranking-match').eq(0).addClass('show')
 			})
-			var matchList = Array.from($('.ranking-match-list li'))
+			/*var matchList = Array.from($('.ranking-match-list li'))
 			matchList.forEach(function(v,k){
 				v.onclick = function(){
 					$(this).addClass('match-list-active').siblings().removeClass('match-list-active')
 					$('.ranking-lists').eq(k).css('display','flex').siblings().css('display','none')
 				}
-			})
-			var rankingList = Array.from($('.ranking-lists a'))
+			})*/
+			var rankingList = Array.from($('.ranking-match p'))
 			rankingList.forEach(function(v,k){
 				v.onclick = function(){
-					$('.ranking').eq(0).html($(this).children('span').html()).css('font-weight','600')
+					$('.ranking').eq(0).html($(this).children('a').html()).css('font-weight','600')
 					$('.delete').eq(1).css('display','block')
+					$('.week>div').eq(k).css('display','flex').siblings().css('display','none')
+				}
+			})
+			var weeknum = Array.from($('.weeknum p'))
+			weeknum.forEach(function(v,k){
+				v.onclick = function(){
+					$(this).addClass('weeknum-active').siblings().removeClass('weeknum-active')
+				}
+			})
+			var round = Array.from($('.round p'))
+			round.forEach(function(v,k){
+				v.onclick = function(){
+					$(this).addClass('weeknum-active').siblings().removeClass('weeknum-active')
 				}
 			})
 			$('.delete').eq(1).click(function(){
-				$('.ranking').eq(0).html("选择战队").css('font-weight','500')
+				$('.ranking').eq(0).html("选择日期").css('font-weight','500')
 				$(this).css('display','none')
+				$('.week>div').css('display','none')
 			})
 			$("#pagination1").pagination({
 					currentPage: 1,

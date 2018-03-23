@@ -66,12 +66,13 @@
 	font-size: 12px;
 	color: #9c9c9c;
 }
+
 .game-detail-table-two .game-detail-title div p{
 	font-size: 12px;
 	color: white;
 }
 .game-detail-table-three {
-	color: white;
+	
 }
 .game-detail-table-three .game-detail-title div p{
 	font-size: 12px;
@@ -280,6 +281,9 @@
 	line-height: 40px !important;
 	margin: 0 10px;
 }
+.Builds-list li:last-child span{
+	display: none;
+}
 .game-detail-Builds table{
 	border: 1px solid #e6e6e6;
   border-collapse: collapse;
@@ -388,9 +392,17 @@
 	  background: #000;
     margin-bottom: -1px;
     margin-left: -11px;
+    width: 42px;
+    height: 42px;
+}
+.game-detail-table3-img img:nth-child(1){
+	width: 26px;
+	height: 26px;
 }
 .game-detail-table3-img img:nth-child(3){
 	margin-left: 10px;
+	width: 32px;
+	height: 32px;
 }
 .game-detail-table-three .game-detail-table3-title span{
 	margin-top: 0;
@@ -416,9 +428,28 @@
 	border-right: 1px solid #d2d2d2;
 	padding: 0 6px;
 }
-.game-detail-bigImg {
+.game-detail-Img {
 	display: flex;
 	justify-content: space-around;
+	flex-flow: row wrap;
+}
+
+.game-detail-imgActive{
+	display: inline-block;
+	position: relative;
+	width: 42px;
+	height: 42px;
+	text-align: center;
+	padding: 4px 0;
+}
+
+.game-detail-imgActive img{
+	margin: 0 auto;
+	width: 32px;
+	height: 32px;
+}
+.game-detail-bigImg{
+	padding: 0;
 }
 .game-detail-bigImg img{
 	width: 42px;
@@ -426,30 +457,33 @@
 	background: #ddd;
 	border-radius: 50%;
 }
-.game-detail-bigImg img:nth-child(2){
-	margin: 0 10px;
-}
 .game-detail-bigImg .game-detail-bigImgActive{
 	background: black;
-}
-.game-detail-smallImg {
-	display: flex;
-	justify-content: space-around;
-	padding: 4px 0;
-}
-.game-detail-imgActive{
-	display: inline-block;
-	position: relative;
-}
-.game-detail-smallImg img{
-	width: 32px;
-	height: 32px;
 }
 .game-detail-smallImg img:nth-child(2){
 	margin: 0 10px;
 }
 .game-detail-opcity{
-	opacity: .5;
+
+}
+.opcity{
+	width: 82%;
+	height: 82%;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+		background: rgba(72,71,69,.5);
+		border-radius: 50%;
+}
+.gray { 
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    
+    filter: grayscale(100%);
+	
+    filter: gray;
 }
 .game-detail-header-img {
 	text-align: center;

@@ -1,0 +1,125 @@
+.swiper-list{
+	    background-color: #0e1420;
+    height: 300px;
+    transition-duration: .3s;
+}
+.swiper-list .swiper-container{
+	    width: 1200px;
+    position: absolute;
+    left: calc((100% - 1200px) / 2);
+    margin: 0 auto;
+    height: 300px;
+    padding-top: 20px;
+}
+.swiper-list .swiper-container .swiper-slide img{
+	width: 608px;
+	height: 250px;
+}
+.room-list{
+	    width: 1200px;
+    margin: 0 auto;
+}
+.room-header{
+	    margin-top: 45px;
+	    display: flex;
+	    justify-content: space-between;
+}
+.room-header>div{
+    background: #fff;
+    border: 1px solid #e7edf1;
+    box-shadow: 0 1px 4px 0 rgba(5,17,25,.06);
+    border-radius: 2px;
+    height: 140px;
+}
+.found-room{
+	width: 255px;
+	display: flex;
+	position: relative;
+}
+.room-every-list{
+	    width: 565px;
+	        padding: 18px 31.5px;
+}
+.room-sum{
+	width: 350px;
+}
+.found-room>div{
+	  width: 50%;
+	  padding-top: 35px;
+	   text-align: center;
+    height: 100%;
+    cursor: pointer;
+    user-select: none;
+    transition-duration: .3s;
+}
+.found-room:before{
+	content: "";
+    display: block;
+    left: 49.5%;
+    top: 20px;
+    bottom: 20px;
+    width: 1px;
+    height: 100px;
+    background-color: #e7edf1;
+    position: absolute;
+}
+.found-room>div a{
+	display: block;
+	color: #373a41;
+}
+.found-room>div a img{
+	    height: 29px;
+    width: auto;
+}
+.found-room>div a div{
+	       font-size: 12px;
+    color: #a5a8b2;
+    height: 16px;
+    line-height: 16px;
+}
+.found-room .room-popular{
+       color: #6f41bf;
+        margin-top: 8px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.found-room .room-blue{
+	color: #0ea4fc;
+	 margin-top: 8px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+.every-list{
+	display: flex;
+	flex-flow: row wrap;
+}
+.every-list li{
+	cursor: pointer;
+    user-select: none;
+    border: 1px solid #d4dae0;
+    border-radius: 4px;
+    margin: 7.5px;
+    font-size: 14px;
+    text-align: center;
+    color: #373a41;
+    display: inline-block;
+    width: 110px;
+    height: 36px;
+    line-height: 36px;
+    transition-duration: .3s;
+}
+.every-list li a{
+	color: #373a41;
+}
+.every-list .every-list-active{
+	    background: #0c9dfc;
+    border: 1px solid #0497f8;
+    box-shadow: 0 2px 4px 0 rgba(12,157,252,.4);
+}
+.every-list .every-list-active a{
+	color: #fff;
+}

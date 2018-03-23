@@ -481,13 +481,12 @@ function highchartsColm(id){
 }
 
 
-function hightchartNetwork(id){
-	
-    var chart = Highcharts.chart(id, {
+function hightchartNetwork(op){
+    var chart = Highcharts.chart(op.id, {
         chart: {
             polar: true,
             type: 'line',
-            backgroundColor:"#f2f2f2"
+            backgroundColor:op.background
         },
         title: {
             text: null
@@ -503,9 +502,13 @@ function hightchartNetwork(id){
             max: 360,
             labels: {
                 formatter: function () {
-                    return null;
+                    if(op.x == null){
+                    	return null
+                    }else{
+                    		return '<span>'+op.x[0]+'</span>'
+                    }
                 }
-            }
+            },
         },
         yAxis: {
         	gridLineInterpolation: 'polygon',
@@ -538,26 +541,7 @@ function hightchartNetwork(id){
         legend: {
             enabled: false
         },
-        series: [{
-        		type: 'polygon',
-            name: '柱形',
-            data: [650, 560, 460, 700, 520, 650],
-            color: 'rgba(75, 119, 254, 0.3)',  
-            pointPlacement: 'on' ,
-            marker: {
-            	enabled: true,
-							symbol: "circle",
-							radius:2,
-							lineWidth: '1px',
-							lineColor: '#2857a6',
-							fillColor: '#fff'
-						},
-						states: {
-							hover: {
-								enabled: false
-							}
-						},
-        }]
+        series: op.data
     });
 }
 function highchartsPies(op){
@@ -569,7 +553,7 @@ function highchartsPies(op){
             spacing : [0, 0 , 0, 0],
             backgroundColor: op.background,
         },
-       colors: ['red', 'rgb(0,160,210)' ],
+       colors: op.color,
         title: {
             floating:true,
             text: op.title
@@ -598,7 +582,7 @@ function highchartsPies(op){
         },
         series: [{
             type: 'pie',
-            size:'100%',
+            size:'120%',
             innerSize: op.innersize,
             name: '市场份额',
             data: [

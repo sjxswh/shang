@@ -62,7 +62,7 @@
 			</div>
 			<div class="cs-group-by ">
 				<div class="group-by-title">Campaigns that were</div>
-				<select @change="selects($event)" id="DrillDown">
+				<select @change="selects($event)" id="DrillDown" @touchstart="clickSelect">
 					<option :data-val="'flow'">Flows</option>
 					<option :data-val="'lander'">Lander</option>
 					<option :data-val="'traffic'">Traffic Source</option>
@@ -88,16 +88,16 @@
 						</div>
 							<div class="campaigns-info" :data="JSON.stringify(data)">
 								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">Revenue</p>
-									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
-									<p :data="JSON.stringify(data)">Profit</p>
-									<em :data="JSON.stringify(data)">${{data.profit}}</em>
+									<p :data="JSON.stringify(data)">Visits</p>
+									<span :data="JSON.stringify(data)">{{data.visits}}</span>
+									<p :data="JSON.stringify(data)">Conversions</p>
+									<em :data="JSON.stringify(data)">{{data.conversions}}</em>
 								</div>
 								<div :data="JSON.stringify(data)">
-									<p :data="JSON.stringify(data)">ROI</p>
-									<em :data="JSON.stringify(data)">${{data.roi}}</em>
-									<p :data="JSON.stringify(data)">Cost</p>
-									<span :data="JSON.stringify(data)">${{data.cost}}</span>
+									<p :data="JSON.stringify(data)">Clicks</p>
+									<em :data="JSON.stringify(data)">{{data.clicks}}</em>
+									<p :data="JSON.stringify(data)">Revenue</p>
+									<span :data="JSON.stringify(data)">${{data.revenue}}</span>
 								</div>
 							</div>
 					</div>
@@ -232,7 +232,6 @@
 				  url:"https://panel.newbidder.com/api/profile",
 				}).then((data) => {
 				   this.timezone = data.data.data.timezone
-				   
 				   	if(this.selectData.campaignName){
 					   	this.params = {
 						  	campaign:this.selectData.id,
@@ -345,6 +344,25 @@
 			},
 		},
 		methods:{
+			clickSelect(){
+				this.groupBy = Array.from(document.getElementById("DrillDown").options)
+		    	this.groupBy.forEach((v,k)=>{
+		    		if(v.getAttribute('selected')){
+		    			this.group = v.getAttribute("data-val")
+		    			this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
+						}
+					this.$store.dispatch("getSevenDate",this.Data)
+		    		}
+		    	})
+			},
 			 selectTile(){
 			 	var SelectRange = Array.from(document.getElementsByClassName("select-range-title")[0].children)
 			 	var SelectContent = Array.from(document.getElementsByClassName("select-content")[0].children)
@@ -428,15 +446,15 @@
 	      activess () {
 	      	this.objS = document.getElementById("timezone")
 	        for(var i=0;i<this.objS.options.length;i++){
-						if(this.objS.options[i].value== this.objS.value){
-							this.timeZone = this.objS.options[i].getAttribute("data-ins")
-							this.timeS = this.objS.options[i].getAttribute("data-ids")
-							this.$ajax({
-			      		method: "get",
-							  params:{
-							  	authorization:this.token
-							  },
-						  url:"https://panel.newbidder.com/api/profile",
+				if(this.objS.options[i].value== this.objS.value){
+					this.timeZone = this.objS.options[i].getAttribute("data-ins")
+					this.timeS = this.objS.options[i].getAttribute("data-ids")
+					this.$ajax({
+	      			  method: "get",
+					  params:{
+					  	authorization:this.token
+					  },
+				  url:"https://panel.newbidder.com/api/profile",
 			      	}).then((data)=>{
 			      		console.log(data.data.data)
 			      		this.firstname = data.data.data.firstname
@@ -467,146 +485,146 @@
 	      	console.log(this.token)
 	      	this.objS = ev.target;
 	        for(var i=0;i<this.objS.options.length;i++){
-						if(this.objS.options[i].value== this.objS.value){
-							this.dayIn = this.objS.options[i].getAttribute("data-ins")
-							if(this.dayIn == 0){
-					   		this.Time = this.nowDate.getTime()//-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time))
-								this.Year = this.pickerVisible.getFullYear()
-					   		this.Month = this.pickerVisible.getMonth()+1
-					   		this.Month = this.Month<10?"0"+this.Month:this.Month
-					   		this.Dates = this.pickerVisible.getDate()
-					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
-								this.Times = this.nowDate.getTime()+86400000
-								this.pickerVisibles = new Date(parseInt(this.Times))
-								this.Years = this.pickerVisibles.getFullYear()
-					   		this.Months = this.pickerVisibles.getMonth()+1
-					   		this.Months = this.Months<10?"0"+this.Months:this.Months
-					   		this.Datess = this.pickerVisibles.getDate()
-					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-					   		this.Data = {
-									"year":this.Year,
-									"month":this.Month,
-									"date":this.Dates,
-									"years":this.Years,
-									"months":this.Months,
-									"dates":this.Datess,
-									"status":this.switchSta,
-									"groupBy":this.group
-								}
-					   		//this.$store.dispatch("getSevenDate",this.Data)
-							}
-							if(this.dayIn == 1){
-					   		this.Time = this.nowDate.getTime()-86400000//-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time))
-								this.Year = this.pickerVisible.getFullYear()
-					   		this.Month = this.pickerVisible.getMonth()+1
-					   		this.Month = this.Month<10?"0"+this.Month:this.Month
-					   		this.Dates = this.pickerVisible.getDate()
-					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
-								this.Times = this.nowDate.getTime()
-								this.pickerVisibles = new Date(parseInt(this.Times))
-								this.Years = this.pickerVisibles.getFullYear()
-					   		this.Months = this.pickerVisibles.getMonth()+1
-					   		this.Months = this.Months<10?"0"+this.Months:this.Months
-					   		this.Datess = this.pickerVisibles.getDate()
-					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-					   		this.Data = {
-									"year":this.Year,
-									"month":this.Month,
-									"date":this.Dates,
-									"years":this.Years,
-									"months":this.Months,
-									"dates":this.Datess,
-									"status":this.switchSta,
-									"groupBy":this.group
-								}
-					   		console.log(this.Data)
-					   		//this.$store.dispatch("getSevenDate",this.Data)
-							}
-							if(this.dayIn == 2){
-					   		this.Time = this.nowDate.getTime()-604800000 + 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time))
-								this.Year = this.pickerVisible.getFullYear()
-					   		this.Month = this.pickerVisible.getMonth()+1
-					   		this.Month = this.Month<10?"0"+this.Month:this.Month
-					   		this.Dates = this.pickerVisible.getDate()
-					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
-								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times))
-								this.Years = this.pickerVisibles.getFullYear()
-					   		this.Months = this.pickerVisibles.getMonth()+1
-					   		this.Months = this.Months<10?"0"+this.Months:this.Months
-					   		this.Datess = this.pickerVisibles.getDate()
-					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-					   		this.Data = {
-									"year":this.Year,
-									"month":this.Month,
-									"date":this.Dates,
-									"years":this.Years,
-									"months":this.Months,
-									"dates":this.Datess,
-									"status":this.switchSta,
-									"groupBy":this.group
-								}
-					   		//this.$store.dispatch("getSevenDate",this.Data)
-							}
-							if(this.dayIn == 3){
-					   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time))
-								this.Year = this.pickerVisible.getFullYear()
-					   		this.Month = this.pickerVisible.getMonth()+1
-					   		this.Month = this.Month<10?"0"+this.Month:this.Month
-					   		this.Dates = this.pickerVisible.getDate()
-					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
-								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times))
-								this.Years = this.pickerVisibles.getFullYear()
-					   		this.Months = this.pickerVisibles.getMonth()+1
-					   		this.Months = this.Months<10?"0"+this.Months:this.Months
-					   		this.Datess = this.pickerVisibles.getDate()
-					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-					   		this.Data = {
-									"year":this.Year,
-									"month":this.Month,
-									"date":this.Dates,
-									"years":this.Years,
-									"months":this.Months,
-									"dates":this.Datess,
-									"status":this.switchSta,
-									"groupBy":this.group
-								}
-					   		//this.$store.dispatch("getSevenDate",this.Data)
-							}
-							if(this.dayIn == 3){
-					   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
-						   	this.pickerVisible = new Date(parseInt(this.Time))
-								this.Year = this.pickerVisible.getFullYear()
-					   		this.Month = this.pickerVisible.getMonth()+1
-					   		this.Month = this.Month<10?"0"+this.Month:this.Month
-					   		this.Dates = this.pickerVisible.getDate()
-					   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
-								this.Times = this.nowDate.getTime()+ 86400000
-								this.pickerVisibles = new Date(parseInt(this.Times))
-								this.Years = this.pickerVisibles.getFullYear()
-					   		this.Months = this.pickerVisibles.getMonth()+1
-					   		this.Months = this.Months<10?"0"+this.Months:this.Months
-					   		this.Datess = this.pickerVisibles.getDate()
-					   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
-					   		this.Data = {
-									"year":this.Year,
-									"month":this.Month,
-									"date":this.Dates,
-									"years":this.Years,
-									"months":this.Months,
-									"dates":this.Datess,
-									"status":this.switchSta,
-									"groupBy":this.group
-								}
-					   		//this.$store.dispatch("getSevenDate",this.Data)
-							}
+				if(this.objS.options[i].value== this.objS.value){
+					this.dayIn = this.objS.options[i].getAttribute("data-ins")
+					if(this.dayIn == 0){
+			   		this.Time = this.nowDate.getTime()//-604800000 + 86400000
+				   	this.pickerVisible = new Date(parseInt(this.Time))
+						this.Year = this.pickerVisible.getFullYear()
+			   		this.Month = this.pickerVisible.getMonth()+1
+			   		this.Month = this.Month<10?"0"+this.Month:this.Month
+			   		this.Dates = this.pickerVisible.getDate()
+			   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+						this.Times = this.nowDate.getTime()+86400000
+						this.pickerVisibles = new Date(parseInt(this.Times))
+						this.Years = this.pickerVisibles.getFullYear()
+			   		this.Months = this.pickerVisibles.getMonth()+1
+			   		this.Months = this.Months<10?"0"+this.Months:this.Months
+			   		this.Datess = this.pickerVisibles.getDate()
+			   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+			   		this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
 						}
+			   		//this.$store.dispatch("getSevenDate",this.Data)
 					}
+					if(this.dayIn == 1){
+			   		this.Time = this.nowDate.getTime()-86400000//-604800000 + 86400000
+				   	this.pickerVisible = new Date(parseInt(this.Time))
+						this.Year = this.pickerVisible.getFullYear()
+			   		this.Month = this.pickerVisible.getMonth()+1
+			   		this.Month = this.Month<10?"0"+this.Month:this.Month
+			   		this.Dates = this.pickerVisible.getDate()
+			   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+						this.Times = this.nowDate.getTime()
+						this.pickerVisibles = new Date(parseInt(this.Times))
+						this.Years = this.pickerVisibles.getFullYear()
+			   		this.Months = this.pickerVisibles.getMonth()+1
+			   		this.Months = this.Months<10?"0"+this.Months:this.Months
+			   		this.Datess = this.pickerVisibles.getDate()
+			   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+			   		this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
+						}
+			   		console.log(this.Data)
+			   		//this.$store.dispatch("getSevenDate",this.Data)
+					}
+					if(this.dayIn == 2){
+			   		this.Time = this.nowDate.getTime()-604800000 + 86400000
+				   	this.pickerVisible = new Date(parseInt(this.Time))
+						this.Year = this.pickerVisible.getFullYear()
+			   		this.Month = this.pickerVisible.getMonth()+1
+			   		this.Month = this.Month<10?"0"+this.Month:this.Month
+			   		this.Dates = this.pickerVisible.getDate()
+			   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+						this.Times = this.nowDate.getTime()+ 86400000
+						this.pickerVisibles = new Date(parseInt(this.Times))
+						this.Years = this.pickerVisibles.getFullYear()
+			   		this.Months = this.pickerVisibles.getMonth()+1
+			   		this.Months = this.Months<10?"0"+this.Months:this.Months
+			   		this.Datess = this.pickerVisibles.getDate()
+			   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+			   		this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
+						}
+			   		//this.$store.dispatch("getSevenDate",this.Data)
+					}
+					if(this.dayIn == 3){
+			   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
+				   	this.pickerVisible = new Date(parseInt(this.Time))
+						this.Year = this.pickerVisible.getFullYear()
+			   		this.Month = this.pickerVisible.getMonth()+1
+			   		this.Month = this.Month<10?"0"+this.Month:this.Month
+			   		this.Dates = this.pickerVisible.getDate()
+			   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+						this.Times = this.nowDate.getTime()+ 86400000
+						this.pickerVisibles = new Date(parseInt(this.Times))
+						this.Years = this.pickerVisibles.getFullYear()
+			   		this.Months = this.pickerVisibles.getMonth()+1
+			   		this.Months = this.Months<10?"0"+this.Months:this.Months
+			   		this.Datess = this.pickerVisibles.getDate()
+			   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+			   		this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
+						}
+			   		//this.$store.dispatch("getSevenDate",this.Data)
+					}
+					if(this.dayIn == 3){
+			   		this.Time = this.nowDate.getTime()-604800000- 604800000+ 86400000
+				   	this.pickerVisible = new Date(parseInt(this.Time))
+						this.Year = this.pickerVisible.getFullYear()
+			   		this.Month = this.pickerVisible.getMonth()+1
+			   		this.Month = this.Month<10?"0"+this.Month:this.Month
+			   		this.Dates = this.pickerVisible.getDate()
+			   		this.Dates = this.Dates<10?"0"+this.Dates:this.Dates
+						this.Times = this.nowDate.getTime()+ 86400000
+						this.pickerVisibles = new Date(parseInt(this.Times))
+						this.Years = this.pickerVisibles.getFullYear()
+			   		this.Months = this.pickerVisibles.getMonth()+1
+			   		this.Months = this.Months<10?"0"+this.Months:this.Months
+			   		this.Datess = this.pickerVisibles.getDate()
+			   		this.Datess = this.Datess<10?"0"+this.Datess:this.Datess
+			   		this.Data = {
+							"year":this.Year,
+							"month":this.Month,
+							"date":this.Dates,
+							"years":this.Years,
+							"months":this.Months,
+							"dates":this.Datess,
+							"status":this.switchSta,
+							"groupBy":this.group
+						}
+			   		//this.$store.dispatch("getSevenDate",this.Data)
+					}
+				}
+			}
 	      },
 	  	selects (ev) {
 	  		var that = this

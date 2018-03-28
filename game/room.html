@@ -6,67 +6,10 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
 		<link rel="stylesheet" href="css/commont.css" />
 		<link rel="stylesheet" href="css/room.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
 	</head>
 	<body>
-		<div class="game-header">
-			<header>
-				<ul class="game-header-list">
-					<li class="game-header-list-first">
-						<a href="javascript:;">
-							<img src="img/logo-lol.png" />
-							<span>
-								<img src="img/l_logo.png" />
-							</span>
-							<em style="display: inline-block;width: 2px;height: 20px;border-left: 1px solid white;margin:0 15px 0;vertical-align: middle;"></em>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<img src="img/logo-bestgg-small.png" />
-							<span>Overwatch</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<img src="img/logo-overwatch-small.png" />
-							<span>Battlegrounds</span>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<img src="img/logo-pubg-small.png" />
-							<span>BEST.GG</span>
-						</a>
-					</li>
-				</ul>
-				<ul class="game-header-seacher">
-					<li class="game-header-seacher-first">
-						<form>
-							<input type="text" placeholder="召唤师名，召唤师名，…" />
-							<button>
-								<img src="img/btn-gnb-search@2x.png" />
-							</button>
-						</form>
-					</li>
-					<li>
-						<button>
-							<span>EUW</span>
-							<span>Simplified Chinese</span>
-						</button>
-					</li>
-				</ul>
-			</header>
-		</div>
-		<nav>
-			<ul class="game-nav">
-				<li><a href="javascript:;" class="nav-active">首頁</a></li>
-				<li><a href="index.html">英雄数据</a></li>
-				<li><a href="Statistics.html">统计</a></li>
-				<li><a href="RankingList.html">排行榜</a></li>
-				<li><a href="guessing.html">竞猜</a></li>
-				<li><a href="javascript:;">职业选手市场观战</a></li>
-			</ul>
-		</nav>
+		<div id="header"></div>
 		<div class="swiper-list">
 			<div class="swiper-container">
 		    <div class="swiper-wrapper">
@@ -103,12 +46,20 @@
 							<div>36 人正在匹配</div>
 						</a>
 					</div>
-					<div>
+					<div class="room-hover">
 						<a href="javascript:;">
 							<img src="img/1114213190985_100X100.png" />
 							<div class="room-blue">Solo匹配</div>
 							<div>36 人正在匹配</div>
 						</a>
+						<div class="button">
+							<a href="foundRoom.html">
+								<span>创建房间</span>
+							</a>
+							<a href="javascript:;">
+								<span>加入房间</span>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="room-every-list">
@@ -148,11 +99,105 @@
 						<b>22</b>
 						<time>dgfd</time>
 					</div>
-					<div>
-						<b>2</b>
-						<b>2</b>
+					<div class="free">
+						<b class="freeSmall">0</b>
+						<b class="freeBig">200</b>
 					</div>
-					<div></div>
+					<div class="selectRange">
+						<div class="selectRanges">
+							<div class="selectRange-bar">
+								<div class="button-left selectRange-button"></div>
+								<div class="button-right selectRange-button"></div>
+								<div class="selectRange-blue"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="room-content">
+				<div class="room-content-header">
+					<div class="room-one">竞赛类别</div>
+					<div class="room-two">房间名称</div>
+					<div class="room-three">参与人数</div>
+					<div class="room-four">中奖范围</div>
+					<div class="room-five">可参与次数</div>
+					<div class="room-six">奖金总额</div>
+					<div class="room-seven">截止时间</div>
+					<div class="room-eight">入场费</div>
+				</div>
+				<div class="room-content-list">
+					<div class="room-list-children">
+						<div class="col room-list-img">
+							<img src="img/logo-lol.png" />
+							<span>英雄联盟</span>
+						</div>
+						<div class="col room-list-name">
+							<p><span>LPL周一免费房</span><span>必开</span></p>
+							<p>前50%玩家每人获8果子</p>
+						</div>
+						<div class="col room-list-peopleNum">
+							<div>267 / 500</div>
+							<div class="progress">
+								<div class="progress-width"></div>
+							</div>
+						</div>
+						<div class="col room-list-range">50%</div>
+						<div class="room-list-num">
+							<div class="room-list-number">
+								<div class="room-list-rate"><span>0</span> / 2</div>
+								<div class="room-list-jia"></div>
+							</div>
+						</div>
+						<div class="col room-list-sum">
+							2000<span></span>
+						</div>
+						<div class="col room-list-time">
+							<div>2018-03-26</div>
+							<div>17:00</div>
+						</div>
+						<div class="col room-list-money">
+							<a href="javascript:;">
+								<span>0</span>
+								<i class="iconfont icon-arrow icon-arrow-xl right"></i>
+							</a>
+						</div>
+					</div>
+					<div class="room-list-children">
+						<div class="col room-list-img">
+							<img src="img/logo-lol.png" />
+							<span>英雄联盟</span>
+						</div>
+						<div class="col room-list-name">
+							<p><span>LPL周一免费房</span><span>必开</span></p>
+							<p>前50%玩家每人获8果子</p>
+						</div>
+						<div class="col room-list-peopleNum">
+							<div>267 / 500</div>
+							<div class="progress">
+								<div class="progress-width"></div>
+							</div>
+						</div>
+						<div class="col room-list-range">50%</div>
+						<div class="room-list-num">
+							<div class="room-list-number">
+								<div class="room-list-rate"><span>0</span> / 2</div>
+								<div class="room-list-jia"></div>
+							</div>
+						</div>
+						<div class="col room-list-sum">
+							2000<span></span>
+						</div>
+						<div class="col room-list-time">
+							<div>2018-03-26</div>
+							<div>17:00</div>
+						</div>
+						<div class="col room-list-money">
+							<a href="javascript:;">
+								<span>0</span>
+								<i class="iconfont icon-arrow icon-arrow-xl right"></i>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -161,6 +206,7 @@
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script>
 		$(function(){
+			$("#header").load("header.html #header")
 			var mySwiper = new Swiper('.swiper-container',{
 				effect : 'coverflow',
 				slidesPerView: 3,
@@ -175,6 +221,27 @@
 	       nextButton: '.swiper-button-next',
 					prevButton: '.swiper-button-prev',
 			})
+			$('.room-hover').eq(0).mouseenter(function(){
+				$('.button').eq(0).css('opacity','1')
+			})
+			$('.room-hover').eq(0).mouseleave(function(){
+				$('.button').eq(0).css('opacity','0')
+			})
+			setInterval(function(){
+				var Dates = new Date()
+				var TDate = new Date('2018-3-28 18:00:00')
+				var time = Dates.getTime()
+				var times = TDate.getTime()
+				var a = times-time
+				var hour = parseInt(a/1000/60/60%24)
+				var minute = parseInt(a/1000/60%60)
+				minute = minute<10 ? "0"+minute:minute
+				var second = parseInt(a/1000%60)
+				second = second<10 ? "0"+second:second
+				var time = hour + ":" + minute+ ":" + second
+				$('.room-sum time').eq(0).html(time)
+			},1000)
+			
 		})
 	</script>
 </html>

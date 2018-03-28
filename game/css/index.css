@@ -26,12 +26,12 @@
 }
 .game-section-content article{
 	width: 606px;
-	background: #f9f9fa;
+	background: white;
 	border: solid 1px #e9eff4;
 }
 .game-section-content aside{
 	width: 475px;
-	background: #f9f9fa;
+	background: white;
 	border: solid 1px #e9eff4;
 	border-left: none;
 }
@@ -39,7 +39,7 @@
 	display: flex;
 	width: 100%;
 	height: 50px;
-	background: white;
+	background: #fafbfd;
 	padding-left: 20px;
 	border-bottom: solid 1px #e9eff4;
 }

@@ -17,6 +17,19 @@ li{
 a{
 	text-decoration: none;
 }
+::-webkit-scrollbar-corner {
+    width: 6px;
+    height: 6px;
+    background: #b2b2b2;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 0;
+    border: 3px solid #fff;
+}
+::-webkit-scrollbar-thumb {
+    background: #b2b2b2;
+}
 .game-content{
 	width: 100%;
 	height: 100%;
@@ -24,16 +37,16 @@ a{
 .game-header{
 	width: 100%;
 	height: 56px;
-	background: #1ea1f7;
+	background: #0097A7;
 }
 .game-header header{
 	width: 1300px;
 	margin: auto;
-	padding: 12px 0;
 	position: relative;
 }
 .game-header-list{
 	width: 100%;
+	height: 100%;
 	display: flex;
 	margin: auto 0;
 }
@@ -41,6 +54,10 @@ a{
 	height: 32px;
 	line-height: 32px;
 	margin-right: 20px;
+	padding: 12px 0;
+}
+.game-header-list li:first-child{
+	padding-top: 4px;
 }
 .game-header-list li a{
 	display: block;
@@ -61,13 +78,13 @@ a{
 }
 .game-header-list-first a span{
 	display: inline-block;
-	width: 66px;
-	height: 14px;
-	vertical-align: initial !important;
+	width: 50px;
+	height: 50px;
 }
 .game-header-list-first a span img{
-	height: 16px;
-	
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
 }
 .game-header-seacher{
 	position: absolute;
@@ -82,11 +99,13 @@ a{
 .game-header-seacher li button{
 	border: 0;
 	background: none;
-	color: white;
+	color: #0097A7;
+	font-weight: bold;
+	outline: none;
 }
 .game-header-seacher li button span:nth-child(1){
 	background: white;
-	color: #0bacfc;
+	color: #0097A7;
 	padding: 5px;
 }
 .game-header-seacher-first{
@@ -109,7 +128,7 @@ a{
 }
 .game-header-seacher-first button{
 	background: white;
-	width: 50px;
+	width: 70px;
 	height: 32px;
 	position: absolute;
 	top: 0;
@@ -151,12 +170,12 @@ nav .game-nav li a:hover{
 	width: 100%;
 	background: rgba(0,0,0,.5);
 }
-.game-article div{
+.game-article>div{
 	width: 1080px;
 	height: 40px;
 	margin: 0 auto;
 }
-.game-article div a{
+.game-article>div>a{
 	display: block;
 	color: white;
 	width: 100%;

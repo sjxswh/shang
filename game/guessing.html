@@ -8,68 +8,7 @@
 	</head>
 	<body>
 		<div class="game-guessing">
-			<div class="game-header">
-				<header>
-					<ul class="game-header-list">
-						<li class="game-header-list-first">
-							<a href="javascript:;">
-								<img src="img/logo-lol.png" />
-								<span>
-									<img src="img/l_logo.png" />
-								</span>
-								<em style="display: inline-block;width: 2px;height: 20px;border-left: 1px solid white;margin:0 15px 0;vertical-align: middle;"></em>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/logo-bestgg-small.png" />
-								<span>Overwatch</span>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/logo-overwatch-small.png" />
-								<span>Battlegrounds</span>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<img src="img/logo-pubg-small.png" />
-								<span>BEST.GG</span>
-							</a>
-						</li>
-					</ul>
-					<ul class="game-header-seacher">
-						<li class="game-header-seacher-first">
-							<form>
-								<input type="text" placeholder="召唤师名，召唤师名，…" />
-								<button>
-									<img src="img/btn-gnb-search@2x.png" />
-								</button>
-							</form>
-						</li>
-						<li>
-							<button>
-								<span>EUW</span>
-								<span>Simplified Chinese</span>
-							</button>
-						</li>
-					</ul>
-				</header>
-			</div>
-			<nav>
-				<ul class="game-nav">
-					<li><a href="page.html">首頁</a></li>
-					<li><a href="index.html">英雄数据</a></li>
-					<li><a href="Statistics.html">统计</a></li>
-					<li><a href="RankingList.html">排行榜</a></li>
-					<li><a href="javascript:;" class="nav-active">竞猜</a></li>
-					<li><a href="javascript:;">职业选手市场观战</a></li>
-				</ul>
-			</nav>
-			<article class="game-article">
-				<div><a href="javascript:;">绝地求生战绩搜索就在OP.GG!</a></div>
-			</article>
+			<div class="header"></div>
 			<section class="guessing-section">
 				<div class="user-info">
 					<div class="user-info-detail">
@@ -2444,6 +2383,7 @@
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script>
 		$(function(){
+			$(".header").load("header.html #header")
 			var navList = Array.from($('.guessing-title-list li'))
 			navList.forEach(function(v,k){
 				v.onclick = function(){

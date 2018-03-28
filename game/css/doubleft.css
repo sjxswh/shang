@@ -208,7 +208,7 @@ b,strong{
 .dataContent-TierBox{
 	  border: 1px solid #cdd2d2;
     box-shadow: 0 1px #dcdfdf;
-    background: #f2f2f2;
+    background: white;
     border-radius: 2px;
     margin-top: 10px;
 }
@@ -353,7 +353,7 @@ b,strong{
     margin-left: 8px;
 }
 .heroTable-list{
-	 background: #ededed;
+	 background: white;
 }
 .heroList{
 	  display: table;
@@ -364,7 +364,7 @@ b,strong{
 	  display: table-cell;
     border-left: 1px solid #cdd2d2;
     border-bottom: 1px solid #cdd2d2;
-    background-color: #f2f2f2;
+    background-color: #fafbfd;
     vertical-align: middle;
     cursor: pointer;
     color: #879292;
@@ -463,12 +463,13 @@ b,strong{
     font-size: 12px;
     font-weight: bold;
     text-decoration: none;
+    background: #fafbfd;
 }
 .win-rate-row{
 	    display: table;
     width: 100%;
     border-bottom: 1px solid #cdd2d2;
-    background: #ededed;
+    background: white;
     color: #879292;
     text-align: center;
     font-size: 12px;
@@ -603,7 +604,7 @@ table{
     top: 0;
     cursor: pointer;
     font-size: 14px;
-    background: #f2f2f2;
+    background: white;
     border: 0;
 }
 .select-content{
@@ -1120,6 +1121,7 @@ table{
 	    margin: -1px 0 0 0;
     border: 1px solid #cdd2d2;
     border-top: none;
+    background: white;
 }
 
 .tabHeaders{

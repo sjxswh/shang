@@ -57,8 +57,8 @@
     font-size: 13px;
     vertical-align: middle;
     outline: none;
-        border: 1px solid #1a78ae;
-    background: #1f8ecd;
+    border: 1px solid #00838F;
+    background: #0097A7;
     color: #f2f2f2;
 }
 .ranking-header-tip{
@@ -255,14 +255,14 @@ table{
 }
 .ranking-content-table{
 	margin-top: 20px;
-    background-color: #ededed;
+    background-color: white;
     border: solid 1px #cdd2d2
 }
 .ranking-content-table thead th{
 	    height: 41px;
     padding: 0;
     border-bottom: 1px solid #cdd2d2;
-    background: #f2f2f2;
+    background: #fafbfd;
     line-height: 17px;
     font-size: 14px;
     text-align: left;
@@ -347,8 +347,8 @@ table{
 }
 .ranking-border{
 	    border: 1px solid #cdd2d2;
-    box-shadow: 0 1px #dcdfdf;
-    background: #f2f2f2;
+    box-shadow: 0 0 4px 0 #dcdfdf;
+    background: white;
     border-radius: 2px;
 }
 .hero-lists{
@@ -376,7 +376,7 @@ table{
 .hero-select{
 	    padding: 10px;
     border-bottom: 1px solid #d5d8d8;
-    background-color: #ededed;
+    background-color: white;
 }
 .hero-select input{
 	    display: block;
@@ -423,8 +423,10 @@ table{
     border-top: none;
 }
 .ranking-article{
-	    width: 678px;
+	    width: 658px;
     vertical-align: top;
+    padding: 10px;
+    background: white;
 }
 .ranking-summary-img{
 	    width: 75px;
@@ -503,10 +505,10 @@ table{
     width: 100%;
     padding: 7px 0 8px;
     border-radius: 4px;
-    background-color: #fff;
-    border: solid 1px #cdd2d2;
+    border: 1px solid #00838F;
+    background: #0097A7;
     line-height: 15px;
     font-size: 12px;
     text-align: center;
-    color: #9b9b9b;
+    color: white;
 }

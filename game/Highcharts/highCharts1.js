@@ -142,7 +142,7 @@ function highchartColumn(id){
 					type: 'column',
 					margin: [20, 20, 60, 60],
 					animation: false,
-					backgroundColor: "#ededed"
+					backgroundColor: "white"
 				},
 				/*credits: {text: _L('CHART_NOTICE_ABOVE_BRONZE')},*/
 				colors: ['rgba(0,160,210,.8)', 'rgba(0,207,188,.8)', 'rgba(145,213,76,.8)', 'rgba(255,198,89,.8)', 'rgba(255,108,129,.8)',],
@@ -336,7 +336,7 @@ function highchartsPie(id){
     var chart = Highcharts.chart(id, {
         chart: {
             type: 'pie',
-            backgroundColor: "#ededed"
+            backgroundColor: "white"
         },
         title: {
             text: null
@@ -395,7 +395,7 @@ function highchartsColm(id){
 	 var chart = Highcharts.chart(id, {
         chart: {
             type: 'column',
-            backgroundColor: "#ededed"
+            backgroundColor: "white"
         },
         colors: ['rgba(0,160,210,.8)', 'rgba(0,207,188,.8)', 'rgba(255,198,89,.8)', 'rgba(255,108,129,.8)'],
         title: {
@@ -614,7 +614,7 @@ function highchartsspline(op){
 	Highcharts.chart(op.id, {
     chart: {
         type: 'spline',
-        backgroundColor:"#eaeaea",
+        backgroundColor:"white",
     },
     title: {
         text: null

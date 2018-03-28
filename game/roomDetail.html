@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/commont.css" />
+		<link rel="stylesheet" href="css/roomDetail.css" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+	</head>
+	<body>
+		<div class="header"></div>
+		<article class="game-article">
+			<div style="height: auto;display: flex;justify-content: space-between;padding: 33px 0 24px;height: 140px;">
+				<div class="room-article-left">
+					<img src="img/logo-lol.png" />
+					<div class="room-article-content">
+						<div class="room-article-name">LPL周三免费房<span class="radiusBg">必开</span></div>
+						<p>前50%玩家每人获8果子</p>
+						<div class="room-article-Floating">
+							<div class="room-article-list">
+								<a href="javascript:;">房间详情</a>
+								<div></div>
+							</div>
+							<div class="room-article-list">
+								<a href="javascript:;">房间详情</a>
+								<div></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<ul class="room-article-right">
+					<li>
+						<div>
+							<span class="time">26:23:18</span>
+						</div>
+						<div>截止时间</div>
+					</li>
+					<li>
+						<div>
+							<span>0</span> / 2
+						</div>
+						<div>参与次数</div>
+					</li>
+					<li>
+						<div>140 / 150</div>
+						<div>参与人数</div>
+					</li>
+					<li>
+						<div>
+							<span>2</span>
+						</div>
+						<div>入场费</div>
+					</li>
+				</ul>
+			</div>
+		</article>
+		<section>
+			<div class="roomDetail-content">
+				<div class="roomDetail-content-left">
+					<div class="roomDetail-content-header"><span>挑选阵容</span><a href="javascript:;">返回</a></div>
+					<div class="roomDetail-match">
+						<div class="roomDetail-match-left">
+							<div>2</div>
+							<div>比赛</div>
+						</div>
+						<div class="roomDetail-match-right">
+							<div class="left-arrow"><i class="iconfont icon-arrow icon-arrow-xl left"></i></div>
+							<div class="roomDetail-match-list">
+								<div class="roomDetail-match-lists">
+									<div>2018 LPL春季赛	</div>
+									<div>
+										<img src="img/1114213190985_100X100.png" /><span class="match-name">iG</span><span>03-28</span>
+									</div>
+									<div>
+										<img src="img/1114213190985_100X100.png" /><span class="match-name">iG</span><span>03-28</span>
+									</div>
+								</div>
+								<div class="roomDetail-match-lists">
+									<div>2018 LPL春季赛	</div>
+									<div>
+										<img src="img/1114213190985_100X100.png" /><span class="match-name">iG</span><span>03-28</span>
+									</div>
+									<div>
+										<img src="img/1114213190985_100X100.png" /><span class="match-name">iG</span><span>03-28</span>
+									</div>
+								</div>
+							</div>
+							<div class="right-arrow"><i class="iconfont icon-arrow icon-arrow-xl right"></i></div>
+						</div>
+					</div>
+					<div class="roomDetail-list">
+						<div class="roomDetail-list-header">
+							<div class="positionF">位置</div>
+							<div class="Player">选手</div>
+							<div class="goodhero">擅长英雄</div>
+							<div class="selectHero">选择英雄</div>
+						</div>
+						<div class="roomDetail-list-content">
+							<div class="roomDetail-list-children">
+								<div class="positionF loction">中单</div>
+								<div class="Player"></div>
+								<div class="goodhero selectHero data">
+									<button></button>
+								</div>
+								<div class="selectHero"></div>
+							</div>
+							<div class="roomDetail-list-children">
+								<div class="positionF loction">上单</div>
+								<div class="Player"></div>
+								<div class="goodhero selectHero data">
+									<button></button>
+								</div>
+								<div class="selectHero"></div>
+							</div>
+							<div class="roomDetail-list-children">
+								<div class="positionF loction">打野</div>
+								<div class="Player"></div>
+								<div class="goodhero selectHero data">
+									<button></button>
+								</div>
+								<div class="selectHero"></div>
+							</div>
+							<div class="roomDetail-list-children">
+								<div class="positionF loction">辅助</div>
+								<div class="Player"></div>
+								<div class="goodhero selectHero data">
+									<button></button>
+								</div>
+								<div class="selectHero"></div>
+							</div>
+							<div class="roomDetail-list-children">
+								<div class="positionF loction">ADC</div>
+								<div class="Player"></div>
+								<div class="goodhero selectHero data">
+									<button></button>
+								</div>
+								<div class="selectHero"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="roomDetail-content-right"></div>
+			</div>
+		</section>
+	</body>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script>
+		$(function(){
+			$(".header").load("header.html #header")
+			var dataList = Array.from($('.data button'))
+			dataList.forEach(function(v,k){
+				v.onclick = function(){
+					var bb = `<div class="positionF loction">中单</div>
+								<div class="Player PlayerDetail">
+									<img src="img/Katarina.png" />
+									<div class="PlayerDetail-right">
+										<a href="javascript:;">ScarletRedHands</a>
+										<div class="PlayerDetail-smallIng"><img src="img/challenger_1.png" /><span> Challenger</span><b> 1,243 LP</b></div>
+										<div class="PlayerDetail-progress">
+											<div class="progressRate">
+												<div class="winTate ratePro"></div>
+												<div class="winText text">150</div>
+												<div class="loseRate ratePro"></div>
+												<div class="loseText text">130</div>
+											</div>
+											<span style="line-height: 20px;height: 20px;margin-left: 6px;">59%</span>
+										</div>
+									</div>
+								</div>
+								<div class="goodhero">
+									<p>
+										<img src="img/Caitlyn-1.png" /><span>67% </span>(46W 23L) <b>3.64:1</b>KDA
+									</p>
+									<p>
+										<img src="img/Caitlyn-1.png" /><span>67% </span>(46W 23L) <b>3.64:1</b>KDA
+									</p>
+									<p>
+										<img src="img/Caitlyn-1.png" /><span>67% </span>(46W 23L) <b>3.64:1</b>KDA
+									</p>
+								</div>
+								<div class="selectHero selectHeros">
+									<button></button>
+									<div class="select-list">
+										<div class="selectInput">
+											<div><input type="text" /><span>Seacher</span></div><b class="close">X</b>
+										</div>
+										<div class="select-list-children">
+											<div>
+												<img src="img/Caitlyn-1.png" /><span>Caitlyn</span>
+											</div>
+											<div>
+												<img src="img/Caitlyn-1.png" /><span>sdsff</span>
+											</div>
+											<div>
+												<img src="img/Ekko.png" /><span>gdfhf</span>
+											</div>
+										</div>
+									</div>
+								</div>`
+								$(this).parent().parent().html(bb)
+						$('.selectInput span').eq(0).on("click",function(){
+							var value = $('.selectInput input').val()
+							var re =new RegExp("^" + value +"*","g")
+							var listName = Array.from($('.select-list-children div span'))
+							listName.forEach((v,k) =>{
+								var name = $('.select-list-children div span').eq(k).html()
+								$('.select-list-children div').eq(k).css('display','none')
+								if(re.test(name) == true){
+									$('.select-list-children div').eq(k).css('display','block')
+								}
+							})
+						})
+						var buttonList = Array.from($('.selectHeros button'))
+						buttonList.forEach(function(v,k){
+							v.onclick = function(){
+								$(this).next().css('display','block')
+							}
+						})
+						var closeList = Array.from($('.close'))
+						closeList.forEach(function(v,k){
+							v.onclick = function(){
+								$(this).parent().parent().css('display','none')
+							}
+						})
+						var herolist = Array.from($('.select-list-children div'))
+						herolist.forEach(function(v,k){
+							v.onclick = function(){
+								var srcIImg = $(this).children('img').attr('src')
+								$(this).parent().parent().css('display','none')
+								var ss = `<img src="${ srcIImg }" />`
+								$(this).parent().parent().parent().append(ss)
+								$(this).parent().parent().prev().css('display','none')
+							}
+						})
+				}
+			})
+			
+			
+			setInterval(function(){
+				var Dates = new Date()
+				var TDate = new Date('2018-3-29 18:00:00')
+				var time = Dates.getTime()
+				var times = TDate.getTime()
+				var a = times-time
+				var hour = parseInt(a/1000/60/60%24)
+				var minute = parseInt(a/1000/60%60)
+				minute = minute<10 ? "0"+minute:minute
+				var second = parseInt(a/1000%60)
+				second = second<10 ? "0"+second:second
+				var time = hour + ":" + minute+ ":" + second
+				$('.time').eq(0).html(time)
+			},1000)
+		})
+	</script>
+</html>

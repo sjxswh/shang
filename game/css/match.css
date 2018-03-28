@@ -387,10 +387,12 @@
 	    margin: 10px 0;
     font-size: 18px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 .rates{
-	display: inline-block;
-	width: 80px;
+	display: block;
+	width: 100px;
 	text-align: center;
 	color: #11bcfb;
 }

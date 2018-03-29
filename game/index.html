@@ -12,22 +12,22 @@
 			<section>
 				<div class="game-section-content"> 
 					<header>
-						<div>OP.GG uses data based on ranked games from Platinum and higher.</div>
-						<div> Korea - 版本 : 8.3</div>
+						<div></div>
+						<div></div>
 					</header>
 					<section>
 						<article>
 							<ul class="game-section-content-list">
-								<li class="article-active"><a href="javascript:;">全部</a></li>
-								<li><a href="javascript:;">上单</a></li>
-								<li><a href="javascript:;">打野</a></li>
-								<li><a href="javascript:;">中单</a></li>
-								<li><a href="javascript:;">下路</a></li>
-								<li><a href="javascript:;">辅助</a></li>
-								<li><a href="javascript:;">周免英雄</a></li>
+								<li class="article-active"><a href="javascript:;">All</a></li>
+								<li><a href="javascript:;">Top</a></li>
+								<li><a href="javascript:;">Jungle</a></li>
+								<li><a href="javascript:;">Middle</a></li>
+								<li><a href="javascript:;">ADC</a></li>
+								<li><a href="javascript:;">Support</a></li>
+								<li><a href="javascript:;">Free Rotation</a></li>
 								<li class="game-section-last">
 									<form>
-										<input type="text" placeholder="搜索英雄 " />
+										<input type="text" placeholder="Search a Champion  " />
 									</form>
 								</li>
 							</ul>
@@ -293,21 +293,23 @@
 							</div>
 						</article>
 						<aside>
-							<ul class="game-section-content-list">
-								<li class="game-section-first"><h2>Champion Rankings</h2></li>
-								<li><a href="javascript:;" class="article-active"><i style="background: url(img/icon-champion-p.png);display: inline-block;width: 14px;height: 16px;margin-right: 4px;"></i>Tier</a></li>
-								<li><a href="javascript:;">胜率</a></li>
-								<li><a href="javascript:;">登场率</a></li>
-								<li><a href="javascript:;">禁用率</a></li>
-							</ul>
+							<div>
+								<h2 class="game-section-first">Champion Rankings</h2>
+								<ul class="game-section-content-list">
+									<li class="article-active"><a href="javascript:;"><i style="background: url(img/icon-champion-p.png);display: inline-block;width: 14px;height: 16px;margin-right: 4px;"></i>Tier</a></li>
+									<li><a href="javascript:;">Win Rate</a></li>
+									<li><a href="javascript:;">Pick Rate</a></li>
+									<li><a href="javascript:;">BanRate</a></li>
+								</ul>
+							</div>
 							<div class="game-aside-content-hero">
 								<ul class="game-aside-list">
-									<li><a href="javascript:;" class="aside-active">全部</a></li>
-									<li><a href="javascript:;">上单</a></li>
-									<li><a href="javascript:;">打野</a></li>
-									<li><a href="javascript:;">中单</a></li>
-									<li><a href="javascript:;">下路</a></li>
-									<li><a href="javascript:;">辅助</a></li>
+									<li><a href="javascript:;" class="aside-active">All</a></li>
+									<li><a href="javascript:;">Top</a></li>
+									<li><a href="javascript:;">Jungle</a></li>
+									<li><a href="javascript:;">Middle</a></li>
+									<li><a href="javascript:;">ADC</a></li>
+									<li><a href="javascript:;">Support</a></li>
 								</ul>
 								<table class="game-aside-table">
 									<colgroup>
@@ -324,9 +326,9 @@
 											<th>#</th>
 											<th></th>
 											<th></th>
-											<th>英雄</th>
-											<th>胜率</th>
-											<th>登场率</th>
+											<th>Champion</th>
+											<th>Win Rate</th>
+											<th>Pick Rate</th>
 											<th>Tier</th>
 										</tr>
 									</thead>
@@ -445,6 +447,13 @@
 	<script>
 		$(function(){
 			$(".header").load("header.html #header")
-		})		
+			setTimeout(function(){
+				$('.game-header-list li').eq(2).addClass('nav-active')
+				$('.game-header-list li').eq(2).siblings().removeClass('nav-active')
+				$('.buttonSeacher').eq(0).click(function(){
+					location.href = "doubleft.html?name="+$("#seacher").val()
+				})
+			})
+		})
 	</script>
 </html>

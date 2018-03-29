@@ -47,21 +47,18 @@
 					<div class="doubleft-introduce-nav">
 						<ul class="doubleft-introduce-navList">
 							<li class="navList-active">
-								<a href="javascript:;">综合</a>
+								<a href="javascript:;">Summary</a>
 							</li>
 							<li>
-								<a href="javascript:;">英雄</a>
+								<a href="javascript:;">Champions</a>
 							</li>
 							<li>
-								<a href="javascript:;">战区</a>
+								<a href="javascript:;">Leagues</a>
 							</li>
 							<li>
 								<a href="javascript:;">Live Game</a>
 							</li>
 						</ul>
-					</div>
-					<div class="game-section-img">
-							<img src="img/1.jpg" />
 					</div>
 					<div class="doubleft-introduces">
 						<div style="display: block;">
@@ -114,8 +111,8 @@
 									<div class="dataContent-TierBox">
 										<div>
 											<ul class="heroList">
-												<li class="heroList-active"><a href="javascript:;">全部</a></li>
-												<li><a href="javascript:;">单独排位赛</a></li>
+												<li class="heroList-active"><a href="javascript:;">S8 total</a></li>
+												<li><a href="javascript:;">Ranked Solo</a></li>
 												<li><a href="javascript:;">Ranked Flex</br>5v5 </a></li>
 												<li><a href="javascript:;">Ranked Flex</br>3v3 </a></li>
 											</ul>
@@ -557,7 +554,7 @@
 									</div>
 									<div class="dataContent-TierBox">
 										<div class="win-rate">
-											最近和谁玩过（最近20场比赛）
+											Recently Played With (Recent 20 Games)
 										</div>
 										<div>
 											<table class="play-table">
@@ -570,11 +567,11 @@
 												</colgroup>
 												<thead>
 													<tr>
-														<th>召唤师</th>
-														<th>游戏</th>
-														<th>胜利</th>
-														<th>败</th>
-														<th>胜率</th>
+														<th>Summoner</th>
+														<th>Played</th>
+														<th>Win</th>
+														<th>Lose</th>
+														<th>Win rate</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -633,10 +630,10 @@
 								  	<div class="match-header">
 								  		<ul class="match-header-list">
 								  			<li class="match-header-active">
-								  				<a href="javascript:;">全部</a>
+								  				<a href="javascript:;">Total</a>
 								  			</li>
 								  			<li>
-								  				<a href="javascript:;">单独排位赛</a>
+								  				<a href="javascript:;">Ranked Solo</a>
 								  			</li>
 								  			<li>
 								  				<a href="javascript:;">Ranked Flex</a>
@@ -644,17 +641,17 @@
 								  			<li>
 								  				<span class="match-seclect">
 								  					<select>
-								  						<option>游戏方式</option>
+								  						<option>Queue Type</option>
 								  						<option>Normal (Blind Pick)</option>
-								  						<option>极地大乱斗</option>
-								  						<option>活動遊戲</option>
+								  						<option>ARAM</option>
+								  						<option>Event Game</option>
 								  					</select>
 								  				</span>
 								  			</li>
 								  		</ul>
 								  		<div class="select-content">
 								  			<div class="select">
-									  			<input type="text" placeholder="搜索英雄" />
+									  			<input type="text" placeholder="Search a champion" />
 									  			<div class="select-img">
 									  				<i></i>
 									  			</div>
@@ -662,7 +659,7 @@
 									  		<div class="select-lists" style="display: none;">
 									  			<ul class="select-list">
 									  				<li class="select-cell">
-									  					<div class="select-list-title">最近常用英雄</div>
+									  					<div class="select-list-title">Recently Played</div>
 									  					<div>
 									  						<ul class="select-list-content">
 									  							<li>
@@ -690,7 +687,7 @@
 									  					</div>
 									  				</li>
 									  				<li class="select-cell">
-									  					<div class="select-list-title">英雄列表</div>
+									  					<div class="select-list-title">Champion List</div>
 									  					<div>
 									  						<ul  class="select-list-content">
 									  							<li>
@@ -1044,7 +1041,7 @@
 								  		<div class="doubleft-row-detail" style="display: none;">
 								  			<ul class="tabHeaders">
 								  				<li class="tablist-active">
-								  					<a href="javascript:;">综合</a>
+								  					<a href="javascript:;">Overview</a>
 								  				</li>
 								  				<li>
 								  					<a href="javascript:;">Team Analysis</a>
@@ -1074,14 +1071,14 @@
 								  						</colgroup>
 								  						<thead>
 								  							<tr>
-								  								<th colspan="4"><span>胜利</span><em style="font-style: normal;">(红队)</em></th>
-								  								<th>物品</th>
+								  								<th colspan="4"><span>Victory</span><em style="font-style: normal;">(Blue Team)</em></th>
+								  								<th>Item</th>
 								  								<th>KDA</th>
-								  								<th>伤害</th>
-								  								<th>眼</th>
+								  								<th>Damage</th>
+								  								<th>Wards</th>
 								  								<th>CS</th>
-								  								<th>金币</th>
-								  								<th>段位</th>
+								  								<th>Gold</th>
+								  								<th>Tier</th>
 								  							</tr>
 								  						</thead>
 								  						<tbody class="win-bodys">
@@ -1263,14 +1260,14 @@
 								  						</colgroup>
 								  						<thead>
 								  							<tr>
-								  								<th colspan="4"><span>失败</span><em style="font-style: normal;">(蓝队)</em></th>
-								  								<th>物品</th>
+								  								<th colspan="4"><span>Defeat</span><em style="font-style: normal;">(Red Team)</em></th>
+								  								<th>Item</th>
 								  								<th>KDA</th>
-								  								<th>伤害</th>
-								  								<th>眼</th>
+								  								<th>Damage</th>
+								  								<th>Wards</th>
 								  								<th>CS</th>
-								  								<th>金币</th>
-								  								<th>段位</th>
+								  								<th>Gold</th>
+								  								<th>Tier</th>
 								  							</tr>
 								  						</thead>
 								  						<tbody class="lose-bodys">
@@ -5101,9 +5098,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="game-section-img" style="margin-top: 20px;">
-							<img src="img/1.jpg" />
-					</div>
 				</div>
 			</section>
 			<footer>
@@ -5144,16 +5138,13 @@
 	<script src="https://cdn.hcharts.cn/highcharts/highcharts-more.js"></script>
 	<script src="Highcharts/highCharts1.js"></script>
 	<script>
-		window.onload = function(){
-			$(".header").load("header.html #header")
-			console.log($('.buttonSeacher').eq(0))
-			$('.buttonSeacher').eq(0).click(function(){
-				console.log(1)
-				location.href = "doubleft.html?name="+$("#seacher").val()
-			})
-		}
 		$(function(){
-			
+			$(".header").load("header.html #header")
+			setTimeout(function(){
+				$('.buttonSeacher').eq(0).click(function(){
+					location.href = "doubleft.html?name="+$("#seacher").val()
+				})
+			})
 			var doubleftnavList = Array.from($('.doubleft-introduce-navList li'))
 			doubleftnavList.forEach(function(v,k){
 				v.onclick = function(){

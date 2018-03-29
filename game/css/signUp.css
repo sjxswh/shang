@@ -1,0 +1,66 @@
+.signUpForm{
+ background: #fafbfd;
+ width: 1000px;
+ margin: 30px auto 0;
+ box-shadow:  0 0 4px 0 rgba(226,234,239,.8);
+ padding: 20px;
+}
+.signUpForm div{
+	background: white;
+	width: 500px;
+	height: 50px;
+	 box-shadow:  0 0 4px 0 rgba(226,234,239,.8);
+}
+.signUpForm div label{
+	display: inline-block;
+	width: 100px;
+	height: 100%;
+	line-height: 50px;
+	text-indent: 24px;
+	font-size: 16px;
+}
+.signUpForm div input{
+	width: 300px;
+	height: 100%;
+	border: 0;
+	outline: none;
+}
+.signUpForm p{
+	margin: 10px 0;
+	text-indent: 24px;
+}
+.signUpForm .field-offset{
+	background: none;
+	box-shadow:  none;
+	margin-top: 10px;
+	height: 20px;
+	line-height: 20px;
+	text-indent: 24px;
+}
+.field-offsets label{
+	width: 100% !important;
+	line-height: 20px !important;
+	text-indent: 0 !important;
+}
+.button{
+	width: 500px;
+	height: 50px;
+	background: #0097A7;
+	color: white;
+	text-align: center;
+	line-height: 50px;
+	border: 0;
+	box-shadow: 0 0 4px 0 rgba(0,131,143,.8);
+	margin-top: 10px;
+}
+.button a{
+	color: white;
+}
+.signUpForm .field-offsets{
+	display: flex;
+}
+.signUpForm .field-offsets input{
+	width: 50px;
+	height: 100%;
+	
+}

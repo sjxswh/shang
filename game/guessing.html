@@ -2384,6 +2384,13 @@
 	<script>
 		$(function(){
 			$(".header").load("header.html #header")
+			setTimeout(function(){
+				$('.game-header-list li').eq(5).addClass('nav-active')
+				$('.game-header-list li').eq(5).siblings().removeClass('nav-active')
+				$('.buttonSeacher').eq(0).click(function(){
+					location.href = "doubleft.html?name="+$("#seacher").val()
+				})
+			})
 			var navList = Array.from($('.guessing-title-list li'))
 			navList.forEach(function(v,k){
 				v.onclick = function(){

@@ -1,7 +1,7 @@
 function hightchartData(id){
 	var chart = Highcharts.chart(id, {
 	  chart:{
-	  	  backgroundColor: '#f9f9fa',
+	  	  backgroundColor: 'white',
 	  	  type:"line"
 	  },
     title: {

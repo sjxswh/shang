@@ -198,18 +198,23 @@
 									</div>
 								</div>`
 								$(this).parent().parent().html(bb)
-						$('.selectInput span').eq(0).on("click",function(){
-							var value = $('.selectInput input').val()
-							var re =new RegExp("^" + value +"*","g")
-							var listName = Array.from($('.select-list-children div span'))
-							listName.forEach((v,k) =>{
-								var name = $('.select-list-children div span').eq(k).html()
-								$('.select-list-children div').eq(k).css('display','none')
-								if(re.test(name) == true){
-									$('.select-list-children div').eq(k).css('display','block')
-								}
-							})
-						})
+								var selectSpan = Array.from($('.selectInput span'))
+								selectSpan.forEach(function(v,k){
+									v.onclick = function(){
+										
+										var value = $('.selectInput input').eq(k).val()
+										var re =new RegExp("^" + value +"*","g")
+										var listName = Array.from($('.select-list-children div span'))
+										listName.forEach((v,k) =>{
+											var name = $('.select-list-children div span').eq(k).html()
+											$('.select-list-children div').eq(k).css('display','none')
+											if(re.test(name) == true){
+												$('.select-list-children div').eq(k).css('display','block')
+											}
+										})
+									}
+								})
+						
 						var buttonList = Array.from($('.selectHeros button'))
 						buttonList.forEach(function(v,k){
 							v.onclick = function(){

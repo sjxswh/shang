@@ -563,6 +563,7 @@ table{
 	display: flex;
 	justify-content: space-between;
 	border-bottom: 1px solid #cdd2d2;
+	background: #fafbfd;
 }
 .match-header-list{
 	display: flex;
@@ -604,7 +605,7 @@ table{
     top: 0;
     cursor: pointer;
     font-size: 14px;
-    background: white;
+    background: #fafbfd;
     border: 0;
 }
 .select-content{
@@ -617,7 +618,7 @@ table{
     width: 114px;
     height: 17px;
     padding: 8px 30px 9px 9px;
-    background-color: #f2f2f2;
+    background-color: #fafbfd;
     box-sizing: content-box;
 }
 .select input{
@@ -627,7 +628,7 @@ table{
     font-size: 13px;
     border: none;
     outline: none;
-    background-color: #f2f2f2;
+    background-color: #fafbfd;
 }
 .select-img{
 	    position: absolute;
@@ -668,11 +669,11 @@ table{
     vertical-align: top;
 }
 .select-cell:nth-child(1){
-	background: url(../img/img_boxbg_recent.png);
+	background: white;
 	border-top: 1px solid #cdd2d2;
 }
 .select-cell:nth-child(2){
-	background: url(../img/img_boxbg.png);
+	background: #fafbfd;
 }
 .select-list-title{
 	      height: 13px;
@@ -1774,6 +1775,7 @@ table{
     overflow: hidden;
     height: 34px;
     padding-left: 10px;
+    background: #fafbfd;
 }
 .TierBoxList li{
 	  display: inline-block;
@@ -1790,7 +1792,7 @@ table{
     border-bottom: 2px solid #1f8ecd;
 }
 .TierBox-tableHeader{
-	    background-color: #f2f2f2;
+	    background-color: #fafbfd;
     border-bottom: solid 1px #cdd2d2;
     padding: 6px 0;
     text-align: center;
@@ -1842,7 +1844,7 @@ table{
     vertical-align: middle;;
 }
 .TierBox-tablelist tbody{
-	    background-color: #ededed;
+	    background-color: white;
 }
 .TierBox-tablelist tbody td{
 	text-align: center;

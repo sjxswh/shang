@@ -229,14 +229,13 @@
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
-  background: #f5f5f5;
+  background: white;
 }
 .game-detail-content-table article table thead{
-	background: white;
+	background: #fafbfd;
 }
 .game-detail-content-table article table thead th{
 	  height: 40px;
-    background: #fff;
     border-bottom: solid 1px #e6e6e6;
     vertical-align: middle;
     line-height: 17px;
@@ -504,11 +503,11 @@
 	padding: 10px 16px 0;
 	font-size: 14px;
   color: #222;
-  background: #fff;
+  background: #fafbfd;
   border-bottom: 1px solid #e6e6e6;
 }
 .game-detail-box-content{
-	  background-color: #f9f9fa;
+	  background-color: white;
     border: solid 1px #e6e6e6
 }
 .game-detail-box-content .game-detail-hightchart{
@@ -568,7 +567,7 @@
   width: 100%;
 }
 .game-detail-aisde-table tbody{
-	background: #f9f9fa;
+	background: white;
 }
 .game-detail-aisde-table tbody tr{
 	border-bottom: solid 1px #e9eff4;

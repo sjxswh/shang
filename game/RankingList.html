@@ -15,26 +15,26 @@
 					<div class="ranking-header-list">
 						<ul>
 							<li class="ranking-header-list-active">
-								<a href="javascript:;">排行榜</a>
+								<a href="javascript:;">Leaderboards</a>
 							</li>
 							<li>
-								<a href="javascript:;">擅长英雄</a>
+								<a href="javascript:;">Champions</a>
 							</li>
 							<li>
-								<a href="javascript:;">等级</a>
+								<a href="javascript:;">Level</a>
 							</li>
 						</ul>
 						<form>
 							<div>
-								<input type="text" placeholder="召唤师名称" />
+								<input type="text" placeholder="Summoner Name" />
 							</div>
-							<button>搜索</button>
+							<button>Search</button>
 						</form>
 					</div>
 				</div>
 				<div class="ranking-content">
 					<div class="ranking-content-table-list" style="display: block;">
-						<div class="ranking-header-tip"><span>当前有 1,005,401 名召唤师正在召唤师峡谷中。</span><small>仅显示段位在青铜以上的召唤师。 排位实时更新。</small></div>
+						<div class="ranking-header-tip"><span>There are currently 1,819,685 summoners on Summoner's Rift</span><small>Displaying summoners that are bronze or above. Rankings are updated periodically.</small></div>
 						<div>
 							<ul class="ranking-heroList">
 								<li class="ranking-heroFirst">
@@ -184,12 +184,12 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th>召唤师</th>
-									<th>段位</th>
+									<th>Summoners</th>
+									<th>Tier</th>
 									<th>LP</th>
-									<th>等级</th>
-									<th>队伍</th>
-									<th>胜率</th>
+									<th>Level</th>
+									<th>Team</th>
+									<th>Win rate</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -746,6 +746,13 @@
 	<script>
 		$(function(){
 			$(".header").load("header.html #header")
+			setTimeout(function(){
+				$('.game-header-list li').eq(4).addClass('nav-active')
+				$('.game-header-list li').eq(4).siblings().removeClass('nav-active')
+				$('.buttonSeacher').eq(0).click(function(){
+					location.href = "doubleft.html?name="+$("#seacher").val()
+				})
+			})
 			var pagelist = Array.from($('.ranking-page-list li'))
 			pagelist.forEach(function(v,k){
 				v.onclick = function(){

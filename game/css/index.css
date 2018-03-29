@@ -56,10 +56,10 @@
 	border-bottom: 2px solid #4990e2;
 }
 .game-section-last {
-	width: 192px;
+	width: 160px;
 	height: 36px;
 	margin-top: 8px;
-	margin-left: 60px;
+	margin-left: 20px;
 }
 .game-section-last form {
 	width: 100%;
@@ -105,15 +105,16 @@
 	margin-bottom: 1px;
 }
 .game-section-first{
-	margin-right: 40px;
-}
-.game-section-first h2{
 	padding: 15px 7px;
 	color: #222;
 	font-size: 14px;
+	background: #fafbfd;
 }
 aside .game-section-content-list li{
 	padding: 0 5px;
+}
+.game-section-content-list li:first-child{
+	margin-left: 120px;
 }
 .game-aside-content-hero{
 	padding: 20px;

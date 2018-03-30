@@ -1,7 +1,7 @@
 .user-info{
 	position: relative;
 	top: 0;
-	    background: #efefef;
+	    background: #f8f8f8;
     padding: 6px 20px 6px 6px;
     line-height: 46px;
     display: flex;
@@ -106,9 +106,7 @@
     background: url(../img/sprite-landing.png);
     background-position: -34px -34px;
 }
-.game-guessing{
-	    background: #f8f8f8;
-}
+
 .game-guessing>section{
 	width: 1240px;
 	margin: 0 auto 0;
@@ -693,7 +691,7 @@
     line-height: 196px;
     height: 196px;
     position: relative;
-    background: #ececec;
+    background: #f8f8f8;
     overflow: hidden;
 }
 .people-content .people-img img{

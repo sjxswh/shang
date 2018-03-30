@@ -139,9 +139,43 @@
 						</div>
 					</div>
 				</div>
-				<div class="roomDetail-content-right"></div>
+				<div class="roomDetail-content-right">
+					<h2>游戏规则</h2>
+					<div>fdfgfhgjkfdfgfdhjhjfdfgfhgjkfdfgfdhjhjfdfgfhgjkfdfgfdhjhjfdfgfhgjksd fdfgfdhjhjfdfgfhgjkfdfgfdhjhjfdfgfhgjkfdfgfdhjhj</div>
+				</div>
 			</div>
 		</section>
+		<footer>
+				<div class="game-footer">
+					<ul class="game-footer-list">
+						<li>
+							<a href="javascript:;">ABOUT OP.GG</a>
+						</li>
+						<li>
+							<a href="javascript:;">LOGO历史记录</a>
+						</li>
+						<li>
+							<a href="javascript:;">个人信息处理方针</a>
+						</li>
+						<li>
+							<a href="javascript:;">帮助</a>
+						</li>
+						<li>
+							<a href="javascript:;">合作建议</a>
+						</li>
+						<li>
+							<a href="javascript:;">疑问/反馈</a>
+						</li>
+					</ul>
+					<div>© 2012-2018 OP.GG.Data based on League of Legends Europe West.</div>
+					<ul class="game-footer-list game-footer-list2">
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+					</ul>
+				</div>
+			</footer>
 	</body>
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script>
@@ -240,17 +274,18 @@
 				}
 			})
 			
-			
+			var times = 0
 			setInterval(function(){
 				var Dates = new Date()
-				var TDate = new Date('2018-3-29 18:00:00')
-				var time = Dates.getTime()
-				var times = TDate.getTime()
-				var a = times-time
-				var hour = parseInt(a/1000/60/60%24)
-				var minute = parseInt(a/1000/60%60)
+				//var TDate = new Date('2018-3-30 18:00:00')
+				times = times+1000
+				//var times = TDate.getTime()
+				//var a = times-time
+				//console.log(times)
+				var hour = parseInt(times/1000/60/60%24)
+				var minute = parseInt(times/1000/60%60)
 				minute = minute<10 ? "0"+minute:minute
-				var second = parseInt(a/1000%60)
+				var second = parseInt(times/1000%60)
 				second = second<10 ? "0"+second:second
 				var time = hour + ":" + minute+ ":" + second
 				$('.time').eq(0).html(time)

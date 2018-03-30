@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/commont.css" />
+		<link rel="stylesheet" href="css/signUp.css" />
+	</head>
+	<body>
+		<div class="header"></div>
+		<section>
+			<div class="signUp-title">
+				<span>Sign In</span> or<a href="signUp.html"> Sign Up</a>
+			</div>
+			<div class="signUpForm">
+				<div class="field gig-field" id="field-Account-input" style="display: flex;">
+					<label for="email-input" class="twelve">Account</label>
+					<input class="field-input" id="Account-input" type="text" data-bhc="email:email" tabindex="0" name="email" autocorrect="off" data-bhc-path="LoginForm|email:email">
+					<span class="icon icon-email"></span>
+				</div>
+				<p class="one" style="width: 100%;height: 20px;"></p>
+				<p  class="two" style="width: 100%;height: 20px;color: red;display: none;">With letters, numbers and underlines, the length is 6-20.</p>
+				<div class="field gig-field" id="field-password-input">
+					<label for="email-input" class="twelve">password</label>
+					<input class="field-input" id="password-input" type="password" data-bhc="email:email" tabindex="0" name="email" autocorrect="off" data-bhc-path="LoginForm|email:email">
+					<span class="icon icon-email"></span>
+				</div>
+				<p style="width: 100%;height: 20px;">The length of 6-15 characters</p>
+				<div class="field field-offset" id="field-forgot-password">
+					<a id="forgot-password-link" data-bhc="link:forgot-password" href="https://www.groupon.com/forgot_password" tabindex="" data-bhc-path="LoginForm|link:forgot-password">
+						Forgot your password?
+					</a>
+				</div>
+				<div class="field field-offset field-offsets" id="field-remember-me-checkbox">
+					<input type="checkbox"  class="remember-me-checkbox"/>
+					<label for="remember-me-checkbox">
+        Keep me signed in on this computer
+      </label>
+				</div>
+				<button class="button buttonss">
+					<a href="javascript:;" class="buttonss btn-cta btn-large signin-btn">Sign Up</a>
+				</button>
+			</div>
+			<div class="sImg">
+				<img src="img/s1.png" />
+			</div>
+		</section>
+		<!--<footer>
+				<div class="game-footer">
+					<ul class="game-footer-list">
+						<li>
+							<a href="javascript:;">ABOUT OP.GG</a>
+						</li>
+						<li>
+							<a href="javascript:;">LOGO历史记录</a>
+						</li>
+						<li>
+							<a href="javascript:;">个人信息处理方针</a>
+						</li>
+						<li>
+							<a href="javascript:;">帮助</a>
+						</li>
+						<li>
+							<a href="javascript:;">合作建议</a>
+						</li>
+						<li>
+							<a href="javascript:;">疑问/反馈</a>
+						</li>
+					</ul>
+					<div>© 2012-2018 OP.GG.Data based on League of Legends Europe West.</div>
+					<ul class="game-footer-list game-footer-list2">
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
+					</ul>
+				</div>
+			</footer>-->
+	</body>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script>
+		$(function(){
+			$(".header").load("header.html #header")
+			setTimeout(function() {
+				$('.game-header-list li').eq(2).addClass('nav-active')
+				$('.game-header-list li').eq(2).siblings().removeClass('nav-active')
+				$('.buttonSeacher').eq(0).click(function() {
+					location.href = "doubleft.html?name=" + $("#seacher").val()
+				})
+			})
+		})
+		$(function(){
+			var remember 
+			$('.remember-me-checkbox').eq(0).change(function(){
+				if($(this).attr("checked")){
+					remember = true
+				}
+				else{
+					$(this).removeAttr("checked")
+					remember = false
+				}
+			})
+			 $(".buttonss").eq(0).click(function(){
+			 	var Account = $("#Account-input").eq(0).val()
+			 	var password = $("#password-input").eq(0).val()
+			 		$.ajax({
+			 			type:"post",
+			 			url:"http://ec2-13-114-229-73.ap-northeast-1.compute.amazonaws.com:18088/user/login/",
+			 			data:{
+			 				"username":Account,
+			 				"password":password,
+			 				"remember":remember,
+			 			},
+			 			success:function(data){
+			 				console.log(data.golds)
+			 				if(data.res == 1){
+			 					document.cookie = "dataLink="+JSON.stringify(data)
+			 					document.cookie = "golds="+JSON.stringify(data.golds)
+			 					document.cookie = "Account="+JSON.stringify(Account)
+			 					window.location.href = "myAccount.html"
+			 				}else{
+			 					alert("用户名或密码错误")
+			 				}
+			 			},
+			 			error:function(err){
+			 				alert("失败")
+			 			}
+			 		});
+			 		location.href = "javascript:;"
+			 })
+		})
+		</script>
+</html>

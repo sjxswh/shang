@@ -1,8 +1,12 @@
+.mdeatil-navs{
+	background-color: #fff;
+	width: 100%;
+}
 .mdeatil-nav{
 	display: flex;
-	    width: 100%;
+	    width: 1300px;
+	    margin: 0 auto;
     max-height: 140px;
-    background-color: #fff;
     position: relative;
     z-index: 15;
 }
@@ -11,7 +15,6 @@
     background: url(https://img1.famulei.com/static/53/images/match/match_logo_shadow.png) center bottom no-repeat;
     background-size: 100% auto;
     padding: 20px 0 14px 0;
-    margin-left: 26px;
 }
 .mdetail-nav-img a{
 	display: inline-block;
@@ -129,11 +132,10 @@
 .game-mDetail section{
 	box-sizing: border-box;
 	position: absolute;
-    top: 238px;
+    top: 214px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    background: #f3f5f7;
     font-size: 14px;
     color: #373a41;
 }

@@ -1,6 +1,11 @@
+.nav-matchs{
+	width: 100%;
+	background: white;
+}
 .nav-match{
-	    width: 100%;
+	    width: 1300px;
     max-height: 140px;
+    margin: 0 auto;
     background-color: #fff;
     position: relative;
     display: flex;
@@ -9,7 +14,6 @@
 	    width: 80px;
     background: none;
     padding: 8px 0 0 0;
-        margin-left: 26px;
 }
 .nav-match-img img{
 	    width: 36px;

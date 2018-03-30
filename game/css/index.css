@@ -113,7 +113,7 @@
 aside .game-section-content-list li{
 	padding: 0 5px;
 }
-.game-section-content-list li:first-child{
+.game-section-content-list:nth-child(2) li:first-child{
 	margin-left: 120px;
 }
 .game-aside-content-hero{

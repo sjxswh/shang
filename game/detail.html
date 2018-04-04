@@ -15231,9 +15231,27 @@
 					}
 				}
 			})
-			hightchartData('game-detail-hightchart1')
-			hightchartData('game-detail-hightchart2')
-			hightchartData('game-detail-hightchart3')
+			var option1 = {
+				id:"game-detail-hightchart1",
+				data:[50.34, 51.75, 49.46, 50.12, 51.23],
+				datas:[46,46,46,46,46],
+				min:40
+			}
+			var option2 = {
+				id:"game-detail-hightchart2",
+				data:[1.34, 1.75,1.46, 1.12,1.23],
+				datas:[1.5,1.5,1.5,1.5,1.5],
+				min:1
+			}
+			var option3 = {
+				id:"game-detail-hightchart3",
+				data:[50.34, 51.75, 49.46, 50.12, 51.23],
+				datas:[46,46,46,46,46],
+				min:40
+			}
+			hightchartData(option1)
+			hightchartData(option2)
+			hightchartData(option3)
 			var navlist = Array.from($('.game-detail-nav ul li'))
 			navlist.forEach(function(v,k){
 				v.onclick = function(){

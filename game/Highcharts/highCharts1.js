@@ -1,5 +1,5 @@
-function hightchartData(id){
-	var chart = Highcharts.chart(id, {
+function hightchartData(op){
+	var chart = Highcharts.chart(op.id, {
 	  chart:{
 	  	  backgroundColor: 'white',
 	  	  type:"line"
@@ -38,7 +38,7 @@ function hightchartData(id){
 			gridLineWidth: 0,
 			lineWidth: 0,
 			tickWidth: 0,
-			min:40,
+			min:op.min,
 			labels: {
 				format:'{value}%',
 				style: {
@@ -68,7 +68,7 @@ function hightchartData(id){
    
     series: [{
         name: '安装，实施人员',
-        data: [50.34, 51.75, 49.46, 50.12, 51.23],
+        data: op.data,
         states: {
 					hover: {
 						marker: {
@@ -103,7 +103,7 @@ function hightchartData(id){
 				}] 
     },{
         type:"line",
-        data: [46,46,46,46,46],
+        data: op.datas,
         color: "#979797",
 				lineWidth: 1,
 				marker: {enabled: false},

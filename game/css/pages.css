@@ -1,4 +1,16 @@
-
+::-webkit-scrollbar-corner {
+    width: 6px;
+    height: 6px;
+    background: #b2b2b2;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 0;
+    border: 3px solid #fff;
+}
+::-webkit-scrollbar-thumb {
+    background: #b2b2b2;
+}
 body,div,h1,h2,h3,h4,h5,h6,ul,li,dt,dd,p,button,input,span,a,strong,b{
 	margin: 0;
 	padding: 0;
@@ -134,9 +146,13 @@ body,html{
 }
 .bannerImg{
 	position: relative;
+	background: black;
 }
 .bannerBg{
 	position: relative;
+	width: 1500px;
+	height: 848px;
+	margin: 0 auto;
 }
 .page-seacher{
 	width: 36%;
@@ -147,11 +163,11 @@ body,html{
 	margin-top: -50px;
 	margin-left: -20%;
 }
-.page-seacher div{
+.page-seacher>div{
 position: relative;
 height: 50%;
 }
-.page-seacher div:nth-child(1){
+.page-seacher>div:nth-child(1){
 	font-size: 30px;
 	color: white;
 	text-align: center;
@@ -161,6 +177,7 @@ height: 50%;
 .page-seacher input{
 	background: white;
 	border-radius: 2px;
+	border: 0;
 	width: 100%;
 	height: 100%;
 	vertical-align: middle;
@@ -181,6 +198,55 @@ height: 50%;
 	position: absolute;
 	top: 0;
 	right: 0;
+}
+.select-data{
+	position: absolute;
+	top: 1px;
+	right: 15%;
+	width: 100px;
+	height: 98%;
+	border-left: 1px solid rgba(226,234,239,.8);
+}
+.select-data input{
+	border: 0;
+	width: 100%;
+	height: 100%;
+	color: black;
+	font-size: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	}
+	.select-data select{
+		width: 100%;
+		height: 100%;
+	}
+.select-data select option{
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.select-option{
+	position: absolute;
+	top: 50px;
+	right: 15%;
+	z-index: 2;
+	width: 120px;
+	height: 100px;
+	overflow: auto;
+	box-shadow:  0 0 4px 0 rgba(226,234,239,.8);
+	background: white;
+	padding: 10px;
+	display: none;
+	cursor: default;
+}
+.option{
+	line-height: 30px;
+	font-size: 18px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .icon-arrow-xl{
 	display: block;
@@ -261,15 +327,16 @@ height: 50%;
 .introduce-imgList li{
 	    padding-left: 22px;
     box-sizing: border-box;
-    width: 50%;
+    width: 25%;
 }
 .introduce-imgList li a{
 	display: block;
+	box-shadow: 0 0 4px 0 rgba(5,17,25,.06);
 }
 .introduce-bigImg{
 	    position: relative;
     font-size: 0;
-    height: 255px;
+    height: 123px;
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: cover;
@@ -299,18 +366,21 @@ height: 50%;
 .introduce-detail h3{
 	display: block;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 22px;
+text-overflow: ellipsis;
+	   display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+    font-size: 12px;
     font-weight: bold;
     color: #333;
-    line-height: 30px;
 }
 .introduce-imgList li a:hover h3{
 	color: #d98500;
 }
 .introduce-detail p{
-	    overflow: hidden;
+	overflow: hidden;
+		white-space: nowrap;
+	text-overflow: ellipsis;	    
     height: 40px;
     margin-top: 9px;
     font-size: 14px;

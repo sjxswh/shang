@@ -579,7 +579,7 @@
 										<td>
 											<div class="gold-percentage per">
 												<div class="goldBg"></div>
-												<span>11175</span>
+												<span>8175</span>
 											</div>
 										</td>
 									</tr>
@@ -956,9 +956,13 @@
 			var csNum = Math.floor((159.7/400)*10000)/100+"%"
 			console.log(csNum)
 			$('.csBg').css("width",csNum)
-			var goldNum = Math.floor((11175/47000)*10000)/100+"%"
-			console.log(goldNum)
-			$('.goldBg').css("width",csNum)
+			var goldBg = Array.from($('.gold-percentage span'))
+			goldBg.forEach(function(v,k){
+				var num = $('.gold-percentage span').eq(k).html()
+				var goldNum = Math.floor((num/22600)*10000)/100+"%"
+					$('.goldBg').css("width",goldNum)
+			})
+			
 			highchartColumn("highchart1")
 			highchartsPie("highchart2")
 			var towcell = Array.from($('.towCell'))

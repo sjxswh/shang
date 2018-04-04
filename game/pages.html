@@ -182,7 +182,7 @@
 					<a href="index.html">Champions</a>
 					<a href="Statistics.html">Stats</a>
 					<a href="RankingList.html">Leaderboards</a>
-					<a href="javasctipt:;">Guess</a>
+					<a href="guessing.html">Guess</a>
         </nav>
         <button onclick="location.href='signIn.html'">SIGN IN</button>
     </div>
@@ -198,6 +198,17 @@
 					</div>
 					<div>
 						<input type="text" placeholder="search" /><span>Search</span>
+						<div class="select-data"><input type="text" value="select area" /></div>
+						<div class="select-option">
+							<div class="option">sdfdhfgjhljg</div>
+							<div class="option">uifdhfgjhljg</div>
+							<div class="option">sdfdhfgjhljg</div>
+							<div class="option">sdfdhfgjhljg</div>
+							<div class="option">sdfdhfgjhljg</div>
+							<div class="option">sdfdhfgjhfhljg</div>
+							<div class="option">sdfdhfgjhljg</div>
+							<div class="option">sdfdhfgjhljg</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -228,6 +239,50 @@
 				<div>
 					<h2><a href="javascript:;">更新说明</a></h2>
 					<ul class="introduce-imgList">
+						<li>
+							<a href="javascript:;">
+								<div class="introduce-bigImg">
+									<img src="img/notice_thumbnail_1520568382205.jpg" />
+								</div>
+								<div class="introduce-detail">
+									<h3>March Update (PC 1.0 Update #7)</h3>
+									<p>With this patch, we are bringing various optimizations to our server and client. We have mitigated lag and stutter instances and a</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="introduce-bigImg">
+									<img src="img/notice_thumbnail_1520568382205.jpg" />
+								</div>
+								<div class="introduce-detail">
+									<h3>March Update (PC 1.0 Update #7)</h3>
+									<p>With this patch, we are bringing various optimizations to our server and client. We have mitigated lag and stutter instances and a</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="introduce-bigImg">
+									<img src="img/notice_thumbnail_1520568382205.jpg" />
+								</div>
+								<div class="introduce-detail">
+									<h3>March Update (PC 1.0 Update #7)</h3>
+									<p>With this patch, we are bringing various optimizations to our server and client. We have mitigated lag and stutter instances and a</p>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="introduce-bigImg">
+									<img src="img/notice_thumbnail_1520568382205.jpg" />
+								</div>
+								<div class="introduce-detail">
+									<h3>March Update (PC 1.0 Update #7)</h3>
+									<p>With this patch, we are bringing various optimizations to our server and client. We have mitigated lag and stutter instances and a</p>
+								</div>
+							</a>
+						</li>
 						<li>
 							<a href="javascript:;">
 								<div class="introduce-bigImg">
@@ -445,12 +500,24 @@
 					location.href = 'match.html'
 				}
 			})
-						$('.page-seacher span').eq(0).click(function() {
+			$('.page-seacher span').eq(0).click(function() {
 				var value = $('.page-seacher input').eq(0).val()
 				window.location.href = 'doubleft.html?name=' + value
 			})
 			$('.icon-arrow-xl').eq(0).click(function(){
 				$('body,html').animate({ scrollTop: 1000}, 800)
+			})
+			$('.select-data input').eq(0).focus(function(){
+				console.log(1)
+				$('.select-option').eq(0).css('display','block')
+			})
+			var selectOption = Array.from($('.option'))
+			selectOption.forEach(function(v,k){
+				v.onclick = function(){
+					console.log($(this).html())
+					$('.select-data input').eq(0).val($(this).html())
+					$('.select-option').eq(0).css('display','none')
+				}
 			})
 		})
 	</script>

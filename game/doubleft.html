@@ -6,6 +6,7 @@
 		<title></title>
 		<link href="css/commont.css" type="text/css" rel="stylesheet" />
 		<link href="css/doubleft.css" type="text/css" rel="stylesheet" />
+		<link href="iconfont/iconfont.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
 		<div class="game-doubleft">
@@ -903,7 +904,7 @@
 								  				<div class="CS">
 								  					<span class="CS tip tpd-delegation-uid-1">175 (5.9)</span> CS
 								  				</div>
-								  				<div class="CKRate tip tpd-delegation-uid-1">击杀参与率  61%</div>
+								  				<div class="CKRate tip tpd-delegation-uid-1">Attack rate  61%</div>
 								  				<div class="MMR">Match MMR <b>2504</b></div>
 								  			</div>
 								  			<div class="Items">
@@ -2333,6 +2334,7 @@
 								  				</div>
 								  			</div>
 								  		</div>
+								  		<div class="double-loading"><i class="iconfont icon-loading"></i></div>
 								  	</div>
 								  	<div class="doubleft-row" data-ctn="失败">
 								  		<div class="doubleft-row-content">
@@ -2387,7 +2389,7 @@
 								  				<div class="CS">
 								  					<span class="CS tip tpd-delegation-uid-1">175 (5.9)</span> CS
 								  				</div>
-								  				<div class="CKRate tip tpd-delegation-uid-1">击杀参与率  61%</div>
+								  				<div class="CKRate tip tpd-delegation-uid-1">Attack rate  61%</div>
 								  				<div class="MMR">Match MMR <b>2504</b></div>
 								  			</div>
 								  			<div class="Items">
@@ -5318,7 +5320,8 @@
 				v.onclick = function(){
 					$(this).css('display','none')
 					$(this).next().css('display','block')
-					$('.doubleft-row-detail').eq(k).css('display','block')
+					$('.doubleft-row-detail').eq(k).css('display','none')
+					$('.double-loading').eq(k).css('display','block')
 					var numsList = Array.from($(this).parent().parent().parent().parent().next().find('.nums'))
 					var arr = []
 					numsList.forEach((v,j)=>{
@@ -5358,6 +5361,7 @@
 				var winOrlose = $('.doubleft-row').eq(k).attr("data-ctn")
 				if(winOrlose == "胜利"){
 					$('.doubleft-row-content').eq(k).addClass("win-row-content")
+					$('.double-loading').eq(k).css('background','#a3cfec')
 					$('.GameResult').eq(k).html("胜利").css("color","#1a78ae")
 					$('.GameStats .Bar').eq(k).css("background","#99b9cf")
 					$('.tabHeaders').eq(k).css('background','#64b1e4')
@@ -5375,6 +5379,7 @@
 				}
 				if(winOrlose == "失败"){
 					$('.doubleft-row-content').eq(k).addClass("lose-row-content")
+					$('.double-loading').eq(k).css('background','#e2b6b3')
 					$('.GameResult').eq(k).html("失败").css("color","#c6443e")
 					$('.GameStats .Bar').eq(k).css('background','#cea7a7')
 					$('.tabHeaders').eq(k).css('background','#e89d99')

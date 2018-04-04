@@ -410,7 +410,7 @@
 					</section>
 				</div>
 			</section>
-			<footer>
+			<!--<footer>
 				<div class="game-footer">
 					<ul class="game-footer-list">
 						<li>
@@ -440,7 +440,7 @@
 						<li><a href="javascript:;"><img src="img/twitter_icon_black.png" /></a></li>
 					</ul>
 				</div>
-			</footer>
+			</footer>-->
 		</div>
 	</body>
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -448,6 +448,7 @@
 		$(function(){
 			$(".header").load("header.html #header")
 			setTimeout(function(){
+				console.log($('.game-header-list li').eq(2))
 				$('.game-header-list li').eq(2).addClass('nav-active')
 				$('.game-header-list li').eq(2).siblings().removeClass('nav-active')
 				$('.buttonSeacher').eq(0).click(function(){

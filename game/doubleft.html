@@ -5199,7 +5199,11 @@
 				innersize:"70%",
 				title:"65%",
 				background:'white',
-				color:['red', 'rgba(0,160,210,.4)' ]
+				color:['red', 'rgba(0,160,210,.4)' ],
+				data:[
+                ['sss', 7],
+                ['bbb', 13]
+            ]
 			}
 			highchartsPies(option1)
 			var tabList = Array.from($('.tabHeaders li'))
@@ -5320,8 +5324,8 @@
 				v.onclick = function(){
 					$(this).css('display','none')
 					$(this).next().css('display','block')
-					$('.doubleft-row-detail').eq(k).css('display','none')
-					$('.double-loading').eq(k).css('display','block')
+					//$('.doubleft-row-detail').eq(k).css('display','none')
+					//$('.double-loading').eq(k).css('display','block')
 					var numsList = Array.from($(this).parent().parent().parent().parent().next().find('.nums'))
 					var arr = []
 					numsList.forEach((v,j)=>{

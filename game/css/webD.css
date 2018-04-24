@@ -199,14 +199,13 @@ table{
 .game-detail-table3-title{
 	display: flex;
 	padding: 11px 12px;
-	float: left;
 	border: solid 1px #e9eff4;
-	margin-left: 8%;
+	width: 90%;
+	margin: 0 auto;
 }
 .game-detail-table3-titles{
-	  margin: 10px auto 0;
+	  margin: 10px auto 10px;
     white-space: nowrap;
-    background-color: #f9f9fa;
 }
 .game-detail-table3-title div{
 	color: #777;
@@ -250,7 +249,9 @@ table{
 	margin-left: 0;
 }
 .game-detail-table3-active{
-	background: white;
+	    position: relative;
+    background-color: #e7f2ff;
+    border-color: #4da1ff;
 }
 .game-detail-table3-content{
 	display: flex;
@@ -259,8 +260,8 @@ table{
 	  display: inline-block;
     vertical-align: bottom;
     width: 50%;
-    max-width: 164px;
     box-sizing: border-box;
+    padding: 0 3%;
 }
 .game-detail-table3-imgList:nth-child(1){
 	border-right: 1px solid #d2d2d2;
@@ -330,4 +331,27 @@ table{
 }
 .game-detail-header-img{
 	text-align: center;
+}
+.StatsWrap{
+	    margin: 11px 16px 0;
+    padding-top: 10px;
+    border-top: 1px solid #eaeaea;
+    display: flex;
+}
+.textIndext{
+	text-indent: 24px;
+}
+.StatsWrap div{
+    width: 50%;
+    font-size: 14px;
+    text-align: center;
+    color: #333;
+}
+.borderTop .game-detail-tbody tr{
+	border-top: 1px solid #eaeaea;
+	margin-top: 10px;
+}
+.borderTop .game-detail-tbody2 tr{
+	border-top: 1px solid #eaeaea;
+	margin-top: 10px;
 }

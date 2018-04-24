@@ -69,16 +69,8 @@ function hightchartData(op){
     series: [{
         name: '安装，实施人员',
         data: op.data,
-        states: {
-					hover: {
-						marker: {
-							symbol: "circle",
-							lineWidth: '1px',
-							lineColor: "#989898",
-							fillColor: '#fff'
-						},
-					}
-				},
+        color:"#f5a623",
+        lineWidth: 1,
         dataLabels: {
 					enabled: true,
 					crop: false,
@@ -93,7 +85,7 @@ function hightchartData(op){
         marker: {
 					symbol: "circle",
 					lineWidth: '2px',
-					lineColor: "#989898",
+					lineColor: "#f5a623",
 					fillColor: '#fff'
 				},
 				zoneAxis: 'x',
@@ -102,7 +94,6 @@ function hightchartData(op){
 					color: '#e7e7e7'
 				}] 
     },{
-        type:"line",
         data: op.datas,
         color: "#979797",
 				lineWidth: 1,
@@ -585,10 +576,7 @@ function highchartsPies(op){
             size:'120%',
             innerSize: op.innersize,
             name: '市场份额',
-            data: [
-                ['Opera', 3.2],
-                ['其他', 6.7]
-            ],
+            data: op.data,
             marker: {
             	enabled: false,
 						},
